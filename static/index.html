@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#702d3c">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23702d3c'/%3E%3Cpath d='M10 6h12l-1 10c-.3 4-2.5 6-5 6s-4.7-2-5-6L10 6Zm6 16v5m-5 0h10' fill='none' stroke='%23fffaf3' stroke-width='1.3'/%3E%3C/svg%3E">
-  <meta name="description" content="黄色のマーカーから、ひとつずつ。写真の根拠を確かめながら学ぶワイン検定の練習アプリ。">
+  <meta name="description" content="問題集から、ひとつずつ。すべての問題や国別の出題で学ぶワイン検定の練習アプリ。">
   <title>ワインの手帖 — ワイン検定の練習</title>
   <link rel="stylesheet" href="./static/style.css">
   <script type="module" src="./static/app.js"></script>
@@ -24,7 +24,7 @@
         <button class="nav-item" data-view="sources"><span class="nav-icon" aria-hidden="true">▧</span><span>資料と問題</span><span id="nav-source-count" class="nav-count">—</span></button>
         <button class="nav-item" data-view="settings"><span class="nav-icon settings-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m10 3-.5 2a8 8 0 0 0-2 .9L5.6 5.3 3.3 9.2l1.6 1.4a7 7 0 0 0 0 2.8l-1.6 1.4 2.3 3.9 1.9-.6a8 8 0 0 0 2 .9l.5 2h4l.5-2a8 8 0 0 0 2-.9l1.9.6 2.3-3.9-1.6-1.4a7 7 0 0 0 0-2.8l1.6-1.4-2.3-3.9-1.9.6a8 8 0 0 0-2-.9L14 3h-4Z" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.3"/></svg></span><span>接続・設定</span></button>
       </nav>
-      <div class="sidebar-note"><span class="tiny-line"></span><p>線を引いた知識を、<br>自分のものに。</p><small>黄色のマーカー部分だけを<br>根拠にした、あなたの問題集。</small></div>
+      <div class="sidebar-note"><span class="tiny-line"></span><p>学んだ知識を、<br>自分のものに。</p><small>国ごとの知識を、<br>問題集で少しずつ。</small></div>
       <div class="sidebar-footer"><span class="status-dot"></span> 保存した問題で、何度でも</div>
     </aside>
 
@@ -35,12 +35,22 @@
 
         <section id="view-practice" class="view" aria-labelledby="practice-heading">
           <div class="page-heading"><div><p class="eyebrow">A LITTLE PRACTICE, EVERY DAY</p><h1 id="practice-heading">今日の、一問。</h1><p class="page-description">答えを選んで、根拠をたしかめる。ワインの知識を少しずつ。</p></div><span class="outlined-pill">ワイン検定 <span>・</span> 三択</span></div>
-          <section id="pages-import" class="pages-import" aria-labelledby="pages-import-heading" hidden>
-            <div class="pages-import-heading"><span class="badge">GitHub Pages · 練習用</span><h2 id="pages-import-heading">承認済みの問題集を読み込む</h2></div>
-            <p>サーバー版から書き出した JSON を、この画面だけで読み込みます。問題はメモリに保持し、再読み込みやタブを閉じると消えます。ファイルの送信は行いません。</p>
-            <div class="pages-import-controls"><div class="field"><label for="question-pack">問題集 JSON（2 MB・2,000 問まで）</label><input id="question-pack" type="file" accept=".json,application/json" aria-describedby="pages-import-status"></div><button id="clear-pack" type="button" class="button button-secondary small-button" disabled>読み込んだ問題を消去</button></div>
-            <p id="pages-import-status" class="pages-import-status" role="status">問題集はまだ読み込んでいません。公開ページに問題や写真は含めていません。</p>
+          <section id="pages-import" class="pages-import" aria-labelledby="pages-import-heading">
+            <div class="pages-import-heading"><span class="badge">出題元</span><h2 id="pages-import-heading">標準の問題集から練習</h2></div>
+            <p>標準問題集を自動で読み込みます。別の問題集 JSON やサーバー版の承認済み書き出しも選べます。選んだファイルは送信せず、このタブでのみ使用します。再読み込みすると標準問題集に戻ります。</p>
+            <div class="pages-import-controls"><div class="field"><label for="question-pack">別の問題集 JSON（2 MB・2,000 問まで）</label><input id="question-pack" type="file" accept=".json,application/json" aria-describedby="pages-import-status"></div><button id="clear-pack" type="button" class="button button-secondary small-button" disabled>標準問題集に戻す</button></div>
+            <p id="pages-import-status" class="pages-import-status" role="status">wine_quiz_master_set_01.json を読み込んでいます。</p>
             <p id="pages-import-error" class="pages-import-error" role="alert" hidden></p>
+          </section>
+          <section class="practice-settings" aria-labelledby="scope-heading">
+            <h2 id="scope-heading">出題範囲</h2>
+            <fieldset class="scope-options"><legend class="visually-hidden">出題範囲を選択</legend>
+              <label><input id="scope-all" type="radio" name="practice-scope" value="all" checked> すべて <span id="scope-all-count">（0 問）</span></label>
+              <label><input id="scope-country" type="radio" name="practice-scope" value="country"> 国別</label>
+              <label class="visually-hidden" for="practice-country">練習する国</label><select id="practice-country" disabled aria-describedby="scope-count"><option value="">国を選んでください</option></select>
+            </fieldset>
+            <div class="scope-actions"><p id="scope-count" role="status">問題集を読み込んでいます。</p><button id="start-practice" class="button button-primary small-button" type="button" disabled>この範囲で練習を開始</button></div>
+            <p id="active-scope" class="active-scope">今回の範囲：すべて</p>
           </section>
           <div class="practice-layout">
             <div id="quiz-root" class="quiz-root" aria-live="polite"><div class="loading-state"><span class="spinner"></span><p>保存した問題を読み込んでいます</p></div></div>
@@ -49,7 +59,7 @@
               <div class="stat-row"><span>練習できる問題</span><strong id="stat-questions">—<small> 問</small></strong></div>
               <div class="stat-row"><span>取り込んだ写真</span><strong id="stat-sources">—<small> 枚</small></strong></div>
               <div class="stat-row"><span>確認待ちの問題</span><strong id="stat-review">—<small> 問</small></strong></div>
-              <div class="study-rule"><span class="rule-symbol" aria-hidden="true">“</span><h3>覚える、その前に。<br>根拠に目を向ける。</h3><p>解説には、もとになった写真と黄色部分の引用を添えています。答えの理由まで、ひとつずつ。</p><span class="marker-swatch" aria-hidden="true"></span></div>
+              <div class="study-rule"><span class="rule-symbol" aria-hidden="true">“</span><h3>覚える、その前に。<br>出典に目を向ける。</h3><p>回答後に解説と、問題集に記録された出典を表示します。検証記録は、原画像の確認や人による校閲の完了を意味しません。</p><span class="marker-swatch" aria-hidden="true"></span></div>
               <div class="offline-note"><span aria-hidden="true">↻</span><p>一巡するまで重複なし。<br>練習中の API 利用はありません。</p></div>
             </aside>
           </div>
@@ -68,7 +78,7 @@
 
             <section class="settings-card"><div class="card-heading"><span class="step-number">02</span><div><h2>luna を確認</h2><p>画像入力と利用権限を検証します。</p></div><span id="model-badge" class="badge">確認中</span></div><div class="model-label"><span>使用モデル</span><code id="model-id">gpt-6-luna</code></div><div id="model-status" class="connection-message">モデルの設定を読み込んでいます。</div><button id="check-model" class="button button-secondary">利用可否を確認 <span aria-hidden="true">↗</span></button><details class="setup-details"><summary>luna の設定手順</summary><ol><li>サーバーの環境変数 <code>OPENAI_API_KEY</code> に API キーを設定します。</li><li><code>OPENAI_MODEL=gpt-6-luna</code> を設定し、サーバーを再起動します。</li><li>「利用可否を確認」で、このアカウントからの利用権限を確認します。</li></ol><p>OpenAI API のキー・利用権限・課金設定は、ChatGPT の契約とは別に必要です。luna が利用できない場合、生成を停止します。別モデルへの自動切り替えは行いません。API キーをこの画面に入力する必要はありません。</p></details></section>
 
-            <section class="settings-card import-card"><div class="card-heading"><span class="step-number">03</span><div><h2>黄色部分から問題をつくる</h2><p>新しい写真・変更された写真だけを処理します。</p></div></div><div class="import-flow"><span>黄色の検出</span><b aria-hidden="true">→</b><span>文字の読み取り</span><b aria-hidden="true">→</b><span>問題を保存</span><b aria-hidden="true">→</b><span>根拠を確認</span></div><p class="muted">文字や黄色の範囲が不鮮明な資料は、確認が必要な資料として保存します。生成した問題は根拠を確認して承認すると、練習に使えるようになります。</p><div class="import-bottom"><p>生成は取り込み時だけ。<br><strong>出題・採点・解説表示では API を使いません。</strong></p><button id="process-sources" class="button button-primary">資料を読み取り・問題を生成 <span aria-hidden="true">→</span></button></div><div id="operation-result" class="operation-result" role="status" hidden></div></section>
+            <section class="settings-card import-card"><div class="card-heading"><span class="step-number">03</span><div><h2>黄色部分から問題をつくる</h2><p>新しい写真・変更された写真だけを処理します。</p></div></div><div class="import-flow"><span>黄色の検出</span><b aria-hidden="true">→</b><span>文字の読み取り</span><b aria-hidden="true">→</b><span>問題を保存</span><b aria-hidden="true">→</b><span>根拠を確認</span></div><p class="muted">文字や黄色の範囲が不鮮明な資料は、確認が必要な資料として保存します。生成した問題は根拠を確認して承認し、書き出した JSON を練習画面で選ぶと練習に使えます。</p><div class="import-bottom"><p>生成は取り込み時だけ。<br><strong>出題・採点・解説表示では API を使いません。</strong></p><button id="process-sources" class="button button-primary">資料を読み取り・問題を生成 <span aria-hidden="true">→</span></button></div><div id="operation-result" class="operation-result" role="status" hidden></div></section>
           </div>
         </section>
 

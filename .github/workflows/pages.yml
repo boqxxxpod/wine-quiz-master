@@ -26,8 +26,10 @@ jobs:
         with:
           node-version: '22'
       - name: Test static practice logic
-        run: node --test tests/test_quiz.mjs tests/test_pages.mjs
-      - name: Build public frontend only
+        run: node --test tests/*.mjs
+      - name: Verify bundled question counts and shared-country membership
+        run: node scripts/verify_standard_pack.mjs
+      - name: Build public frontend and bundled questions
         run: python scripts/build_pages.py
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -8,7 +8,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from app.store import Store
-from scripts.build_pages import MARKER, PUBLIC_FILES, build
+from scripts.build_pages import MARKER, PUBLIC_FILES, PUBLIC_QUESTION_PACK, build
 from scripts.export_questions import export_questions
 
 
@@ -23,6 +23,9 @@ class PublicBuildTests(unittest.TestCase):
             path = self.root / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(f"public source: {relative}\n", encoding="utf-8")
+        # Packaging tests use an explicitly synthetic pack, never invented study content.
+        self.synthetic_pack = json.dumps({"source": "synthetic-build-fixture", "questions": []})
+        (self.root / PUBLIC_QUESTION_PACK).write_text(self.synthetic_pack, encoding="utf-8")
         self.output = self.root / "dist-pages"
 
     def test_allowlist_artifact_never_contains_private_runtime_or_extra_files(self):
@@ -36,12 +39,20 @@ class PublicBuildTests(unittest.TestCase):
         build(self.root, self.output)
         actual = {str(path.relative_to(self.output)) for path in self.output.rglob("*") if path.is_file()}
         expected = {"index.html", "static/app.js", "static/quiz.js", "static/pages.js",
-                    "static/style.css", "static/runtime.js", ".nojekyll", MARKER}
+                    "static/style.css", PUBLIC_QUESTION_PACK, "static/runtime.js", ".nojekyll", MARKER}
         self.assertEqual(actual, expected)
         for path in self.output.rglob("*"):
             if path.is_file():
                 self.assertNotIn(canary, path.read_text(encoding="utf-8"))
         self.assertEqual((self.output / "static/runtime.js").read_text(), "export const mode = 'pages';\n")
+        self.assertEqual((self.output / PUBLIC_QUESTION_PACK).read_text(encoding="utf-8"), self.synthetic_pack)
+
+    def test_missing_bundled_questions_fail_explicitly_without_publishing_empty_pack(self):
+        (self.root / PUBLIC_QUESTION_PACK).unlink()
+        with self.assertRaisesRegex(ValueError, PUBLIC_QUESTION_PACK):
+            build(self.root, self.output)
+        self.assertFalse(self.output.exists())
+        self.assertEqual(list(self.output.parent.glob(".pages-build-*")), [])
 
     def test_unrelated_directory_and_source_ancestors_cannot_be_overwritten(self):
         unrelated = self.base / "important"
@@ -56,12 +67,22 @@ class PublicBuildTests(unittest.TestCase):
     def test_failed_rebuild_preserves_last_complete_artifact(self):
         build(self.root, self.output)
         before = {str(p.relative_to(self.output)): p.read_bytes() for p in self.output.rglob("*") if p.is_file()}
-        (self.root / PUBLIC_FILES[-1]).unlink()
+        (self.root / PUBLIC_QUESTION_PACK).unlink()
         with self.assertRaises(ValueError):
             build(self.root, self.output)
         after = {str(p.relative_to(self.output)): p.read_bytes() for p in self.output.rglob("*") if p.is_file()}
         self.assertEqual(after, before)
         self.assertEqual(list(self.output.parent.glob(".pages-build-*")), [])
+
+    def test_bundled_questions_symlink_cannot_publish_unlisted_data(self):
+        outside = self.base / "private-questions.json"
+        outside.write_text("PRIVATE QUESTION CANARY", encoding="utf-8")
+        source = self.root / PUBLIC_QUESTION_PACK
+        source.unlink()
+        source.symlink_to(outside)
+        with self.assertRaisesRegex(ValueError, PUBLIC_QUESTION_PACK):
+            build(self.root, self.output)
+        self.assertFalse(self.output.exists())
 
     def test_leaf_or_parent_symlink_cannot_copy_outside_source_tree(self):
         outside = self.base / "outside"
