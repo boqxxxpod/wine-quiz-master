@@ -1,0 +1,665 @@
+{
+  "metadata": {
+    "title": "Wine Quiz Master 試験運用3択問題集",
+    "source_file": "ワイン検定_問題作成用知識と周辺テキスト.json",
+    "source_sha256": "4d6cd1ce22e9c6064cd4817cf2a37fb9540179ccf265cb8025dd5a780a425b97",
+    "generated_on": "2026-10-18",
+    "total_questions": 30,
+    "questions_per_batch": 30,
+    "batch_count": 5,
+    "choice_count": 3,
+    "answer_index_base": 0,
+    "qa_status": "auto_checked（構造・元知識・正答キーの機械検証済み。誤答選択肢の意味上の一意性は人手最終確認前）",
+    "country_counts": {
+      "アメリカ": 11,
+      "アルゼンチン": 7,
+      "イタリア": 17,
+      "ポルトガル": 11,
+      "南アフリカ": 7,
+      "スペイン": 15,
+      "日本": 17,
+      "オーストリア": 8,
+      "フランス": 32,
+      "チリ": 7,
+      "オーストラリア": 11,
+      "ニュージーランド": 7
+    },
+    "set": "batch-5",
+    "batch_index": 5,
+    "privacy_note": "出典原文と外部の共有URL・画像名を除いた公開レビュー用データ",
+    "app_import_compatible": false
+  },
+  "questions": [
+    {
+      "question_id": "Q-K0273-01",
+      "knowledge_id": "K0273",
+      "country": "イタリア",
+      "countries": [
+        "イタリア"
+      ],
+      "topic": "イタリアの基礎・ワイン法",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nイタリアは（　　　）に統一された。",
+      "options": [
+        "1918年",
+        "1815年",
+        "1861年"
+      ],
+      "correct_index": 2,
+      "correct_answer": "1861年",
+      "explanation": "イタリアは1861年に統一された。 それまで分かれていた国家がサヴォイア王家のもとで統一されたと説明されている。",
+      "source_page": 36,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0634-01",
+      "knowledge_id": "K0634",
+      "country": "チリ",
+      "countries": [
+        "チリ"
+      ],
+      "topic": "チリの基礎・気候・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n（　　　）にカルメネールがメルロとは別の品種であると分かった。",
+      "options": [
+        "1984年",
+        "1994年",
+        "2004年"
+      ],
+      "correct_index": 1,
+      "correct_answer": "1994年",
+      "explanation": "メルロと違う品種であると分かった年が1994年である。",
+      "source_page": 96,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0063-01",
+      "knowledge_id": "K0063",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ブルゴーニュ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nコート・ドールは「（　　　）」という意味である。",
+      "options": [
+        "黄金の丘",
+        "「銀の谷」",
+        "「白い山」"
+      ],
+      "correct_index": 0,
+      "correct_answer": "黄金の丘",
+      "explanation": "コート・ドールは「黄金の丘」という意味である。コート・ド・ニュイとコート・ド・ボーヌを合わせた呼び方として示されている。",
+      "source_page": 18,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0854-01",
+      "knowledge_id": "K0854",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "日本ワインの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n新潟県の角田浜・越前浜のワイナリー群は「（　　　）」と称する。",
+      "options": [
+        "新潟ワインコースト",
+        "長野ワイン街道",
+        "山梨ワインリゾート"
+      ],
+      "correct_index": 0,
+      "correct_answer": "新潟ワインコースト",
+      "explanation": "川上善兵衛の新潟県での活動は岩の原葡萄園と交配育種である。角田浜・越前浜のワイナリー群の呼称が新潟ワインコーストである。",
+      "source_page": "8",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0613-01",
+      "knowledge_id": "K0613",
+      "country": "アメリカ",
+      "countries": [
+        "アメリカ"
+      ],
+      "topic": "ワシントン・オレゴン",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nオレゴンのワイン産地の一つは海岸山脈とカスケード山脈の間の（　　　）である。",
+      "options": [
+        "コロンビア・ヴァレー",
+        "ウィラメット・ヴァレー",
+        "ナパ・ヴァレー"
+      ],
+      "correct_index": 1,
+      "correct_answer": "ウィラメット・ヴァレー",
+      "explanation": "産地はウィラメット・ヴァレー、その南のサザン・オレゴン、州境のコロンビア川流域という3つの地理的まとまり。高品質のピノ・ノワールで注目される。",
+      "source_page": "90",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0025-01",
+      "knowledge_id": "K0025",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ワイン法・シャンパーニュ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nミレジメは（　　　）とも呼ばれる。",
+      "options": [
+        "ロゼ・シャンパーニュ",
+        "ヴィンテージ・シャンパーニュ",
+        "ノン・ヴィンテージ・シャンパーニュ"
+      ],
+      "correct_index": 1,
+      "correct_answer": "ヴィンテージ・シャンパーニュ",
+      "explanation": "ミレジメはヴィンテージ・シャンパーニュとも呼ばれる。タイプの一覧は収穫年に関する名称と、使うブドウの色に関する名称を別々に示している。",
+      "source_page": 14,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0816-01",
+      "knowledge_id": "K0816",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "日本ワインの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n甲州は（　　　）にO.I.V.のワイン用ブドウ品種として登録された。",
+      "options": [
+        "2020年",
+        "2010年",
+        "2000年"
+      ],
+      "correct_index": 1,
+      "correct_answer": "2010年",
+      "explanation": "白ワイン用品種の甲州は果皮が藤紫色で、グリ系とも呼ばれる。ワインの色区分と果皮の色の表現を取り違えない。",
+      "source_page": "6",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0552-01",
+      "knowledge_id": "K0552",
+      "country": "オーストリア",
+      "countries": [
+        "オーストリア"
+      ],
+      "topic": "オーストリアの気候・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nニーダーエスタライヒ州のドナウ流域では（　　　）が重要な高品質ワインの中心となる。",
+      "options": [
+        "テンプラニーリョ",
+        "ネッビオーロ",
+        "グリューナー・ヴェルトリーナー"
+      ],
+      "correct_index": 2,
+      "correct_answer": "グリューナー・ヴェルトリーナー",
+      "explanation": "ニーダーエスタライヒ州のドナウ流域ではグリューナー・ヴェルトリーナーが重要な高品質ワインの中心となる。 州内は北部・パノニア・ドナウに分かれ、ドナウの説明ではグリューナー・ヴェルトリーナーとリースリングが挙げられる。",
+      "source_page": 80,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0019-01",
+      "knowledge_id": "K0019",
+      "country": "フランス",
+      "countries": [
+        "フランス",
+        "スペイン"
+      ],
+      "topic": "ワイン法・シャンパーニュ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nI.G.P.は（　　　）を表す。",
+      "options": [
+        "原産地統制呼称",
+        "原産地呼称保護",
+        "地理的表示保護"
+      ],
+      "correct_index": 2,
+      "correct_answer": "地理的表示保護",
+      "explanation": "I.G.P.は地理的表示保護を表す。名称は保護される一方、規定はA.O.C.よりゆるやかと説明されている。",
+      "source_page": 13,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0444-01",
+      "knowledge_id": "K0444",
+      "country": "スペイン",
+      "countries": [
+        "スペイン"
+      ],
+      "topic": "カスティーリャ・イ・レオン",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n（　　　）はリベラ・デル・ドゥエロの著名なボデガである。",
+      "options": [
+        "マルケス・デ・リスカル",
+        "トーレス",
+        "ベガ・シシリア"
+      ],
+      "correct_index": 2,
+      "correct_answer": "ベガ・シシリア",
+      "explanation": "ベガ・シシリアはリベラ・デル・ドゥエロの著名なボデガである。 ドゥエロ川沿いの細長い産地で、ティント・フィノという名称と著名なボデガが関連付けられる。",
+      "source_page": 66,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0488-01",
+      "knowledge_id": "K0488",
+      "country": "ポルトガル",
+      "countries": [
+        "ポルトガル"
+      ],
+      "topic": "ワイン法・基礎",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nポルトガルでは（　　　）にポートワインの原産地呼称管理法が制定された。",
+      "options": [
+        "1935年",
+        "1855年",
+        "1756年"
+      ],
+      "correct_index": 2,
+      "correct_answer": "1756年",
+      "explanation": "ポルトガルでは1756年にポートワインの原産地呼称管理法が制定された。 1756年のポートワインの法を起点に、EU加盟と2008年の改正後の分類が説明される。",
+      "source_page": 72,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0555-01",
+      "knowledge_id": "K0555",
+      "country": "オーストリア",
+      "countries": [
+        "オーストリア"
+      ],
+      "topic": "オーストリアの気候・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nヴァインフィアテルはオーストリア（　　　）である。",
+      "options": [
+        "最後にDACに認定された地域",
+        "DAC制度のない地域",
+        "最初のDAC"
+      ],
+      "correct_index": 2,
+      "correct_answer": "最初のDAC",
+      "explanation": "ヴァインフィアテルはオーストリア最初のDACである。 最北・最大・最初のDACという3つの特徴が同じ冒頭文にまとめられる。",
+      "source_page": 81,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0798-01",
+      "knowledge_id": "K0798",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "日本ワインの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n（　　　）は「ワイン元年」と呼ばれた。",
+      "options": [
+        "1973年",
+        "1999年",
+        "1955年"
+      ],
+      "correct_index": 0,
+      "correct_answer": "1973年",
+      "explanation": "ワイン元年は1973年で、消費量が甘味果実酒を上回った1975年とは別の年である。地域振興を目的としたワイナリー設立の拡大が背景にある。",
+      "source_page": "5（左頁4の対向頁）",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0595-01",
+      "knowledge_id": "K0595",
+      "country": "アメリカ",
+      "countries": [
+        "アメリカ"
+      ],
+      "topic": "カリフォルニア",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n（　　　）はカリフォルニアの主な黒品種である。",
+      "options": [
+        "リースリング",
+        "シュナン・ブラン",
+        "カベルネ・ソーヴィニヨン"
+      ],
+      "correct_index": 2,
+      "correct_answer": "カベルネ・ソーヴィニヨン",
+      "explanation": "カリフォルニアの品種表は白・黒に分ける。シャルドネは白、カベルネ・ソーヴィニヨン、ピノ・ノワール、ジンファンデルは黒に記載される。",
+      "source_page": "87",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0676-01",
+      "knowledge_id": "K0676",
+      "country": "オーストラリア",
+      "countries": [
+        "オーストラリア"
+      ],
+      "topic": "オーストラリアの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nオーストラリアのワイン産地は東西（　　　）にわたって点在する。",
+      "options": [
+        "約1,500km",
+        "約500km",
+        "3,000km超"
+      ],
+      "correct_index": 2,
+      "correct_answer": "3,000km超",
+      "explanation": "東のニュー・サウス・ウェールズ州から西の西オーストラリア州まで、3,000km超の範囲に産地が点在する。",
+      "source_page": 104,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0288-01",
+      "knowledge_id": "K0288",
+      "country": "イタリア",
+      "countries": [
+        "イタリア"
+      ],
+      "topic": "イタリアの基礎・ワイン法",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nイタリアの保護地理表示ワインI.G.P.には（　　　）が対応する。",
+      "options": [
+        "D.O.C.",
+        "D.O.C.G.",
+        "I.G.T."
+      ],
+      "correct_index": 2,
+      "correct_answer": "I.G.T.",
+      "explanation": "イタリアの保護地理表示ワインI.G.P.にはI.G.T.が対応する。 D.O.C.G.はD.O.C.より制約が厳しく、出荷に際して国の検査も必要とされる。EUのカテゴリーと従来の表示の対応を整理する。",
+      "source_page": 37,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0651-01",
+      "knowledge_id": "K0651",
+      "country": "アルゼンチン",
+      "countries": [
+        "アルゼンチン"
+      ],
+      "topic": "アルゼンチンの基礎・気候・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nアルゼンチンのブドウ畑は（　　　）の高い地域にある。",
+      "options": [
+        "標高4,000〜6,000m",
+        "標高0〜500m",
+        "標高300〜3,000m"
+      ],
+      "correct_index": 2,
+      "correct_answer": "標高300〜3,000m",
+      "explanation": "ほとんどの畑が標高300〜3,000mにあり、高い標高が産地の第一の特徴とされる。",
+      "source_page": 101,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0686-01",
+      "knowledge_id": "K0686",
+      "country": "オーストラリア",
+      "countries": [
+        "オーストラリア"
+      ],
+      "topic": "オーストラリアの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nかつてオーストラリアワイン輸出の大部分は（　　　）であった。",
+      "options": [
+        "甘口のスパークリングワイン",
+        "甘い酒精強化ワイン",
+        "辛口のスティルワイン"
+      ],
+      "correct_index": 1,
+      "correct_answer": "甘い酒精強化ワイン",
+      "explanation": "輸出が伸びた時期、その大部分を甘い酒精強化ワインが占めた。ポートのフィロキセラ被害を補う事情も示される。",
+      "source_page": 105,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0635-01",
+      "knowledge_id": "K0635",
+      "country": "チリ",
+      "countries": [
+        "チリ"
+      ],
+      "topic": "チリの基礎・気候・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nチリの原産地呼称は（　　　）である。",
+      "options": [
+        "W.O.",
+        "D.O.",
+        "A.V.A."
+      ],
+      "correct_index": 1,
+      "correct_answer": "D.O.",
+      "explanation": "原産地呼称D.O.と品質表示は1994年に規定され、1995年から始まったと教材にある。",
+      "source_page": 96,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0499-01",
+      "knowledge_id": "K0499",
+      "country": "ポルトガル",
+      "countries": [
+        "ポルトガル"
+      ],
+      "topic": "ポート",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nポート用ブドウは（　　　）して醸造する。",
+      "options": [
+        "破砕",
+        "陰干し",
+        "冷凍"
+      ],
+      "correct_index": 0,
+      "correct_answer": "破砕",
+      "explanation": "ポート用ブドウは破砕して醸造する。 求める残糖度に達した時点でスピリッツを添加し発酵を止める。原料の色による大分類と、レッド・ポート内の2タイプを区別する。",
+      "source_page": 73,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0338-01",
+      "knowledge_id": "K0338",
+      "country": "イタリア",
+      "countries": [
+        "イタリア"
+      ],
+      "topic": "トスカーナ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nトスカーナの州名は（　　　）に由来する。",
+      "options": [
+        "ケルト民族",
+        "エトルリア民族",
+        "ラテン民族"
+      ],
+      "correct_index": 1,
+      "correct_answer": "エトルリア民族",
+      "explanation": "トスカーナの州名はエトルリア民族に由来する。 地理的な位置と丘陵景観に続き、エトルリア民族とフィレンツェの歴史が説明される。",
+      "source_page": 42,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0109-01",
+      "knowledge_id": "K0109",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ジュラ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nヴァン・ド・パイユは（　　　）である。",
+      "options": [
+        "辛口ワイン",
+        "甘口ワイン",
+        "発泡性ワイン"
+      ],
+      "correct_index": 1,
+      "correct_answer": "甘口ワイン",
+      "explanation": "ヴァン・ド・パイユは甘口ワインである。収穫後のブドウを藁の上で乾燥させ、糖分を凝縮するという説明が、甘口の性質につながる。",
+      "source_page": 22,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0461-01",
+      "knowledge_id": "K0461",
+      "country": "スペイン",
+      "countries": [
+        "スペイン"
+      ],
+      "topic": "シェリー",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nオロロソタイプは（　　　）工程を経る。",
+      "options": [
+        "産膜酵母下でのみ熟成",
+        "瓶内二次発酵",
+        "酸化熟成"
+      ],
+      "correct_index": 2,
+      "correct_answer": "酸化熟成",
+      "explanation": "オロロソタイプは酸化熟成工程を経る。 15%に強化するフィノと17%に強化するオロロソでは、熟成の方法が異なる。",
+      "source_page": 68,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0159-01",
+      "knowledge_id": "K0159",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ボルドー",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nボルドー港は「（　　　）」と呼ばれる。",
+      "options": [
+        "月の港",
+        "黄金の港",
+        "大西洋の門"
+      ],
+      "correct_index": 0,
+      "correct_answer": "月の港",
+      "explanation": "ボルドー港は「月の港」と呼ばれる。地名の由来、港の水路、港の別称と、銘醸地として知られた時代をそれぞれ分けて答える。",
+      "source_page": 30,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0203-01",
+      "knowledge_id": "K0203",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ボルドー",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nサン・テミリオン＆ポムロール＆フロンサック地区は（　　　）にある。",
+      "options": [
+        "ガロンヌ川左岸",
+        "ドルドーニュ川右岸",
+        "ジロンド川左岸"
+      ],
+      "correct_index": 1,
+      "correct_answer": "ドルドーニュ川右岸",
+      "explanation": "サン・テミリオン＆ポムロール＆フロンサック地区はドルドーニュ川右岸にある。右岸の地域として紹介した上で、サン・テミリオンを世界遺産の町と説明している。",
+      "source_page": 31,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0435-01",
+      "knowledge_id": "K0435",
+      "country": "スペイン",
+      "countries": [
+        "スペイン"
+      ],
+      "topic": "主要産地",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nリアス・バイシャスは「（　　　）」とも称される。",
+      "options": [
+        "「砂漠のワイン」",
+        "海のワイン",
+        "「山のワイン」"
+      ],
+      "correct_index": 1,
+      "correct_answer": "海のワイン",
+      "explanation": "リアス・バイシャスは「海のワイン」とも称される。 雨が多くても花崗岩の地盤で水はけがよく、白ワインを主要とする産地として説明される。",
+      "source_page": 65,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0770-01",
+      "knowledge_id": "K0770",
+      "country": "南アフリカ",
+      "countries": [
+        "南アフリカ"
+      ],
+      "topic": "南アフリカの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n南アフリカではシュナン・ブランを（　　　）とも呼ぶ。",
+      "options": [
+        "ミュスカデ",
+        "スティーン",
+        "マルベック"
+      ],
+      "correct_index": 1,
+      "correct_answer": "スティーン",
+      "explanation": "南アフリカで使われるシュナン・ブランの別名である。",
+      "source_page": 119,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0728-01",
+      "knowledge_id": "K0728",
+      "country": "ニュージーランド",
+      "countries": [
+        "ニュージーランド"
+      ],
+      "topic": "ニュージーランドの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nニュージーランドは（　　　）から構成される。",
+      "options": [
+        "本島と小島の一つの島",
+        "東島と西島の二つの島",
+        "北島と南島の二つの島"
+      ],
+      "correct_index": 2,
+      "correct_answer": "北島と南島の二つの島",
+      "explanation": "国の構成を示す説明は北島と南島の2島であり、国土面積は日本の約7割と続く。",
+      "source_page": 112,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0372-01",
+      "knowledge_id": "K0372",
+      "country": "イタリア",
+      "countries": [
+        "イタリア"
+      ],
+      "topic": "南イタリア",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nマルサーラは（　　　）である。",
+      "options": [
+        "発泡性ワイン",
+        "非酒精強化の白ワイン",
+        "酒精強化ワイン"
+      ],
+      "correct_index": 2,
+      "correct_answer": "酒精強化ワイン",
+      "explanation": "マルサーラは酒精強化ワインである。 エトナとマルサーラはD.O.C.の一覧に載る。マルサーラの説明では英国での人気とアルコール補強の歴史が示される。",
+      "source_page": 50,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0245-01",
+      "knowledge_id": "K0245",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ロワール渓谷",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nアンジュー＆ソミュールの白ワインは（　　　）から造られる。",
+      "options": [
+        "シャルドネ",
+        "リースリング",
+        "シュナン・ブラン"
+      ],
+      "correct_index": 2,
+      "correct_answer": "シュナン・ブラン",
+      "explanation": "アンジュー＆ソミュールの白ワインはシュナン・ブランから造られる。白と赤を対にして主体となる品種を示しており、ロワール全体の品種表より地区を限定した対応である。",
+      "source_page": 34,
+      "status": "auto_checked",
+      "version": 1
+    }
+  ]
+}
