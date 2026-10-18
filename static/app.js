@@ -1,0 +1,592 @@
+import { QuizSession } from './quiz.js';
+import { mode } from './runtime.js';
+import { parseQuestionPack, MAX_PACK_BYTES } from './pages.js';
+
+const $ = selector => document.querySelector(selector);
+const IS_PAGES = mode === 'pages';
+const SERVER_ONLY = 'GitHub Pages では、Google ドライブ接続・黄色部分の読み取り・luna による生成・問題の承認を実行できません。ローカルの Python サーバー版で操作し、承認済みの問題集を書き出してください。';
+const state = { status: null, sources: [], session: null, view: 'practice', sourceId: null, detail: null, busy: false, loadError: '', folders: [], pagesQuestions: [], pagesFileName: '' };
+let toastTimer;
+
+function element(tag, className = '', text = '') {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== '') node.textContent = text;
+  return node;
+}
+
+function button(text, className, handler) {
+  const node = element('button', className, text);
+  node.type = 'button';
+  node.addEventListener('click', handler);
+  return node;
+}
+
+function link(text, url, className = '') {
+  const node = element('a', className, text);
+  node.href = url;
+  node.target = '_blank';
+  node.rel = 'noopener noreferrer';
+  return node;
+}
+
+function imageUrl(sourceId, regionId = '', kind = 'original') {
+  const query = new URLSearchParams({ kind });
+  if (regionId) query.set('region', regionId);
+  return `/api/images/${encodeURIComponent(sourceId)}?${query}`;
+}
+
+async function api(path, body) {
+  if (IS_PAGES) {
+    // Pages never contacts a server, including on refresh or disabled actions.
+    if (body !== undefined) throw new Error(SERVER_ONLY);
+    if (path === '/api/questions') return state.pagesQuestions;
+    if (path === '/api/sources') return [];
+    if (path === '/api/status') return {
+      counts: { sources: new Set(state.pagesQuestions.map(question => question.source_id)).size, questions: state.pagesQuestions.length, pending_review: 0, needs_review: 0, errors: 0 },
+      drive: { configured: false, message: SERVER_ONLY },
+      luna: { configured: false, model: 'gpt-6-luna', checked: false, available: false, message: 'GitHub Pages から OpenAI API は呼び出しません。luna の設定・利用権限の確認は、ローカルの Python サーバー版で行ってください。' },
+      warnings: [],
+    };
+    throw new Error(SERVER_ONLY);
+  }
+  let response;
+  try {
+    response = await fetch(path, body === undefined ? { headers: { Accept: 'application/json' } } : {
+      method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body),
+    });
+  } catch {
+    throw new Error('サーバーに接続できません。起動状態とネットワークを確認してください。');
+  }
+  let data;
+  try { data = await response.json(); } catch {
+    throw new Error(`サーバーの応答を読み取れませんでした（HTTP ${response.status}）。`);
+  }
+  if (!response.ok) {
+    const detail = data.detail ?? data;
+    const message = typeof detail === 'string' ? detail : detail.message ?? detail.reason ?? `処理に失敗しました（HTTP ${response.status}）。`;
+    const setup = Array.isArray(detail.setup) ? `\n${detail.setup.join('\n')}` : '';
+    throw new Error(`${message}${setup}`);
+  }
+  return data;
+}
+
+function toast(message, error = false) {
+  const node = $('#toast');
+  node.textContent = message;
+  node.className = error ? 'toast error' : 'toast';
+  node.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { node.hidden = true; }, error ? 9000 : 4500);
+}
+
+function setNotice(message) {
+  const node = $('#global-notice');
+  node.textContent = message;
+  node.hidden = !message;
+}
+
+function normalizeQuestion(question) {
+  return { ...question, source_id: question.source_id ?? question.source?.id, file_name: question.file_name ?? question.source?.file_name };
+}
+
+function count(name) { return Number(state.status?.counts?.[name] ?? 0); }
+
+function showView(view, focus = true) {
+  if (!['practice', 'sources', 'settings'].includes(view)) return;
+  state.view = view;
+  for (const section of document.querySelectorAll('.view')) section.hidden = section.id !== `view-${view}`;
+  for (const item of document.querySelectorAll('.nav-item')) {
+    const active = item.dataset.view === view;
+    item.classList.toggle('active', active);
+    if (active) item.setAttribute('aria-current', 'page'); else item.removeAttribute('aria-current');
+  }
+  $('#current-view-label').textContent = { practice: '練習する', sources: '資料と問題', settings: '接続・設定' }[view];
+  history.replaceState(null, '', `#${view}`);
+  if (focus) $('#main-content').focus({ preventScroll: true });
+}
+
+function updateStatus() {
+  $('#stat-questions').replaceChildren(document.createTextNode(String(state.session?.total ?? count('questions'))), element('small', '', ' 問'));
+  $('#stat-sources').replaceChildren(document.createTextNode(String(count('sources'))), element('small', '', IS_PAGES ? ' 件' : ' 枚'));
+  $('#stat-review').replaceChildren(document.createTextNode(String(count('pending_review'))), element('small', '', ' 問'));
+  $('#nav-source-count').textContent = String(count('sources'));
+  const drive = state.status?.drive ?? {};
+  const driveBadge = $('#drive-badge');
+  driveBadge.textContent = drive.configured ? '設定あり' : '未接続';
+  driveBadge.className = `badge ${drive.configured ? 'good' : 'warning'}`;
+  $('#drive-status').textContent = drive.message ?? (drive.configured ? '認証設定があります。フォルダのアクセス権を確認してから、写真を同期してください。' : 'Google ドライブの認証が未設定です。下の接続手順に沿って、サーバーを設定してください。');
+  $('#drive-status').className = `connection-message ${drive.configured ? 'good' : ''}`;
+  if (drive.folder_id && !$('#folder-id').value) $('#folder-id').value = drive.folder_id;
+  const luna = state.status?.luna ?? {};
+  const available = luna.available === true;
+  $('#model-id').textContent = luna.model ?? 'gpt-6-luna';
+  $('#model-badge').textContent = available ? '利用可能' : luna.checked ? '利用不可' : luna.configured ? '未検証' : '未設定';
+  $('#model-badge').className = `badge ${available ? 'good' : 'warning'}`;
+  $('#model-status').textContent = luna.message ?? luna.reason ?? (available ? 'このアカウントの利用権限を確認しました。画像入力に対応する luna を使用します。' : 'API キーをサーバーに設定し、luna の利用可否を確認してください。利用できるまで問題生成を停止します。');
+  $('#model-status').className = `connection-message ${available ? 'good' : ''}`;
+  if (luna.image_input === false) $('#model-status').textContent += '\n画像入力を確認できないため、問題生成を停止します。';
+  $('#source-summary').textContent = `${count('sources')} 枚の写真 · ${count('questions')} 問を保存 · ${count('pending_review')} 問が確認待ち`;
+  if (IS_PAGES) {
+    driveBadge.textContent = 'サーバー版のみ';
+    driveBadge.className = 'badge neutral';
+    $('#model-badge').textContent = 'サーバー版のみ';
+    $('#model-badge').className = 'badge neutral';
+    $('#source-summary').textContent = `${count('questions')} 問をメモリに保持 · 出典 ${count('sources')} 件 · 原本写真は未読み込み`;
+  }
+}
+
+function paperIllustration() {
+  const art = element('div', 'empty-illustration');
+  art.setAttribute('aria-hidden', 'true');
+  const paper = element('div', 'paper-sheet');
+  for (const name of ['paper-line', 'paper-line', 'paper-line marked', 'paper-line short', 'paper-line']) paper.append(element('span', name));
+  art.append(paper, element('span', 'empty-spark', '✦'));
+  return art;
+}
+
+function renderEmpty() {
+  const card = element('div', 'empty-card');
+  const top = element('div', 'empty-card-top');
+  top.append(element('span', '', 'YOUR FIRST QUESTION'), element('span', '', 'まだ、白紙の一ページ'));
+  card.append(top, paperIllustration());
+  let heading = '最初の一問は、あなたの写真から。';
+  let description = 'Google ドライブの「ワイン検定」フォルダをつないで、黄色のマーカーから問題集をつくりましょう。';
+  let action = '資料の取り込みをはじめる';
+  let view = 'settings';
+  if (state.loadError) {
+    heading = '問題を読み込めませんでした。';
+    description = state.loadError;
+    action = 'もう一度読み込む';
+  } else if (count('pending_review') > 0) {
+    heading = '問題の根拠を、たしかめましょう。';
+    description = `${count('pending_review')} 問が確認待ちです。写真の黄色部分と問題を見比べ、承認した問題から練習を始められます。`;
+    action = '確認待ちの問題を見る';
+    view = 'sources';
+  } else if (count('sources') > 0) {
+    heading = '写真から、学びの一問へ。';
+    description = count('needs_review') > 0
+      ? `${count('needs_review')} 枚の資料で、文字や黄色の範囲などの確認が必要です。読み取れない内容からは問題を作成していません。`
+      : '写真は保存されています。接続・モデルの設定を確認して資料を処理すると、生成した問題を確認できます。';
+    if (!count('needs_review') && state.status?.luna?.available !== true && state.status?.luna?.message) description += `\n${state.status.luna.message}`;
+    action = count('needs_review') > 0 ? '確認が必要な資料を見る' : '取り込みの状態を確認する';
+    view = count('needs_review') > 0 ? 'sources' : 'settings';
+  }
+  if (IS_PAGES) {
+    heading = '問題集を読み込んで、練習を始めましょう。';
+    description = 'サーバー版で承認した問題集（JSON）を、上の欄から読み込んでください。この公開ページに問題や原本写真は含めていません。';
+    action = '問題集を選ぶ';
+  }
+  card.append(element('h2', '', heading), element('p', 'empty-description', description));
+  const actionButton = button(action, 'button button-primary', () => IS_PAGES ? $('#question-pack').click() : state.loadError ? loadData(true) : showView(view));
+  actionButton.append(element('span', '', '→'));
+  card.append(actionButton, element('p', 'empty-fine-print', IS_PAGES ? '写真の照合・問題の承認はサーバー版で行います。' : '実資料で確認できた問題だけを、ここに表示します。'));
+  $('#quiz-root').replaceChildren(card);
+}
+
+function renderCompletion() {
+  const session = state.session;
+  const card = element('div', 'completion-card');
+  card.append(element('div', 'completion-medallion', '✓'), element('p', 'eyebrow', 'ONE ROUND, WELL DONE'), element('h2', '', 'ひと巡り、おつかれさまでした。'), element('p', '', 'もう一度、順番を変えて。知識を少しずつ確かなものに。'));
+  const score = element('div', 'completion-score', String(session.score));
+  score.append(element('span', '', `/ ${session.total} 問正解`));
+  const restart = button('シャッフルして、もう一巡', 'button button-primary', () => {
+    session.restart();
+    renderPractice();
+    $('#main-content').focus({ preventScroll: true });
+  });
+  restart.append(element('span', '', '↻'));
+  card.append(score, restart);
+  $('#quiz-root').replaceChildren(card);
+}
+
+function evidence(question, includeImage = !IS_PAGES) {
+  const box = element('div', 'evidence');
+  box.append(element('div', 'evidence-label', '根拠になった黄色部分'));
+  const quote = element('p', 'evidence-quote');
+  quote.append(document.createTextNode('「'), element('span', 'highlight-text', question.quote), document.createTextNode('」'));
+  const file = element('div', 'evidence-file');
+  file.append(element('span', '', `出典：${question.file_name}`));
+  if (includeImage && !IS_PAGES) file.append(link('写真で確かめる ↗', imageUrl(question.source_id, question.region_id, 'crop')));
+  box.append(quote, file);
+  if (IS_PAGES) box.append(element('p', 'pages-evidence-note', '原本写真と黄色部分の照合は、サーバー版で確認できます。'));
+  return box;
+}
+
+function renderPractice() {
+  const session = state.session;
+  if (!session?.total) { renderEmpty(); return; }
+  if (session.complete) { renderCompletion(); return; }
+  const question = session.current;
+  const card = element('div', 'quiz-card');
+  const header = element('div', 'question-header');
+  const questionCount = element('div', 'question-count');
+  questionCount.append(element('span', '', 'QUESTION'), element('strong', '', String(session.index + 1).padStart(2, '0')), element('span', '', `/ ${String(session.total).padStart(2, '0')}`));
+  header.append(questionCount, element('span', 'question-score', `正解 ${session.score} / 回答 ${session.answers.length}`));
+  const progress = element('div', 'progress-track');
+  progress.setAttribute('role', 'progressbar');
+  progress.setAttribute('aria-label', '今回の練習の進み具合');
+  progress.setAttribute('aria-valuenow', String(session.answers.length));
+  progress.setAttribute('aria-valuemin', '0');
+  progress.setAttribute('aria-valuemax', String(session.total));
+  const fill = element('div', 'progress-fill');
+  fill.style.width = `${session.answers.length / session.total * 100}%`;
+  progress.append(fill);
+  const prompt = element('h2', 'question-prompt', question.prompt);
+  prompt.id = 'question-prompt';
+  const choices = element('div', 'choice-list');
+  choices.setAttribute('role', 'group');
+  choices.setAttribute('aria-labelledby', 'question-prompt');
+  question.choices.forEach((choice, index) => {
+    const correct = session.answered && choice.id === question.correct_choice_id;
+    const wrong = session.answered && choice.id === session.selectedId && !correct;
+    const choiceButton = button('', `choice${correct ? ' correct' : ''}${wrong ? ' incorrect' : ''}`, () => {
+      // Lock synchronously before a second click can arrive; rerender disables every choice.
+      if (!session.answer(choice.id)) return;
+      renderPractice();
+      $('.answer-panel')?.focus({ preventScroll: true });
+    });
+    choiceButton.disabled = session.answered;
+    choiceButton.append(element('span', 'choice-letter', String.fromCharCode(65 + index)), element('span', 'choice-text', choice.text));
+    if (correct || wrong) {
+      const marker = element('span', 'choice-state', correct ? '✓' : '×');
+      marker.setAttribute('aria-label', correct ? '正しい回答' : '選んだ回答・不正解');
+      choiceButton.append(marker);
+    }
+    choices.append(choiceButton);
+  });
+  card.append(header, progress, element('div', 'question-category', '黄色のマーカーから出題'), prompt, choices);
+  if (!session.answered) card.append(element('p', 'answer-hint', '答えをひとつ選んでください。回答後に解説を表示します。'));
+  else {
+    const answer = session.answers[session.answers.length - 1];
+    const correctChoice = question.choices.find(choice => choice.id === question.correct_choice_id);
+    const panel = element('div', 'answer-panel');
+    panel.tabIndex = -1;
+    panel.setAttribute('aria-label', '回答結果と解説');
+    const verdict = element('div', `verdict${answer.correct ? '' : ' incorrect'}`);
+    verdict.append(element('span', 'verdict-symbol', answer.correct ? '✓' : '×'), document.createTextNode(answer.correct ? '正解です。' : '不正解です。次につなげましょう。'));
+    const correctAnswer = element('p', 'correct-answer', '正しい回答：');
+    correctAnswer.append(element('strong', '', correctChoice.text));
+    const next = button('次の問題', 'button button-primary', () => {
+      if (!session.next()) return;
+      renderPractice();
+      $('#main-content').focus({ preventScroll: true });
+      if (window.innerWidth < 760) $('#view-practice').scrollIntoView({ behavior: 'instant', block: 'start' });
+    });
+    next.append(element('span', '', '→'));
+    const row = element('div', 'next-row');
+    row.append(next);
+    panel.append(verdict, correctAnswer, element('div', 'explanation-label', 'EXPLANATION / 解説'), element('p', 'explanation-body', question.explanation), evidence(question), row);
+    card.append(panel);
+  }
+  $('#quiz-root').replaceChildren(card);
+}
+
+function sourceStatus(source) {
+  if (source.active === false || source.status === 'removed') return { text: '対象外', type: 'neutral' };
+  if (source.status === 'error' || source.generation_error) return { text: '処理を確認', type: 'error' };
+  if (Number(source.needs_review_count) > 0 || ['needs_review', 'review'].includes(source.status)) return { text: '要確認', type: 'warning' };
+  if (Number(source.questions_count) > 0) return { text: '問題あり', type: 'good' };
+  return { text: { downloaded: '読取待ち', pending: '読取待ち', extracted: '生成待ち', processed: '読取済み', synced: '同期済み' }[source.status] ?? '確認中', type: 'neutral' };
+}
+
+function renderSources() {
+  const list = $('#source-list');
+  list.replaceChildren();
+  if (IS_PAGES) {
+    list.append(element('p', 'empty-inline', `読み込んだ問題集：${state.pagesQuestions.length} 問\n参照した資料：${count('sources')} 件\n原本写真はこのページに読み込んでいません。`));
+    const detail = $('#source-detail');
+    detail.replaceChildren(element('h2', 'detail-title', '資料の確認は、サーバー版で。'), element('p', 'source-reason', SERVER_ONLY), element('p', 'empty-inline', '読み込んだ問題の解説には、書き出し時の写真名と黄色部分の引用を表示します。原本画像・切り出し・検出範囲・OCR の保存結果は、ローカルの Python サーバー版で確認してください。'));
+    return;
+  }
+  if (!state.sources.length) {
+    list.append(element('p', 'empty-inline', 'まだ資料がありません。接続・設定から Google ドライブの写真を同期してください。'));
+    return;
+  }
+  for (const source of state.sources) {
+    const item = button('', `source-item${state.sourceId === source.id ? ' active' : ''}`, () => loadSource(source.id));
+    item.setAttribute('aria-label', `${source.file_name} の詳細`);
+    const info = element('div', 'source-info');
+    info.append(element('span', 'source-name', source.file_name));
+    const status = sourceStatus(source);
+    const meta = element('div', 'source-meta');
+    meta.append(element('span', `badge ${status.type}`, status.text), element('span', '', `${Number(source.regions_count ?? 0)} 箇所 · ${Number(source.questions_count ?? 0)} 問`));
+    info.append(meta);
+    item.append(element('span', 'source-file-icon', '▧'), info);
+    list.append(item);
+  }
+}
+
+function sourcePhoto(sourceId, regionId, kind, alt, className) {
+  const photo = element('img', className);
+  photo.src = imageUrl(sourceId, regionId, kind);
+  photo.alt = alt;
+  photo.loading = 'lazy';
+  photo.addEventListener('error', () => {
+    const missing = element('p', 'source-reason', '画像を表示できません。写真の同期状態を確認してください。');
+    photo.replaceWith(missing);
+  });
+  return photo;
+}
+
+function renderReviewQuestion(rawQuestion, detail) {
+  const question = normalizeQuestion({ ...rawQuestion, source_id: detail.id, file_name: detail.file_name });
+  const approved = question.status === 'approved';
+  const rejected = question.status === 'rejected';
+  const invalidated = question.status === 'invalidated';
+  const pending = question.status === 'pending_review';
+  const card = element('div', `review-question${approved ? ' approved' : rejected || invalidated ? ' rejected' : ''}`);
+  card.append(element('span', `badge ${approved ? 'good' : rejected || invalidated ? 'neutral' : 'warning'}`, approved ? '承認済み・練習で使用' : rejected ? '不採用' : invalidated ? '旧版・無効' : '確認待ち'));
+  card.append(element('h4', '', question.prompt));
+  const choices = element('ol', 'review-choices');
+  choices.type = 'A';
+  for (const choice of question.choices ?? []) choices.append(element('li', '', choice.text));
+  const correct = question.choices?.find(choice => choice.id === question.correct_choice_id);
+  card.append(choices, element('p', 'review-answer', `正しい回答：${correct?.text ?? '確認できません'}`), element('p', 'review-explanation', question.explanation ?? '解説がありません。'));
+  if (question.quote) card.append(evidence(question, !invalidated));
+  if (invalidated) card.append(element('p', 'review-instruction', '写真が更新されたため無効になった旧版の問題です。現在の写真との対応はありません。'));
+  if (pending) {
+    card.append(element('p', 'review-instruction', '黄色部分の引用・読み取りと一致し、正解がひとつであることを確認してください。'));
+    const actions = element('div', 'review-actions');
+    actions.append(button('根拠を確認して承認', 'button button-primary', () => reviewQuestion(question.id, true)), button('この問題は使わない', 'button button-secondary', () => reviewQuestion(question.id, false)));
+    card.append(actions);
+  }
+  return card;
+}
+
+function renderSourceDetail(detail) {
+  const root = $('#source-detail');
+  root.replaceChildren();
+  const status = sourceStatus(detail);
+  root.append(element('h2', 'detail-title', detail.file_name));
+  const meta = element('div', 'detail-status');
+  meta.append(element('span', `badge ${status.type}`, status.text), link('元の写真を開く ↗', imageUrl(detail.id)));
+  root.append(meta);
+  const reasons = [detail.reason, detail.generation_error].filter(Boolean);
+  if (reasons.length) root.append(element('p', 'source-reason', [...new Set(reasons)].join('\n')));
+  if (detail.downloaded !== false) {
+    const photoLink = link('', imageUrl(detail.id), 'detail-photo-link');
+    photoLink.append(sourcePhoto(detail.id, '', 'original', `${detail.file_name} の原本`, 'detail-photo'));
+    root.append(photoLink, element('p', 'detail-photo-caption', '写真をタップすると原本を開きます。'));
+  }
+  root.append(element('h3', 'detail-subheading', `黄色部分と読み取り（${detail.regions?.length ?? 0} 箇所）`));
+  if (!detail.regions?.length) root.append(element('p', 'empty-inline', '黄色部分の抽出結果はまだありません。未処理、または黄色の範囲を確定できていない資料です。'));
+  for (const [index, region] of (detail.regions ?? []).entries()) {
+    const card = element('div', 'region-card');
+    const regionHead = element('div', 'region-heading');
+    regionHead.append(element('span', '', `黄色部分 ${String(index + 1).padStart(2, '0')}`));
+    if (region.status) regionHead.append(element('span', `badge ${region.status === 'needs_review' ? 'warning' : 'neutral'}`, region.status === 'needs_review' ? '読取を確認' : region.status === 'ready' ? '読取済み' : '抽出済み'));
+    card.append(regionHead, sourcePhoto(detail.id, region.id, 'crop', `${detail.file_name} の黄色部分 ${index + 1}`, 'region-image'), element('div', 'ocr-label', '読み取った文字'));
+    card.append(element('p', 'ocr-text', region.text ?? region.ocr_text ?? region.quote ?? '文字を確定できませんでした。推測による補完は行っていません。'));
+    if (region.reason) card.append(element('p', 'source-reason', region.reason));
+    const tools = element('div', 'region-tools');
+    tools.append(link('切り出しを開く ↗', imageUrl(detail.id, region.id, 'crop')), link('黄色の検出範囲を見る ↗', imageUrl(detail.id, region.id, 'mask')));
+    card.append(tools);
+    const questions = (detail.questions ?? []).filter(question => question.region_id === region.id);
+    for (const question of questions) card.append(renderReviewQuestion(question, detail));
+    root.append(card);
+  }
+  const unmatched = (detail.questions ?? []).filter(question => !(detail.regions ?? []).some(region => region.id === question.region_id));
+  if (unmatched.length) {
+    root.append(element('h3', 'detail-subheading', '保存された問題'));
+    for (const question of unmatched) root.append(renderReviewQuestion(question, detail));
+  }
+}
+
+async function loadSource(sourceId) {
+  state.sourceId = sourceId;
+  renderSources();
+  $('#source-detail').replaceChildren(element('p', 'empty-inline', '資料の根拠を読み込んでいます…'));
+  try {
+    const detail = await api(`/api/sources/${encodeURIComponent(sourceId)}`);
+    if (state.sourceId !== sourceId) return;
+    state.detail = detail;
+    renderSourceDetail(detail);
+  } catch (error) {
+    $('#source-detail').replaceChildren(element('p', 'source-reason', error.message));
+    toast(error.message, true);
+  }
+}
+
+async function loadData(replaceSession = false) {
+  const results = await Promise.allSettled([api('/api/status'), api('/api/questions'), api('/api/sources')]);
+  const errors = [];
+  if (results[0].status === 'fulfilled') state.status = results[0].value;
+  else errors.push(results[0].reason.message);
+  if (results[1].status === 'fulfilled') {
+    state.loadError = '';
+    if (!state.session || replaceSession) {
+      const rows = Array.isArray(results[1].value) ? results[1].value : results[1].value.questions ?? [];
+      state.session = new QuizSession(rows.map(normalizeQuestion));
+      if (rows.length > state.session.total) errors.push('根拠や三択の対応を確認できない問題は、練習対象から除外しました。');
+    }
+  } else { state.loadError = results[1].reason.message; errors.push(state.loadError); }
+  if (results[2].status === 'fulfilled') state.sources = Array.isArray(results[2].value) ? results[2].value : results[2].value.sources ?? [];
+  else errors.push(results[2].reason.message);
+  const warnings = (state.status?.warnings ?? []).filter(warning => !warning.includes('利用可能な承認済み問題がありません'));
+  setNotice([...new Set([...errors, ...warnings])].join('\n'));
+  updateStatus();
+  renderSources();
+  renderPractice();
+}
+
+function setBusy(busy, activeId = '', label = '') {
+  state.busy = busy;
+  for (const id of ['find-folders', 'sync-drive', 'process-sources', 'check-model']) {
+    const node = $(`#${id}`);
+    node.disabled = busy || IS_PAGES;
+    node.setAttribute('aria-busy', String(busy && id === activeId));
+  }
+  for (const node of document.querySelectorAll('.review-actions button')) node.disabled = busy || IS_PAGES;
+  const active = activeId && $(`#${activeId}`);
+  if (active) {
+    if (busy) { active.dataset.originalText = active.textContent; active.textContent = label; }
+    else if (active.dataset.originalText) { active.textContent = active.dataset.originalText; delete active.dataset.originalText; }
+  }
+}
+
+function operationResult(message, error = false) {
+  const node = $('#operation-result');
+  node.textContent = message;
+  node.className = `operation-result${error ? ' error' : ''}`;
+  node.hidden = false;
+}
+
+async function perform(id, loadingText, path, body, fallback) {
+  if (state.busy) return;
+  setBusy(true, id, loadingText);
+  try {
+    const result = await api(path, body);
+    const extra = (result.errors ?? []).map(error => typeof error === 'string' ? error : error.message ?? error.reason ?? '').filter(Boolean);
+    const message = [result.message ?? result.reason ?? fallback, ...extra].filter(Boolean).join('\n');
+    const failed = result.ok === false || result.available === false || extra.length > 0;
+    operationResult(message, failed);
+    toast(message, failed);
+    await loadData(true);
+    if (state.sourceId) await loadSource(state.sourceId);
+    return result;
+  } catch (error) {
+    operationResult(error.message, true);
+    toast(error.message, true);
+  } finally { setBusy(false, id); }
+}
+
+function renderFolders(result) {
+  const root = $('#folder-results');
+  root.replaceChildren();
+  root.hidden = false;
+  state.folders = result.folders ?? [];
+  if (result.selected?.id) $('#folder-id').value = result.selected.id;
+  root.append(element('p', '', result.message ?? (state.folders.length > 1 ? '同名フォルダが複数あります。対象を選んでから同期してください。' : state.folders.length ? 'フォルダを確認しました。対象の ID を確認して写真を同期してください。' : '「ワイン検定」フォルダを確認できません。フォルダ ID と共有設定を確認してください。')));
+  for (const folder of state.folders) {
+    const option = element('label', 'folder-option');
+    const radio = element('input');
+    radio.type = 'radio';
+    radio.name = 'drive-folder';
+    radio.value = folder.id;
+    radio.checked = $('#folder-id').value === folder.id;
+    radio.addEventListener('change', () => { $('#folder-id').value = folder.id; });
+    const text = element('span');
+    text.append(element('strong', '', folder.name), element('code', '', folder.id));
+    option.append(radio, text);
+    root.append(option);
+  }
+}
+
+async function findFolders() {
+  if (state.busy) return;
+  setBusy(true, 'find-folders', '確認しています…');
+  try {
+    const folderId = $('#folder-id').value.trim();
+    const result = await api('/api/folders', folderId ? { folder_id: folderId } : {});
+    renderFolders(result);
+  } catch (error) {
+    $('#folder-results').hidden = false;
+    $('#folder-results').replaceChildren(element('p', '', error.message));
+    toast(error.message, true);
+  } finally { setBusy(false, 'find-folders'); }
+}
+
+async function reviewQuestion(id, approved) {
+  if (state.busy) return;
+  setBusy(true);
+  try {
+    await api(`/api/questions/${encodeURIComponent(id)}/review`, { approved });
+    toast(approved ? '承認しました。練習で使えるようになりました。' : 'この問題を練習対象から外しました。');
+    await loadData(true);
+    if (state.sourceId) await loadSource(state.sourceId);
+  } catch (error) { toast(error.message, true); }
+  finally { setBusy(false); }
+}
+
+function initializePages() {
+  if (!IS_PAGES) return;
+  $('#pages-import').hidden = false;
+  $('.topbar-badge').textContent = 'GitHub Pages · 練習用';
+  $('.topbar-badge').classList.add('pages-mode-badge');
+  $('#stat-sources').parentElement.querySelector('span').textContent = '参照した資料';
+  $('.sidebar-footer').replaceChildren(element('span', 'status-dot'), document.createTextNode(' 読み込んだ問題で練習'));
+  $('#folder-id').disabled = true;
+  $('#folder-id').placeholder = 'サーバー版で指定してください';
+  $('#refresh-sources').hidden = true;
+  $('.import-bottom > p').textContent = SERVER_ONLY;
+  $('#process-sources').textContent = 'サーバー版で取り込み・生成';
+  setBusy(false);
+}
+
+async function importPagesPack() {
+  if (!IS_PAGES) return;
+  const input = $('#question-pack');
+  const file = input.files?.[0];
+  if (!file) return;
+  input.disabled = true;
+  $('#clear-pack').disabled = true;
+  $('#pages-import-error').hidden = true;
+  try {
+    if (file.size > MAX_PACK_BYTES) throw new Error('問題集は 2 MB 以下の JSON ファイルを選んでください。');
+    const pack = parseQuestionPack(await file.text());
+    // Assign only after the entire file passed validation; invalid files preserve the session.
+    state.pagesQuestions = pack.questions;
+    state.pagesFileName = file.name;
+    await loadData(true);
+    $('#pages-import-status').textContent = `${file.name}：${pack.questions.length} 問をこのタブのメモリに読み込みました。再読み込みやタブを閉じると消えます。`;
+    toast(`${pack.questions.length} 問を読み込みました。`);
+  } catch (error) {
+    $('#pages-import-error').textContent = `${error.message}\n以前に読み込んだ問題と回答状況は、そのまま保持しています。`;
+    $('#pages-import-error').hidden = false;
+  } finally {
+    input.value = '';
+    input.disabled = false;
+    $('#clear-pack').disabled = !state.pagesFileName;
+  }
+}
+
+async function clearPagesPack() {
+  if (!IS_PAGES) return;
+  state.pagesQuestions = [];
+  state.pagesFileName = '';
+  $('#pages-import-error').hidden = true;
+  $('#pages-import-status').textContent = '読み込んだ問題をメモリから消去しました。公開ページに問題や写真は含めていません。';
+  $('#clear-pack').disabled = true;
+  await loadData(true);
+}
+
+for (const item of document.querySelectorAll('[data-view]')) item.addEventListener('click', () => showView(item.dataset.view));
+for (const item of document.querySelectorAll('[data-open-view]')) item.addEventListener('click', () => showView(item.dataset.openView));
+$('.brand').addEventListener('click', event => { event.preventDefault(); showView('practice'); });
+$('#find-folders').addEventListener('click', findFolders);
+$('#sync-drive').addEventListener('click', async () => {
+  const folderId = $('#folder-id').value.trim();
+  if (!folderId && state.folders.length > 1) { toast('対象フォルダを選ぶか、フォルダ ID を入力してください。', true); $('#folder-id').focus(); return; }
+  const result = await perform('sync-drive', '写真を同期しています…', '/api/sync', folderId ? { folder_id: folderId } : {}, '写真の同期が完了しました。');
+  if (result?.folders) renderFolders(result);
+});
+$('#process-sources').addEventListener('click', () => perform('process-sources', '資料を処理しています…', '/api/process', {}, '資料の処理が完了しました。資料と問題の画面で根拠を確認してください。'));
+$('#check-model').addEventListener('click', () => perform('check-model', '利用権限を確認しています…', '/api/check-model', {}, 'モデルの確認が完了しました。'));
+$('#refresh-sources').addEventListener('click', async () => { await loadData(true); if (state.sourceId) await loadSource(state.sourceId); toast('保存された資料の状態を更新しました。'); });
+$('#question-pack').addEventListener('change', importPagesPack);
+$('#clear-pack').addEventListener('click', clearPagesPack);
+window.addEventListener('hashchange', () => showView(location.hash.slice(1) || 'practice', false));
+initializePages();
+showView(location.hash.slice(1) || 'practice', false);
+loadData();
