@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { parseQuestionPack } from '../static/pages.js';
 
 const code = await readFile(new URL('../static/quiz.js', import.meta.url), 'utf8');
 const { QuizSession, shuffle, validQuestion, countryCounts, availableCountries, questionsForCountry } = await import(`data:text/javascript;base64,${Buffer.from(code).toString('base64')}`);
@@ -155,4 +156,49 @@ test('null and malformed options are rejected safely by validation and sessions'
   assert.equal(new QuizSession(null).total, 0);
   assert.deepEqual([...countryCounts(null)], []);
   assert.deepEqual(questionsForCountry(null), []);
+});
+
+test('registered pilot data derives country membership from rows and scores every shuffled scope by stable IDs', async () => {
+  const text = await readFile(new URL('../question-packs/pilot-150.json', import.meta.url), 'utf8');
+  const original = JSON.parse(text);
+  const { questions, metadata } = parseQuestionPack(text);
+  const expectedCounts = new Map([
+    ['フランス', 32], ['スペイン', 16], ['イタリア', 17], ['日本', 17],
+    ['アメリカ', 11], ['オーストラリア', 11], ['ポルトガル', 11], ['オーストリア', 8],
+    ['ニュージーランド', 7], ['アルゼンチン', 7], ['南アフリカ', 7], ['チリ', 7],
+  ]);
+  assert.deepEqual(countryCounts(questions), expectedCounts);
+  assert.equal(metadata.country_counts['スペイン'], 15, 'recorded count is preserved');
+  assert.equal(countryCounts(questions).get('スペイン'), 16, 'actual memberships determine the range');
+  const originalsById = new Map(original.questions.map(row => [row.question_id, row]));
+  for (const [country, count] of [[null, 150], ...expectedCounts]) {
+    const session = new QuizSession(questions, () => 0, country);
+    const ids = [];
+    assert.equal(session.total, count);
+    while (session.current) {
+      const row = session.current;
+      assert.equal(validQuestion(row), true);
+      if (country !== null) assert.ok(row.countries.includes(country));
+      ids.push(row.id);
+      const source = originalsById.get(row.id);
+      const correct = row.choices.find(choice => choice.text === source.correct_answer);
+      assert.ok(correct);
+      assert.equal(session.answer(correct.id).correct, true, `${row.id} remains correctly scored after shuffling`);
+      assert.equal(session.answer(correct.id), null);
+      session.next();
+    }
+    assert.equal(new Set(ids).size, count);
+    assert.equal(session.score, count);
+    assert.equal(session.complete, true);
+    if (country === 'フランス' || country === 'スペイン') assert.ok(ids.includes('Q-K0019-01'));
+    session.restart();
+    assert.equal(session.country, country);
+    assert.equal(session.total, count);
+    assert.equal(session.score, 0);
+    assert.equal(session.answers.length, 0);
+  }
+  const rawSession = new QuizSession(original.questions, () => 0);
+  assert.equal(rawSession.total, 150, 'raw pilot rows normalize before ID deduplication');
+  assert.equal(rawSession.current.format, 'pilot');
+  assert.deepEqual(original, JSON.parse(text), 'source rows are never mutated by normalization or play');
 });

@@ -8,7 +8,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from app.store import Store
-from scripts.build_pages import MARKER, PUBLIC_FILES, PUBLIC_QUESTION_PACK, build
+from scripts.build_pages import MARKER, PUBLIC_FILES, PUBLIC_QUESTION_PACK, ROOT, build
 from scripts.export_questions import export_questions
 
 
@@ -32,7 +32,8 @@ class PublicBuildTests(unittest.TestCase):
         canary = "DO-NOT-PUBLISH-PRIVATE-EVIDENCE-OR-KEYS"
         for relative in (".env", "data/questions-export.json", "data/wine-quiz.sqlite3",
                          "data/originals/private.jpg", "credentials/service-account.json",
-                         "static/unlisted-export.json", "app/store.py"):
+                         "static/unlisted-export.json", "question-packs/private.json",
+                         "question-packs/batches/pilot-01.json", "app/store.py"):
             path = self.root / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(canary, encoding="utf-8")
@@ -53,6 +54,12 @@ class PublicBuildTests(unittest.TestCase):
             build(self.root, self.output)
         self.assertFalse(self.output.exists())
         self.assertEqual(list(self.output.parent.glob(".pages-build-*")), [])
+
+    def test_registered_pack_is_published_without_modifying_original_bytes(self):
+        original = (ROOT / PUBLIC_QUESTION_PACK).read_bytes()
+        build(ROOT, self.output)
+        self.assertEqual((self.output / PUBLIC_QUESTION_PACK).read_bytes(), original)
+        self.assertEqual((ROOT / PUBLIC_QUESTION_PACK).read_bytes(), original)
 
     def test_unrelated_directory_and_source_ancestors_cannot_be_overwritten(self):
         unrelated = self.base / "important"
@@ -80,6 +87,16 @@ class PublicBuildTests(unittest.TestCase):
         source = self.root / PUBLIC_QUESTION_PACK
         source.unlink()
         source.symlink_to(outside)
+        with self.assertRaisesRegex(ValueError, PUBLIC_QUESTION_PACK):
+            build(self.root, self.output)
+        self.assertFalse(self.output.exists())
+        source.unlink()
+        pack_dir = source.parent
+        pack_dir.rmdir()
+        outside_dir = self.base / "private-packs"
+        outside_dir.mkdir()
+        (outside_dir / source.name).write_text("PRIVATE QUESTION CANARY", encoding="utf-8")
+        pack_dir.symlink_to(outside_dir, target_is_directory=True)
         with self.assertRaisesRegex(ValueError, PUBLIC_QUESTION_PACK):
             build(self.root, self.output)
         self.assertFalse(self.output.exists())

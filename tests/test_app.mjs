@@ -143,6 +143,9 @@ const generatedQuestion = {
   choices: ['a', 'b', 'c'].map(id => ({ id, text: id })), correct_choice_id: 'a',
   explanation: 'Generated explanation', quote: 'Generated quote', source_id: 'generated-source', file_name: 'generated.png', region_id: 'generated-region',
 };
+const DEFAULT_PACK_PATH = '/question-packs/pilot-150.json';
+const registeredPilotText = readFileSync(new URL('../question-packs/pilot-150.json', import.meta.url), 'utf8');
+const registeredPilot = JSON.parse(registeredPilotText);
 
 async function startApp(mode, { pack = JSON.stringify(questions), status = 200, networkError = false } = {}) {
   const document = documentFromHtml(readFileSync(new URL('../static/index.html', import.meta.url), 'utf8'));
@@ -150,7 +153,7 @@ async function startApp(mode, { pack = JSON.stringify(questions), status = 200, 
   const fetch = async input => {
     const path = new URL(String(input), 'https://app.example/').pathname;
     requests.push(path);
-    if (path.endsWith('/wine_quiz_master_set_01.json')) {
+    if (path === DEFAULT_PACK_PATH) {
       if (networkError) throw new Error('Synthetic network error');
       return { ok: status === 200, status, text: async () => pack, json: async () => JSON.parse(pack) };
     }
@@ -203,9 +206,86 @@ async function importPack(app, text, name = 'synthetic-import.json') {
 }
 
 for (const mode of ['server', 'pages']) {
+  test(`${mode}: registered pilot loads 150 questions and retains recorded pack review status`, async () => {
+    const app = await startApp(mode, { pack: registeredPilotText });
+    assert.deepEqual(app.requests.filter(path => path.endsWith('.json')), [DEFAULT_PACK_PATH]);
+    if (mode === 'pages') assert.equal(app.requests.some(path => path.startsWith('/api/')), false);
+    assert.match(app.$('#scope-all-count').textContent, /150/);
+    assert.match(app.$('#active-scope').textContent, /すべて.*150/);
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '150');
+    assert.equal(app.$('#stat-review').textContent, '150 問');
+    assert.equal(app.$('#stat-review').parentElement.querySelector('span').textContent, '人手確認前の問題');
+    for (const [country, count] of [['フランス', 32], ['スペイン', 16]]) {
+      const option = app.$('#practice-country').options.find(node => node.value === country);
+      assert.ok(option);
+      assert.ok(option.textContent.includes(String(count)), `${country} count must derive from every countries[] membership`);
+    }
+    const record = app.$('#pack-review-status');
+    assert.equal(record.hidden, false);
+    assert.ok(record.textContent.includes(registeredPilot.metadata.qa_status));
+    assert.equal(record.querySelector('a'), null, 'pack review text is a recorded statement');
+    assert.doesNotMatch(record.textContent, /承認済み|人手確認済み|校閲済み|事実確認済み/);
+    const questionId = app.$('.quiz-card').dataset.questionId;
+    await app.$('.choice').click();
+    await importPack(app, '{invalid pilot import');
+    assert.equal(app.$('.quiz-card').dataset.questionId, questionId);
+    assert.ok(app.$('.answer-panel'));
+    assert.ok(app.$('#pack-review-status').textContent.includes(registeredPilot.metadata.qa_status));
+    assert.equal(app.$('#pack-review-status').hidden, false);
+    await importPack(app, JSON.stringify(questions));
+    assert.equal(app.$('#pack-review-status').hidden, true);
+    assert.equal(app.$('#stat-review').textContent, '0 問');
+    assert.equal(app.$('#stat-review').parentElement.querySelector('span').textContent, '取り込みの確認待ち');
+    await app.$('#clear-pack').click();
+    assert.equal(app.requests.filter(path => path === DEFAULT_PACK_PATH).length, 2);
+    assert.match(app.$('#active-scope').textContent, /すべて.*150/);
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '0');
+    assert.equal(app.$('#pack-review-status').hidden, false);
+    assert.ok(app.$('#pack-review-status').textContent.includes(registeredPilot.metadata.qa_status));
+  });
+
+  for (const [country, count] of [['フランス', 32], ['スペイン', 16]]) {
+    test(`${mode}: registered pilot ${country} round includes shared questions and preserves pilot evidence`, async () => {
+      const app = await startApp(mode, { pack: registeredPilotText });
+      await chooseCountry(app, country);
+      assert.match(app.$('#scope-count').textContent, new RegExp(`${country}.*${count}`));
+      await app.$('#start-practice').click();
+      const seen = [];
+      for (let index = 0; index < count; index += 1) {
+        const id = app.$('.quiz-card').dataset.questionId;
+        const row = registeredPilot.questions.find(question => question.question_id === id);
+        assert.ok(row, `rendered unknown question ${id}`);
+        assert.ok(row.countries.includes(country));
+        seen.push(id);
+        assert.equal(app.$('#question-prompt').textContent, row.question);
+        assert.deepEqual(app.document.querySelectorAll('.choice-text').map(node => node.textContent).sort(), [...row.options].sort());
+        const correct = app.document.querySelectorAll('.choice').find(node => node.querySelector('.choice-text').textContent === row.correct_answer);
+        assert.ok(correct, 'string options must keep their answer key after shuffling');
+        await correct.click();
+        const evidence = app.$('.pilot-evidence');
+        for (const value of [row.knowledge_id, row.source_page, row.topic, row.status]) {
+          assert.ok(evidence.textContent.includes(String(value)), `missing pilot evidence ${value}`);
+        }
+        assert.match(app.$('.pilot-review-note').textContent, /auto_checked.*機械検証済み・人手確認前/);
+        assert.doesNotMatch(evidence.textContent, /承認済み|人手確認済み|校閲済み|事実確認済み|undefined/);
+        assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), String(index + 1));
+        assert.match(app.$('.question-score').textContent, new RegExp(`正解 ${index + 1} / 回答 ${index + 1}`));
+        await app.$('.next-row button').click();
+      }
+      assert.equal(new Set(seen).size, count);
+      assert.ok(seen.includes('Q-K0019-01'), 'France/Spain cross-country question must appear in each round');
+      assert.ok(app.$('.completion-card'));
+      assert.match(app.$('.completion-score').textContent, new RegExp(`${count}.*${count}`));
+      await app.$('.completion-card button').click();
+      assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), String(count));
+      assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '0');
+      assert.match(app.$('#active-scope').textContent, new RegExp(`${country}.*${count}`));
+    });
+  }
+
   test(`${mode}: automatically loads the bundled pack and derives all/country counts`, async () => {
     const app = await startApp(mode);
-    assert.equal(app.requests.filter(path => path.endsWith('/wine_quiz_master_set_01.json')).length, 1);
+    assert.equal(app.requests.filter(path => path === DEFAULT_PACK_PATH).length, 1);
     if (mode === 'pages') assert.equal(app.requests.some(path => path.startsWith('/api/')), false);
     assert.equal(app.$('#scope-all').checked, true);
     assert.equal(app.$('#scope-all').name, 'practice-scope');
@@ -297,7 +377,7 @@ for (const mode of ['server', 'pages']) {
     assert.equal(app.$('#clear-pack').disabled, false);
     assert.match(app.$('#pages-import-status').textContent, /synthetic-import\.json.*0/);
     await app.$('#clear-pack').click();
-    assert.equal(app.requests.filter(path => path.endsWith('/wine_quiz_master_set_01.json')).length, 2);
+    assert.equal(app.requests.filter(path => path === DEFAULT_PACK_PATH).length, 2);
     assert.ok(app.$('.choice'));
     assert.equal(app.$('#start-practice').disabled, false);
     assert.equal(app.$('#scope-all').checked, true);
@@ -325,7 +405,7 @@ for (const mode of ['server', 'pages']) {
       const app = await startApp(mode, options);
       assert.equal(app.$('.choice'), null);
       assert.ok(app.$('#start-practice').disabled);
-      assert.match(app.$('#quiz-root').textContent, /wine_quiz_master_set_01\.json/);
+      assert.match(app.$('#quiz-root').textContent, /pilot-150\.json/);
       assert.doesNotMatch(app.$('#quiz-root').textContent, /Synthetic question|Unrelated server-generated/);
     });
   }

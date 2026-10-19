@@ -1,12 +1,12 @@
 import { QuizSession, countryCounts, questionsForCountry } from './quiz.js';
 import { mode } from './runtime.js';
-import { parseQuestionPack, loadDefaultQuestionPack, MAX_PACK_BYTES } from './pages.js';
+import { parseQuestionPack, loadDefaultQuestionPack, DEFAULT_PACK_FILENAME, MAX_PACK_BYTES } from './pages.js';
 
 const $ = selector => document.querySelector(selector);
 const IS_PAGES = mode === 'pages';
 const SERVER_ONLY = 'GitHub Pages では、Google ドライブ接続・黄色部分の読み取り・luna による生成・問題の承認を実行できません。ローカルの Python サーバー版で操作し、承認済みの問題集を書き出してください。';
-const DEFAULT_PACK_NAME = 'wine_quiz_master_set_01.json';
-const state = { status: null, sources: [], session: null, view: 'practice', sourceId: null, detail: null, busy: false, loadError: '', folders: [], practiceQuestions: [], packFileName: '', customPack: false, practiceLoading: true };
+const DEFAULT_PACK_NAME = DEFAULT_PACK_FILENAME;
+const state = { status: null, sources: [], session: null, view: 'practice', sourceId: null, detail: null, busy: false, loadError: '', folders: [], practiceQuestions: [], packMetadata: null, packFileName: '', customPack: false, practiceLoading: true };
 let toastTimer;
 
 function element(tag, className = '', text = '') {
@@ -134,6 +134,7 @@ function startPractice() {
 
 function useQuestionPack(pack, fileName, custom = false) {
   state.practiceQuestions = pack.questions;
+  state.packMetadata = pack.metadata ?? null;
   state.packFileName = fileName;
   state.customPack = custom;
   state.loadError = '';
@@ -142,6 +143,9 @@ function useQuestionPack(pack, fileName, custom = false) {
   $('#scope-country').checked = false;
   state.session = new QuizSession(state.practiceQuestions);
   $('#pages-import-status').textContent = `出題元：${fileName} · ${pack.questions.length} 問${custom ? '（このタブのみ）' : '（標準問題集）'}`;
+  const qa = state.packMetadata?.qa_status;
+  $('#pack-review-status').textContent = typeof qa === 'string' ? `問題集の検証記録：${qa}` : '';
+  $('#pack-review-status').hidden = typeof qa !== 'string' || !qa.trim();
   $('#pages-import-error').hidden = true;
   $('#clear-pack').disabled = !custom;
   renderScope(true);
@@ -154,6 +158,7 @@ async function loadDefaultPack() {
   state.practiceLoading = true;
   state.loadError = '';
   state.practiceQuestions = [];
+  state.packMetadata = null;
   state.session = null;
   state.customPack = false;
   state.packFileName = DEFAULT_PACK_NAME;
@@ -161,6 +166,7 @@ async function loadDefaultPack() {
   $('#clear-pack').disabled = true;
   $('#pages-import-error').hidden = true;
   $('#pages-import-status').textContent = `${DEFAULT_PACK_NAME} を読み込んでいます。`;
+  $('#pack-review-status').hidden = true;
   renderScope(true);
   renderPractice();
   try {
@@ -194,12 +200,16 @@ function showView(view, focus = true) {
 }
 
 function updateStatus() {
-  const packSources = new Set(state.practiceQuestions.flatMap(question => Array.isArray(question.sources)
-    ? question.sources.map(source => JSON.stringify(source)) : [question.source_id]));
+  const packSources = new Set(state.practiceQuestions.flatMap(question => question.format === 'pilot'
+    ? [`knowledge:${question.knowledge_id}`] : Array.isArray(question.sources)
+      ? question.sources.map(source => JSON.stringify(source)) : question.source_id ? [question.source_id] : []));
   const sourceCount = IS_PAGES ? packSources.size : count('sources');
   $('#stat-questions').replaceChildren(document.createTextNode(String(state.session?.total ?? 0)), element('small', '', ' 問'));
   $('#stat-sources').replaceChildren(document.createTextNode(String(sourceCount)), element('small', '', IS_PAGES ? ' 件' : ' 枚'));
-  $('#stat-review').replaceChildren(document.createTextNode(String(count('pending_review'))), element('small', '', ' 問'));
+  const pilotQuestions = state.practiceQuestions.filter(question => question.format === 'pilot');
+  const reviewCount = pilotQuestions.length ? pilotQuestions.filter(question => question.status === 'auto_checked').length : count('pending_review');
+  $('#stat-review').parentElement.querySelector('span').textContent = pilotQuestions.length ? '人手確認前の問題' : '取り込みの確認待ち';
+  $('#stat-review').replaceChildren(document.createTextNode(String(reviewCount)), element('small', '', ' 問'));
   $('#nav-source-count').textContent = String(sourceCount);
   const drive = state.status?.drive ?? {};
   const driveBadge = $('#drive-badge');
@@ -281,6 +291,7 @@ const metadataLabels = {
   image: '画像', image_name: '画像名', image_file: '画像名', image_filename: '画像名',
   file_name: '画像名', filename: '画像名', page: 'ページ', page_number: 'ページ',
   position: '位置', location: '位置', url: 'URL', source_url: '出典URL',
+  knowledge_id: '知識ID', source_page: '教材ページ', topic: 'テーマ',
 };
 
 function recordedMetadata(value) {
@@ -299,6 +310,18 @@ function recordedMetadata(value) {
 
 function evidence(question, includeImage = !IS_PAGES) {
   const box = element('div', 'evidence');
+  if (question.format === 'pilot') {
+    box.classList.add('pilot-evidence');
+    box.append(element('div', 'evidence-label', '問題集に記録された出典'), recordedMetadata({
+      knowledge_id: question.knowledge_id,
+      source_page: question.source_page,
+      topic: question.topic,
+    }));
+    const description = question.status === 'auto_checked' ? '（機械検証済み・人手確認前）' : '';
+    box.append(element('p', 'pilot-review-note', `検証記録：${question.status}${description}`),
+      element('p', 'pages-evidence-note', '原画像の確認・外部の事実確認・人による校閲の完了を示すものではありません。'));
+    return box;
+  }
   if (Array.isArray(question.sources)) {
     box.append(element('div', 'evidence-label', `問題集に記録された出典（${question.sources.length} 件）`));
     for (const [index, source] of question.sources.entries()) {
@@ -332,6 +355,7 @@ function renderPractice() {
   if (session.complete) { renderCompletion(); return; }
   const question = session.current;
   const card = element('div', 'quiz-card');
+  card.dataset.questionId = question.id;
   const header = element('div', 'question-header');
   const questionCount = element('div', 'question-count');
   questionCount.append(element('span', '', 'QUESTION'), element('strong', '', String(session.index + 1).padStart(2, '0')), element('span', '', `/ ${String(session.total).padStart(2, '0')}`));
@@ -409,7 +433,7 @@ function renderSources() {
   if (IS_PAGES) {
     list.append(element('p', 'empty-inline', `出題元：${state.packFileName || DEFAULT_PACK_NAME}\n読み込んだ問題集：${state.practiceQuestions.length} 問\n原本写真はこのページに読み込んでいません。`));
     const detail = $('#source-detail');
-    detail.replaceChildren(element('h2', 'detail-title', '問題集の出典は、回答後に。'), element('p', 'empty-inline', '各問題の回答後に、解説と記録されたすべての出典を表示します。標準問題集の原画像・引用・抽出領域は作成していません。検証記録は原画像の確認や校閲の完了を意味しません。'), element('p', 'source-reason', SERVER_ONLY));
+    detail.replaceChildren(element('h2', 'detail-title', '問題集の出典は、回答後に。'), element('p', 'empty-inline', '各問題の回答後に解説と出典を表示します。標準問題集は知識ID・教材ページで参照できます。検証記録は原画像の確認や校閲の完了を意味しません。'), element('p', 'source-reason', SERVER_ONLY));
     return;
   }
   if (!state.sources.length) {

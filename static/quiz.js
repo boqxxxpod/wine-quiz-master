@@ -10,16 +10,34 @@ export function shuffle(items, random = Math.random) {
 
 const nonemptyString = value => typeof value === 'string' && Boolean(value.trim());
 const record = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+const validCountries = question => Array.isArray(question.countries) && question.countries.length > 0 &&
+  question.countries.every(nonemptyString) && new Set(question.countries).size === question.countries.length;
+
+/** The registered review pack uses string options and a zero-based answer index. */
+export function isPilotQuestion(question) {
+  return record(question) && (question.format === 'pilot' || Object.hasOwn(question, 'question_id') || Object.hasOwn(question, 'correct_index'));
+}
 
 /** Native files carry their own provenance instead of server source/region IDs. */
 export function isNativeQuestion(question) {
-  return record(question) && ['question', 'options', 'correct_option_id', 'primary_country', 'countries', 'sources']
+  return record(question) && !isPilotQuestion(question) && ['question', 'options', 'correct_option_id', 'primary_country', 'countries', 'sources']
     .some(key => Object.hasOwn(question, key));
 }
 
 /** Keep native metadata intact while exposing the same quiz fields as version 1. */
 export function normalizeQuestion(question) {
-  if (!record(question) || !isNativeQuestion(question)) return question;
+  if (!record(question)) return question;
+  if (isPilotQuestion(question)) {
+    return {
+      ...question,
+      format: 'pilot',
+      id: question.question_id,
+      prompt: question.question,
+      choices: Array.isArray(question.options) ? question.options.map((text, index) => ({ id: `option-${index}`, text })) : question.options,
+      correct_choice_id: `option-${question.correct_index}`,
+    };
+  }
+  if (!isNativeQuestion(question)) return question;
   return {
     ...question,
     prompt: question.question,
@@ -30,23 +48,34 @@ export function normalizeQuestion(question) {
 
 export function validQuestion(question) {
   if (!record(question)) return false;
+  const pilot = isPilotQuestion(question);
   const native = isNativeQuestion(question);
-  const prompt = native ? question.question : question.prompt;
-  const choices = native ? question.options : question.choices;
-  const correctId = native ? question.correct_option_id : question.correct_choice_id;
-  if (!nonemptyString(question.id) || !nonemptyString(prompt) ||
+  const normalized = pilot ? normalizeQuestion(question) : question;
+  const prompt = native ? question.question : normalized.prompt;
+  const choices = native ? question.options : normalized.choices;
+  const correctId = native ? question.correct_option_id : normalized.correct_choice_id;
+  if (!nonemptyString(normalized.id) || !nonemptyString(prompt) ||
     !Array.isArray(choices) || choices.length !== 3 ||
     !choices.every(choice => record(choice) && nonemptyString(choice.id) && nonemptyString(choice.text)) ||
     new Set(choices.map(choice => choice.id)).size !== 3 ||
     choices.filter(choice => choice.id === correctId).length !== 1 ||
     !nonemptyString(question.explanation)) return false;
 
+  if (pilot) {
+    return nonemptyString(question.knowledge_id) && nonemptyString(question.country) &&
+      validCountries(question) && question.countries.includes(question.country) &&
+      nonemptyString(question.topic) &&
+      Number.isInteger(question.correct_index) && question.correct_index >= 0 && question.correct_index < 3 &&
+      nonemptyString(question.correct_answer) && question.options[question.correct_index] === question.correct_answer &&
+      (typeof question.source_page === 'number' ? Number.isFinite(question.source_page) : nonemptyString(question.source_page)) &&
+      ['auto_checked', 'approved'].includes(question.status) &&
+      (question.version === undefined || question.version === 1);
+  }
+
   if (native) {
     return ['type', 'question_type'].every(key => question[key] === undefined || question[key] === 'single_choice') &&
       nonemptyString(question.primary_country) &&
-      Array.isArray(question.countries) && question.countries.length > 0 &&
-      question.countries.every(nonemptyString) &&
-      new Set(question.countries).size === question.countries.length &&
+      validCountries(question) &&
       question.countries.includes(question.primary_country) &&
       Array.isArray(question.sources) && question.sources.length > 0 &&
       question.sources.every(source => record(source) && Object.keys(source).length > 0) &&
@@ -57,7 +86,7 @@ export function validQuestion(question) {
 
 function uniqueValidQuestions(questions) {
   const seen = new Set();
-  return (Array.isArray(questions) ? questions : []).filter(question => {
+  return (Array.isArray(questions) ? questions : []).map(normalizeQuestion).filter(question => {
     if (!validQuestion(question) || seen.has(question.id)) return false;
     seen.add(question.id);
     return true;

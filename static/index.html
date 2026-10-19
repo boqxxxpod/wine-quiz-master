@@ -37,9 +37,10 @@
           <div class="page-heading"><div><p class="eyebrow">A LITTLE PRACTICE, EVERY DAY</p><h1 id="practice-heading">今日の、一問。</h1><p class="page-description">答えを選んで、根拠をたしかめる。ワインの知識を少しずつ。</p></div><span class="outlined-pill">ワイン検定 <span>・</span> 三択</span></div>
           <section id="pages-import" class="pages-import" aria-labelledby="pages-import-heading">
             <div class="pages-import-heading"><span class="badge">出題元</span><h2 id="pages-import-heading">標準の問題集から練習</h2></div>
-            <p>標準問題集を自動で読み込みます。別の問題集 JSON やサーバー版の承認済み書き出しも選べます。選んだファイルは送信せず、このタブでのみ使用します。再読み込みすると標準問題集に戻ります。</p>
+            <p>登録済みの150問を自動で読み込みます。別の問題集 JSON やサーバー版の承認済み書き出しも選べます。選んだファイルは送信せず、このタブでのみ使用します。再読み込みすると標準問題集に戻ります。</p>
             <div class="pages-import-controls"><div class="field"><label for="question-pack">別の問題集 JSON（2 MB・2,000 問まで）</label><input id="question-pack" type="file" accept=".json,application/json" aria-describedby="pages-import-status"></div><button id="clear-pack" type="button" class="button button-secondary small-button" disabled>標準問題集に戻す</button></div>
-            <p id="pages-import-status" class="pages-import-status" role="status">wine_quiz_master_set_01.json を読み込んでいます。</p>
+            <p id="pages-import-status" class="pages-import-status" role="status">pilot-150.json を読み込んでいます。</p>
+            <p id="pack-review-status" class="pack-review-status" hidden></p>
             <p id="pages-import-error" class="pages-import-error" role="alert" hidden></p>
           </section>
           <section class="practice-settings" aria-labelledby="scope-heading">

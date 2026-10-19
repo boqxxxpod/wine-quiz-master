@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { parseQuestionPack, loadDefaultQuestionPack, DEFAULT_PACK_FILENAME, MAX_PACK_BYTES, MAX_PACK_QUESTIONS } from '../static/pages.js';
 
 const question = (id = 'question-1') => ({
@@ -124,9 +125,9 @@ test('native malformed records reject the entire file rather than silently dropp
   assert.throws(() => parseQuestionPack(JSON.stringify([repeatedText])), /同じ内容/);
 });
 
-test('default loading resolves the bundle beside the module, including nested site deployments', async () => {
+test('default loading resolves the registered pack relative to the module, including nested site deployments', async () => {
   let requested;
-  const expected = new URL(`../static/${DEFAULT_PACK_FILENAME}`, import.meta.url);
+  const expected = new URL(`../question-packs/${DEFAULT_PACK_FILENAME}`, import.meta.url);
   const result = await loadDefaultQuestionPack(async url => {
     requested = url;
     return { ok: true, text: async () => JSON.stringify([nativeQuestion()]) };
@@ -146,4 +147,87 @@ test('default loading reports HTTP, network and parse errors without substitutin
   }
   const empty = await loadDefaultQuestionPack(async () => ({ ok: true, text: async () => '[]' }));
   assert.deepEqual(empty.questions, []);
+});
+
+const pilotQuestion = (id = 'synthetic-pilot') => ({
+  question_id: id, knowledge_id: 'synthetic-knowledge', country: 'フランス', countries: ['フランス', 'スペイン'],
+  topic: '検証専用の分野', question: '試験運用形式を検証するためのテストです。',
+  options: ['検証 A', '検証 B', '検証 C'], correct_index: 1, correct_answer: '検証 B',
+  explanation: '合成データの検証専用解説です。', source_page: 13, status: 'auto_checked', version: 1,
+});
+const pilotPack = (questions, metadata = { title: 'synthetic-fixture', country_counts: { フランス: 99 }, qa_status: '検証用の記録' }) =>
+  JSON.stringify({ metadata, questions });
+
+test('pilot packs retain source records and metadata while assigning stable option IDs', () => {
+  const original = pilotQuestion();
+  const metadata = { title: 'synthetic-fixture', qa_status: 'auto_checked', detail: { notes: ['検証記録'], reviewer: null } };
+  const result = parseQuestionPack(pilotPack([original], metadata));
+  assert.deepEqual(result, {
+    version: 1,
+    questions: [{
+      ...original, format: 'pilot', id: original.question_id, prompt: original.question,
+      choices: original.options.map((text, index) => ({ id: `option-${index}`, text })), correct_choice_id: 'option-1',
+    }],
+    metadata,
+  });
+  for (const key of ['sources', 'validation', 'quote', 'file_name', 'source_id', 'region_id']) {
+    assert.equal(Object.hasOwn(result.questions[0], key), false, `${key} must not be invented`);
+  }
+  assert.equal(result.questions[0].status, 'auto_checked');
+  assert.deepEqual(parseQuestionPack(pilotPack([], metadata)), { version: 1, questions: [], metadata });
+});
+
+test('pilot records preserve string pages and accept recorded supported statuses', () => {
+  for (const status of ['auto_checked', 'approved']) {
+    const row = { ...pilotQuestion(), source_page: ' 13・14 ', status };
+    assert.equal(parseQuestionPack(pilotPack([row])).questions[0].source_page, row.source_page);
+    assert.equal(parseQuestionPack(pilotPack([row])).questions[0].status, status);
+  }
+});
+
+test('pilot packs reject malformed records, invalid indices, mismatched answers and duplicate IDs as a whole', () => {
+  const invalid = [
+    null,
+    { ...pilotQuestion(), question_id: '' },
+    { ...pilotQuestion(), knowledge_id: ' ' },
+    { ...pilotQuestion(), options: null },
+    { ...pilotQuestion(), options: ['A', 'B'] },
+    { ...pilotQuestion(), options: [null, 'B', 'C'] },
+    { ...pilotQuestion(), options: [{ id: 'a', text: 'A' }, { id: 'b', text: 'B' }, { id: 'c', text: 'C' }] },
+    ...[-1, 3, 1.5, '1', null].map(correct_index => ({ ...pilotQuestion(), correct_index })),
+    { ...pilotQuestion(), correct_answer: '検証 A' },
+    { ...pilotQuestion(), source_page: null },
+    { ...pilotQuestion(), source_page: ' ' },
+    { ...pilotQuestion(), source_page: true },
+    { ...pilotQuestion(), country: 'イタリア' },
+    { ...pilotQuestion(), countries: ['フランス', 'フランス'] },
+    { ...pilotQuestion(), countries: ['フランス', null] },
+    { ...pilotQuestion(), topic: '' },
+    { ...pilotQuestion(), status: 'rejected' },
+    { ...pilotQuestion(), status: '' },
+    { ...pilotQuestion(), version: 2 },
+  ];
+  for (const row of invalid) assert.throws(() => parseQuestionPack(pilotPack([pilotQuestion('valid-first'), row])), /ファイル全体/);
+  assert.throws(() => parseQuestionPack(pilotPack([pilotQuestion(), pilotQuestion()])), /問題 ID/);
+  const repeated = { ...pilotQuestion(), options: ['検証 A', ' 検証 A ', '検証 C'], correct_index: 0, correct_answer: '検証 A' };
+  assert.throws(() => parseQuestionPack(pilotPack([repeated])), /同じ内容/);
+  for (const metadata of [null, [], 'metadata']) assert.throws(() => parseQuestionPack(pilotPack([], metadata)), /形式/);
+});
+
+test('the registered pilot150 data parses without changing recorded rows or metadata', async () => {
+  const text = await readFile(new URL('../question-packs/pilot-150.json', import.meta.url), 'utf8');
+  const original = JSON.parse(text);
+  const result = parseQuestionPack(text);
+  assert.equal(result.questions.length, 150);
+  assert.deepEqual(result.metadata, original.metadata);
+  assert.equal(result.metadata.app_import_compatible, false, 'historical metadata is retained as recorded');
+  for (let index = 0; index < result.questions.length; index += 1) {
+    const row = result.questions[index];
+    const source = original.questions[index];
+    for (const [key, value] of Object.entries(source)) assert.deepEqual(row[key], value);
+    assert.equal(row.id, source.question_id);
+    assert.equal(row.format, 'pilot');
+    assert.equal(row.choices.find(choice => choice.id === row.correct_choice_id).text, source.correct_answer);
+    for (const key of ['sources', 'validation', 'quote', 'file_name', 'source_id', 'region_id']) assert.equal(Object.hasOwn(row, key), false);
+  }
 });
