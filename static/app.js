@@ -1,11 +1,12 @@
-import { QuizSession } from './quiz.js';
+import { QuizSession, countryCounts, questionsForCountry } from './quiz.js';
 import { mode } from './runtime.js';
-import { parseQuestionPack, MAX_PACK_BYTES } from './pages.js';
+import { parseQuestionPack, loadDefaultQuestionPack, DEFAULT_PACK_FILENAME, MAX_PACK_BYTES } from './pages.js';
 
 const $ = selector => document.querySelector(selector);
 const IS_PAGES = mode === 'pages';
 const SERVER_ONLY = 'GitHub Pages では、Google ドライブ接続・黄色部分の読み取り・luna による生成・問題の承認を実行できません。ローカルの Python サーバー版で操作し、承認済みの問題集を書き出してください。';
-const state = { status: null, sources: [], session: null, view: 'practice', sourceId: null, detail: null, busy: false, loadError: '', folders: [], pagesQuestions: [], pagesFileName: '' };
+const DEFAULT_PACK_NAME = DEFAULT_PACK_FILENAME;
+const state = { status: null, sources: [], session: null, view: 'practice', sourceId: null, detail: null, busy: false, loadError: '', folders: [], practiceQuestions: [], packMetadata: null, packFileName: '', customPack: false, practiceLoading: true };
 let toastTimer;
 
 function element(tag, className = '', text = '') {
@@ -40,10 +41,9 @@ async function api(path, body) {
   if (IS_PAGES) {
     // Pages never contacts a server, including on refresh or disabled actions.
     if (body !== undefined) throw new Error(SERVER_ONLY);
-    if (path === '/api/questions') return state.pagesQuestions;
     if (path === '/api/sources') return [];
     if (path === '/api/status') return {
-      counts: { sources: new Set(state.pagesQuestions.map(question => question.source_id)).size, questions: state.pagesQuestions.length, pending_review: 0, needs_review: 0, errors: 0 },
+      counts: { sources: 0, questions: 0, pending_review: 0, needs_review: 0, errors: 0 },
       drive: { configured: false, message: SERVER_ONLY },
       luna: { configured: false, model: 'gpt-6-luna', checked: false, available: false, message: 'GitHub Pages から OpenAI API は呼び出しません。luna の設定・利用権限の確認は、ローカルの Python サーバー版で行ってください。' },
       warnings: [],
@@ -92,6 +92,99 @@ function normalizeQuestion(question) {
 
 function count(name) { return Number(state.status?.counts?.[name] ?? 0); }
 
+function selectedCountry() {
+  return $('#scope-country').checked ? $('#practice-country').value : null;
+}
+
+function renderScope(rebuildCountries = false) {
+  const countries = countryCounts(state.practiceQuestions);
+  const select = $('#practice-country');
+  if (rebuildCountries) {
+    select.replaceChildren(element('option', '', '国を選んでください'));
+    select.firstElementChild.value = '';
+    for (const country of [...countries.keys()].sort((a, b) => a.localeCompare(b, 'ja'))) {
+      const option = element('option', '', `${country}（${countries.get(country)} 問）`);
+      option.value = country;
+      select.append(option);
+    }
+  }
+  select.disabled = !$('#scope-country').checked || state.practiceLoading;
+  const country = selectedCountry();
+  const total = country === '' ? 0 : questionsForCountry(state.practiceQuestions, country).length;
+  $('#scope-all-count').textContent = `（${state.practiceQuestions.length} 問）`;
+  $('#scope-count').textContent = state.practiceLoading ? '問題集を読み込んでいます。'
+    : state.loadError ? '問題集を読み込めないため、開始できません。'
+      : country === '' ? '練習する国を選んでください。'
+        : total === 0 ? 'この範囲には問題がないため、開始できません。'
+          : `対象：${country ?? 'すべて'} · ${total} 問。開始すると回答・得点・進捗をリセットします。`;
+  $('#start-practice').disabled = state.practiceLoading || Boolean(state.loadError) || total === 0;
+  $('#scope-all').disabled = state.practiceLoading;
+  $('#scope-country').disabled = state.practiceLoading;
+  $('#active-scope').textContent = `今回の範囲：${state.session?.country ?? 'すべて'} · ${state.session?.total ?? 0} 問`;
+}
+
+function startPractice() {
+  if ($('#start-practice').disabled) return;
+  state.session = new QuizSession(state.practiceQuestions, Math.random, selectedCountry());
+  updateStatus();
+  renderScope();
+  renderPractice();
+  $('#main-content').focus({ preventScroll: true });
+}
+
+function useQuestionPack(pack, fileName, custom = false) {
+  state.practiceQuestions = pack.questions;
+  state.packMetadata = pack.metadata ?? null;
+  state.packFileName = fileName;
+  state.customPack = custom;
+  state.loadError = '';
+  state.practiceLoading = false;
+  $('#scope-all').checked = true;
+  $('#scope-country').checked = false;
+  state.session = new QuizSession(state.practiceQuestions);
+  $('#pages-import-status').textContent = `出題元：${fileName} · ${pack.questions.length} 問${custom ? '（このタブのみ）' : '（標準問題集）'}`;
+  const qa = state.packMetadata?.qa_status;
+  $('#pack-review-status').textContent = typeof qa === 'string' ? `問題集の検証記録：${qa}` : '';
+  $('#pack-review-status').hidden = typeof qa !== 'string' || !qa.trim();
+  $('#pages-import-error').hidden = true;
+  $('#clear-pack').disabled = !custom;
+  renderScope(true);
+  updateStatus();
+  renderSources();
+  renderPractice();
+}
+
+async function loadDefaultPack() {
+  state.practiceLoading = true;
+  state.loadError = '';
+  state.practiceQuestions = [];
+  state.packMetadata = null;
+  state.session = null;
+  state.customPack = false;
+  state.packFileName = DEFAULT_PACK_NAME;
+  $('#question-pack').disabled = true;
+  $('#clear-pack').disabled = true;
+  $('#pages-import-error').hidden = true;
+  $('#pages-import-status').textContent = `${DEFAULT_PACK_NAME} を読み込んでいます。`;
+  $('#pack-review-status').hidden = true;
+  renderScope(true);
+  renderPractice();
+  try {
+    useQuestionPack(await loadDefaultQuestionPack(), DEFAULT_PACK_NAME);
+  } catch (error) {
+    state.loadError = error.message;
+    $('#pages-import-status').textContent = `出題元：${DEFAULT_PACK_NAME} · 読み込み失敗`;
+    $('#pages-import-error').textContent = error.message;
+    $('#pages-import-error').hidden = false;
+  } finally {
+    state.practiceLoading = false;
+    $('#question-pack').disabled = false;
+    renderScope();
+    updateStatus();
+    renderPractice();
+  }
+}
+
 function showView(view, focus = true) {
   if (!['practice', 'sources', 'settings'].includes(view)) return;
   state.view = view;
@@ -107,10 +200,17 @@ function showView(view, focus = true) {
 }
 
 function updateStatus() {
-  $('#stat-questions').replaceChildren(document.createTextNode(String(state.session?.total ?? count('questions'))), element('small', '', ' 問'));
-  $('#stat-sources').replaceChildren(document.createTextNode(String(count('sources'))), element('small', '', IS_PAGES ? ' 件' : ' 枚'));
-  $('#stat-review').replaceChildren(document.createTextNode(String(count('pending_review'))), element('small', '', ' 問'));
-  $('#nav-source-count').textContent = String(count('sources'));
+  const packSources = new Set(state.practiceQuestions.flatMap(question => question.format === 'pilot'
+    ? [`knowledge:${question.knowledge_id}`] : Array.isArray(question.sources)
+      ? question.sources.map(source => JSON.stringify(source)) : question.source_id ? [question.source_id] : []));
+  const sourceCount = IS_PAGES ? packSources.size : count('sources');
+  $('#stat-questions').replaceChildren(document.createTextNode(String(state.session?.total ?? 0)), element('small', '', ' 問'));
+  $('#stat-sources').replaceChildren(document.createTextNode(String(sourceCount)), element('small', '', IS_PAGES ? ' 件' : ' 枚'));
+  const pilotQuestions = state.practiceQuestions.filter(question => question.format === 'pilot');
+  const reviewCount = pilotQuestions.length ? pilotQuestions.filter(question => question.status === 'auto_checked').length : count('pending_review');
+  $('#stat-review').parentElement.querySelector('span').textContent = pilotQuestions.length ? '人手確認前の問題' : '取り込みの確認待ち';
+  $('#stat-review').replaceChildren(document.createTextNode(String(reviewCount)), element('small', '', ' 問'));
+  $('#nav-source-count').textContent = String(sourceCount);
   const drive = state.status?.drive ?? {};
   const driveBadge = $('#drive-badge');
   driveBadge.textContent = drive.configured ? '設定あり' : '未接続';
@@ -132,7 +232,7 @@ function updateStatus() {
     driveBadge.className = 'badge neutral';
     $('#model-badge').textContent = 'サーバー版のみ';
     $('#model-badge').className = 'badge neutral';
-    $('#source-summary').textContent = `${count('questions')} 問をメモリに保持 · 出典 ${count('sources')} 件 · 原本写真は未読み込み`;
+    $('#source-summary').textContent = `${state.practiceQuestions.length} 問を読み込み · 出典は回答後に表示 · 原本写真は未読み込み`;
   }
 }
 
@@ -150,37 +250,16 @@ function renderEmpty() {
   const top = element('div', 'empty-card-top');
   top.append(element('span', '', 'YOUR FIRST QUESTION'), element('span', '', 'まだ、白紙の一ページ'));
   card.append(top, paperIllustration());
-  let heading = '最初の一問は、あなたの写真から。';
-  let description = 'Google ドライブの「ワイン検定」フォルダをつないで、黄色のマーカーから問題集をつくりましょう。';
-  let action = '資料の取り込みをはじめる';
-  let view = 'settings';
-  if (state.loadError) {
-    heading = '問題を読み込めませんでした。';
-    description = state.loadError;
-    action = 'もう一度読み込む';
-  } else if (count('pending_review') > 0) {
-    heading = '問題の根拠を、たしかめましょう。';
-    description = `${count('pending_review')} 問が確認待ちです。写真の黄色部分と問題を見比べ、承認した問題から練習を始められます。`;
-    action = '確認待ちの問題を見る';
-    view = 'sources';
-  } else if (count('sources') > 0) {
-    heading = '写真から、学びの一問へ。';
-    description = count('needs_review') > 0
-      ? `${count('needs_review')} 枚の資料で、文字や黄色の範囲などの確認が必要です。読み取れない内容からは問題を作成していません。`
-      : '写真は保存されています。接続・モデルの設定を確認して資料を処理すると、生成した問題を確認できます。';
-    if (!count('needs_review') && state.status?.luna?.available !== true && state.status?.luna?.message) description += `\n${state.status.luna.message}`;
-    action = count('needs_review') > 0 ? '確認が必要な資料を見る' : '取り込みの状態を確認する';
-    view = count('needs_review') > 0 ? 'sources' : 'settings';
-  }
-  if (IS_PAGES) {
-    heading = '問題集を読み込んで、練習を始めましょう。';
-    description = 'サーバー版で承認した問題集（JSON）を、上の欄から読み込んでください。この公開ページに問題や原本写真は含めていません。';
-    action = '問題集を選ぶ';
-  }
+  const heading = state.practiceLoading ? '問題集を読み込んでいます。'
+    : state.loadError ? '問題を読み込めませんでした。' : 'この範囲には問題がありません。';
+  const description = state.practiceLoading ? `${DEFAULT_PACK_NAME} の読み込みを待っています。`
+    : state.loadError || '出題範囲を変更するか、別の問題集を選んでください。0 問の練習は開始できません。';
   card.append(element('h2', '', heading), element('p', 'empty-description', description));
-  const actionButton = button(action, 'button button-primary', () => IS_PAGES ? $('#question-pack').click() : state.loadError ? loadData(true) : showView(view));
-  actionButton.append(element('span', '', '→'));
-  card.append(actionButton, element('p', 'empty-fine-print', IS_PAGES ? '写真の照合・問題の承認はサーバー版で行います。' : '実資料で確認できた問題だけを、ここに表示します。'));
+  if (!state.practiceLoading) {
+    const actionButton = button(state.loadError ? '標準問題集を再読み込み' : '別の問題集を選ぶ', 'button button-primary',
+      () => state.loadError ? loadDefaultPack() : $('#question-pack').click());
+    card.append(actionButton);
+  }
   $('#quiz-root').replaceChildren(card);
 }
 
@@ -200,8 +279,65 @@ function renderCompletion() {
   $('#quiz-root').replaceChildren(card);
 }
 
+function safeSourceLink(value) {
+  if (typeof value !== 'string') return null;
+  try {
+    const url = new URL(value);
+    return ['http:', 'https:'].includes(url.protocol) ? url.href : null;
+  } catch { return null; }
+}
+
+const metadataLabels = {
+  image: '画像', image_name: '画像名', image_file: '画像名', image_filename: '画像名',
+  file_name: '画像名', filename: '画像名', page: 'ページ', page_number: 'ページ',
+  position: '位置', location: '位置', url: 'URL', source_url: '出典URL',
+  knowledge_id: '知識ID', source_page: '教材ページ', topic: 'テーマ',
+};
+
+function recordedMetadata(value) {
+  if (value === null || typeof value !== 'object') {
+    const url = safeSourceLink(value);
+    return url ? link(value, url) : element('span', '', String(value));
+  }
+  const list = element('dl', 'recorded-metadata');
+  for (const [key, item] of Object.entries(value)) {
+    const content = element('dd');
+    content.append(recordedMetadata(item));
+    list.append(element('dt', '', Array.isArray(value) ? String(Number(key) + 1) : metadataLabels[key] ?? key), content);
+  }
+  return list;
+}
+
 function evidence(question, includeImage = !IS_PAGES) {
   const box = element('div', 'evidence');
+  if (question.format === 'pilot') {
+    box.classList.add('pilot-evidence');
+    box.append(element('div', 'evidence-label', '問題集に記録された出典'), recordedMetadata({
+      knowledge_id: question.knowledge_id,
+      source_page: question.source_page,
+      topic: question.topic,
+    }));
+    const description = question.status === 'auto_checked' ? '（機械検証済み・人手確認前）' : '';
+    box.append(element('p', 'pilot-review-note', `検証記録：${question.status}${description}`),
+      element('p', 'pages-evidence-note', '原画像の確認・外部の事実確認・人による校閲の完了を示すものではありません。'));
+    return box;
+  }
+  if (Array.isArray(question.sources)) {
+    box.append(element('div', 'evidence-label', `問題集に記録された出典（${question.sources.length} 件）`));
+    for (const [index, source] of question.sources.entries()) {
+      const item = element('div', 'pack-source');
+      item.append(element('h3', '', `出典 ${index + 1}`), recordedMetadata(source));
+      box.append(item);
+    }
+    if (question.validation !== undefined) {
+      const record = element('details', 'validation-record');
+      record.append(element('summary', '', '検証記録（問題集の記載）'),
+        element('p', '', 'この記録は、原画像の確認・外部の事実確認・人による校閲の完了を示すものではありません。'),
+        recordedMetadata(question.validation));
+      box.append(record);
+    }
+    return box;
+  }
   box.append(element('div', 'evidence-label', '根拠になった黄色部分'));
   const quote = element('p', 'evidence-quote');
   quote.append(document.createTextNode('「'), element('span', 'highlight-text', question.quote), document.createTextNode('」'));
@@ -219,6 +355,7 @@ function renderPractice() {
   if (session.complete) { renderCompletion(); return; }
   const question = session.current;
   const card = element('div', 'quiz-card');
+  card.dataset.questionId = question.id;
   const header = element('div', 'question-header');
   const questionCount = element('div', 'question-count');
   questionCount.append(element('span', '', 'QUESTION'), element('strong', '', String(session.index + 1).padStart(2, '0')), element('span', '', `/ ${String(session.total).padStart(2, '0')}`));
@@ -255,7 +392,7 @@ function renderPractice() {
     }
     choices.append(choiceButton);
   });
-  card.append(header, progress, element('div', 'question-category', '黄色のマーカーから出題'), prompt, choices);
+  card.append(header, progress, element('div', 'question-category', `${state.packFileName} · ${question.countries?.join('・') || '国情報なし'}`), prompt, choices);
   if (!session.answered) card.append(element('p', 'answer-hint', '答えをひとつ選んでください。回答後に解説を表示します。'));
   else {
     const answer = session.answers[session.answers.length - 1];
@@ -294,9 +431,9 @@ function renderSources() {
   const list = $('#source-list');
   list.replaceChildren();
   if (IS_PAGES) {
-    list.append(element('p', 'empty-inline', `読み込んだ問題集：${state.pagesQuestions.length} 問\n参照した資料：${count('sources')} 件\n原本写真はこのページに読み込んでいません。`));
+    list.append(element('p', 'empty-inline', `出題元：${state.packFileName || DEFAULT_PACK_NAME}\n読み込んだ問題集：${state.practiceQuestions.length} 問\n原本写真はこのページに読み込んでいません。`));
     const detail = $('#source-detail');
-    detail.replaceChildren(element('h2', 'detail-title', '資料の確認は、サーバー版で。'), element('p', 'source-reason', SERVER_ONLY), element('p', 'empty-inline', '読み込んだ問題の解説には、書き出し時の写真名と黄色部分の引用を表示します。原本画像・切り出し・検出範囲・OCR の保存結果は、ローカルの Python サーバー版で確認してください。'));
+    detail.replaceChildren(element('h2', 'detail-title', '問題集の出典は、回答後に。'), element('p', 'empty-inline', '各問題の回答後に解説と出典を表示します。標準問題集は知識ID・教材ページで参照できます。検証記録は原画像の確認や校閲の完了を意味しません。'), element('p', 'source-reason', SERVER_ONLY));
     return;
   }
   if (!state.sources.length) {
@@ -336,7 +473,7 @@ function renderReviewQuestion(rawQuestion, detail) {
   const invalidated = question.status === 'invalidated';
   const pending = question.status === 'pending_review';
   const card = element('div', `review-question${approved ? ' approved' : rejected || invalidated ? ' rejected' : ''}`);
-  card.append(element('span', `badge ${approved ? 'good' : rejected || invalidated ? 'neutral' : 'warning'}`, approved ? '承認済み・練習で使用' : rejected ? '不採用' : invalidated ? '旧版・無効' : '確認待ち'));
+  card.append(element('span', `badge ${approved ? 'good' : rejected || invalidated ? 'neutral' : 'warning'}`, approved ? '承認済み・書き出し可' : rejected ? '不採用' : invalidated ? '旧版・無効' : '確認待ち'));
   card.append(element('h4', '', question.prompt));
   const choices = element('ol', 'review-choices');
   choices.type = 'A';
@@ -408,26 +545,17 @@ async function loadSource(sourceId) {
   }
 }
 
-async function loadData(replaceSession = false) {
-  const results = await Promise.allSettled([api('/api/status'), api('/api/questions'), api('/api/sources')]);
+async function loadData() {
+  const results = await Promise.allSettled([api('/api/status'), api('/api/sources')]);
   const errors = [];
   if (results[0].status === 'fulfilled') state.status = results[0].value;
   else errors.push(results[0].reason.message);
-  if (results[1].status === 'fulfilled') {
-    state.loadError = '';
-    if (!state.session || replaceSession) {
-      const rows = Array.isArray(results[1].value) ? results[1].value : results[1].value.questions ?? [];
-      state.session = new QuizSession(rows.map(normalizeQuestion));
-      if (rows.length > state.session.total) errors.push('根拠や三択の対応を確認できない問題は、練習対象から除外しました。');
-    }
-  } else { state.loadError = results[1].reason.message; errors.push(state.loadError); }
-  if (results[2].status === 'fulfilled') state.sources = Array.isArray(results[2].value) ? results[2].value : results[2].value.sources ?? [];
-  else errors.push(results[2].reason.message);
+  if (results[1].status === 'fulfilled') state.sources = Array.isArray(results[1].value) ? results[1].value : results[1].value.sources ?? [];
+  else errors.push(results[1].reason.message);
   const warnings = (state.status?.warnings ?? []).filter(warning => !warning.includes('利用可能な承認済み問題がありません'));
   setNotice([...new Set([...errors, ...warnings])].join('\n'));
   updateStatus();
   renderSources();
-  renderPractice();
 }
 
 function setBusy(busy, activeId = '', label = '') {
@@ -462,7 +590,7 @@ async function perform(id, loadingText, path, body, fallback) {
     const failed = result.ok === false || result.available === false || extra.length > 0;
     operationResult(message, failed);
     toast(message, failed);
-    await loadData(true);
+    await loadData();
     if (state.sourceId) await loadSource(state.sourceId);
     return result;
   } catch (error) {
@@ -512,8 +640,8 @@ async function reviewQuestion(id, approved) {
   setBusy(true);
   try {
     await api(`/api/questions/${encodeURIComponent(id)}/review`, { approved });
-    toast(approved ? '承認しました。練習で使えるようになりました。' : 'この問題を練習対象から外しました。');
-    await loadData(true);
+    toast(approved ? '承認しました。問題集を書き出し、練習画面で JSON を選ぶと練習できます。' : 'この問題を書き出し対象から外しました。');
+    await loadData();
     if (state.sourceId) await loadSource(state.sourceId);
   } catch (error) { toast(error.message, true); }
   finally { setBusy(false); }
@@ -534,41 +662,27 @@ function initializePages() {
   setBusy(false);
 }
 
-async function importPagesPack() {
-  if (!IS_PAGES) return;
+async function importQuestionPack() {
   const input = $('#question-pack');
   const file = input.files?.[0];
-  if (!file) return;
+  if (!file || state.practiceLoading) return;
   input.disabled = true;
   $('#clear-pack').disabled = true;
   $('#pages-import-error').hidden = true;
   try {
     if (file.size > MAX_PACK_BYTES) throw new Error('問題集は 2 MB 以下の JSON ファイルを選んでください。');
     const pack = parseQuestionPack(await file.text());
-    // Assign only after the entire file passed validation; invalid files preserve the session.
-    state.pagesQuestions = pack.questions;
-    state.pagesFileName = file.name;
-    await loadData(true);
-    $('#pages-import-status').textContent = `${file.name}：${pack.questions.length} 問をこのタブのメモリに読み込みました。再読み込みやタブを閉じると消えます。`;
+    // Commit only after validating the whole file. Failed imports retain the active session and source label.
+    useQuestionPack(pack, file.name, true);
     toast(`${pack.questions.length} 問を読み込みました。`);
   } catch (error) {
-    $('#pages-import-error').textContent = `${error.message}\n以前に読み込んだ問題と回答状況は、そのまま保持しています。`;
+    $('#pages-import-error').textContent = `${file.name} を読み込めませんでした。${error.message}\n現在の出題元・問題・回答状況を保持しています。`;
     $('#pages-import-error').hidden = false;
   } finally {
     input.value = '';
     input.disabled = false;
-    $('#clear-pack').disabled = !state.pagesFileName;
+    $('#clear-pack').disabled = !state.customPack;
   }
-}
-
-async function clearPagesPack() {
-  if (!IS_PAGES) return;
-  state.pagesQuestions = [];
-  state.pagesFileName = '';
-  $('#pages-import-error').hidden = true;
-  $('#pages-import-status').textContent = '読み込んだ問題をメモリから消去しました。公開ページに問題や写真は含めていません。';
-  $('#clear-pack').disabled = true;
-  await loadData(true);
 }
 
 for (const item of document.querySelectorAll('[data-view]')) item.addEventListener('click', () => showView(item.dataset.view));
@@ -583,10 +697,15 @@ $('#sync-drive').addEventListener('click', async () => {
 });
 $('#process-sources').addEventListener('click', () => perform('process-sources', '資料を処理しています…', '/api/process', {}, '資料の処理が完了しました。資料と問題の画面で根拠を確認してください。'));
 $('#check-model').addEventListener('click', () => perform('check-model', '利用権限を確認しています…', '/api/check-model', {}, 'モデルの確認が完了しました。'));
-$('#refresh-sources').addEventListener('click', async () => { await loadData(true); if (state.sourceId) await loadSource(state.sourceId); toast('保存された資料の状態を更新しました。'); });
-$('#question-pack').addEventListener('change', importPagesPack);
-$('#clear-pack').addEventListener('click', clearPagesPack);
+$('#refresh-sources').addEventListener('click', async () => { await loadData(); if (state.sourceId) await loadSource(state.sourceId); toast('保存された資料の状態を更新しました。'); });
+$('#question-pack').addEventListener('change', importQuestionPack);
+$('#clear-pack').addEventListener('click', loadDefaultPack);
+$('#scope-all').addEventListener('change', () => renderScope());
+$('#scope-country').addEventListener('change', () => renderScope());
+$('#practice-country').addEventListener('change', () => renderScope());
+$('#start-practice').addEventListener('click', startPractice);
 window.addEventListener('hashchange', () => showView(location.hash.slice(1) || 'practice', false));
 initializePages();
 showView(location.hash.slice(1) || 'practice', false);
 loadData();
+loadDefaultPack();

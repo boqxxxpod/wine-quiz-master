@@ -1,44 +1,73 @@
-import { validQuestion } from './quiz.js';
+import { isNativeQuestion, isPilotQuestion, normalizeQuestion, validQuestion } from './quiz.js';
 
 export const MAX_PACK_BYTES = 2_000_000;
 export const MAX_PACK_QUESTIONS = 2000;
+export const DEFAULT_PACK_FILENAME = 'pilot-150.json';
+export const DEFAULT_PACK_PATH = '../question-packs/pilot-150.json';
 
-/** Read a user-selected export without retaining any unrecognized data. */
+/** Validate the entire file before exposing any questions to a running session. */
 export function parseQuestionPack(text) {
   if (typeof text !== 'string' || new TextEncoder().encode(text).length > MAX_PACK_BYTES) {
     throw new Error('問題集は 2 MB 以下の JSON ファイルを選んでください。');
   }
   let pack;
   try { pack = JSON.parse(text); }
-  catch { throw new Error('JSON を読み取れません。サーバー版から書き出した問題集を選んでください。'); }
-  if (!pack || Array.isArray(pack) || pack.version !== 1 || !Array.isArray(pack.questions)) {
-    throw new Error('問題集の形式が違います。version: 1 と questions を含む書き出しファイルが必要です。');
+  catch { throw new Error('JSON を読み取れません。問題集の JSON ファイルを確認してください。'); }
+  const native = Array.isArray(pack);
+  const pilot = !native && pack !== null && typeof pack === 'object' && pack.version === undefined &&
+    pack.metadata !== null && typeof pack.metadata === 'object' && !Array.isArray(pack.metadata) && Array.isArray(pack.questions);
+  if (!native && !pilot && (!pack || pack.version !== 1 || !Array.isArray(pack.questions))) {
+    throw new Error('問題集の形式が違います。metadata と questions を含む試験運用問題集、問題の配列、または version: 1 の書き出しが必要です。');
   }
-  if (pack.questions.length > MAX_PACK_QUESTIONS) throw new Error('読み込める問題は 2,000 問までです。');
+  const rows = native ? pack : pack.questions;
+  if (rows.length > MAX_PACK_QUESTIONS) throw new Error('読み込める問題は 2,000 問までです。');
   const seen = new Set();
-  const questions = pack.questions.map((row, index) => {
-    const question = row && typeof row === 'object' ? {
-      id: row.id,
-      prompt: row.prompt,
-      choices: Array.isArray(row.choices) ? row.choices.map(choice => ({ id: choice?.id, text: choice?.text })) : row.choices,
-      correct_choice_id: row.correct_choice_id,
-      explanation: row.explanation,
-      source_id: row.source_id ?? row.source?.id,
-      file_name: row.file_name ?? row.source?.file_name,
-      region_id: row.region_id,
-      quote: row.quote,
-    } : null;
-    const idsPresent = question && [question.id, question.source_id, question.region_id].every(value => typeof value === 'string' && value.trim()) &&
-      Array.isArray(question.choices) && question.choices.every(choice => typeof choice.id === 'string' && choice.id.trim());
-    if (!idsPresent || !validQuestion(question)) {
+  const questions = rows.map((row, index) => {
+    let question;
+    if (native || pilot) {
+      question = (pilot ? isPilotQuestion(row) : isNativeQuestion(row)) ? normalizeQuestion(row) : null;
+    } else {
+      question = row && typeof row === 'object' ? {
+        id: row.id,
+        prompt: row.prompt,
+        choices: Array.isArray(row.choices) ? row.choices.map(choice => ({ id: choice?.id, text: choice?.text })) : row.choices,
+        correct_choice_id: row.correct_choice_id,
+        explanation: row.explanation,
+        source_id: row.source_id ?? row.source?.id,
+        file_name: row.file_name ?? row.source?.file_name,
+        region_id: row.region_id,
+        quote: row.quote,
+      } : null;
+    }
+    if (!validQuestion(question)) {
       throw new Error(`${index + 1} 問目の三択・正解・解説・出典情報を確認できません。ファイル全体の読み込みを中止しました。`);
     }
     const texts = question.choices.map(choice => choice.text.trim().replace(/\s+/g, ' '));
     if (new Set(texts).size !== 3) throw new Error(`${index + 1} 問目の選択肢に同じ内容があります。ファイル全体の読み込みを中止しました。`);
     if (seen.has(question.id)) throw new Error('同じ問題 ID が複数あります。ファイル全体の読み込みを中止しました。');
-    if (row.status !== undefined && row.status !== 'approved') throw new Error(`${index + 1} 問目が承認済みではありません。承認済みの問題集を書き出してください。`);
+    if (!native && !pilot && row.status !== undefined && row.status !== 'approved') {
+      throw new Error(`${index + 1} 問目が承認済みではありません。承認済みの問題集を書き出してください。`);
+    }
     seen.add(question.id);
     return question;
   });
-  return { version: 1, questions };
+  return pilot ? { version: 1, questions, metadata: pack.metadata } : { version: 1, questions };
+}
+
+/** A missing or invalid default file is actionable; never replace it with demo data. */
+export async function loadDefaultQuestionPack(fetcher = globalThis.fetch) {
+  let response;
+  try {
+    response = await fetcher(new URL(DEFAULT_PACK_PATH, import.meta.url));
+  } catch (error) {
+    throw new Error(`${DEFAULT_PACK_FILENAME} を取得できません。接続と配置を確認してください。${error?.message ? ` (${error.message})` : ''}`);
+  }
+  if (!response?.ok) {
+    throw new Error(`${DEFAULT_PACK_FILENAME} を読み込めません (HTTP ${response?.status ?? '不明'})。問題集ファイルの配置を確認してください。`);
+  }
+  try {
+    return parseQuestionPack(await response.text());
+  } catch (error) {
+    throw new Error(`${DEFAULT_PACK_FILENAME} の読み込みに失敗しました: ${error?.message ?? '不明なエラー'}`);
+  }
 }

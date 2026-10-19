@@ -7,7 +7,7 @@ from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 
-from app.main import create_app
+from app.main import APP_DIR, create_app
 from app.store import Store
 
 
@@ -84,8 +84,37 @@ class HttpTests(unittest.TestCase):
 
     def test_readonly_routes_never_call_external_services(self):
         with patch("app.main.DriveClient", side_effect=AssertionError("Drive must not run")), patch("app.luna.LunaClient", side_effect=AssertionError("Luna must not run")):
-            for route in ("/api/status", "/api/questions", "/api/sources", f"/api/sources/{self.sid}"):
+            for route in ("/api/status", "/api/questions", "/api/sources", f"/api/sources/{self.sid}", "/question-packs/pilot-150.json"):
                 self.assertEqual(self.client.get(route).status_code, 200)
+
+    def test_standard_pack_returns_original_json_without_exposing_pack_directory(self):
+        with patch("app.main.DriveClient", side_effect=AssertionError("Drive must not run")), patch("app.luna.LunaClient", side_effect=AssertionError("Luna must not run")):
+            response = self.client.get("/question-packs/pilot-150.json")
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.headers["content-type"], "application/json")
+            self.assertEqual(response.content, (APP_DIR / "question-packs/pilot-150.json").read_bytes())
+            for route in ("/question-packs/", "/question-packs/README.md", "/question-packs/batches/pilot-01.json", "/question-packs/private.json"):
+                with self.subTest(route=route):
+                    self.assertEqual(self.client.get(route).status_code, 404)
+
+    def test_standard_pack_rejects_missing_file_and_symlinks(self):
+        root = Path(self.temp.name) / "public-root"
+        pack_dir = root / "question-packs"
+        pack_dir.mkdir(parents=True)
+        pack = pack_dir / "pilot-150.json"
+        outside = Path(self.temp.name) / "private.json"
+        outside.write_text('{"private":"do-not-serve"}', encoding="utf-8")
+        with patch("app.main.APP_DIR", root):
+            self.assertEqual(self.client.get("/question-packs/pilot-150.json").status_code, 404)
+            pack.symlink_to(outside)
+            self.assertEqual(self.client.get("/question-packs/pilot-150.json").status_code, 404)
+            pack.unlink()
+            pack_dir.rmdir()
+            outside_dir = Path(self.temp.name) / "private-packs"
+            outside_dir.mkdir()
+            (outside_dir / pack.name).write_bytes(outside.read_bytes())
+            pack_dir.symlink_to(outside_dir, target_is_directory=True)
+            self.assertEqual(self.client.get("/question-packs/pilot-150.json").status_code, 404)
 
     def test_source_json_never_exposes_server_paths(self):
         result = self.client.get(f"/api/sources/{self.sid}")

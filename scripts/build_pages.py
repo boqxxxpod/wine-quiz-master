@@ -6,9 +6,10 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+PUBLIC_QUESTION_PACK = "question-packs/pilot-150.json"
 PUBLIC_FILES = (
     "static/index.html", "static/app.js", "static/quiz.js",
-    "static/pages.js", "static/style.css",
+    "static/pages.js", "static/style.css", PUBLIC_QUESTION_PACK,
 )
 MARKER = ".wine-pages-artifact"
 
@@ -33,7 +34,7 @@ def build(source_root: Path = ROOT, output: Path | None = None) -> Path:
             shutil.copyfile(source, target)
         (temporary / "static/runtime.js").write_text("export const mode = 'pages';\n", encoding="utf-8")
         (temporary / ".nojekyll").touch()
-        (temporary / MARKER).write_text("Generated public frontend only; no private data.\n", encoding="utf-8")
+        (temporary / MARKER).write_text("Generated public frontend and bundled question pack; no private data.\n", encoding="utf-8")
         if output.exists():
             shutil.rmtree(output)
         temporary.replace(output)
@@ -45,4 +46,4 @@ def build(source_root: Path = ROOT, output: Path | None = None) -> Path:
 
 if __name__ == "__main__":
     result = build()
-    print(f"Pages artifact ready: {result} (private data excluded)")
+    print(f"Pages artifact ready: {result} (bundled questions included; private data excluded)")
