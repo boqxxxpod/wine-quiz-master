@@ -13,80 +13,58 @@
 <body>
   <a class="skip-link" href="#main-content">本文へ移動</a>
   <div class="app-shell">
-    <aside class="sidebar">
-      <a class="brand" href="#practice" aria-label="ワインの手帖 ホーム">
+    <header class="app-header">
+      <a class="brand" href="#setup" aria-label="ワインの手帖 初期設定へ">
         <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 52 58" fill="none"><path d="M14 5h24l-2 19c-.7 7.2-4.5 12-10 12s-9.3-4.8-10-12L14 5Z" stroke="currentColor" stroke-width="1.7"/><path d="M16 21c6-4 12 4 20 0v3c-.7 7.2-4.5 12-10 12s-9.3-4.8-10-12v-3Z" fill="currentColor" opacity=".8"/><path d="M26 36v15m-10 2h20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M40 9h5m-2.5-2.5v5" stroke="#b69a4e" stroke-width="1.4" stroke-linecap="round"/></svg></span>
-        <span><strong>ワインの手帖</strong><small>WINE STUDY NOTEBOOK</small></span>
+        <span>ワインの手帖<small>WINE PRACTICE</small></span>
       </a>
-      <div class="nav-label">MY STUDY</div>
-      <nav class="main-nav" aria-label="メインメニュー">
-        <button class="nav-item active" data-view="practice" aria-current="page"><span class="nav-icon" aria-hidden="true">▤</span><span>練習する</span><span class="nav-chevron" aria-hidden="true">›</span></button>
-        <button class="nav-item" data-view="sources"><span class="nav-icon" aria-hidden="true">▧</span><span>資料と問題</span><span id="nav-source-count" class="nav-count">—</span></button>
-        <button class="nav-item" data-view="settings"><span class="nav-icon settings-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m10 3-.5 2a8 8 0 0 0-2 .9L5.6 5.3 3.3 9.2l1.6 1.4a7 7 0 0 0 0 2.8l-1.6 1.4 2.3 3.9 1.9-.6a8 8 0 0 0 2 .9l.5 2h4l.5-2a8 8 0 0 0 2-.9l1.9.6 2.3-3.9-1.6-1.4a7 7 0 0 0 0-2.8l1.6-1.4-2.3-3.9-1.9.6a8 8 0 0 0-2-.9L14 3h-4Z" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.3"/></svg></span><span>接続・設定</span></button>
-      </nav>
-      <div class="sidebar-note"><span class="tiny-line"></span><p>学んだ知識を、<br>自分のものに。</p><small>国ごとの知識を、<br>問題集で少しずつ。</small></div>
-      <div class="sidebar-footer"><span class="status-dot"></span> 保存した問題で、何度でも</div>
-    </aside>
-
-    <div class="workspace">
-      <header class="topbar"><div class="breadcrumb">MY NOTEBOOK <span>/</span> <span id="current-view-label">練習する</span></div><div class="topbar-badge"><span aria-hidden="true">✦</span> ひとつずつ、たしかに。</div></header>
-      <main id="main-content" tabindex="-1">
-        <div id="global-notice" class="notice" role="status" hidden></div>
-
-        <section id="view-practice" class="view" aria-labelledby="practice-heading">
-          <div class="page-heading"><div><p class="eyebrow">A LITTLE PRACTICE, EVERY DAY</p><h1 id="practice-heading">今日の、一問。</h1><p class="page-description">答えを選んで、根拠をたしかめる。ワインの知識を少しずつ。</p></div><span class="outlined-pill">ワイン検定 <span>・</span> 三択</span></div>
-          <section id="pages-import" class="pages-import" aria-labelledby="pages-import-heading">
-            <div class="pages-import-heading"><span class="badge">出題元</span><h2 id="pages-import-heading">標準の問題集から練習</h2></div>
-            <p>登録済みの150問を自動で読み込みます。別の問題集 JSON やサーバー版の承認済み書き出しも選べます。選んだファイルは送信せず、このタブでのみ使用します。再読み込みすると標準問題集に戻ります。</p>
-            <div class="pages-import-controls"><div class="field"><label for="question-pack">別の問題集 JSON（2 MB・2,000 問まで）</label><input id="question-pack" type="file" accept=".json,application/json" aria-describedby="pages-import-status"></div><button id="clear-pack" type="button" class="button button-secondary small-button" disabled>標準問題集に戻す</button></div>
-            <p id="pages-import-status" class="pages-import-status" role="status">pilot-150.json を読み込んでいます。</p>
-            <p id="pack-review-status" class="pack-review-status" hidden></p>
-            <p id="pages-import-error" class="pages-import-error" role="alert" hidden></p>
-          </section>
-          <section class="practice-settings" aria-labelledby="scope-heading">
-            <h2 id="scope-heading">出題範囲</h2>
-            <fieldset class="scope-options"><legend class="visually-hidden">出題範囲を選択</legend>
-              <label><input id="scope-all" type="radio" name="practice-scope" value="all" checked> すべて <span id="scope-all-count">（0 問）</span></label>
-              <label><input id="scope-country" type="radio" name="practice-scope" value="country"> 国別</label>
-              <label class="visually-hidden" for="practice-country">練習する国</label><select id="practice-country" disabled aria-describedby="scope-count"><option value="">国を選んでください</option></select>
-            </fieldset>
-            <div class="scope-actions"><p id="scope-count" role="status">問題集を読み込んでいます。</p><button id="start-practice" class="button button-primary small-button" type="button" disabled>この範囲で練習を開始</button></div>
-            <p id="active-scope" class="active-scope">今回の範囲：すべて</p>
-          </section>
-          <div class="practice-layout">
-            <div id="quiz-root" class="quiz-root" aria-live="polite"><div class="loading-state"><span class="spinner"></span><p>保存した問題を読み込んでいます</p></div></div>
-            <aside class="study-aside">
-              <div class="section-label">YOUR NOTEBOOK <span>01</span></div>
-              <div class="stat-row"><span>練習できる問題</span><strong id="stat-questions">—<small> 問</small></strong></div>
-              <div class="stat-row"><span>取り込んだ写真</span><strong id="stat-sources">—<small> 枚</small></strong></div>
-              <div class="stat-row"><span>確認待ちの問題</span><strong id="stat-review">—<small> 問</small></strong></div>
-              <div class="study-rule"><span class="rule-symbol" aria-hidden="true">“</span><h3>覚える、その前に。<br>出典に目を向ける。</h3><p>回答後に解説と、問題集に記録された出典を表示します。検証記録は、原画像の確認や人による校閲の完了を意味しません。</p><span class="marker-swatch" aria-hidden="true"></span></div>
-              <div class="offline-note"><span aria-hidden="true">↻</span><p>一巡するまで重複なし。<br>練習中の API 利用はありません。</p></div>
-            </aside>
+      <span class="header-note">ワイン検定の三択練習</span>
+    </header>
+    <main id="main-content" tabindex="-1">
+      <section id="view-setup" aria-labelledby="setup-heading">
+        <div class="page-heading">
+          <p class="eyebrow">ひとつずつ、たしかに。</p>
+          <h1 id="setup-heading" tabindex="-1">今日の練習を、選ぶ。</h1>
+          <p class="page-description">問題集と範囲、出題数を選んで始めましょう。</p>
+        </div>
+        <section id="pages-import" class="setup-card pages-import" aria-labelledby="pages-import-heading">
+          <h2 id="pages-import-heading"><span class="step-number">01</span> 問題集</h2>
+          <p id="pages-import-status" class="pages-import-status" role="status">pilot-150.json を読み込んでいます。</p>
+          <p id="pack-review-status" class="pack-review-status" hidden></p>
+          <div class="pages-import-controls">
+            <div class="field"><label for="question-pack">別の問題集 JSON を選ぶ（2 MB・2,000 問まで）</label><input id="question-pack" type="file" accept=".json,application/json" aria-describedby="import-help pages-import-error"></div>
+            <button id="clear-pack" type="button" class="button button-secondary" disabled>標準問題集に戻す</button>
           </div>
+          <p id="import-help" class="field-help">標準の150問を自動で読み込みます。選んだ JSON は送信せず、このタブでのみ使用します。再読み込みすると標準問題集に戻ります。</p>
+          <p id="pages-import-error" class="pages-import-error" role="alert" hidden></p>
+          <button id="retry-pack" type="button" class="button button-secondary" hidden>標準問題集を再読み込み</button>
         </section>
-
-        <section id="view-sources" class="view" aria-labelledby="sources-heading" hidden>
-          <div class="page-heading"><div><p class="eyebrow">FROM YOUR HIGHLIGHTS</p><h1 id="sources-heading">資料と、知識のつながり。</h1><p class="page-description">写真・黄色部分・問題を並べて、出題の根拠を確認できます。</p></div><button id="refresh-sources" class="button button-secondary small-button">資料を更新 <span aria-hidden="true">↻</span></button></div>
-          <div class="source-toolbar"><div><span class="status-dot"></span><span id="source-summary">資料を読み込んでいます</span></div><button class="text-button" data-open-view="settings">取り込み・接続の設定 <span aria-hidden="true">↗</span></button></div>
-          <div class="sources-layout"><div id="source-list" class="source-list"></div><div id="source-detail" class="source-detail"><div class="empty-detail"><span class="empty-detail-icon" aria-hidden="true">▧</span><p>資料を選ぶと、黄色部分と<br>生成した問題を確認できます。</p></div></div></div>
+        <section class="setup-card practice-settings" aria-labelledby="scope-heading">
+          <h2 id="scope-heading"><span class="step-number">02</span> 出題範囲</h2>
+          <fieldset class="scope-options"><legend class="visually-hidden">出題範囲を選択</legend>
+            <label><input id="scope-all" type="radio" name="practice-scope" value="all" checked> すべて <span id="scope-all-count">（0 問）</span></label>
+            <label><input id="scope-country" type="radio" name="practice-scope" value="country"> 国別</label>
+            <label class="visually-hidden" for="practice-country">練習する国</label><select id="practice-country" disabled aria-describedby="scope-count"><option value="">国を選んでください</option></select>
+          </fieldset>
+          <p id="scope-count" class="scope-count" role="status">問題集を読み込んでいます。</p>
+          <h2 id="count-heading"><span class="step-number">03</span> 出題数</h2>
+          <fieldset class="count-options" aria-describedby="count-help count-error"><legend class="visually-hidden">出題数を選択</legend>
+            <label><input id="count-all" type="radio" name="practice-count" value="all" checked> <span id="count-all-label">全問（0 問）</span></label>
+            <label><input id="count-custom" type="radio" name="practice-count" value="custom"> 問数を指定</label>
+            <label class="count-field" for="question-count"><input id="question-count" type="number" min="1" max="0" step="1" value="1" inputmode="numeric" aria-label="出題する問題数" aria-describedby="count-error" disabled> 問</label>
+          </fieldset>
+          <p id="count-help" class="field-help">選んだ範囲からランダムに出題します。一巡するまで同じ問題は出ません。</p>
+          <p id="count-error" class="field-error" role="alert" hidden></p>
+          <button id="start-practice" class="button button-primary start-button" type="button" disabled>練習を始める <span aria-hidden="true">→</span></button>
         </section>
+      </section>
 
-        <section id="view-settings" class="view" aria-labelledby="settings-heading" hidden>
-          <div class="page-heading"><div><p class="eyebrow">MAKE IT YOUR NOTEBOOK</p><h1 id="settings-heading">学びの、準備。</h1><p class="page-description">Google ドライブの写真から、根拠のある問題を保存します。</p></div><span class="outlined-pill">サーバー側で安全に管理</span></div>
-          <div class="settings-grid">
-            <section class="settings-card"><div class="card-heading"><span class="step-number">01</span><div><h2>Google ドライブを接続</h2><p>「ワイン検定」フォルダを指定します。</p></div><span id="drive-badge" class="badge">確認中</span></div><div id="drive-status" class="connection-message">接続状態を読み込んでいます。</div><div class="field"><label for="folder-id">フォルダ ID</label><input id="folder-id" type="text" autocomplete="off" spellcheck="false" placeholder="Google ドライブのフォルダ ID"><p class="field-help">フォルダ URL の <code>folders/</code> に続く文字列。同名フォルダがある場合は ID で指定します。</p></div><div class="button-row"><button id="find-folders" class="button button-secondary">フォルダを確認</button><button id="sync-drive" class="button button-primary">写真を同期 <span aria-hidden="true">↓</span></button></div><div id="folder-results" class="folder-results" hidden></div><details class="setup-details"><summary>Google ドライブの接続手順</summary><ol><li>Google Cloud で Drive API を有効にし、サービスアカウントを作成します。</li><li>サーバーに認証 JSON を保存し、<code>GOOGLE_APPLICATION_CREDENTIALS</code> にファイルパスを設定します。</li><li>「ワイン検定」フォルダを、サービスアカウントのメールアドレスに「閲覧者」で共有します。</li><li>フォルダ ID を入力して「写真を同期」を押します。</li></ol><p>ChatGPT の Drive 接続は、このアプリには引き継がれません。認証ファイルは公開フォルダや Git に保存しないでください。OAuth を使う場合は、drive.readonly スコープとオフラインアクセスで取得した GOOGLE_CLIENT_ID・GOOGLE_CLIENT_SECRET・GOOGLE_REFRESH_TOKEN をサーバーに設定します。設定後はサーバーを再起動してください。</p></details></section>
-
-            <section class="settings-card"><div class="card-heading"><span class="step-number">02</span><div><h2>luna を確認</h2><p>画像入力と利用権限を検証します。</p></div><span id="model-badge" class="badge">確認中</span></div><div class="model-label"><span>使用モデル</span><code id="model-id">gpt-6-luna</code></div><div id="model-status" class="connection-message">モデルの設定を読み込んでいます。</div><button id="check-model" class="button button-secondary">利用可否を確認 <span aria-hidden="true">↗</span></button><details class="setup-details"><summary>luna の設定手順</summary><ol><li>サーバーの環境変数 <code>OPENAI_API_KEY</code> に API キーを設定します。</li><li><code>OPENAI_MODEL=gpt-6-luna</code> を設定し、サーバーを再起動します。</li><li>「利用可否を確認」で、このアカウントからの利用権限を確認します。</li></ol><p>OpenAI API のキー・利用権限・課金設定は、ChatGPT の契約とは別に必要です。luna が利用できない場合、生成を停止します。別モデルへの自動切り替えは行いません。API キーをこの画面に入力する必要はありません。</p></details></section>
-
-            <section class="settings-card import-card"><div class="card-heading"><span class="step-number">03</span><div><h2>黄色部分から問題をつくる</h2><p>新しい写真・変更された写真だけを処理します。</p></div></div><div class="import-flow"><span>黄色の検出</span><b aria-hidden="true">→</b><span>文字の読み取り</span><b aria-hidden="true">→</b><span>問題を保存</span><b aria-hidden="true">→</b><span>根拠を確認</span></div><p class="muted">文字や黄色の範囲が不鮮明な資料は、確認が必要な資料として保存します。生成した問題は根拠を確認して承認し、書き出した JSON を練習画面で選ぶと練習に使えます。</p><div class="import-bottom"><p>生成は取り込み時だけ。<br><strong>出題・採点・解説表示では API を使いません。</strong></p><button id="process-sources" class="button button-primary">資料を読み取り・問題を生成 <span aria-hidden="true">→</span></button></div><div id="operation-result" class="operation-result" role="status" hidden></div></section>
-          </div>
-        </section>
-
-        <footer class="page-footer"><span>WINE STUDY NOTEBOOK</span><p>ひとつの知識が、次の一杯を豊かにする。</p><span class="footer-decoration" aria-hidden="true">✧</span></footer>
-      </main>
-    </div>
+      <section id="view-practice" aria-label="練習" hidden>
+        <div class="practice-toolbar"><button id="back-to-setup" type="button" class="button button-secondary">← 設定に戻る</button><p id="active-scope"></p></div>
+        <div id="quiz-root" class="quiz-root" aria-live="polite"></div>
+      </section>
+      <footer class="page-footer">答えて、理由を知る。自分のペースで、何度でも。</footer>
+    </main>
   </div>
-  <div id="toast" class="toast" role="status" hidden></div>
 </body>
 </html>

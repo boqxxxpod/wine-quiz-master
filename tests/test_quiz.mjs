@@ -145,6 +145,104 @@ test('a country with no questions stays empty without falling back to another ra
   assert.equal(session.total, 0);
 });
 
+test('question counts select a shuffled subset of unique valid questions', () => {
+  const rows = [question('1'), question('2'), question('3'), question('4'), question('5'), question('2'), { ...question('bad'), quote: '' }];
+  const session = new QuizSession(rows, () => 0, null, 2);
+  assert.equal(session.questionCount, 2);
+  assert.equal(session.total, 2);
+  assert.deepEqual(session.order.map(row => row.id), ['2', '3'], 'shuffle the available pool before taking the subset');
+  assert.equal(new Set(session.order.map(row => row.id)).size, 2);
+  assert.equal(new QuizSession(rows, () => 0, null, 1).total, 1);
+  assert.equal(new QuizSession(rows, () => 0, null, 5).total, 5);
+  assert.equal(new QuizSession(rows, () => 0, null, null).total, 5);
+  assert.deepEqual(rows.slice(0, 5).map(row => row.id), ['1', '2', '3', '4', '5']);
+});
+
+test('counted country rounds select and score only eligible questions', () => {
+  const rows = [
+    nativeQuestion('france-1'), nativeQuestion('italy', ['イタリア']),
+    nativeQuestion('france-2'), nativeQuestion('shared', ['フランス', 'イタリア']),
+    nativeQuestion('shared', ['フランス', 'イタリア']),
+  ];
+  const session = new QuizSession(rows, () => 0, 'フランス', 2);
+  const ids = [];
+  assert.equal(session.total, 2);
+  while (session.current) {
+    assert.ok(session.current.countries.includes('フランス'));
+    assert.deepEqual(session.current.choices.map(choice => choice.id), ['b', 'c', 'a']);
+    ids.push(session.current.id);
+    assert.equal(session.answer('b').correct, true);
+    assert.equal(session.answer('a'), null);
+    session.next();
+  }
+  assert.deepEqual(ids, ['france-2', 'shared']);
+  assert.equal(new Set(ids).size, 2);
+  assert.equal(session.score, 2);
+  assert.equal(session.answers.length, 2);
+  assert.equal(session.complete, true);
+});
+
+test('invalid question counts fail closed against the unique scoped pool', () => {
+  const rows = [nativeQuestion('one'), nativeQuestion('two'), nativeQuestion('two'), nativeQuestion('italy', ['イタリア'])];
+  for (const count of [0, -1, 1.5, '1', false, {}, NaN, Infinity, 3]) {
+    assert.throws(() => new QuizSession(rows, () => 0, 'フランス', count), RangeError, `reject ${String(count)}`);
+  }
+  assert.throws(() => new QuizSession(rows, () => 0, null, 4), RangeError);
+  assert.throws(() => new QuizSession([], () => 0, null, 1), RangeError);
+  assert.throws(() => new QuizSession(rows, () => 0, '未登録の国', 1), RangeError);
+  const empty = new QuizSession(rows, () => 0, '未登録の国', null);
+  assert.equal(empty.total, 0);
+  assert.equal(empty.current, null);
+  assert.equal(empty.complete, false);
+});
+
+test('restart preserves the scope and count, resamples, and resets progress', () => {
+  let randomValue = 0;
+  const rows = [nativeQuestion('one'), nativeQuestion('two'), nativeQuestion('three'), nativeQuestion('italy', ['イタリア'])];
+  const session = new QuizSession(rows, () => randomValue, 'フランス', 2);
+  assert.deepEqual(session.order.map(row => row.id), ['two', 'three']);
+  session.answer('b');
+  session.next();
+  session.answer('a');
+  assert.equal(session.score, 1);
+  randomValue = 0.999;
+  assert.equal(session.restart(), session.current);
+  assert.equal(session.country, 'フランス');
+  assert.equal(session.questionCount, 2);
+  assert.equal(session.total, 2);
+  assert.deepEqual(session.order.map(row => row.id), ['one', 'two']);
+  assert.equal(session.index, 0);
+  assert.equal(session.score, 0);
+  assert.deepEqual(session.answers, []);
+  assert.equal(session.selectedId, null);
+  assert.equal(session.answered, false);
+  assert.equal(session.complete, false);
+  session.restart('イタリア', 1);
+  assert.equal(session.country, 'イタリア');
+  assert.equal(session.questionCount, 1);
+  assert.equal(session.total, 1);
+  session.restart(null, null);
+  assert.equal(session.country, null);
+  assert.equal(session.questionCount, null);
+  assert.equal(session.total, 4);
+});
+
+test('an invalid restart preserves the active round and answers', () => {
+  const rows = [nativeQuestion('one'), nativeQuestion('two'), nativeQuestion('italy', ['イタリア'])];
+  const session = new QuizSession(rows, () => 0, 'フランス', 2);
+  session.answer('b');
+  const previousOrder = session.order;
+  const previousAnswers = session.answers;
+  assert.throws(() => session.restart('イタリア'), RangeError, 'the current count exceeds the new scope');
+  assert.throws(() => session.restart('フランス', 0), RangeError);
+  assert.equal(session.country, 'フランス');
+  assert.equal(session.questionCount, 2);
+  assert.equal(session.order, previousOrder);
+  assert.equal(session.answers, previousAnswers);
+  assert.equal(session.selectedId, 'b');
+  assert.equal(session.score, 1);
+});
+
 test('null and malformed options are rejected safely by validation and sessions', () => {
   const native = nativeQuestion('invalid');
   for (const row of [null, undefined, 3, [], { ...question('bad'), choices: [null, {}, {}] },

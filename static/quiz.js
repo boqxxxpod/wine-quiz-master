@@ -113,16 +113,23 @@ export function availableCountries(questions) {
 }
 
 export class QuizSession {
-  constructor(questions, random = Math.random, country = null) {
+  constructor(questions, random = Math.random, country = null, questionCount = null) {
     this.random = random;
     this.questions = uniqueValidQuestions(questions).map(normalizeQuestion);
     this.country = country;
+    this.questionCount = questionCount;
     this.restart();
   }
 
-  restart(country = this.country) {
+  restart(country = this.country, questionCount = this.questionCount) {
+    const available = questionsForCountry(this.questions, country);
+    if (questionCount !== null && (!Number.isInteger(questionCount) || questionCount < 1 || questionCount > available.length)) {
+      throw new RangeError('Question count must be an integer within the selected range.');
+    }
+    const selected = shuffle(available, this.random).slice(0, questionCount ?? available.length);
     this.country = country;
-    this.order = shuffle(questionsForCountry(this.questions, this.country), this.random).map(question => ({
+    this.questionCount = questionCount;
+    this.order = selected.map(question => ({
       ...question,
       choices: shuffle(question.choices, this.random),
     }));
