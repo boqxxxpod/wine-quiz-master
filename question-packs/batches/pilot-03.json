@@ -1,0 +1,664 @@
+{
+  "metadata": {
+    "title": "Wine Quiz Master 試験運用3択問題集",
+    "source_file": "ワイン検定_問題作成用知識と周辺テキスト.json",
+    "source_sha256": "4d6cd1ce22e9c6064cd4817cf2a37fb9540179ccf265cb8025dd5a780a425b97",
+    "generated_on": "2026-10-18",
+    "total_questions": 30,
+    "questions_per_batch": 30,
+    "batch_count": 5,
+    "choice_count": 3,
+    "answer_index_base": 0,
+    "qa_status": "auto_checked（構造・元知識・正答キーの機械検証済み。誤答選択肢の意味上の一意性は人手最終確認前）",
+    "country_counts": {
+      "アメリカ": 11,
+      "アルゼンチン": 7,
+      "イタリア": 17,
+      "ポルトガル": 11,
+      "南アフリカ": 7,
+      "スペイン": 15,
+      "日本": 17,
+      "オーストリア": 8,
+      "フランス": 32,
+      "チリ": 7,
+      "オーストラリア": 11,
+      "ニュージーランド": 7
+    },
+    "set": "batch-3",
+    "batch_index": 3,
+    "privacy_note": "出典原文と外部の共有URL・画像名を除いた公開レビュー用データ",
+    "app_import_compatible": false
+  },
+  "questions": [
+    {
+      "question_id": "Q-K0490-01",
+      "knowledge_id": "K0490",
+      "country": "ポルトガル",
+      "countries": [
+        "ポルトガル"
+      ],
+      "topic": "ワイン法・基礎",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nポルトガルの原産地統制名称ワインの略称は（　　　）である。",
+      "options": [
+        "D.O.C.",
+        "D.O.Ca.",
+        "A.V.A."
+      ],
+      "correct_index": 0,
+      "correct_answer": "D.O.C.",
+      "explanation": "ポルトガルの原産地統制名称ワインの略称はD.O.C.である。 1756年のポートワインの法を起点に、EU加盟と2008年の改正後の分類が説明される。",
+      "source_page": 72,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0258-01",
+      "knowledge_id": "K0258",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ロワール渓谷",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nトゥーレーヌ地区のA.O.C.に（　　　）がある。",
+      "options": [
+        "シノン",
+        "シャトーヌフ・デュ・パプ",
+        "ポイヤック"
+      ],
+      "correct_index": 0,
+      "correct_answer": "シノン",
+      "explanation": "トゥーレーヌ地区のA.O.C.にシノンがある。ブルグイユとシノンはカベルネ・フランの赤に関する説明に含まれ、ヴーヴレには白の甘辛度と発泡白が示されている。",
+      "source_page": 34,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0532-01",
+      "knowledge_id": "K0532",
+      "country": "オーストリア",
+      "countries": [
+        "オーストリア"
+      ],
+      "topic": "オーストリアの気候・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nオーストリアのブドウ栽培では（　　　）を占める。",
+      "options": [
+        "白ブドウが約3割",
+        "赤ブドウが約7割",
+        "白ブドウが約7割"
+      ],
+      "correct_index": 2,
+      "correct_answer": "白ブドウが約7割",
+      "explanation": "オーストリアのブドウ栽培では白ブドウが約7割を占める。 西部に高地が多いことが東部への産地集中につながり、二大産地が挙げられる。",
+      "source_page": 78,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0781-01",
+      "knowledge_id": "K0781",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "日本ワインの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n日本ワインは（　　　）である。",
+      "options": [
+        "国産・輸入のブドウを混合した果実酒",
+        "輸入ブドウのみを原料とする果実酒",
+        "国産ブドウのみを原料とする果実酒"
+      ],
+      "correct_index": 2,
+      "correct_answer": "国産ブドウのみを原料とする果実酒",
+      "explanation": "日本ワインは原料を国産ブドウに限る。国内製造ワインは製造地で括るため、輸入原料から国内で造るものも含む。",
+      "source_page": "4",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0354-01",
+      "knowledge_id": "K0354",
+      "country": "イタリア",
+      "countries": [
+        "イタリア"
+      ],
+      "topic": "トスカーナ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nボルゲリの名声は（　　　）によって高まった。",
+      "options": [
+        "サッシカイアの大成功",
+        "バローロの大成功",
+        "フランチャコルタの大成功"
+      ],
+      "correct_index": 0,
+      "correct_answer": "サッシカイアの大成功",
+      "explanation": "ボルゲリの名声はサッシカイアの大成功によって高まった。 サッシカイア以前はシンプルな白とロゼの産地だったが、その成功が産地の名声を高めたと説明される。",
+      "source_page": 44,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0690-01",
+      "knowledge_id": "K0690",
+      "country": "オーストラリア",
+      "countries": [
+        "オーストラリア"
+      ],
+      "topic": "オーストラリアの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nオーストラリア発の重要な生産技術革新は（　　　）である。",
+      "options": [
+        "木樽熟成の義務化",
+        "スクリューキャップ（ステルヴァン）の採用",
+        "プラスチック製タンクの禁止"
+      ],
+      "correct_index": 1,
+      "correct_answer": "スクリューキャップ（ステルヴァン）の採用",
+      "explanation": "オーストラリア発の重要な生産技術の刷新として挙げられる。2000年ヴィンテージから追従するワイナリーが増えたとされる。",
+      "source_page": 105,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0627-01",
+      "knowledge_id": "K0627",
+      "country": "チリ",
+      "countries": [
+        "チリ"
+      ],
+      "topic": "チリの基礎・気候・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nチリの海岸沿いの日較差は（　　　）である。",
+      "options": [
+        "5〜8℃",
+        "15〜18℃",
+        "25〜28℃"
+      ],
+      "correct_index": 1,
+      "correct_answer": "15〜18℃",
+      "explanation": "海岸沿いの日較差は15〜18℃。アンデス山脈の麓の20℃以上と区別する。",
+      "source_page": 96,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0181-01",
+      "knowledge_id": "K0181",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ボルドー",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nカベルネ・ソーヴィニヨンは（　　　）を好む。",
+      "options": [
+        "多湿な平野部",
+        "湿った粘土質の場所",
+        "乾燥した砂利質の場所"
+      ],
+      "correct_index": 2,
+      "correct_answer": "乾燥した砂利質の場所",
+      "explanation": "カベルネ・ソーヴィニヨンは乾燥した砂利質の場所を好む。左岸のカベルネ・ソーヴィニヨンに向く土壌条件と、白品種の列挙・セミヨンの用途を区別して読む。",
+      "source_page": 31,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0405-01",
+      "knowledge_id": "K0405",
+      "country": "スペイン",
+      "countries": [
+        "スペイン"
+      ],
+      "topic": "ワイン法・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nスペインを代表する黒ブドウ品種は（　　　）である。",
+      "options": [
+        "ガルナッチャ",
+        "テンプラニーリョ",
+        "アイレン"
+      ],
+      "correct_index": 1,
+      "correct_answer": "テンプラニーリョ",
+      "explanation": "スペインを代表する黒ブドウ品種はテンプラニーリョである。 テンプラニーリョには地域ごとの別名があり、リオハでは主要品種として紹介される。",
+      "source_page": 62,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0103-01",
+      "knowledge_id": "K0103",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ジュラ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nジュラの独特なワインに（　　　）がある。",
+      "options": [
+        "ヴァン・ドゥー・ナチュレル",
+        "クレマン・ダルザス",
+        "ヴァン・ド・パイユ（藁ワイン）"
+      ],
+      "correct_index": 2,
+      "correct_answer": "ヴァン・ド・パイユ（藁ワイン）",
+      "explanation": "ジュラの独特なワインにヴァン・ド・パイユ（藁ワイン）がある。ジュラ独特のワインとして、ヴァン・ジョーヌと並べて紹介されている。",
+      "source_page": 21,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0744-01",
+      "knowledge_id": "K0744",
+      "country": "ニュージーランド",
+      "countries": [
+        "ニュージーランド"
+      ],
+      "topic": "ニュージーランドの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nホークス・ベイは（　　　）の重要産地である。",
+      "options": [
+        "シラー",
+        "ガメイ",
+        "ピノタージュ"
+      ],
+      "correct_index": 0,
+      "correct_answer": "シラー",
+      "explanation": "シラーはボルドー系品種と並び、ホークス・ベイの重要な品種とされる。",
+      "source_page": 115,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0584-01",
+      "knowledge_id": "K0584",
+      "country": "アメリカ",
+      "countries": [
+        "アメリカ"
+      ],
+      "topic": "カリフォルニア",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n太平洋岸はカリフォルニア海流の影響で（　　　）である。",
+      "options": [
+        "海から遠いほど冷涼",
+        "標高が低いほど冷涼",
+        "海に近いほど冷涼"
+      ],
+      "correct_index": 2,
+      "correct_answer": "海に近いほど冷涼",
+      "explanation": "太平洋岸3州と大西洋岸のニューヨークを区別する。冷たいカリフォルニア海流の影響により海側は冷涼、内陸側は高温になる。",
+      "source_page": "86",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0047-01",
+      "knowledge_id": "K0047",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "アルザス",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nアルザスのワインは（　　　）から造られる。",
+      "options": [
+        "主に複数品種のブレンド",
+        "主に単一品種",
+        "主に黒ブドウのみ"
+      ],
+      "correct_index": 1,
+      "correct_answer": "主に単一品種",
+      "explanation": "アルザスのワインは主に単一品種から造られる。栽培地の形状と、単一品種・品種名表示・ボトル形というアルザス独自のスタイルが同じ段落で説明される。",
+      "source_page": 16,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0385-01",
+      "knowledge_id": "K0385",
+      "country": "スペイン",
+      "countries": [
+        "スペイン"
+      ],
+      "topic": "スペインの基礎",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nスペインの白ワイン生産量は全体の（　　　）に及ぶ。",
+      "options": [
+        "69%",
+        "29%",
+        "49%"
+      ],
+      "correct_index": 2,
+      "correct_answer": "49%",
+      "explanation": "スペインの白ワイン生産量は全体の49%に及ぶ。 面積と生産量の順位は異なり、ワインの種類によって代表的な産地も分けて説明される。",
+      "source_page": 61,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0765-01",
+      "knowledge_id": "K0765",
+      "country": "南アフリカ",
+      "countries": [
+        "南アフリカ"
+      ],
+      "topic": "南アフリカの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n南アフリカの春から夏に吹く強く乾燥した風は（　　　）と呼ばれる。",
+      "options": [
+        "ミストラル",
+        "ケープドクター",
+        "ゾンダ風"
+      ],
+      "correct_index": 1,
+      "correct_answer": "ケープドクター",
+      "explanation": "春から夏に南東から吹く、強く乾燥した風である。防虫剤の使用を抑えられる理由としても記される。",
+      "source_page": 119,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0817-01",
+      "knowledge_id": "K0817",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "日本ワインの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nマスカット・ベーリーAは（　　　）にO.I.V.の品種リストに掲載された。",
+      "options": [
+        "2020年",
+        "2005年",
+        "2013年"
+      ],
+      "correct_index": 2,
+      "correct_answer": "2013年",
+      "explanation": "仕込み量の首位は甲州、次位がマスカット・ベーリーA。O.I.V.への掲載年は甲州2010年、マスカット・ベーリーA2013年で、EU向けの品種名表示と結び付けて説明される。",
+      "source_page": "6",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0678-01",
+      "knowledge_id": "K0678",
+      "country": "オーストラリア",
+      "countries": [
+        "オーストラリア"
+      ],
+      "topic": "オーストラリアの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nオーストラリアに最初のワイン用ブドウ樹が持ち込まれたのは（　　　）である。",
+      "options": [
+        "1928年",
+        "1788年",
+        "1888年"
+      ],
+      "correct_index": 1,
+      "correct_answer": "1788年",
+      "explanation": "初代総督アーサー・フィリップ大佐が、喜望峰とブラジルからシドニーへワイン用ブドウ樹をもたらした年とされる。",
+      "source_page": 104,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0413-01",
+      "knowledge_id": "K0413",
+      "country": "スペイン",
+      "countries": [
+        "スペイン"
+      ],
+      "topic": "ワイン法・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n（　　　）はラ・マンチャ地方で大量に生産される主要な白ブドウ品種である。",
+      "options": [
+        "アイレン",
+        "ベルデホ",
+        "アルバリーニョ"
+      ],
+      "correct_index": 0,
+      "correct_answer": "アイレン",
+      "explanation": "アイレンはラ・マンチャ地方で大量に生産される主要な白ブドウ品種である。 伝統的な白品種を用途とともに挙げ、アルバリーニョやベルデホも地域に結び付けて紹介している。",
+      "source_page": 62,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0801-01",
+      "knowledge_id": "K0801",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "日本ワインの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n国税庁がワインの地理的表示に山梨を初指定したのは（　　　）である。",
+      "options": [
+        "2013年",
+        "2023年",
+        "2003年"
+      ],
+      "correct_index": 0,
+      "correct_answer": "2013年",
+      "explanation": "地理的表示の指定年は山梨が2013年、北海道が2018年。ラベル表示制度の施行日とは別の出来事として整理する。",
+      "source_page": "6",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0524-01",
+      "knowledge_id": "K0524",
+      "country": "ポルトガル",
+      "countries": [
+        "ポルトガル"
+      ],
+      "topic": "マデイラ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nマデイラワインは（　　　）を最大の特徴とする。",
+      "options": [
+        "温めて熟成させる方法",
+        "低温での急速熟成",
+        "凍結させて熟成"
+      ],
+      "correct_index": 0,
+      "correct_answer": "温めて熟成させる方法",
+      "explanation": "マデイラワインは温めて熟成させる方法を最大の特徴とする。 航海によって風味を出す時期を経て、現在の島内での加熱熟成法が説明される。",
+      "source_page": 75,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0271-01",
+      "knowledge_id": "K0271",
+      "country": "イタリア",
+      "countries": [
+        "イタリア"
+      ],
+      "topic": "イタリアの基礎・ワイン法",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nイタリアに本格的なブドウ栽培を伝えたのは（　　　）である。",
+      "options": [
+        "ローマ人",
+        "ゲルマン人",
+        "ギリシャ人"
+      ],
+      "correct_index": 2,
+      "correct_answer": "ギリシャ人",
+      "explanation": "イタリアに本格的なブドウ栽培を伝えたのはギリシャ人である。 本格的な栽培の伝来と、それ以前から行われていた原始的なワイン造りを区別している。",
+      "source_page": 36,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0022-01",
+      "knowledge_id": "K0022",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ワイン法・シャンパーニュ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nシャンパーニュの主な白ブドウ品種は（　　　）である。",
+      "options": [
+        "シャルドネ",
+        "リースリング",
+        "ソーヴィニヨン・ブラン"
+      ],
+      "correct_index": 0,
+      "correct_answer": "シャルドネ",
+      "explanation": "シャンパーニュの主な白ブドウ品種はシャルドネである。品種表では白ブドウと黒ブドウを区分し、それぞれがシャンパーニュにもたらす特徴も説明している。",
+      "source_page": 14,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0010-01",
+      "knowledge_id": "K0010",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ワイン法・シャンパーニュ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nA.O.C.の日本語名称は（　　　）である。",
+      "options": [
+        "地理的表示保護",
+        "原産地呼称保護",
+        "原産地統制呼称"
+      ],
+      "correct_index": 2,
+      "correct_answer": "原産地統制呼称",
+      "explanation": "A.O.C.の日本語名称は原産地統制呼称である。教材では栽培面積・生産量・輸出額を区別して説明し、A.O.C.をEU共通ワイン法の基礎としている。",
+      "source_page": 12,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0632-01",
+      "knowledge_id": "K0632",
+      "country": "チリ",
+      "countries": [
+        "チリ"
+      ],
+      "topic": "チリの基礎・気候・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n（　　　）はチリの主な黒ブドウ品種である。",
+      "options": [
+        "サンジョヴェーゼ",
+        "カルメネール",
+        "ピノタージュ"
+      ],
+      "correct_index": 1,
+      "correct_answer": "カルメネール",
+      "explanation": "カルメネールは黒ブドウの欄に掲載されている。かつてはメルロと認識されていた品種である。",
+      "source_page": 96,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0583-01",
+      "knowledge_id": "K0583",
+      "country": "アメリカ",
+      "countries": [
+        "アメリカ"
+      ],
+      "topic": "カリフォルニア",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nカリフォルニア海流は（　　　）である。",
+      "options": [
+        "季節ごとに逆流する海流",
+        "冷たい海流",
+        "暖かい海流"
+      ],
+      "correct_index": 1,
+      "correct_answer": "冷たい海流",
+      "explanation": "太平洋岸3州と大西洋岸のニューヨークを区別する。冷たいカリフォルニア海流の影響により海側は冷涼、内陸側は高温になる。",
+      "source_page": "86",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0511-01",
+      "knowledge_id": "K0511",
+      "country": "ポルトガル",
+      "countries": [
+        "ポルトガル"
+      ],
+      "topic": "ポート",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nトウニータイプの名称はワインが（　　　）に変わることに由来する。",
+      "options": [
+        "淡い黄色（Pale）",
+        "深い赤色（Ruby）",
+        "黄褐色（Tawny）"
+      ],
+      "correct_index": 2,
+      "correct_answer": "黄褐色（Tawny）",
+      "explanation": "トウニータイプの名称はワインが黄褐色（Tawny）に変わることに由来する。 トウニーという名称は酸化で変わる黄褐色に由来する。年数表記のタイプには4つの年数が並べられる。",
+      "source_page": 73,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0541-01",
+      "knowledge_id": "K0541",
+      "country": "オーストリア",
+      "countries": [
+        "オーストリア"
+      ],
+      "topic": "オーストリアの気候・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nオーストリアのワイン産地は（　　　）である。",
+      "options": [
+        "亜熱帯気候",
+        "大陸性気候",
+        "海洋性気候"
+      ],
+      "correct_index": 1,
+      "correct_answer": "大陸性気候",
+      "explanation": "オーストリアのワイン産地は大陸性気候である。 大陸性気候、少ない降水量、ドイツより温暖という条件が、厚みのあるワインに結び付けられる。",
+      "source_page": 79,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0657-01",
+      "knowledge_id": "K0657",
+      "country": "アルゼンチン",
+      "countries": [
+        "アルゼンチン"
+      ],
+      "topic": "アルゼンチンの基礎・気候・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n（　　　）はアルゼンチンの主な黒ブドウ品種である。",
+      "options": [
+        "ガメイ",
+        "マルベック",
+        "サンジョヴェーゼ"
+      ],
+      "correct_index": 1,
+      "correct_answer": "マルベック",
+      "explanation": "マルベックは黒ブドウの欄に掲載されている。",
+      "source_page": 101,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0590-01",
+      "knowledge_id": "K0590",
+      "country": "アメリカ",
+      "countries": [
+        "アメリカ"
+      ],
+      "topic": "カリフォルニア",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nカリフォルニアの高品質ワイン産地は（　　　）にかけて集中する。",
+      "options": [
+        "グレート・プレーンズから五大湖",
+        "ノース・コーストからセントラル・コースト",
+        "ニューヨークからフロリダ"
+      ],
+      "correct_index": 1,
+      "correct_answer": "ノース・コーストからセントラル・コースト",
+      "explanation": "高品質産地はノース・コーストからセントラル・コーストに集中し、ナパとソノマが筆頭である。大量生産地として挙げられるセントラル・ヴァレーとは名称も位置も異なる。",
+      "source_page": "86",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0296-01",
+      "knowledge_id": "K0296",
+      "country": "イタリア",
+      "countries": [
+        "イタリア"
+      ],
+      "topic": "ピエモンテ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nピエモンテ州の州都は（　　　）である。",
+      "options": [
+        "ミラノ",
+        "トリノ",
+        "ヴェネツィア"
+      ],
+      "correct_index": 1,
+      "correct_answer": "トリノ",
+      "explanation": "ピエモンテ州の州都はトリノである。 フランスに隣接することに加え、サヴォイア王家の出身地との関係がフランスの影響の背景として挙げられる。",
+      "source_page": 37,
+      "status": "auto_checked",
+      "version": 1
+    }
+  ]
+}

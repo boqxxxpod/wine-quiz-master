@@ -1,0 +1,664 @@
+{
+  "metadata": {
+    "title": "Wine Quiz Master 試験運用3択問題集",
+    "source_file": "ワイン検定_問題作成用知識と周辺テキスト.json",
+    "source_sha256": "4d6cd1ce22e9c6064cd4817cf2a37fb9540179ccf265cb8025dd5a780a425b97",
+    "generated_on": "2026-10-18",
+    "total_questions": 30,
+    "questions_per_batch": 30,
+    "batch_count": 5,
+    "choice_count": 3,
+    "answer_index_base": 0,
+    "qa_status": "auto_checked（構造・元知識・正答キーの機械検証済み。誤答選択肢の意味上の一意性は人手最終確認前）",
+    "country_counts": {
+      "アメリカ": 11,
+      "アルゼンチン": 7,
+      "イタリア": 17,
+      "ポルトガル": 11,
+      "南アフリカ": 7,
+      "スペイン": 15,
+      "日本": 17,
+      "オーストリア": 8,
+      "フランス": 32,
+      "チリ": 7,
+      "オーストラリア": 11,
+      "ニュージーランド": 7
+    },
+    "set": "batch-2",
+    "batch_index": 2,
+    "privacy_note": "出典原文と外部の共有URL・画像名を除いた公開レビュー用データ",
+    "app_import_compatible": false
+  },
+  "questions": [
+    {
+      "question_id": "Q-K0068-01",
+      "knowledge_id": "K0068",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ブルゴーニュ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nシャブリのワインは（　　　）から造られる。",
+      "options": [
+        "リースリング",
+        "ソーヴィニヨン・ブラン",
+        "シャルドネ"
+      ],
+      "correct_index": 2,
+      "correct_answer": "シャルドネ",
+      "explanation": "シャブリのワインはシャルドネから造られる。冷涼な気候と化石を含む土壌の説明に、シャルドネから生まれるワインの特徴が続き、A.O.C.一覧はいずれも白と示される。",
+      "source_page": 18,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0426-01",
+      "knowledge_id": "K0426",
+      "country": "スペイン",
+      "countries": [
+        "スペイン"
+      ],
+      "topic": "カバ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nカバを生産するカタルーニャ州の中心地は（　　　）である。",
+      "options": [
+        "ペネデス",
+        "ヘレス",
+        "リオハ"
+      ],
+      "correct_index": 0,
+      "correct_answer": "ペネデス",
+      "explanation": "カバを生産するカタルーニャ州の中心地はペネデスである。 原産地は複数州に広がるが、生産の95%はペネデスを中心とするカタルーニャ州に集中すると説明される。",
+      "source_page": 63,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0493-01",
+      "knowledge_id": "K0493",
+      "country": "ポルトガル",
+      "countries": [
+        "ポルトガル"
+      ],
+      "topic": "ヴィーニョ・ヴェルデ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nヴィーニョ・ヴェルデは「（　　　）」を意味する。",
+      "options": [
+        "グリーンのワイン",
+        "「赤いワイン」",
+        "「古いワイン」"
+      ],
+      "correct_index": 0,
+      "correct_answer": "グリーンのワイン",
+      "explanation": "ヴィーニョ・ヴェルデは「グリーンのワイン」を意味する。 グリーンは若々しさを表現する名称で、酸・わずかな炭酸・軽い風味と結び付けて説明される。",
+      "source_page": 73,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0305-01",
+      "knowledge_id": "K0305",
+      "country": "イタリア",
+      "countries": [
+        "イタリア"
+      ],
+      "topic": "ピエモンテ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nアスティには（　　　）を用いる。",
+      "options": [
+        "ネッビオーロ",
+        "サンジョヴェーゼ",
+        "モスカート・ビアンコ"
+      ],
+      "correct_index": 2,
+      "correct_answer": "モスカート・ビアンコ",
+      "explanation": "アスティにはモスカート・ビアンコを用いる。 アスティと赤ワイン2種では用いる品種が異なる。バルバレスコについてはバローロとの違いも説明される。",
+      "source_page": 38,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0814-01",
+      "knowledge_id": "K0814",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "日本ワインの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n日本でワインに仕込まれる量が最も多い品種は（　　　）である。",
+      "options": [
+        "シャルドネ",
+        "メルロ",
+        "甲州"
+      ],
+      "correct_index": 2,
+      "correct_answer": "甲州",
+      "explanation": "仕込み量の首位は甲州、次位がマスカット・ベーリーA。O.I.V.への掲載年は甲州2010年、マスカット・ベーリーA2013年で、EU向けの品種名表示と結び付けて説明される。",
+      "source_page": "6",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0774-01",
+      "knowledge_id": "K0774",
+      "country": "南アフリカ",
+      "countries": [
+        "南アフリカ"
+      ],
+      "topic": "南アフリカの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n南アフリカの原産地呼称制度は（　　　）である。",
+      "options": [
+        "D.O.C.（Denominación de Origen Controlada）",
+        "W.O.（Wine of Origin）",
+        "A.V.A.（American Viticultural Area）"
+      ],
+      "correct_index": 1,
+      "correct_answer": "W.O.（Wine of Origin）",
+      "explanation": "1973年に制定された原産地呼称の分類方式で、産地・品種・収穫年の特徴を保証すると説明される。",
+      "source_page": 119,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0324-01",
+      "knowledge_id": "K0324",
+      "country": "イタリア",
+      "countries": [
+        "イタリア"
+      ],
+      "topic": "ヴェネト",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nアマローネ・デッラ・ヴァルポリチェッラは（　　　）である。",
+      "options": [
+        "パワフルな辛口赤ワイン",
+        "軽快なロゼワイン",
+        "甘口の白ワイン"
+      ],
+      "correct_index": 0,
+      "correct_answer": "パワフルな辛口赤ワイン",
+      "explanation": "アマローネ・デッラ・ヴァルポリチェッラはパワフルな辛口赤ワインである。 ヴェネト州には甘口、辛口赤、プロセッコ、蒸留酒グラッパまで幅広い種類が揃うと説明される。",
+      "source_page": 40,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0704-01",
+      "knowledge_id": "K0704",
+      "country": "オーストラリア",
+      "countries": [
+        "オーストラリア"
+      ],
+      "topic": "オーストラリアの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nバロッサ・ヴァレーは『（　　　）』と呼ばれる重要産地である。",
+      "options": [
+        "シラーズの首都",
+        "ピノ・ノワールの首都",
+        "リースリングの首都"
+      ],
+      "correct_index": 0,
+      "correct_answer": "シラーズの首都",
+      "explanation": "バロッサ・ヴァレーはシラーズの首都といえる重要産地とされる。",
+      "source_page": 107,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0225-01",
+      "knowledge_id": "K0225",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ロワール渓谷",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nロワール渓谷地方の産地は（　　　）に大別される。",
+      "options": [
+        "3地区",
+        "6地区",
+        "4地区"
+      ],
+      "correct_index": 2,
+      "correct_answer": "4地区",
+      "explanation": "ロワール渓谷地方の産地は4地区に大別される。大西洋沿いからトゥーレーヌ付近までの地域と、東側のサントル・ニヴェルネを対比する説明である。",
+      "source_page": 33,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0695-01",
+      "knowledge_id": "K0695",
+      "country": "オーストラリア",
+      "countries": [
+        "オーストラリア"
+      ],
+      "topic": "オーストラリアの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nオーストラリアの地理的呼称制度は（　　　）である。",
+      "options": [
+        "D.O.C.（Denominazione di Origine Controllata）",
+        "GI（Geographical Indications）",
+        "W.O.（Wine of Origin）"
+      ],
+      "correct_index": 1,
+      "correct_answer": "GI（Geographical Indications）",
+      "explanation": "地理的呼称を示すGI制度は1993年に導入されたと教材にある。特定GI内で収穫された原料ブドウのワインに当該名を表示する制度である。",
+      "source_page": 106,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0459-01",
+      "knowledge_id": "K0459",
+      "country": "スペイン",
+      "countries": [
+        "スペイン"
+      ],
+      "topic": "シェリー",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nフィノタイプは（　　　）で熟成する。",
+      "options": [
+        "凍結熟成",
+        "フロール（産膜酵母）の膜のもと",
+        "酸化熟成のみ"
+      ],
+      "correct_index": 1,
+      "correct_answer": "フロール（産膜酵母）の膜のもと",
+      "explanation": "フィノタイプはフロール（産膜酵母）の膜のもとで熟成する。 15%に強化するフィノと17%に強化するオロロソでは、熟成の方法が異なる。",
+      "source_page": 68,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0828-01",
+      "knowledge_id": "K0828",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "日本ワインの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n日本のヨーロッパ系品種の生産量第1位は（　　　）である。",
+      "options": [
+        "シラー",
+        "メルロ",
+        "ピノ・ノワール"
+      ],
+      "correct_index": 1,
+      "correct_answer": "メルロ",
+      "explanation": "メルロは日本のヨーロッパ系品種で生産量第1位。長野県塩尻市の桔梗ヶ原が代表的な産地として挙げられる。",
+      "source_page": "7",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0567-01",
+      "knowledge_id": "K0567",
+      "country": "アメリカ",
+      "countries": [
+        "アメリカ"
+      ],
+      "topic": "カリフォルニア",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nアメリカのワイン生産量は（　　　）である。",
+      "options": [
+        "世界第4位",
+        "世界第2位",
+        "世界第1位"
+      ],
+      "correct_index": 0,
+      "correct_answer": "世界第4位",
+      "explanation": "生産量の世界順位と消費量の順位は異なる。教材は生産量世界第4位に対し、国内消費量は世界最大で、生産量を上回る点を特徴としている。",
+      "source_page": "85",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0649-01",
+      "knowledge_id": "K0649",
+      "country": "アルゼンチン",
+      "countries": [
+        "アルゼンチン"
+      ],
+      "topic": "アルゼンチンの基礎・気候・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nチリを越えてアルゼンチン側に吹く乾燥した暖かい風は（　　　）と呼ばれる。",
+      "options": [
+        "ミストラル",
+        "シロッコ",
+        "ゾンダ風"
+      ],
+      "correct_index": 2,
+      "correct_answer": "ゾンダ風",
+      "explanation": "太平洋からの湿った風は、チリを越えると乾燥した暖かいゾンダ風になると説明されている。",
+      "source_page": 101,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0011-01",
+      "knowledge_id": "K0011",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ワイン法・シャンパーニュ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nフランスのA.O.C.は、EUの（　　　）に対応する。",
+      "options": [
+        "I.G.P.",
+        "A.O.P.",
+        "V.D.Q.S."
+      ],
+      "correct_index": 1,
+      "correct_answer": "A.O.P.",
+      "explanation": "フランスのA.O.C.は、EUのA.O.P.に対応する。同じ分類欄は、A.O.C.を最上位と位置付け、規定が細かく厳しい対象を列挙している。",
+      "source_page": 13,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0734-01",
+      "knowledge_id": "K0734",
+      "country": "ニュージーランド",
+      "countries": [
+        "ニュージーランド"
+      ],
+      "topic": "ニュージーランドの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nニュージーランドのブドウ栽培は（　　　）に苗を植えたのが始まりとされる。",
+      "options": [
+        "1919年",
+        "1719年",
+        "1819年"
+      ],
+      "correct_index": 2,
+      "correct_answer": "1819年",
+      "explanation": "神父サミュエル・マースデンが、北島ケリケリへオーストラリアから持ってきた苗を植えた年とされる。",
+      "source_page": 113,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0658-01",
+      "knowledge_id": "K0658",
+      "country": "アルゼンチン",
+      "countries": [
+        "アルゼンチン"
+      ],
+      "topic": "アルゼンチンの基礎・気候・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nアルゼンチンの原産地呼称制度は（　　　）と呼ばれる。",
+      "options": [
+        "D.O.Ca.",
+        "A.V.A.",
+        "D.O.C."
+      ],
+      "correct_index": 2,
+      "correct_answer": "D.O.C.",
+      "explanation": "原産地呼称制度D.O.C.は1999年に施行されたと教材に記載される。",
+      "source_page": 101,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0570-01",
+      "knowledge_id": "K0570",
+      "country": "アメリカ",
+      "countries": [
+        "アメリカ"
+      ],
+      "topic": "カリフォルニア",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nカリフォルニア州はアメリカのワイン生産量の（　　　）を占める。",
+      "options": [
+        "約50%",
+        "約80%",
+        "約30%"
+      ],
+      "correct_index": 1,
+      "correct_answer": "約80%",
+      "explanation": "カリフォルニア州は米国生産の約80%を占める。小規模高品質の生産者をいうブティック・ワイナリーと、極少量・高価格のワインをいうカルト・ワインを区別する。",
+      "source_page": "85",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0428-01",
+      "knowledge_id": "K0428",
+      "country": "スペイン",
+      "countries": [
+        "スペイン"
+      ],
+      "topic": "カバ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nボデガは（　　　）を指す。",
+      "options": [
+        "原産地呼称",
+        "ワイナリー",
+        "ブドウ畑"
+      ],
+      "correct_index": 1,
+      "correct_answer": "ワイナリー",
+      "explanation": "ボデガはワイナリーを指す。 フランス人生産者が持ち込んだボルドー式の醸造・熟成が、リオハの変化に結び付けられる。",
+      "source_page": 63,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0553-01",
+      "knowledge_id": "K0553",
+      "country": "オーストリア",
+      "countries": [
+        "オーストリア"
+      ],
+      "topic": "オーストリアの気候・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nヴァインフィアテルは（　　　）のワイン生産地域である。",
+      "options": [
+        "オーストリア最北",
+        "オーストリア最南",
+        "オーストリア最西"
+      ],
+      "correct_index": 0,
+      "correct_answer": "オーストリア最北",
+      "explanation": "ヴァインフィアテルはオーストリア最北のワイン生産地域である。 最北・最大・最初のDACという3つの特徴が同じ冒頭文にまとめられる。",
+      "source_page": 81,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0042-01",
+      "knowledge_id": "K0042",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ワイン法・シャンパーニュ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nシャンパーニュの醸造工程の第11段階は（　　　）である。",
+      "options": [
+        "動瓶",
+        "澱抜き",
+        "瓶内二次発酵"
+      ],
+      "correct_index": 1,
+      "correct_answer": "澱抜き",
+      "explanation": "シャンパーニュの醸造工程の第11段階は澱抜きである。動瓶で瓶口に集めた澱を凍らせ、瓶内のガス圧で取り除く仕組みが説明されている。",
+      "source_page": 15,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0803-01",
+      "knowledge_id": "K0803",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "日本ワインの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nワインのラベル表示を規定する法制度の施行日は（　　　）である。",
+      "options": [
+        "2018年10月30日",
+        "2015年10月30日",
+        "2020年10月30日"
+      ],
+      "correct_index": 0,
+      "correct_answer": "2018年10月30日",
+      "explanation": "表示基準を定めた2015年10月と、施行された2018年10月30日を区別する。",
+      "source_page": "6",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0802-01",
+      "knowledge_id": "K0802",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "日本ワインの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n北海道がワインの地理的表示に指定されたのは（　　　）である。",
+      "options": [
+        "2013年",
+        "2018年",
+        "2025年"
+      ],
+      "correct_index": 1,
+      "correct_answer": "2018年",
+      "explanation": "地理的表示の指定年は山梨が2013年、北海道が2018年。ラベル表示制度の施行日とは別の出来事として整理する。",
+      "source_page": "6",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0031-01",
+      "knowledge_id": "K0031",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ワイン法・シャンパーニュ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nR.M.は（　　　）を表す。",
+      "options": [
+        "ネゴシアン・マニピュラン",
+        "レコルタン・マニピュラン",
+        "コオペラティヴ・マニピュラン"
+      ],
+      "correct_index": 1,
+      "correct_answer": "レコルタン・マニピュラン",
+      "explanation": "R.M.はレコルタン・マニピュランを表す。この表示はシャンパーニュの生産形態を区別するもので、外部からのブドウ購入と自家栽培中心という違いが記されている。",
+      "source_page": 14,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0347-01",
+      "knowledge_id": "K0347",
+      "country": "イタリア",
+      "countries": [
+        "イタリア"
+      ],
+      "topic": "トスカーナ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nキャンティは（　　　）である。",
+      "options": [
+        "サンジョヴェーゼ主体",
+        "ネッビオーロ主体",
+        "アリアニコ主体"
+      ],
+      "correct_index": 0,
+      "correct_answer": "サンジョヴェーゼ主体",
+      "explanation": "キャンティはサンジョヴェーゼ主体である。 同じサンジョヴェーゼでも、ワインの行にブルネッロ、プルニョーロ・ジェンティーレという呼び名が併記される。",
+      "source_page": 44,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0475-01",
+      "knowledge_id": "K0475",
+      "country": "ポルトガル",
+      "countries": [
+        "ポルトガル"
+      ],
+      "topic": "ワイン法・基礎",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n（　　　）はポルトガルの主要な輸出品の一つである。",
+      "options": [
+        "オリーブオイル",
+        "コルク",
+        "羊毛"
+      ],
+      "correct_index": 1,
+      "correct_answer": "コルク",
+      "explanation": "コルクはポルトガルの主要な輸出品の一つである。 コルクは農業の主要産業に含まれ、輸出品としても挙げられる。",
+      "source_page": 71,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0769-01",
+      "knowledge_id": "K0769",
+      "country": "南アフリカ",
+      "countries": [
+        "南アフリカ"
+      ],
+      "topic": "南アフリカの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n（　　　）は南アフリカの主要な白ブドウ品種である。",
+      "options": [
+        "ガルガーネガ",
+        "モスカート・ビアンコ",
+        "シュナン・ブラン"
+      ],
+      "correct_index": 2,
+      "correct_answer": "シュナン・ブラン",
+      "explanation": "白ワイン用品種の主要品種として挙げられ、南アフリカではスティーンとも呼ばれる。",
+      "source_page": 119,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0739-01",
+      "knowledge_id": "K0739",
+      "country": "ニュージーランド",
+      "countries": [
+        "ニュージーランド"
+      ],
+      "topic": "ニュージーランドの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nニュージーランドの収穫年表示には、（　　　）使用する必要がある。",
+      "options": [
+        "該当収穫年のブドウを50%以上",
+        "該当収穫年のブドウを100%",
+        "該当収穫年のブドウを85%以上"
+      ],
+      "correct_index": 2,
+      "correct_answer": "該当収穫年のブドウを85%以上",
+      "explanation": "収穫年の表示に必要なブドウの割合は85%以上である。",
+      "source_page": 114,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0621-01",
+      "knowledge_id": "K0621",
+      "country": "チリ",
+      "countries": [
+        "チリ"
+      ],
+      "topic": "チリの基礎・気候・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nチリでは（　　　）からブドウ栽培が行われていた。",
+      "options": [
+        "18世紀半ば",
+        "16世紀半ば",
+        "20世紀初め"
+      ],
+      "correct_index": 1,
+      "correct_answer": "16世紀半ば",
+      "explanation": "チリでは16世紀半ばからブドウを栽培していた。1818年のスペインからの独立より前からの歴史である。",
+      "source_page": 95,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0009-01",
+      "knowledge_id": "K0009",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ワイン法・シャンパーニュ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nフランスのA.O.C.は（　　　）に成立した。",
+      "options": [
+        "1945年",
+        "1925年",
+        "1935年"
+      ],
+      "correct_index": 2,
+      "correct_answer": "1935年",
+      "explanation": "フランスのA.O.C.は1935年に成立した。教材では栽培面積・生産量・輸出額を区別して説明し、A.O.C.をEU共通ワイン法の基礎としている。",
+      "source_page": 12,
+      "status": "auto_checked",
+      "version": 1
+    }
+  ]
+}

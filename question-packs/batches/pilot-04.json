@@ -1,0 +1,664 @@
+{
+  "metadata": {
+    "title": "Wine Quiz Master 試験運用3択問題集",
+    "source_file": "ワイン検定_問題作成用知識と周辺テキスト.json",
+    "source_sha256": "4d6cd1ce22e9c6064cd4817cf2a37fb9540179ccf265cb8025dd5a780a425b97",
+    "generated_on": "2026-10-18",
+    "total_questions": 30,
+    "questions_per_batch": 30,
+    "batch_count": 5,
+    "choice_count": 3,
+    "answer_index_base": 0,
+    "qa_status": "auto_checked（構造・元知識・正答キーの機械検証済み。誤答選択肢の意味上の一意性は人手最終確認前）",
+    "country_counts": {
+      "アメリカ": 11,
+      "アルゼンチン": 7,
+      "イタリア": 17,
+      "ポルトガル": 11,
+      "南アフリカ": 7,
+      "スペイン": 15,
+      "日本": 17,
+      "オーストリア": 8,
+      "フランス": 32,
+      "チリ": 7,
+      "オーストラリア": 11,
+      "ニュージーランド": 7
+    },
+    "set": "batch-4",
+    "batch_index": 4,
+    "privacy_note": "出典原文と外部の共有URL・画像名を除いた公開レビュー用データ",
+    "app_import_compatible": false
+  },
+  "questions": [
+    {
+      "question_id": "Q-K0836-01",
+      "knowledge_id": "K0836",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "日本ワインの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n日本の赤用品種で最も仕込み量が多いのは（　　　）である。",
+      "options": [
+        "メルロ",
+        "ピノ・ノワール",
+        "マスカット・ベーリーA"
+      ],
+      "correct_index": 2,
+      "correct_answer": "マスカット・ベーリーA",
+      "explanation": "川上善兵衛が1927年に開発・登録した日本の交雑／交配黒品種。両親はベーリーとマスカット・ハンブルグで、赤用の仕込み量が最多とされる。",
+      "source_page": "7",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0443-01",
+      "knowledge_id": "K0443",
+      "country": "スペイン",
+      "countries": [
+        "スペイン"
+      ],
+      "topic": "カスティーリャ・イ・レオン",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nリベラ・デル・ドゥエロの産地は（　　　）を挟む。",
+      "options": [
+        "ドゥエロ川",
+        "エブロ川",
+        "グアダルキビル川"
+      ],
+      "correct_index": 0,
+      "correct_answer": "ドゥエロ川",
+      "explanation": "リベラ・デル・ドゥエロの産地はドゥエロ川を挟む。 ドゥエロ川沿いの細長い産地で、ティント・フィノという名称と著名なボデガが関連付けられる。",
+      "source_page": 66,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0141-01",
+      "knowledge_id": "K0141",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ラングドック・ルーション",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nルーションの天然甘口ワイン（V.D.N.）のA.O.C.に（　　　）がある。",
+      "options": [
+        "ソーテルヌ",
+        "バニュルス",
+        "シノン"
+      ],
+      "correct_index": 1,
+      "correct_answer": "バニュルス",
+      "explanation": "ルーションの天然甘口ワイン（V.D.N.）のA.O.C.にバニュルスがある。ルーションの一覧の中でも、V.D.N.すなわち天然甘口ワインの欄に掲載されている。",
+      "source_page": 28,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0743-01",
+      "knowledge_id": "K0743",
+      "country": "ニュージーランド",
+      "countries": [
+        "ニュージーランド"
+      ],
+      "topic": "ニュージーランドの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nホークス・ベイは（　　　）の重要産地である。",
+      "options": [
+        "日本固有品種",
+        "イタリア固有品種",
+        "ボルドー系品種"
+      ],
+      "correct_index": 2,
+      "correct_answer": "ボルドー系品種",
+      "explanation": "ホークス・ベイはボルドー系品種とシラーの重要産地で、国内最大の栽培面積を持つと記載される。",
+      "source_page": 115,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0316-01",
+      "knowledge_id": "K0316",
+      "country": "イタリア",
+      "countries": [
+        "イタリア"
+      ],
+      "topic": "ロンバルディア",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nフランチャコルタは（　　　）で造る。",
+      "options": [
+        "瓶内二次発酵",
+        "タンク内二次発酵",
+        "樽内二次発酵"
+      ],
+      "correct_index": 0,
+      "correct_answer": "瓶内二次発酵",
+      "explanation": "フランチャコルタは瓶内二次発酵で造る。 白とロゼの発泡ワインとして載り、使用品種も同じ行に示される。",
+      "source_page": 39,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0790-01",
+      "knowledge_id": "K0790",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "日本ワインの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n日本の本格的なワイン造りは（　　　）に始まった。",
+      "options": [
+        "1874年",
+        "1927年",
+        "1855年"
+      ],
+      "correct_index": 0,
+      "correct_answer": "1874年",
+      "explanation": "1874年の甲府での開始と、1877年に祝村で設立された民間ワイナリーを区別する。開始の人物は山田宥教と詫間憲久である。",
+      "source_page": "5（左頁4の対向頁）",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0633-01",
+      "knowledge_id": "K0633",
+      "country": "チリ",
+      "countries": [
+        "チリ"
+      ],
+      "topic": "チリの基礎・気候・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nカルメネールは長い間（　　　）と認識されていた。",
+      "options": [
+        "カベルネ・フラン",
+        "メルロ",
+        "マルベック"
+      ],
+      "correct_index": 1,
+      "correct_answer": "メルロ",
+      "explanation": "カルメネールは長らくメルロと認識されていた。1994年に別品種と分かり、カルメネールとして認証された。",
+      "source_page": 96,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0363-01",
+      "knowledge_id": "K0363",
+      "country": "イタリア",
+      "countries": [
+        "イタリア"
+      ],
+      "topic": "カンパーニア",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nタウラージは（　　　）から造られる。",
+      "options": [
+        "アリアニコ",
+        "ガルガーネガ",
+        "ネッビオーロ"
+      ],
+      "correct_index": 0,
+      "correct_answer": "アリアニコ",
+      "explanation": "タウラージはアリアニコから造られる。 古代ローマ時代からのワインであり、非常に長期熟成能力があると説明される。",
+      "source_page": 47,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0447-01",
+      "knowledge_id": "K0447",
+      "country": "スペイン",
+      "countries": [
+        "スペイン"
+      ],
+      "topic": "カスティーリャ・イ・レオン",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nルエダは（　　　）で有名である。",
+      "options": [
+        "テンプラニーリョの赤ワイン",
+        "モナストレルのロゼワイン",
+        "ベルデホの白ワイン"
+      ],
+      "correct_index": 2,
+      "correct_answer": "ベルデホの白ワイン",
+      "explanation": "ルエダはベルデホの白ワインで有名である。 ベルデホの白ワインの産地であり、1970年代後半からの醸造技術の革新も紹介される。",
+      "source_page": 66,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0759-01",
+      "knowledge_id": "K0759",
+      "country": "南アフリカ",
+      "countries": [
+        "南アフリカ"
+      ],
+      "topic": "南アフリカの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n南アフリカで最初のワインが造られた日は（　　　）と記録されている。",
+      "options": [
+        "1759年2月2日",
+        "1659年2月2日",
+        "1859年2月2日"
+      ],
+      "correct_index": 1,
+      "correct_answer": "1659年2月2日",
+      "explanation": "ヤン・ファン・リーベックが最初のワイン造りを記録に残した日付である。",
+      "source_page": 118,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0708-01",
+      "knowledge_id": "K0708",
+      "country": "オーストラリア",
+      "countries": [
+        "オーストラリア"
+      ],
+      "topic": "オーストラリアの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nイーデン・ヴァレーは（　　　）の重要産地である。",
+      "options": [
+        "テンプラニーリョ",
+        "リースリング",
+        "アルバリーニョ"
+      ],
+      "correct_index": 1,
+      "correct_answer": "リースリング",
+      "explanation": "リースリングはシラーズと並び、イーデン・ヴァレーで重要な品種とされる。",
+      "source_page": 107,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0609-01",
+      "knowledge_id": "K0609",
+      "country": "アメリカ",
+      "countries": [
+        "アメリカ"
+      ],
+      "topic": "ワシントン・オレゴン",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nコロンビア・ヴァレーは（　　　）である。",
+      "options": [
+        "乾燥した大陸性気候",
+        "湿潤な亜熱帯気候",
+        "温暖な海洋性気候"
+      ],
+      "correct_index": 0,
+      "correct_answer": "乾燥した大陸性気候",
+      "explanation": "15℃以上の寒暖差、乾燥した大陸性気候、灌漑が必要という3つの属性を整理する。教材は乾燥・寒さ・砂質土壌とフィロキセラの発生抑制も関連付けている。",
+      "source_page": "89",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0029-01",
+      "knowledge_id": "K0029",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ワイン法・シャンパーニュ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nN.M.は（　　　）を表す。",
+      "options": [
+        "レコルタン・マニピュラン",
+        "コオペラティヴ・マニピュラン",
+        "ネゴシアン・マニピュラン"
+      ],
+      "correct_index": 2,
+      "correct_answer": "ネゴシアン・マニピュラン",
+      "explanation": "N.M.はネゴシアン・マニピュランを表す。この表示はシャンパーニュの生産形態を区別するもので、外部からのブドウ購入と自家栽培中心という違いが記されている。",
+      "source_page": 14,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0125-01",
+      "knowledge_id": "K0125",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ローヌ渓谷",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nローヌの主な黒ブドウ品種に（　　　）がある。",
+      "options": [
+        "カベルネ・フラン",
+        "シラー",
+        "ガメイ"
+      ],
+      "correct_index": 1,
+      "correct_answer": "シラー",
+      "explanation": "ローヌの主な黒ブドウ品種にシラーがある。表は白・黒の区分に加え、ヴィオニエやシラーは北部、グルナッシュは南部という使用地域の説明を添えている。",
+      "source_page": 24,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0714-01",
+      "knowledge_id": "K0714",
+      "country": "オーストラリア",
+      "countries": [
+        "オーストラリア"
+      ],
+      "topic": "オーストラリアの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nクナワラはオーストラリアを代表する（　　　）の銘醸地である。",
+      "options": [
+        "ガメイ",
+        "マスカット・ベーリーA",
+        "カベルネ・ソーヴィニヨン"
+      ],
+      "correct_index": 2,
+      "correct_answer": "カベルネ・ソーヴィニヨン",
+      "explanation": "クナワラはオーストラリアを代表するカベルネ・ソーヴィニヨンの銘醸産地である。",
+      "source_page": 108,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0318-01",
+      "knowledge_id": "K0318",
+      "country": "イタリア",
+      "countries": [
+        "イタリア"
+      ],
+      "topic": "ヴェネト",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nヴェネト州の州都は（　　　）である。",
+      "options": [
+        "フィレンツェ",
+        "ヴェネツィア",
+        "トリノ"
+      ],
+      "correct_index": 1,
+      "correct_answer": "ヴェネツィア",
+      "explanation": "ヴェネト州の州都はヴェネツィアである。 ヴェネト州には甘口、辛口赤、プロセッコ、蒸留酒グラッパまで幅広い種類が揃うと説明される。",
+      "source_page": 40,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0038-01",
+      "knowledge_id": "K0038",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ワイン法・シャンパーニュ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nシャンパーニュの醸造工程の第6段階は（　　　）である。",
+      "options": [
+        "圧搾",
+        "瓶内熟成",
+        "調合"
+      ],
+      "correct_index": 2,
+      "correct_answer": "調合",
+      "explanation": "シャンパーニュの醸造工程の第6段階は調合である。品種やクリュの異なるワインを組み合わせ、ノンヴィンテージでは取り置きワインも加える工程である。",
+      "source_page": 15,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0607-01",
+      "knowledge_id": "K0607",
+      "country": "アメリカ",
+      "countries": [
+        "アメリカ"
+      ],
+      "topic": "ワシントン・オレゴン",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nワシントン州のブドウ栽培面積はカリフォルニア州に次ぐ（　　　）である。",
+      "options": [
+        "全米第1位",
+        "全米第4位",
+        "全米第2位"
+      ],
+      "correct_index": 2,
+      "correct_answer": "全米第2位",
+      "explanation": "全米第2位という順位はブドウ栽培面積の順位である。栽培の多くがコロンビア・ヴァレー流域に集中すると説明される。",
+      "source_page": "89",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0028-01",
+      "knowledge_id": "K0028",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ワイン法・シャンパーニュ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nブラン・ド・ノワールは（　　　）である。",
+      "options": [
+        "白ブドウだけで造るシャンパーニュ",
+        "黒ブドウだけで造るシャンパーニュ",
+        "黒ブドウと白ブドウを半々で造るシャンパーニュ"
+      ],
+      "correct_index": 1,
+      "correct_answer": "黒ブドウだけで造るシャンパーニュ",
+      "explanation": "ブラン・ド・ノワールは黒ブドウだけで造るシャンパーニュである。タイプの一覧は収穫年に関する名称と、使うブドウの色に関する名称を別々に示している。",
+      "source_page": 14,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0282-01",
+      "knowledge_id": "K0282",
+      "country": "イタリア",
+      "countries": [
+        "イタリア"
+      ],
+      "topic": "イタリアの基礎・ワイン法",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nイタリアの半島部は典型的な（　　　）である。",
+      "options": [
+        "地中海性気候",
+        "亜寒帯気候",
+        "海洋性気候"
+      ],
+      "correct_index": 0,
+      "correct_answer": "地中海性気候",
+      "explanation": "イタリアの半島部は典型的な地中海性気候である。 温暖さには暖流、アルプス山脈、南からの熱い風が関係すると説明される。",
+      "source_page": 37,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0484-01",
+      "knowledge_id": "K0484",
+      "country": "ポルトガル",
+      "countries": [
+        "ポルトガル"
+      ],
+      "topic": "ワイン法・基礎",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n（　　　）はヴィーニョ・ヴェルデの主要品種である。",
+      "options": [
+        "アルヴァリーニョ",
+        "マルベック",
+        "シラー"
+      ],
+      "correct_index": 0,
+      "correct_answer": "アルヴァリーニョ",
+      "explanation": "アルヴァリーニョはヴィーニョ・ヴェルデの主要品種である。 白品種のなかで、アルヴァリーニョはヴィーニョ・ヴェルデ、エンクルザードはダォン地方に関連付けられる。",
+      "source_page": 72,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0551-01",
+      "knowledge_id": "K0551",
+      "country": "オーストリア",
+      "countries": [
+        "オーストリア"
+      ],
+      "topic": "オーストリアの気候・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nニーダーエスタライヒ州はオーストリアの全生産地域面積の（　　　）を占める。",
+      "options": [
+        "約20%",
+        "約90%",
+        "約60%"
+      ],
+      "correct_index": 2,
+      "correct_answer": "約60%",
+      "explanation": "ニーダーエスタライヒ州はオーストリアの全生産地域面積の約60%を占める。 州内は北部・パノニア・ドナウに分かれ、ドナウの説明ではグリューナー・ヴェルトリーナーとリースリングが挙げられる。",
+      "source_page": 80,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0559-01",
+      "knowledge_id": "K0559",
+      "country": "オーストリア",
+      "countries": [
+        "オーストリア"
+      ],
+      "topic": "オーストリアの気候・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n（　　　）はブルゲンラント州のものである。",
+      "options": [
+        "オーストリアの赤ワインの半分近く",
+        "赤ワインのほぼすべて",
+        "赤ワインの約1割"
+      ],
+      "correct_index": 0,
+      "correct_answer": "オーストリアの赤ワインの半分近く",
+      "explanation": "オーストリアの赤ワインの半分近くはブルゲンラント州のものである。 ノイジードラーゼーに面したハンガリー国境沿いの細長い州で、赤ワインの生産比率が高いと説明される。",
+      "source_page": 81,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0795-01",
+      "knowledge_id": "K0795",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "日本ワインの基礎・産地・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n川上善兵衛による日本独自の改良品種の開発年は（　　　）である。",
+      "options": [
+        "1973年",
+        "1874年",
+        "1927年"
+      ],
+      "correct_index": 2,
+      "correct_answer": "1927年",
+      "explanation": "川上善兵衛は新潟県を拠点に日本の風土に適するブドウを研究し、1927年にマスカット・ベーリーAなどを開発したと説明される。",
+      "source_page": "5（左頁4の対向頁）",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0650-01",
+      "knowledge_id": "K0650",
+      "country": "アルゼンチン",
+      "countries": [
+        "アルゼンチン"
+      ],
+      "topic": "アルゼンチンの基礎・気候・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nアルゼンチンのワイン産地の日較差は（　　　）に達する。",
+      "options": [
+        "約35℃",
+        "20℃",
+        "約5℃"
+      ],
+      "correct_index": 1,
+      "correct_answer": "20℃",
+      "explanation": "大陸性気候の説明に続き、日較差が20℃と非常に大きいことが記されている。",
+      "source_page": 101,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0521-01",
+      "knowledge_id": "K0521",
+      "country": "ポルトガル",
+      "countries": [
+        "ポルトガル"
+      ],
+      "topic": "マデイラ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nマデイラ島は（　　　）によって開発された。",
+      "options": [
+        "エンリケ航海王",
+        "ヴァスコ・ダ・ガマ",
+        "コロンブス"
+      ],
+      "correct_index": 0,
+      "correct_answer": "エンリケ航海王",
+      "explanation": "マデイラ島はエンリケ航海王によって開発された。 暑く長い航海と酸化が、マデイラの独特の風味に結び付けて説明される。",
+      "source_page": 75,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0162-01",
+      "knowledge_id": "K0162",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ボルドー",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nボルドーの有名な格付けは（　　　）に生まれた。",
+      "options": [
+        "1855年",
+        "1976年",
+        "1935年"
+      ],
+      "correct_index": 0,
+      "correct_answer": "1855年",
+      "explanation": "ボルドーの有名な格付けは1855年に生まれた。格付けの年・契機・指示者と、A.O.C.を主導した生産者、ボルドーワインの区分を一続きの記述から整理する。",
+      "source_page": 30,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0424-01",
+      "knowledge_id": "K0424",
+      "country": "スペイン",
+      "countries": [
+        "スペイン"
+      ],
+      "topic": "カバ",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\nカバはカタルーニャ語で「（　　　）」を意味する。",
+      "options": [
+        "洞窟",
+        "「樽」",
+        "「泡」"
+      ],
+      "correct_index": 0,
+      "correct_answer": "洞窟",
+      "explanation": "カバはカタルーニャ語で「洞窟」を意味する。 原産地は複数州に広がるが、生産の95%はペネデスを中心とするカタルーニャ州に集中すると説明される。",
+      "source_page": 63,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0656-01",
+      "knowledge_id": "K0656",
+      "country": "アルゼンチン",
+      "countries": [
+        "アルゼンチン"
+      ],
+      "topic": "アルゼンチンの基礎・気候・品種",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n（　　　）はアルゼンチンの主な白ブドウ品種である。",
+      "options": [
+        "トロンテス・リオハーノ",
+        "シュナン・ブラン",
+        "ガルガーネガ"
+      ],
+      "correct_index": 0,
+      "correct_answer": "トロンテス・リオハーノ",
+      "explanation": "トロンテス・リオハーノは白ブドウの欄に掲載されている。",
+      "source_page": 101,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0129-01",
+      "knowledge_id": "K0129",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "ローヌ渓谷",
+      "question": "教材に基づき、次の文の空欄に当てはまるものを選んでください。\n北部ローヌのA.O.C.に（　　　）がある。",
+      "options": [
+        "ジゴンダス",
+        "コンドリュー",
+        "サンセール"
+      ],
+      "correct_index": 1,
+      "correct_answer": "コンドリュー",
+      "explanation": "北部ローヌのA.O.C.にコンドリューがある。北部ローヌのA.O.C.の一覧で、各呼称名に対応するワインの種類が括弧内に示される。",
+      "source_page": 24,
+      "status": "auto_checked",
+      "version": 1
+    }
+  ]
+}
