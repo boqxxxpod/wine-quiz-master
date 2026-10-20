@@ -139,8 +139,8 @@ const questions = [
   question('france', ['フランス']), question('italy', ['イタリア']),
   question('cross-country', ['フランス', 'イタリア']), question('spain', ['スペイン']),
 ];
-const DEFAULT_PACK_PATH = '/question-packs/wine-quiz-500.json';
-const registeredStandardText = readFileSync(new URL('../question-packs/wine-quiz-500.json', import.meta.url), 'utf8');
+const DEFAULT_PACK_PATH = '/question-packs/wine-quiz-highlighted.json';
+const registeredStandardText = readFileSync(new URL('../question-packs/wine-quiz-highlighted.json', import.meta.url), 'utf8');
 const registeredStandard = JSON.parse(registeredStandardText);
 
 async function startApp(mode, { pack = JSON.stringify(questions), status = 200, networkError = false, defaultFetcher } = {}) {
@@ -168,12 +168,14 @@ async function startApp(mode, { pack = JSON.stringify(questions), status = 200, 
     if (url.pathname.endsWith('/runtime.js')) return { mode };
     if (modules.has(url.href)) return modules.get(url.href);
     const exports = [];
-    let code = readFileSync(url, 'utf8');
+    const fileUrl = new URL(url);
+    fileUrl.search = '';
+    let code = readFileSync(fileUrl, 'utf8');
     code = code.replace(/^import\s+\{([^}]+)\}\s+from\s+['"]([^'"]+)['"];?$/gm, (_, names, source) =>
       `const {${names.replace(/\s+as\s+/g, ': ')}} = __load(${JSON.stringify(new URL(source, url).href)});`);
     code = code.replace(/\bexport\s+(?=(?:async\s+)?(?:function|class|const|let)\s)/g, '');
-    for (const match of readFileSync(url, 'utf8').matchAll(/\bexport\s+(?:async\s+)?(?:function|class|const|let)\s+(\w+)/g)) exports.push(match[1]);
-    code = code.replaceAll('import.meta.url', JSON.stringify(`https://app.example/static/${url.pathname.split('/').at(-1)}`));
+    for (const match of readFileSync(fileUrl, 'utf8').matchAll(/\bexport\s+(?:async\s+)?(?:function|class|const|let)\s+(\w+)/g)) exports.push(match[1]);
+    code = code.replaceAll('import.meta.url', JSON.stringify(`https://app.example/static/${url.pathname.split('/').at(-1)}${url.search}`));
     const evaluate = vm.runInContext(`(function(__load) { ${code}\nreturn { ${exports.join(', ')} }; })`, context, { filename: url.pathname });
     const result = evaluate(value => loadModule(new URL(value)));
     modules.set(url.href, result);
@@ -199,11 +201,8 @@ async function importPack(app, text, name = 'synthetic-import.json') {
 }
 
 async function chooseCount(app, count) {
-  app.$('#count-all').checked = false;
-  app.$('#count-custom').checked = true;
   app.$('#question-count').value = String(count);
-  await app.$('#count-custom').dispatch('change');
-  await app.$('#question-count').dispatch('input');
+  await app.$('#question-count').dispatch('change');
 }
 
 async function answerCorrectly(app) {
@@ -223,11 +222,11 @@ for (const mode of ['server', 'pages']) {
     assert.equal(app.$('#view-sources'), null);
     assert.equal(app.$('#view-settings'), null);
     assert.equal(app.$('.study-aside'), null);
-    assert.equal(app.$('#count-all').checked, true);
-    assert.equal(app.$('#question-count').disabled, true);
-    assert.equal(app.$('#question-count').max, '500');
-    assert.match(app.$('#scope-all-count').textContent, /500/);
-    for (const [country, count] of [['フランス', 149], ['スペイン', 61], ['ポルトガル', 33]]) {
+    assert.equal(app.$('#question-count').value, 'all');
+    assert.equal(app.$('#question-count').disabled, false);
+    assert.deepEqual(app.$('#question-count').options.map(option => option.value), ['5', '10', '20', '30', '50', '70', '100', 'all']);
+    assert.match(app.$('#scope-all-count').textContent, /653/);
+    for (const [country, count] of [['フランス', 198], ['スペイン', 76], ['ポルトガル', 42]]) {
       const option = app.$('#practice-country').options.find(node => node.value === country);
       assert.ok(option.textContent.includes(String(count)), 'country membership is derived from rows');
     }
@@ -239,14 +238,14 @@ for (const mode of ['server', 'pages']) {
     await app.$('#start-practice').click();
     assert.equal(app.$('#view-setup').hidden, true);
     assert.equal(app.$('#view-practice').hidden, false);
-    assert.match(app.$('#active-scope').textContent, /すべて.*500/);
-    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '500');
+    assert.match(app.$('#active-scope').textContent, /すべて.*653/);
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '653');
     assert.equal(app.document.activeElement, app.$('#question-prompt'));
     assert.equal(app.document.scrollTarget, app.$('#view-practice'));
     assert.deepEqual(app.requests, [DEFAULT_PACK_PATH]);
   });
 
-  for (const [country, count] of [['フランス', 149], ['スペイン', 61], ['ポルトガル', 33]]) {
+  for (const [country, count] of [['フランス', 198], ['スペイン', 76], ['ポルトガル', 42]]) {
     test(`${mode}: a full ${country} round keeps pilot evidence and stable scoring through restart`, async () => {
       const app = await startApp(mode, { pack: registeredStandardText });
       await chooseCountry(app, country);
@@ -284,65 +283,79 @@ for (const mode of ['server', 'pages']) {
     });
   }
 
-  test(`${mode}: custom count controls the scoped round, completion, and restart`, async () => {
-    const app = await startApp(mode);
+  test(`${mode}: every preset controls round length, completion, and restart`, async () => {
+    const rows = Array.from({ length: 120 }, (_, index) => question(`fr-${index}`, ['フランス']));
+    const app = await startApp(mode, { pack: JSON.stringify(rows) });
     await chooseCountry(app, 'フランス');
-    await chooseCount(app, 1);
-    assert.equal(app.$('#question-count').max, '2');
-    await app.$('#start-practice').click();
-    assert.equal(app.$('#view-setup').hidden, true);
-    assert.match(app.$('#active-scope').textContent, /フランス.*1/);
-    assert.ok(['france', 'cross-country'].includes(app.$('.quiz-card').dataset.questionId));
-    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '1');
-    await answerCorrectly(app);
-    assert.match(app.$('.next-row button').textContent, /結果を見る/);
-    await app.$('.next-row button').click();
-    assert.match(app.$('.completion-score').textContent, /1.*1/);
-    await app.$('.completion-card button').click();
-    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '1');
-    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '0');
-    assert.match(app.$('.question-score').textContent, /正解 0 \/ 1 · 回答 0/);
-    assert.match(app.$('#active-scope').textContent, /フランス.*1/);
-    assert.ok(['france', 'cross-country'].includes(app.$('.quiz-card').dataset.questionId));
+    for (const count of [5, 10, 20, 30, 50, 70, 100, 'all']) {
+      await chooseCount(app, count);
+      const total = count === 'all' ? rows.length : count;
+      await app.$('#start-practice').click();
+      assert.equal(app.$('#view-setup').hidden, true);
+      assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), String(total));
+      const seen = new Set();
+      for (let index = 0; index < total; index += 1) {
+        const id = app.$('.quiz-card').dataset.questionId;
+        assert.ok(!seen.has(id));
+        seen.add(id);
+        await answerCorrectly(app);
+        await app.$('.next-row button').click();
+      }
+      assert.match(app.$('.completion-score').textContent, new RegExp(`${total}.*${total}`));
+      await app.$('.completion-card button').click();
+      assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), String(total));
+      assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '0');
+      await app.$('#back-to-setup').click();
+      assert.equal(app.$('#question-count').value, String(count));
+    }
     assert.deepEqual(app.requests, [DEFAULT_PACK_PATH]);
   });
 
-  test(`${mode}: returning to setup preserves choices and a new start resets answers and score`, async () => {
-    const app = await startApp(mode);
+  test(`${mode}: scope changes keep valid presets and reset excessive presets to all`, async () => {
+    const rows = [
+      ...Array.from({ length: 12 }, (_, index) => question(`fr-${index}`, ['フランス'])),
+      ...Array.from({ length: 3 }, (_, index) => question(`sp-${index}`, ['スペイン'])),
+    ];
+    const app = await startApp(mode, { pack: JSON.stringify(rows) });
     await chooseCountry(app, 'フランス');
-    await chooseCount(app, 2);
+    await chooseCount(app, 10);
     await app.$('#start-practice').click();
     await answerCorrectly(app);
     await app.$('#back-to-setup').click();
-    assert.equal(app.$('#view-practice').hidden, true);
-    assert.equal(app.$('#view-setup').hidden, false);
     assert.equal(app.$('#practice-country').value, 'フランス');
-    assert.equal(app.$('#question-count').value, '2');
+    assert.equal(app.$('#question-count').value, '10');
     assert.equal(app.document.activeElement, app.$('#setup-heading'));
     await chooseCountry(app, 'スペイン');
-    assert.equal(app.$('#question-count').max, '1');
-    assert.equal(app.$('#question-count').value, '1', 'scope change clamps the previous count to available questions');
+    assert.equal(app.$('#question-count').value, 'all');
+    assert.equal(app.$('#count-all-label').textContent, '全問（3 問）');
+    assert.ok(app.$('#question-count').options.filter(option => option.value !== 'all').every(option => option.disabled));
     assert.equal(app.$('#start-practice').disabled, false);
-    await chooseCount(app, 2);
-    assert.equal(app.$('#start-practice').disabled, true, 'manual over-limit input still cannot start');
-    await chooseCount(app, 1);
+    await chooseCount(app, 5);
+    assert.equal(app.$('#start-practice').disabled, true, 'even a tampered over-limit selection cannot start');
+    await chooseCount(app, 'all');
     await app.$('#start-practice').click();
-    assert.equal(app.$('.quiz-card').dataset.questionId, 'spain');
     assert.equal(app.$('.answer-panel'), null);
     assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '0');
-    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '1');
-    assert.match(app.$('.question-score').textContent, /正解 0 \/ 1 · 回答 0/);
-    await answerCorrectly(app);
-    await app.$('.next-row button').click();
-    const configure = app.document.querySelectorAll('.completion-card button')[1];
-    await configure.click();
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '3');
+    for (let index = 0; index < 3; index += 1) {
+      await answerCorrectly(app);
+      await app.$('.next-row button').click();
+    }
+    await app.document.querySelectorAll('.completion-card button')[1].click();
     assert.equal(app.$('#view-setup').hidden, false);
     assert.equal(app.$('#view-practice').hidden, true);
+    await chooseCountry(app, 'フランス');
+    assert.equal(app.$('#question-count').options.find(option => option.value === '10').disabled, false);
+    await chooseCount(app, 10);
+    app.$('#scope-all').checked = true;
+    app.$('#scope-country').checked = false;
+    await app.$('#scope-all').dispatch('change');
+    assert.equal(app.$('#question-count').value, '10', 'valid presets survive a wider scope');
   });
 
-  test(`${mode}: blank, zero, negative, fractional, and excessive counts cannot start`, async () => {
+  test(`${mode}: blank, unlisted, malformed, and excessive counts cannot start`, async () => {
     const app = await startApp(mode);
-    for (const value of ['', 0, -1, 1.5, 5, 'NaN']) {
+    for (const value of ['', 0, -1, 1.5, 1, 2, 5, 'NaN']) {
       await chooseCount(app, value);
       assert.equal(app.$('#start-practice').disabled, true, `invalid count ${value}`);
       assert.equal(app.$('#count-error').hidden, false);
@@ -350,13 +363,14 @@ for (const mode of ['server', 'pages']) {
       assert.equal(app.$('#view-practice').hidden, true);
       assert.equal(app.$('.choice'), null);
     }
-    await chooseCount(app, 4);
+    await chooseCount(app, 'all');
     assert.equal(app.$('#start-practice').disabled, false);
     await chooseCountry(app, '');
     assert.equal(app.$('#start-practice').disabled, true);
+    assert.equal(app.$('#question-count').disabled, true);
     await chooseCountry(app, '未登録の国');
     assert.equal(app.$('#start-practice').disabled, true);
-    assert.equal(app.$('#question-count').max, '0');
+    assert.equal(app.$('#question-count').disabled, true);
   });
 
   test(`${mode}: full explanations remain intact and next is before long explanation and provenance`, async () => {
@@ -391,7 +405,7 @@ for (const mode of ['server', 'pages']) {
   test(`${mode}: invalid manual import preserves source, settings, and answered session`, async () => {
     const app = await startApp(mode, { pack: registeredStandardText });
     await chooseCountry(app, 'フランス');
-    await chooseCount(app, 2);
+    await chooseCount(app, 5);
     await app.$('#start-practice').click();
     await app.$('.choice').click();
     const questionId = app.$('.quiz-card').dataset.questionId;
@@ -405,7 +419,7 @@ for (const mode of ['server', 'pages']) {
     assert.ok(app.$('.answer-panel'));
     assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '1');
     assert.equal(app.$('#practice-country').value, 'フランス');
-    assert.equal(app.$('#question-count').value, '2');
+    assert.equal(app.$('#question-count').value, '5');
     assert.equal(app.$('#pages-import-error').hidden, false);
     assert.equal(app.$('#question-pack').disabled, false);
     assert.equal(app.$('#clear-pack').disabled, true);
@@ -415,12 +429,12 @@ for (const mode of ['server', 'pages']) {
   test(`${mode}: valid imports and restoring default return to setup and reset range and count`, async () => {
     const app = await startApp(mode);
     await chooseCountry(app, 'フランス');
-    await chooseCount(app, 2);
+    await chooseCount(app, 'all');
     await importPack(app, JSON.stringify([questions[3]]));
     assert.match(app.$('#pages-import-status').textContent, /synthetic-import\.json.*1/);
-    assert.equal(app.$('#count-all').checked, true);
+    assert.equal(app.$('#question-count').value, 'all');
     assert.equal(app.$('#scope-all').checked, true);
-    assert.equal(app.$('#question-count').max, '1');
+    assert.equal(app.$('#count-all-label').textContent, '全問（1 問）');
     assert.equal(app.$('#view-setup').hidden, false);
     assert.equal(app.$('.choice'), null);
     await app.$('#start-practice').click();
@@ -436,8 +450,8 @@ for (const mode of ['server', 'pages']) {
     assert.equal(app.$('#start-practice').disabled, false);
     assert.equal(app.$('#scope-all').checked, true);
     assert.equal(app.$('#scope-country').checked, false);
-    assert.equal(app.$('#count-all').checked, true);
-    assert.equal(app.$('#question-count').max, '4');
+    assert.equal(app.$('#question-count').value, 'all');
+    assert.equal(app.$('#count-all-label').textContent, '全問（4 問）');
     assert.equal(app.$('#clear-pack').disabled, true);
     assert.equal(app.$('#pages-import-error').hidden, true);
     await app.$('#start-practice').click();
@@ -504,7 +518,7 @@ for (const mode of ['server', 'pages']) {
     assert.equal(app.$('#retry-pack').hidden, true);
     assert.equal(app.$('#question-pack').disabled, false);
     assert.equal(app.$('#start-practice').disabled, false);
-    assert.match(app.$('#pages-import-status').textContent, /wine-quiz-500\.json.*4/);
+    assert.match(app.$('#pages-import-status').textContent, /wine-quiz-highlighted\.json.*4/);
     await app.$('#start-practice').click();
     assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '4');
   });
@@ -522,7 +536,7 @@ for (const mode of ['server', 'pages']) {
       assert.equal(app.$('.choice'), null);
       assert.ok(app.$('#start-practice').disabled);
       assert.equal(app.$('#pages-import-error').hidden, false);
-      assert.match(app.$('#pages-import-error').textContent, /wine-quiz-500\.json/);
+      assert.match(app.$('#pages-import-error').textContent, /wine-quiz-highlighted\.json/);
       assert.equal(app.$('#retry-pack').hidden, false);
       assert.deepEqual(app.requests, [DEFAULT_PACK_PATH]);
     });

@@ -231,3 +231,16 @@ test('the registered pilot150 data parses without changing recorded rows or meta
     for (const key of ['sources', 'validation', 'quote', 'file_name', 'source_id', 'region_id']) assert.equal(Object.hasOwn(row, key), false);
   }
 });
+
+test('default pack carries the module version and bypasses stale cached JSON', async () => {
+  const { loadDefaultQuestionPack: loadVersioned } = await import('../static/pages.js?v=cache-test');
+  let requested;
+  const result = await loadVersioned(async (url, options) => {
+    requested = url;
+    assert.equal(options.cache, 'no-store');
+    return { ok: true, text: async () => pilotPack([pilotQuestion()]) };
+  });
+  assert.equal(requested.searchParams.get('v'), 'cache-test');
+  assert.ok(requested.pathname.endsWith('/question-packs/wine-quiz-highlighted.json'));
+  assert.equal(result.questions.length, 1);
+});

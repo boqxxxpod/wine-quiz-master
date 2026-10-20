@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -34,7 +35,8 @@ class PublicBuildTests(unittest.TestCase):
                          "data/originals/private.jpg", "credentials/service-account.json",
                          "static/unlisted-export.json", "question-packs/private.json",
                          "question-packs/batches/pilot-01.json", "question-packs/pilot-150.json",
-                         "question-packs/batches/wine-quiz-01.json", "app/store.py"):
+                         "question-packs/batches/wine-quiz-01.json", "question-packs/wine-quiz-500.json",
+                         "question-packs/coverage.json", "question-packs/highlighted-batches/wine-quiz-01.json", "app/store.py"):
             path = self.root / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(canary, encoding="utf-8")
@@ -61,6 +63,28 @@ class PublicBuildTests(unittest.TestCase):
         build(ROOT, self.output)
         self.assertEqual((self.output / PUBLIC_QUESTION_PACK).read_bytes(), original)
         self.assertEqual((ROOT / PUBLIC_QUESTION_PACK).read_bytes(), original)
+
+    def test_asset_versions_match_through_imports_and_change_with_pack_bytes(self):
+        build(ROOT, self.output)
+        html = (self.output / "index.html").read_text(encoding="utf-8")
+        version = re.search(r"app\.js\?v=([a-f0-9]{16})", html).group(1)
+        self.assertIn(f"style.css?v={version}", html)
+        for relative in ("static/app.js", "static/pages.js"):
+            content = (self.output / relative).read_text(encoding="utf-8")
+            versions = re.findall(r"\.js\?v=([^'\"]+)", content)
+            self.assertTrue(versions)
+            self.assertEqual(set(versions), {version})
+            self.assertNotIn("v=highlighted-20261020", content)
+        for relative in PUBLIC_FILES:
+            source = ROOT / relative
+            target = self.root / relative
+            target.write_bytes(source.read_bytes())
+        pack = self.root / PUBLIC_QUESTION_PACK
+        pack.write_bytes(pack.read_bytes() + b"\n")
+        build(self.root, self.output)
+        updated = (self.output / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn(f"app.js?v={version}", updated)
+        self.assertEqual((self.output / PUBLIC_QUESTION_PACK).read_bytes(), pack.read_bytes())
 
     def test_unrelated_directory_and_source_ancestors_cannot_be_overwritten(self):
         unrelated = self.base / "important"

@@ -1,0 +1,37 @@
+name: Validate quiz and application
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Test backend and Pages packaging
+        run: python -m unittest discover -s tests -v
+      - name: Test parsing, rounds, and setup interactions
+        run: node --test tests/*.mjs
+      - name: Verify questions, unchanged baselines, and coverage
+        run: node scripts/verify_standard_pack.mjs
+      - name: Build public Pages artifact
+        run: python scripts/build_pages.py
