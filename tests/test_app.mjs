@@ -225,8 +225,8 @@ for (const mode of ['server', 'pages']) {
     assert.equal(app.$('#question-count').value, 'all');
     assert.equal(app.$('#question-count').disabled, false);
     assert.deepEqual(app.$('#question-count').options.map(option => option.value), ['5', '10', '20', '30', '50', '70', '100', 'all']);
-    assert.match(app.$('#scope-all-count').textContent, /653/);
-    for (const [country, count] of [['フランス', 198], ['スペイン', 76], ['ポルトガル', 42]]) {
+    assert.match(app.$('#scope-all-count').textContent, /662/);
+    for (const [country, count] of [['フランス', 201], ['スペイン', 76], ['ポルトガル', 42]]) {
       const option = app.$('#practice-country').options.find(node => node.value === country);
       assert.ok(option.textContent.includes(String(count)), 'country membership is derived from rows');
     }
@@ -238,14 +238,14 @@ for (const mode of ['server', 'pages']) {
     await app.$('#start-practice').click();
     assert.equal(app.$('#view-setup').hidden, true);
     assert.equal(app.$('#view-practice').hidden, false);
-    assert.match(app.$('#active-scope').textContent, /すべて.*653/);
-    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '653');
+    assert.match(app.$('#active-scope').textContent, /すべて.*662/);
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '662');
     assert.equal(app.document.activeElement, app.$('#question-prompt'));
     assert.equal(app.document.scrollTarget, app.$('#view-practice'));
     assert.deepEqual(app.requests, [DEFAULT_PACK_PATH]);
   });
 
-  for (const [country, count] of [['フランス', 198], ['スペイン', 76], ['ポルトガル', 42]]) {
+  for (const [country, count] of [['フランス', 201], ['スペイン', 76], ['ポルトガル', 42]]) {
     test(`${mode}: a full ${country} round keeps pilot evidence and stable scoring through restart`, async () => {
       const app = await startApp(mode, { pack: registeredStandardText });
       await chooseCountry(app, country);

@@ -2,59 +2,62 @@
   "metadata": {
     "title": "Wine Quiz Master 黄色マーカー知識対応版",
     "generated_on": "2026-10-20",
-    "created_timezone": "Asia/Tokyo",
-    "total_questions": 653,
+    "created_timezone": "Etc/UTC",
+    "total_questions": 662,
     "original_questions": 150,
-    "previous_questions": 500,
-    "added_questions": 153,
-    "new_questions": 503,
+    "previous_questions": 653,
+    "added_questions": 9,
+    "new_questions": 512,
     "choice_count": 3,
     "question_format": "日本語三択・単一正答",
     "answer_index_base": 0,
     "questions_per_batch": 50,
     "batch_count": 14,
     "validation_status": "auto_checked",
-    "qa_status": "auto_checked（資料の知識ID別に対応を整理。要確認・年不明の数値等には保留あり。人手最終確認前）",
+    "qa_status": "auto_checked（原画像再読・公的過去統計による63項目の再確認で15項目を補完。48項目は未解決。人手最終承認前）",
     "human_approved": false,
     "source_file": "ワイン検定_問題作成用知識と周辺テキスト.json",
     "source_sha256": "4d6cd1ce22e9c6064cd4817cf2a37fb9540179ccf265cb8025dd5a780a425b97",
     "original_150_questions_sha256": "73425381d2651372a374c4a189861652746a17392046ad1dc64c131ccb5431e1",
-    "previous_pack": "wine-quiz-500.json",
+    "previous_pack": "wine-quiz-highlighted.json@44edf968ea107bbdb1f3003e6877a3efd60283a4",
     "previous_questions_preserved": true,
     "original_150_preserved": true,
-    "base_commit": "d65def9e895a212c0827d3449be8a782dc8cff44",
+    "base_commit": "44edf968ea107bbdb1f3003e6877a3efd60283a4",
     "coverage": {
       "source_items": 864,
       "source_needs_review": 9,
-      "question_count": 653,
+      "source_review_resolved": 7,
+      "source_review_open": 2,
+      "question_count": 662,
       "original_questions": 150,
-      "previous_questions": 500,
-      "added_questions": 153,
+      "previous_questions": 653,
+      "added_questions": 9,
       "status_counts": {
-        "direct": 643,
-        "grouped": 100,
-        "deferred_source_year": 10,
-        "adapted": 39,
-        "deferred_review": 9,
-        "related": 58,
-        "deferred_ambiguity": 5
+        "direct": 653,
+        "grouped": 102,
+        "deferred_source_year": 7,
+        "adapted": 35,
+        "related": 61,
+        "deferred_ambiguity": 5,
+        "deferred_review": 1
       },
-      "fully_represented_items": 801,
-      "adapted_items": 39,
-      "deferred_items": 24
+      "fully_represented_items": 816,
+      "adapted_items": 35,
+      "deferred_items": 13,
+      "remaining_items": 48
     },
     "country_counts": {
-      "アメリカ": 44,
+      "アメリカ": 45,
       "アルゼンチン": 20,
       "イタリア": 94,
       "ポルトガル": 42,
       "南アフリカ": 21,
       "スペイン": 76,
-      "日本": 59,
-      "オーストリア": 23,
-      "フランス": 198,
-      "チリ": 17,
-      "オーストラリア": 46,
+      "日本": 61,
+      "オーストリア": 24,
+      "フランス": 201,
+      "チリ": 18,
+      "オーストラリア": 47,
       "ニュージーランド": 17
     },
     "topic_counts": {
@@ -94,18 +97,18 @@
       "主要産地": 1,
       "南イタリア": 1,
       "醸造": 37,
-      "品種": 110,
+      "品種": 111,
       "地理": 64,
       "歴史": 66,
-      "気候": 24,
-      "ワインの種類": 53,
-      "産地": 71,
+      "気候": 25,
+      "ワインの種類": 54,
+      "産地": 77,
       "制度": 78
     },
     "correct_index_counts": {
-      "0": 218,
-      "1": 218,
-      "2": 217
+      "2": 220,
+      "0": 221,
+      "1": 221
     },
     "original_metadata": {
       "title": "Wine Quiz Master 試験運用3択問題集",
@@ -145,7 +148,10 @@
         ],
         "human_reviewed": false
       }
-    }
+    },
+    "previous_653_questions_sha256": "56f91fbc858bdc7de4d38f4e405cd1d9760adc7dee893349036abc0e87e1ff35",
+    "previous_653_preserved": true,
+    "source_review_record": "remaining-review.json"
   },
   "questions": [
     {
@@ -13861,6 +13867,195 @@
       "correct_index": 1,
       "correct_answer": "甲州とマスカット・ベーリーA",
       "explanation": "【要点】山梨県の主な品種には、白用の甲州と赤用のマスカット・ベーリーAがある。\n【解説】山梨県は甲府盆地を中心にワイナリーが集まる産地である。白用品種の甲州だけでなく、黒品種のマスカット・ベーリーAも主要品種として紹介される。\n【整理】甲州は白ワイン用、マスカット・ベーリーAは黒ブドウの交配品種。果実の用途、果皮の色、品種の系統を、それぞれ別の情報として対応させる。（参照p.4）",
+      "source_page": "10",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0006-01",
+      "knowledge_id": "K0006",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "産地",
+      "question": "OIVが2018年4月に公表した2017年の国別ブドウ栽培面積（醸造用・生食用・乾燥用、未収穫・未成園を含む）で、フランスの順位は何位ですか。",
+      "options": [
+        "世界第1位",
+        "世界第2位",
+        "世界第3位"
+      ],
+      "correct_index": 2,
+      "correct_answer": "世界第3位",
+      "explanation": "【要点】OIVの2018年4月公表資料では、2017年のフランスのブドウ栽培面積は世界第3位である。\n【解説】上位はスペイン、中国、フランスの順。この面積は醸造用だけに限らず、生食用・乾燥用や、まだ収穫していない畑も含む。同資料の2017年ワイン生産量ではフランスはイタリアに次ぐ第2位である。\n【整理】栽培面積は土地の広さ、生産量は造られたワインの量を比べる指標。同じ年の順位でも、対象と単位を分けて理解する。",
+      "source_page": 12,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0008-01",
+      "knowledge_id": "K0008",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "産地",
+      "question": "OIVが2018年4月に公表した2017年の国別ワイン輸出額（ユーロ建て、ジュース・マストを除く）で、世界第1位の国はどこですか。",
+      "options": [
+        "フランス",
+        "スペイン",
+        "イタリア"
+      ],
+      "correct_index": 0,
+      "correct_answer": "フランス",
+      "explanation": "【要点】OIVの2018年4月公表資料では、2017年のワイン輸出額が世界第1位の国はフランスである。\n【解説】同じ資料で、輸出したワインの量が最も多い国はスペインとされる。輸出額はユーロで比べた金額、輸出量はワインの体積であり、上位国の順番は一致するとは限らない。\n【整理】2017年の「輸出額＝フランス」「輸出量＝スペイン」を対応させる。国別の比較であることと、金額・数量のどちらを比べるかをセットで整理する。",
+      "source_page": 12,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0111-01",
+      "knowledge_id": "K0111",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "産地",
+      "question": "2017年実績のフランスの地方別A.O.C.ワイン生産量で、ローヌ渓谷地方はボルドーに次ぐ何位ですか。",
+      "options": [
+        "第1位",
+        "第2位",
+        "第3位"
+      ],
+      "correct_index": 1,
+      "correct_answer": "第2位",
+      "explanation": "【要点】2017年実績のA.O.C.ワイン生産量では、ローヌ渓谷地方はボルドーに次ぐフランス第2位である。\n【解説】この順位はA.O.C.ワインについての比較で、I.G.P.などを含む全ワインの順位ではない。出典資料はローヌ渓谷地方全体について、赤とロゼが生産の大半を占めるとも説明している。\n【整理】「2017年」「地方別」「A.O.C.の生産量」が順位の条件。赤・ロゼ中心という傾向の対象も地方全体であり、南部地区だけに限定しない。",
+      "source_page": 23,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0560-01",
+      "knowledge_id": "K0560",
+      "country": "オーストリア",
+      "countries": [
+        "オーストリア"
+      ],
+      "topic": "ワインの種類",
+      "question": "オーストリアのノイジードラーゼーの湖を囲む産地の南東部は、ヴェルシュリースリングなどによる、どの種類のワインの産地として知られますか。",
+      "options": [
+        "酒精強化ワイン",
+        "瓶内二次発酵の発泡ワイン",
+        "貴腐ワイン"
+      ],
+      "correct_index": 2,
+      "correct_answer": "貴腐ワイン",
+      "explanation": "【要点】ノイジードラーゼーの湖を北から東に囲む産地の南東部は、ヴェルシュリースリングなどによる貴腐ワインで知られる。\n【解説】出典資料は、この地域では霧により貴腐が付きやすいと説明する。同じ産地でも東北部はツヴァイゲルトの産地として紹介され、地域の中で品種とワインの種類が異なる。\n【整理】ノイジードラーゼーという湖と、その周囲のワイン産地を区別する。南東部の貴腐ワインの説明を、同名のDACの全ワインに一律の規定として当てはめない。",
+      "source_page": 81,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0568-01",
+      "knowledge_id": "K0568",
+      "country": "アメリカ",
+      "countries": [
+        "アメリカ"
+      ],
+      "topic": "産地",
+      "question": "OIVが2018年4月に公表した2017年の国別ワイン消費量（国全体の総量）で、世界最大の国はどこですか。",
+      "options": [
+        "アメリカ",
+        "フランス",
+        "イタリア"
+      ],
+      "correct_index": 0,
+      "correct_answer": "アメリカ",
+      "explanation": "【要点】OIVの2018年4月公表資料では、2017年の国全体のワイン消費量が世界最大の国はアメリカである。\n【解説】同資料のアメリカの消費量は約3,260万hl、生産量はジュース・マストを除いて約2,330万hlとされ、消費量が生産量を上回る。多く造ることと、多く消費することは別の特徴である。\n【整理】この比較は2017年の国全体の総量であり、1人当たりの消費量の順位ではない。消費国としての規模と、生産国としての規模を分けて捉える。",
+      "source_page": "85",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0625-01",
+      "knowledge_id": "K0625",
+      "country": "チリ",
+      "countries": [
+        "チリ"
+      ],
+      "topic": "気候",
+      "question": "チリの南緯27〜40度付近に広がるブドウ栽培地域で、雨がほとんど降らない乾期として説明される期間はどれですか。",
+      "options": [
+        "4月から10月",
+        "10月から4月",
+        "6月から8月"
+      ],
+      "correct_index": 1,
+      "correct_answer": "10月から4月",
+      "explanation": "【要点】チリの南緯27〜40度付近のブドウ栽培地域では、10月から4月が乾期に当たり、雨がほとんど降らないと説明される。\n【解説】出典資料はこの栽培地域を地中海性気候として紹介する。また中央の平地にはマイポ川など複数の河川流域があり、栽培期の灌漑が行いやすいという地理的な背景も記している。\n【整理】覚える対応は「10月〜4月＝乾期」。チリ全国が通年無降雨という意味ではなく、指定した緯度帯の栽培地域と季節についての説明である。",
+      "source_page": 95,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0718-01",
+      "knowledge_id": "K0718",
+      "country": "オーストラリア",
+      "countries": [
+        "オーストラリア"
+      ],
+      "topic": "品種",
+      "question": "ヴィクトリア州のヤラ・ヴァレー以南に多い冷涼なワイン産地で、主に力を入れていると紹介される品種の組合せはどれですか。",
+      "options": [
+        "カベルネ・ソーヴィニヨンとセミヨン",
+        "シラーズとリースリング",
+        "ピノ・ノワールとシャルドネ"
+      ],
+      "correct_index": 2,
+      "correct_answer": "ピノ・ノワールとシャルドネ",
+      "explanation": "【要点】ヴィクトリア州のヤラ・ヴァレー以南には、ピノ・ノワールとシャルドネに注力する冷涼なワイン産地が多い。\n【解説】州内には内陸部から沿岸部まで、気候や土壌の異なる産地が点在する。ヤラ・ヴァレーより北側の産地では、シラーズやカベルネ・ソーヴィニヨンに加え、ピノ・ノワールやシャルドネも挙げられる。\n【整理】地域の傾向と、栽培できる品種を限定する規定は別。州全体を一つの品種構成とせず、ヤラ・ヴァレー以南という範囲と組合せを結び付ける。",
+      "source_page": 109,
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0784-01",
+      "knowledge_id": "K0784",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "産地",
+      "question": "国税庁の平成29年度（2017年4月〜2018年3月）調査で、日本ワインの都道府県別製成数量が第2位の県はどこですか。",
+      "options": [
+        "長野県",
+        "北海道",
+        "山形県"
+      ],
+      "correct_index": 0,
+      "correct_answer": "長野県",
+      "explanation": "【要点】国税庁の平成29年度調査では、日本ワインの都道府県別製成数量の第2位は長野県である。\n【解説】同じ表の順位は第1位が山梨県、第2位が長野県、第3位が北海道となる。ここで比べているのは日本ワインの製成数量であり、海外原料を使ったものを含む国内製造ワイン全体とは区別される。\n【整理】対象は2017年4月から2018年3月までの会計年度。同資料が公表された2019年や、暦年2017年の統計と混同せず、年度と製成数量という指標を組にして整理する。",
+      "source_page": "4",
+      "status": "auto_checked",
+      "version": 1
+    },
+    {
+      "question_id": "Q-K0861-01",
+      "knowledge_id": "K0861",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "産地",
+      "question": "国税庁の2018年3月31日現在の集計で、2017年度に生産・出荷実績のある国内ワイナリー303場の約3割弱が集まる県はどこですか。",
+      "options": [
+        "長野県",
+        "山梨県",
+        "北海道"
+      ],
+      "correct_index": 1,
+      "correct_answer": "山梨県",
+      "explanation": "【要点】国税庁の2018年3月31日現在の集計では、山梨県のワイナリー81場は全国303場の約26.7%で、3割弱に当たる。\n【解説】分母は2017年度にワインの生産または出荷実績がある製造場の数である。果実酒の製造場すべてを数えた418場や、アンケートに回答した場数とは異なる。\n【整理】この割合が表すのはワイナリーの場数であり、山梨県のワイン生産量のシェアではない。基準日、数える施設の範囲、分母303場を合わせて読む。（参照p.4）",
       "source_page": "10",
       "status": "auto_checked",
       "version": 1

@@ -1,33 +1,28 @@
 # ワイン検定：黄色マーカー知識対応版
 
-標準問題集は **653問** です。既存500問を全フィールド・順序ごと保持し、未使用知識IDを使った153問を追加しました。追加問題は、同じ産地・分類などの知識をまとめることで255個の知識IDに対応します。
+標準問題集は**662問**です。従来653問（既存500問・150問を含む）を全フィールド・順序ごと保持し、未使用の主知識IDから9問を追加しました。残る63項目を原画像35枚と公的過去統計で確認し、15項目を補完しました。
 
-864項目のうち801項目は問題文または解説に対応し、39項目は年不明の数値・順位などを避けて関連特徴だけを扱います。24項目は出題保留です。**完全網羅と数えず、未解決を区別しています。** 詳細は [検証レポート](highlighted-validation-report.md) と [全ID対応表](coverage.json) を参照してください。
+864項目のうち816項目は問題・解説に対応、35項目は関連特徴のみ、13項目は保留です。未解決は48項目で、完全網羅と数えません。816項目には複数の知識を一問や解説で扱うものを含み、独立した設問数ではありません。
 
 | ファイル | 内容 |
 | --- | --- |
-| [wine-quiz-highlighted.json](wine-quiz-highlighted.json) | 現在の標準653問。metadataとquestions |
-| [highlighted-batches/](highlighted-batches/) | 14ファイル。50問×13と3問×1。順に結合すると統合版と完全一致 |
-| [coverage.json](coverage.json) | 864項目の対応先・状態・保留理由、追加問題の根拠ID |
-| [highlighted-validation-report.md](highlighted-validation-report.md) | 国・テーマ別件数、検証結果、未解決範囲 |
-| [wine-quiz-500.json](wine-quiz-500.json) | 従来の500問。変更なし |
-| `batches/wine-quiz-01.json`〜`wine-quiz-10.json` | 従来500問の確認用50問×10。変更なし |
-| [pilot-150.json](pilot-150.json) | 修正済みの既存150問。変更なし |
-| `batches/pilot-01.json`〜`pilot-05.json` | 既存150問の30問×5。変更なし |
-| [validation-report.md](validation-report.md) | 旧500問版の検証記録。変更なし |
+| [wine-quiz-highlighted.json](wine-quiz-highlighted.json) | 現行662問。metadataとquestions |
+| [highlighted-batches/](highlighted-batches/) | 50問×13、12問×1。順に結合すると統合版と完全一致 |
+| [coverage.json](coverage.json) | 864項目の対応先・状態・根拠ID |
+| [remaining-review.json](remaining-review.json) | 再確認した63項目の判断・出典・未解決の具体的な確認事項 |
+| [remaining-review-report.md](remaining-review-report.md) | 確認結果と、出版社・講師へ渡せる48項目の一覧 |
+| [highlighted-validation-report.md](highlighted-validation-report.md) | 現行版の件数・検証・制約 |
+| [validation-653.md](validation-653.md) | 653問版の当時の検証記録 |
+| [wine-quiz-500.json](wine-quiz-500.json) | 従来500問とbatches/wine-quiz-01〜10は変更なし |
+| [pilot-150.json](pilot-150.json) | 既存150問とbatches/pilot-01〜05は変更なし |
+| [validation-report.md](validation-report.md) | 500問版の当時の記録。変更なし |
 
-## 形式と根拠
+pilot形式を維持し、正答キーは0始まりで正答文字列と一致します。主知識ID・問題IDは一意、国・countries・source_pageは元資料から継承します。追加9問は三択・単一正答、解説は【要点】【解説】【整理】の3行、206〜225字です。年・比較条件・地理的な範囲を問題文に示します。
 
-各問のpilot形式は維持し、0始まりの `correct_index` と `options[correct_index]` に一致する `correct_answer` を保存します。IDは元の知識IDから作ります。追加153問の主知識IDは既存500問と重複せず、国・countries・source_pageは元資料から継承します。
+原文で対象年が不明な統計を、近隣の文章の年で補っていません。公的な過去資料で同じ事実を確認できたものは、その資料の年・範囲に限定して追加しました。元の統計年を確定したという意味ではありません。
 
-新規解説は【要点】【解説】【整理】を改行した一文字列で、153〜273字、650字以内です。元知識、対応する周辺テキスト、確認済みの関連知識を根拠とし、必要な別ページは参照p.○で示します。統計の新規出題は対象年を示し、年不明の数字を新しく断定しません。
+全問 `auto_checked`、`human_approved: false` です。元資料のneeds_reviewフラグ自体は変更せず、原画像で修正案を確認できた7項目は別の再確認記録を根拠に採用します。残る2項目は保留です。従来問題に残る注意点や、人による内容承認が未実施であることも引き継ぎます。
 
-全653問は `auto_checked`、`human_approved: false` です。元資料で `needs_review=true` の9項目は追加問題と関連知識に使用しません。原画像との全件再照合や人による最終承認を済ませた状態ではありません。既存500問に残る確認事項も検証レポートに記録しています。
+アプリの出題数は5・10・20・30・50・70・100・全問、範囲は全問または国別です。国別合計666は複数国の問題を各国に数えた値で、全問では662問です。統合版と分割版は同じ問題を含むため、取り込みにはどちらか一つを使います。上限は2 MB・2,000問です。
 
-## 練習と公開範囲
-
-アプリは標準653問を読み込み、出題数は5・10・20・30・50・70・100・全問から選びます。範囲は全問または国別です。国別件数の合計657は、複数国に属する問題をそれぞれの国に数えた値です。全問では各問題を一回だけ数えます。
-
-統合版と分割版を同時に取り込むと同じ問題を含むため、用途に合わせてどちらか一つを使ってください。JSON読み込み上限は2 MB・2,000問です。手動読み込みはこのタブのみで使用します。
-
-今回追加する問題集・対応表には原画像・画像名・Drive URL・周辺原文の全文を含めません。Pagesビルドとサーバーの公開対象は標準の `wine-quiz-highlighted.json` 一件に限定し、旧版・確認用バッチ・対応表・検証記録は配信しません。Gitリポジトリではレビューできるよう保存しています。
+原画像・画像名・Drive URL・周辺原文の全文は成果物に含めません。Pagesとサーバーの公開対象は標準の統合JSON一件で、対応表・再確認記録・バッチ・旧版はGitリポジトリでの確認用です。

@@ -1,0 +1,1309 @@
+{
+  "metadata": {
+    "reviewed_on": "2026-10-20",
+    "base_commit": "44edf968ea107bbdb1f3003e6877a3efd60283a4",
+    "reviewed_items": 63,
+    "source_image_count": 35,
+    "resolved_items": 15,
+    "pending_items": 48,
+    "added_questions": 9,
+    "previous_questions": 653,
+    "total_questions": 662,
+    "validation_status": "auto_checked",
+    "human_approved": false,
+    "source_sha256": "4d6cd1ce22e9c6064cd4817cf2a37fb9540179ccf265cb8025dd5a780a425b97",
+    "statistical_year_policy": "原文の統計年は推測しない。原文と同じ事実を独立した公的過去統計で確認できた場合、その公的資料の対象年・範囲に限定して補完する。原文がその年の統計であるとは認定しない。"
+  },
+  "references": [
+    {
+      "reference_id": "OIV-2018-04",
+      "title": "OIV State of the Vitiviniculture World Market, April 2018",
+      "publisher": "OIV",
+      "published": "2018-04",
+      "data_year": "2017",
+      "url": "https://www.oiv.int/public/medias/5958/oiv-state-of-the-vitiviniculture-world-market-april-2018.pdf",
+      "locators": "印刷p.3–4（栽培面積・用途）、p.6–8（生産・消費）、p.10・12（輸出額・輸出量）"
+    },
+    {
+      "reference_id": "NTA-H29",
+      "title": "国内製造ワインの概況（平成29年度調査分）",
+      "publisher": "国税庁",
+      "published": "2019-02",
+      "data_year": "2017年度。ワイナリー数の基準日は2018-03-31",
+      "url": "https://www.nta.go.jp/taxes/sake/shiori-gaikyo/seizogaikyo/kajitsu/pdf/h29/29wine_all.pdf",
+      "locators": "冒頭の調査対象期間、印刷p.1（81/303場）、p.18（日本ワインの製成数量順位）"
+    },
+    {
+      "reference_id": "UNESCO-1046",
+      "title": "Alto Douro Wine Region",
+      "publisher": "UNESCO World Heritage Centre",
+      "url": "https://whc.unesco.org/en/list/1046",
+      "locators": "Brief Synthesis、石垣で支える狭い段々畑、登録年2001。p.74の帰属を確定できないため新規出題には使わない"
+    },
+    {
+      "reference_id": "SOURCE-P023",
+      "title": "提供された出典資料p.23",
+      "kind": "provided_page",
+      "source_page": 23,
+      "image_rechecked": true
+    },
+    {
+      "reference_id": "SOURCE-P078",
+      "title": "提供された出典資料p.78",
+      "kind": "provided_page",
+      "source_page": 78,
+      "image_rechecked": true
+    },
+    {
+      "reference_id": "SOURCE-P081",
+      "title": "提供された出典資料p.81",
+      "kind": "provided_page",
+      "source_page": 81,
+      "image_rechecked": true
+    },
+    {
+      "reference_id": "SOURCE-P095",
+      "title": "提供された出典資料p.95",
+      "kind": "provided_page",
+      "source_page": 95,
+      "image_rechecked": true
+    },
+    {
+      "reference_id": "SOURCE-P109",
+      "title": "提供された出典資料p.109",
+      "kind": "provided_page",
+      "source_page": 109,
+      "image_rechecked": true
+    }
+  ],
+  "entries": [
+    {
+      "knowledge_id": "K0006",
+      "source_pages": [
+        12
+      ],
+      "previous_status": "deferred_source_year",
+      "status": "direct",
+      "outcome": "resolved",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": true,
+      "reference_ids": [
+        "OIV-2018-04"
+      ],
+      "question_ids": [
+        "Q-K0006-01"
+      ],
+      "finding": "63項目再確認で出題可能と判断。2017年推計。全用途のブドウ栽培面積と、ジュース・マストを除くワイン生産量を区別。原文の統計年を2017年と認定したものではない。",
+      "next_action": "",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0007",
+      "source_pages": [
+        12,
+        36
+      ],
+      "previous_status": "adapted",
+      "status": "direct",
+      "outcome": "resolved",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": true,
+      "reference_ids": [
+        "OIV-2018-04"
+      ],
+      "question_ids": [
+        "Q-K0007-01",
+        "Q-K0006-01"
+      ],
+      "finding": "既存の三大生産国の問題を保持し、新規Q-K0006-01の解説で、OIVの2017年ワイン生産量第2位を年・対象付きで補完。原文の統計年は未特定。",
+      "next_action": "",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0008",
+      "source_pages": [
+        12
+      ],
+      "previous_status": "deferred_source_year",
+      "status": "direct",
+      "outcome": "resolved",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": true,
+      "reference_ids": [
+        "OIV-2018-04"
+      ],
+      "question_ids": [
+        "Q-K0008-01"
+      ],
+      "finding": "63項目再確認で出題可能と判断。2017年国別ワイン輸出額。83か国の貿易データに基づくOIV公表値、ユーロ建て。",
+      "next_action": "",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0058",
+      "source_pages": [
+        16
+      ],
+      "previous_status": "deferred_review",
+      "status": "deferred_source_year",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": true,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [],
+      "finding": "p.16の「フランスの家庭」で消費第1位の対象年と、家庭内購入・消費量・購入金額などの指標を、引用元統計の名称とともに確認してください。",
+      "next_action": "p.16の「フランスの家庭」で消費第1位の対象年と、家庭内購入・消費量・購入金額などの指標を、引用元統計の名称とともに確認してください。",
+      "effective_needs_review": true
+    },
+    {
+      "knowledge_id": "K0076",
+      "source_pages": [
+        19
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0078-01"
+      ],
+      "finding": "p.19の赤ワイン約90%の対象年と、分母がコート・ド・ニュイの生産量であるかを確認してください。",
+      "next_action": "p.19の赤ワイン約90%の対象年と、分母がコート・ド・ニュイの生産量であるかを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0097",
+      "source_pages": [
+        21
+      ],
+      "previous_status": "deferred_source_year",
+      "status": "deferred_source_year",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [],
+      "finding": "p.21のボージョレ・ヌーヴォー最大輸出先の対象年、数量・金額の別、輸出先の比較範囲を確認してください。",
+      "next_action": "p.21のボージョレ・ヌーヴォー最大輸出先の対象年、数量・金額の別、輸出先の比較範囲を確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0110",
+      "source_pages": [
+        23
+      ],
+      "previous_status": "deferred_source_year",
+      "status": "deferred_source_year",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [],
+      "finding": "p.23の赤80%・ロゼ13%・白7%の対象年とA.O.C.の集計範囲を確認してください。次の文の2017年実績を色別比率に流用できるかを尋ねてください。",
+      "next_action": "p.23の赤80%・ロゼ13%・白7%の対象年とA.O.C.の集計範囲を確認してください。次の文の2017年実績を色別比率に流用できるかを尋ねてください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0111",
+      "source_pages": [
+        23
+      ],
+      "previous_status": "deferred_review",
+      "status": "direct",
+      "outcome": "resolved",
+      "source_image_rechecked": true,
+      "source_needs_review_original": true,
+      "eligible_after_recheck": true,
+      "reference_ids": [
+        "SOURCE-P023"
+      ],
+      "question_ids": [
+        "Q-K0111-01"
+      ],
+      "finding": "63項目再確認で出題可能と判断。原画像でA.O.C.生産量とInter Rhône 2017年実績の対応を確認。色の一般的傾向に年不明の80%・13%・7%を転用しない。",
+      "next_action": "",
+      "effective_needs_review": false,
+      "verified_knowledge": "2017年実績で、ローヌ渓谷地方のA.O.C.ワイン生産量はボルドーに次ぐフランス第2位である。",
+      "review_resolution": "source_rechecked"
+    },
+    {
+      "knowledge_id": "K0112",
+      "source_pages": [
+        23
+      ],
+      "previous_status": "deferred_review",
+      "status": "related",
+      "outcome": "resolved",
+      "source_image_rechecked": true,
+      "source_needs_review_original": true,
+      "eligible_after_recheck": true,
+      "reference_ids": [
+        "SOURCE-P023"
+      ],
+      "question_ids": [
+        "Q-K0111-01"
+      ],
+      "finding": "原画像で対象がローヌ渓谷地方全体であることを確認し、追加解説に赤・ロゼ中心の傾向を記載。南部限定にはしない。",
+      "next_action": "",
+      "effective_needs_review": false,
+      "verified_knowledge": "ローヌ渓谷地方全体のワインでは赤とロゼが大半を占める。南部地区だけの説明に限定しない。",
+      "review_resolution": "source_rechecked"
+    },
+    {
+      "knowledge_id": "K0127",
+      "source_pages": [
+        24
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0127-01"
+      ],
+      "finding": "p.24のコート・デュ・ローヌ約半分の対象年と、分母が地方全体のA.O.C.生産量であることを確認してください。",
+      "next_action": "p.24のコート・デュ・ローヌ約半分の対象年と、分母が地方全体のA.O.C.生産量であることを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0139",
+      "source_pages": [
+        27
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0139-01"
+      ],
+      "finding": "p.27のI.G.P.80%の対象年、分母がフランス全国のI.G.P.生産量であること、地域境界を確認してください。",
+      "next_action": "p.27のI.G.P.80%の対象年、分母がフランス全国のI.G.P.生産量であること、地域境界を確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0165",
+      "source_pages": [
+        30
+      ],
+      "previous_status": "deferred_ambiguity",
+      "status": "deferred_ambiguity",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [],
+      "finding": "p.30のA.O.C.制定主導の説明について、CapusとLe Royらの関与をどう区別するか、出版社・講師の訂正説明を確認してください。ボルドー単独の主導としてよいかが未確定です。",
+      "next_action": "p.30のA.O.C.制定主導の説明について、CapusとLe Royらの関与をどう区別するか、出版社・講師の訂正説明を確認してください。ボルドー単独の主導としてよいかが未確定です。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0178",
+      "source_pages": [
+        31
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0179-01"
+      ],
+      "finding": "p.31のメルロ栽培面積最大の対象年と、比較がボルドーの黒品種間か全品種間かを確認してください。",
+      "next_action": "p.31のメルロ栽培面積最大の対象年と、比較がボルドーの黒品種間か全品種間かを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0279",
+      "source_pages": [
+        37
+      ],
+      "previous_status": "deferred_ambiguity",
+      "status": "deferred_ambiguity",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [],
+      "finding": "p.37の「ローマは釧路と同じ北緯42度」はどの地点・丸め方か、出版社・講師に確認してください。厳密な同緯度としての出題は保留しています。",
+      "next_action": "p.37の「ローマは釧路と同じ北緯42度」はどの地点・丸め方か、出版社・講師に確認してください。厳密な同緯度としての出題は保留しています。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0383",
+      "source_pages": [
+        61
+      ],
+      "previous_status": "deferred_source_year",
+      "status": "deferred_source_year",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [],
+      "finding": "p.61のラ・マンチャ約50%の対象年と、ラ・マンチャD.O.か州全体か、ワイン生産量の分母を確認してください。",
+      "next_action": "p.61のラ・マンチャ約50%の対象年と、ラ・マンチャD.O.か州全体か、ワイン生産量の分母を確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0387",
+      "source_pages": [
+        61
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0426-01"
+      ],
+      "finding": "p.61のカタルーニャのスパークリング大半について、対象年、カバだけか全発泡ワインか、生産量の比較かを確認してください。",
+      "next_action": "p.61のカタルーニャのスパークリング大半について、対象年、カバだけか全発泡ワインか、生産量の比較かを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0409",
+      "source_pages": [
+        62,
+        68
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0408-01"
+      ],
+      "finding": "p.68（関連p.62）のパロミノ約95%の対象年と、栽培面積・原料使用量・生産量のどの割合かを確認してください。",
+      "next_action": "p.68（関連p.62）のパロミノ約95%の対象年と、栽培面積・原料使用量・生産量のどの割合かを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0425",
+      "source_pages": [
+        63
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0426-01"
+      ],
+      "finding": "p.63のカバ95%の対象年と、数量・生産場数など分母の種類、カタルーニャ州の範囲を確認してください。",
+      "next_action": "p.63のカバ95%の対象年と、数量・生産場数など分母の種類、カタルーニャ州の範囲を確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0434",
+      "source_pages": [
+        65
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0434-01"
+      ],
+      "finding": "p.65のアルバリーニョ約96%の対象年と、栽培面積か原料量かを確認してください。",
+      "next_action": "p.65のアルバリーニョ約96%の対象年と、栽培面積か原料量かを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0481",
+      "source_pages": [
+        72
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0481-01"
+      ],
+      "finding": "p.72の土着品種250超の集計時点と、認定品種・栽培品種・別名を含む品種数の数え方を確認してください。",
+      "next_action": "p.72の土着品種250超の集計時点と、認定品種・栽培品種・別名を含む品種数の数え方を確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0489",
+      "source_pages": [
+        72
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0488-01"
+      ],
+      "finding": "p.72の「世界最初」が産地画定・品質管理・現代の原産地呼称法のどれを意味するか、1716年のトスカーナ等との比較定義を確認してください。1756年の制度設置自体は既存問題で扱っています。",
+      "next_action": "p.72の「世界最初」が産地画定・品質管理・現代の原産地呼称法のどれを意味するか、1716年のトスカーナ等との比較定義を確認してください。1756年の制度設置自体は既存問題で扱っています。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0517",
+      "source_pages": [
+        74
+      ],
+      "previous_status": "deferred_ambiguity",
+      "status": "deferred_ambiguity",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [
+        "UNESCO-1046"
+      ],
+      "question_ids": [],
+      "finding": "p.74のテラス・ド・ダォンの見出しの下にある石垣・狭い段々畑の記述が、ドウロの説明の混入かを出版社・講師に確認し、訂正箇所を共有してください。UNESCOはアルト・ドウロに同様の段々畑を記載します。",
+      "next_action": "p.74のテラス・ド・ダォンの見出しの下にある石垣・狭い段々畑の記述が、ドウロの説明の混入かを出版社・講師に確認し、訂正箇所を共有してください。UNESCOはアルト・ドウロに同様の段々畑を記載します。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0518",
+      "source_pages": [
+        74
+      ],
+      "previous_status": "deferred_review",
+      "status": "deferred_review",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": true,
+      "eligible_after_recheck": false,
+      "reference_ids": [
+        "UNESCO-1046"
+      ],
+      "question_ids": [],
+      "finding": "p.74の世界遺産登録対象はアルト・ドウロか、テラス・ド・ダォンかを出版社・講師に確認し、正式名称と訂正箇所を共有してください。写真の文字は読めており、見出しとの帰属が課題です。",
+      "next_action": "p.74の世界遺産登録対象はアルト・ドウロか、テラス・ド・ダォンかを出版社・講師に確認し、正式名称と訂正箇所を共有してください。写真の文字は読めており、見出しとの帰属が課題です。",
+      "effective_needs_review": true
+    },
+    {
+      "knowledge_id": "K0539",
+      "source_pages": [
+        78
+      ],
+      "previous_status": "deferred_review",
+      "status": "related",
+      "outcome": "resolved",
+      "source_image_rechecked": true,
+      "source_needs_review_original": true,
+      "eligible_after_recheck": true,
+      "reference_ids": [
+        "SOURCE-P078"
+      ],
+      "question_ids": [
+        "Q-K0540-01"
+      ],
+      "finding": "原画像で「溌剌」を確認。既存Q-K0540-01のフレッシュ感の説明が対応しているため、重複問題を追加しない。",
+      "next_action": "",
+      "effective_needs_review": false,
+      "verified_knowledge": "オーストリアでは溌剌としたフレッシュ感のあるワインが多いと説明される。",
+      "review_resolution": "source_rechecked"
+    },
+    {
+      "knowledge_id": "K0545",
+      "source_pages": [
+        79
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0552-01"
+      ],
+      "finding": "p.79のグリューナー・ヴェルトリーナー約3分の1の対象年と、全栽培面積に対する割合かを確認してください。p.78の面積の2017年を品種比率に自動転用していません。",
+      "next_action": "p.79のグリューナー・ヴェルトリーナー約3分の1の対象年と、全栽培面積に対する割合かを確認してください。p.78の面積の2017年を品種比率に自動転用していません。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0554",
+      "source_pages": [
+        81
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0553-01",
+        "Q-K0555-01"
+      ],
+      "finding": "p.81のヴァインフィアテル最大の対象年と、栽培面積・生産量・地理的面積のどれで比較するか、比較地域の単位を確認してください。",
+      "next_action": "p.81のヴァインフィアテル最大の対象年と、栽培面積・生産量・地理的面積のどれで比較するか、比較地域の単位を確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0560",
+      "source_pages": [
+        81
+      ],
+      "previous_status": "deferred_review",
+      "status": "direct",
+      "outcome": "resolved",
+      "source_image_rechecked": true,
+      "source_needs_review_original": true,
+      "eligible_after_recheck": true,
+      "reference_ids": [
+        "SOURCE-P081"
+      ],
+      "question_ids": [
+        "Q-K0560-01"
+      ],
+      "finding": "63項目再確認で出題可能と判断。見出しはNeusiedlersee DACだが、設問は湖を囲む地理上の産地に限定する。甘口が同DAC全体の認定規定とは述べない。",
+      "next_action": "",
+      "effective_needs_review": false,
+      "verified_knowledge": "ノイジードラーゼーの湖を北から東に囲む産地の南東部では、霧と貴腐の付きやすさが説明され、ヴェルシュリースリングなどによる貴腐ワインが知られる。",
+      "review_resolution": "source_rechecked"
+    },
+    {
+      "knowledge_id": "K0561",
+      "source_pages": [
+        82
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0561-01"
+      ],
+      "finding": "p.82の世界唯一の基準時点、首都の市域、商業的生産の定義を確認してください。都市圏・行政区域内・小規模生産を含めるかで比較が変わります。",
+      "next_action": "p.82の世界唯一の基準時点、首都の市域、商業的生産の定義を確認してください。都市圏・行政区域内・小規模生産を含めるかで比較が変わります。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0568",
+      "source_pages": [
+        "85"
+      ],
+      "previous_status": "deferred_source_year",
+      "status": "direct",
+      "outcome": "resolved",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": true,
+      "reference_ids": [
+        "OIV-2018-04"
+      ],
+      "question_ids": [
+        "Q-K0568-01"
+      ],
+      "finding": "63項目再確認で出題可能と判断。2017年推計。国全体の総消費量。生産量はジュース・マストを除く。原文の統計年は未特定。",
+      "next_action": "",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0569",
+      "source_pages": [
+        "85"
+      ],
+      "previous_status": "deferred_source_year",
+      "status": "related",
+      "outcome": "resolved",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": true,
+      "reference_ids": [
+        "OIV-2018-04"
+      ],
+      "question_ids": [
+        "Q-K0568-01"
+      ],
+      "finding": "OIVの2017年消費量と同年生産量を比較し、追加解説で消費量が生産量を上回ることを年・対象付きで補完。",
+      "next_action": "",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0625",
+      "source_pages": [
+        95
+      ],
+      "previous_status": "deferred_review",
+      "status": "direct",
+      "outcome": "resolved",
+      "source_image_rechecked": true,
+      "source_needs_review_original": true,
+      "eligible_after_recheck": true,
+      "reference_ids": [
+        "SOURCE-P095"
+      ],
+      "question_ids": [
+        "Q-K0625-01"
+      ],
+      "finding": "63項目再確認で出題可能と判断。原画像の10月〜4月＝乾期を採用。既存Q-K0626-01は生育期の降雨傾向を問うが、本問は暦上の期間を問う。",
+      "next_action": "",
+      "effective_needs_review": false,
+      "verified_knowledge": "チリの南緯27〜40度付近のブドウ栽培地域では、10月から4月が雨のほとんど降らない乾期として説明される。",
+      "review_resolution": "source_rechecked"
+    },
+    {
+      "knowledge_id": "K0629",
+      "source_pages": [
+        96
+      ],
+      "previous_status": "deferred_source_year",
+      "status": "deferred_source_year",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [],
+      "finding": "p.96のフィロキセラ被害未発生について、出典の基準年・調査機関と、未侵入／被害未発生のどちらを指すかを確認してください。",
+      "next_action": "p.96のフィロキセラ被害未発生について、出典の基準年・調査機関と、未侵入／被害未発生のどちらを指すかを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0631",
+      "source_pages": [
+        96
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0630-01"
+      ],
+      "finding": "p.96のカベルネ・ソーヴィニヨン30%の対象年と、全ワイン用品種の栽培面積に対する割合かを確認してください。",
+      "next_action": "p.96のカベルネ・ソーヴィニヨン30%の対象年と、全ワイン用品種の栽培面積に対する割合かを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0641",
+      "source_pages": [
+        97
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0641-01"
+      ],
+      "finding": "p.97のマイポのカベルネ・ソーヴィニヨン50%以上について、対象年と地域境界、分母が全品種の栽培面積かを確認してください。",
+      "next_action": "p.97のマイポのカベルネ・ソーヴィニヨン50%以上について、対象年と地域境界、分母が全品種の栽培面積かを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0652",
+      "source_pages": [
+        101
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0651-01"
+      ],
+      "finding": "p.101の平均標高900mについて、対象年、全国のどの畑を含むか、面積で重み付けした平均かを確認してください。標高範囲300〜3,000m自体は既存問題で扱っています。",
+      "next_action": "p.101の平均標高900mについて、対象年、全国のどの畑を含むか、面積で重み付けした平均かを確認してください。標高範囲300〜3,000m自体は既存問題で扱っています。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0663",
+      "source_pages": [
+        102
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0665-01"
+      ],
+      "finding": "p.102のメンドーサ80%の対象年と、ワイン量・栽培面積・ブドウ収穫量のどの割合かを確認してください。",
+      "next_action": "p.102のメンドーサ80%の対象年と、ワイン量・栽培面積・ブドウ収穫量のどの割合かを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0691",
+      "source_pages": [
+        105
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0690-01"
+      ],
+      "finding": "p.105のスクリューキャップ70%以上の対象年と、瓶詰め本数・生産量・輸出を含むかという分母を確認してください。",
+      "next_action": "p.105のスクリューキャップ70%以上の対象年と、瓶詰め本数・生産量・輸出を含むかという分母を確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0696",
+      "source_pages": [
+        106
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0699-01"
+      ],
+      "finding": "p.106の西オーストラリア2%の対象年と、ワイン生産量・圧搾ブドウ量などの指標を確認してください。",
+      "next_action": "p.106の西オーストラリア2%の対象年と、ワイン生産量・圧搾ブドウ量などの指標を確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0703",
+      "source_pages": [
+        107
+      ],
+      "previous_status": "deferred_source_year",
+      "status": "deferred_source_year",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [],
+      "finding": "p.107の世界最古のシラーズについて、生産者、畑・樹の固有名、植樹年、比較基準時点、現存と継続生産の別を確認してください。直後のラングメール1843年の記述との対応も必要です。",
+      "next_action": "p.107の世界最古のシラーズについて、生産者、畑・樹の固有名、植樹年、比較基準時点、現存と継続生産の別を確認してください。直後のラングメール1843年の記述との対応も必要です。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0705",
+      "source_pages": [
+        107
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0704-01"
+      ],
+      "finding": "p.107のバロッサ黒品種85%の対象年と、分母が栽培面積か生産量か、GI地域か広域地域かを確認してください。",
+      "next_action": "p.107のバロッサ黒品種85%の対象年と、分母が栽培面積か生産量か、GI地域か広域地域かを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0710",
+      "source_pages": [
+        107
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0704-01"
+      ],
+      "finding": "p.107のバロッサのシラーズ半分について、対象年、栽培面積の分母、GI地域か広域地域かを確認してください。",
+      "next_action": "p.107のバロッサのシラーズ半分について、対象年、栽培面積の分母、GI地域か広域地域かを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0718",
+      "source_pages": [
+        109
+      ],
+      "previous_status": "deferred_review",
+      "status": "direct",
+      "outcome": "resolved",
+      "source_image_rechecked": true,
+      "source_needs_review_original": true,
+      "eligible_after_recheck": true,
+      "reference_ids": [
+        "SOURCE-P109"
+      ],
+      "question_ids": [
+        "Q-K0718-01"
+      ],
+      "finding": "63項目再確認で出題可能と判断。原文の「主に…に注力」「冷涼な産地が多い」を保持し、「適性が唯一」「州全域」へ広げない。既存Q-K0717-01の気候問題とは問う知識が異なる。",
+      "next_action": "",
+      "effective_needs_review": false,
+      "verified_knowledge": "ヴィクトリア州のヤラ・ヴァレー以南には、ピノ・ノワールとシャルドネに注力する冷涼なワイン産地が多い。",
+      "review_resolution": "source_rechecked"
+    },
+    {
+      "knowledge_id": "K0719",
+      "source_pages": [
+        109
+      ],
+      "previous_status": "deferred_review",
+      "status": "grouped",
+      "outcome": "resolved",
+      "source_image_rechecked": true,
+      "source_needs_review_original": true,
+      "eligible_after_recheck": true,
+      "reference_ids": [
+        "SOURCE-P109"
+      ],
+      "question_ids": [
+        "Q-K0718-01"
+      ],
+      "finding": "原画像でピノ・ノワールとシャルドネへの注力を確認。二品種の組合せを一問にまとめる。",
+      "next_action": "",
+      "effective_needs_review": false,
+      "verified_knowledge": "ヴィクトリア州のヤラ・ヴァレー以南には、シャルドネとピノ・ノワールに注力する冷涼なワイン産地が多い。",
+      "review_resolution": "source_rechecked"
+    },
+    {
+      "knowledge_id": "K0731",
+      "source_pages": [
+        112
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0730-01"
+      ],
+      "finding": "p.112のスクリューキャップ99%以上の対象年と、瓶詰めワイン本数の調査対象（国内向け・輸出含むか）を確認してください。",
+      "next_action": "p.112のスクリューキャップ99%以上の対象年と、瓶詰めワイン本数の調査対象（国内向け・輸出含むか）を確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0742",
+      "source_pages": [
+        115
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0742-01"
+      ],
+      "finding": "p.115の世界最東端の基準時点と、経度・日付変更線・商業ワイン産地などの比較条件を確認してください。",
+      "next_action": "p.115の世界最東端の基準時点と、経度・日付変更線・商業ワイン産地などの比較条件を確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0748",
+      "source_pages": [
+        116
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0733-01",
+        "Q-K0751-01"
+      ],
+      "finding": "p.116の国内最高標高について、最高地点・平均標高・代表畑のどの指標か、対象年と比較産地を確認してください。",
+      "next_action": "p.116の国内最高標高について、最高地点・平均標高・代表畑のどの指標か、対象年と比較産地を確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0749",
+      "source_pages": [
+        116
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0733-01",
+        "Q-K0751-01"
+      ],
+      "finding": "p.116の世界最南端について、対象年と、実験栽培・商業生産・地域単位のどこまで含める比較かを確認してください。",
+      "next_action": "p.116の世界最南端について、対象年と、実験栽培・商業生産・地域単位のどこまで含める比較かを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0750",
+      "source_pages": [
+        116
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0751-01"
+      ],
+      "finding": "p.116のピノ・ノワール70%以上の対象年と、セントラル・オタゴ全体の栽培面積に対する割合かを確認してください。",
+      "next_action": "p.116のピノ・ノワール70%以上の対象年と、セントラル・オタゴ全体の栽培面積に対する割合かを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0755",
+      "source_pages": [
+        118
+      ],
+      "previous_status": "deferred_ambiguity",
+      "status": "deferred_ambiguity",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [],
+      "finding": "p.118の「1994年の大統領就任により撤廃」は法制度廃止と民主化のどちらを指すか、出版社・講師に訂正説明を確認してください。法の廃止と大統領就任を単一の出来事として出題しません。",
+      "next_action": "p.118の「1994年の大統領就任により撤廃」は法制度廃止と民主化のどちらを指すか、出版社・講師に訂正説明を確認してください。法の廃止と大統領就任を単一の出来事として出題しません。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0757",
+      "source_pages": [
+        118
+      ],
+      "previous_status": "deferred_source_year",
+      "status": "deferred_source_year",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [],
+      "finding": "p.118の「この20年間」の始点・終点、輸出の体積か金額か、元の統計表を確認してください。",
+      "next_action": "p.118の「この20年間」の始点・終点、輸出の体積か金額か、元の統計表を確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0768",
+      "source_pages": [
+        119
+      ],
+      "previous_status": "deferred_ambiguity",
+      "status": "deferred_ambiguity",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [],
+      "finding": "p.119の約90%の地理的範囲は世界遺産の保護区域そのものか、より広いケープ植物区か、対象年・分母とともに出版社・講師に確認してください。",
+      "next_action": "p.119の約90%の地理的範囲は世界遺産の保護区域そのものか、より広いケープ植物区か、対象年・分母とともに出版社・講師に確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0776",
+      "source_pages": [
+        120
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0758-01"
+      ],
+      "finding": "p.120のワイン産地9割について、対象年、地域数・栽培面積・生産量のどの割合かを確認してください。",
+      "next_action": "p.120のワイン産地9割について、対象年、地域数・栽培面積・生産量のどの割合かを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0778",
+      "source_pages": [
+        120
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0777-01"
+      ],
+      "finding": "p.120のステレンボッシュ最大の対象年と、地区・地域・州のどの単位のブドウ栽培面積を比較するかを確認してください。",
+      "next_action": "p.120のステレンボッシュ最大の対象年と、地区・地域・州のどの単位のブドウ栽培面積を比較するかを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0784",
+      "source_pages": [
+        "4"
+      ],
+      "previous_status": "adapted",
+      "status": "direct",
+      "outcome": "resolved",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": true,
+      "reference_ids": [
+        "NTA-H29"
+      ],
+      "question_ids": [
+        "Q-K0857-01",
+        "Q-K0784-01"
+      ],
+      "finding": "63項目再確認で出題可能と判断。日本ワインの製成数量、都道府県別、平成29会計年度。原文の統計年をこの年度と同定したものではない。",
+      "next_action": "",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0785",
+      "source_pages": [
+        "4"
+      ],
+      "previous_status": "adapted",
+      "status": "grouped",
+      "outcome": "resolved",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": true,
+      "reference_ids": [
+        "NTA-H29"
+      ],
+      "question_ids": [
+        "Q-K0841-01",
+        "Q-K0784-01"
+      ],
+      "finding": "国税庁平成29年度の日本ワイン製成数量第3位＝北海道を、長野県第2位の問題の解説で年・対象付きで補完。",
+      "next_action": "",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0815",
+      "source_pages": [
+        "6"
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0835-01"
+      ],
+      "finding": "p.6のマスカット・ベーリーAが次位という仕込み量の対象年、全品種間の比較、原料受入量との違いを確認してください。国税庁の受入量をそのまま仕込み量と扱いません。",
+      "next_action": "p.6のマスカット・ベーリーAが次位という仕込み量の対象年、全品種間の比較、原料受入量との違いを確認してください。国税庁の受入量をそのまま仕込み量と扱いません。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0849",
+      "source_pages": [
+        "8"
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0849-01"
+      ],
+      "finding": "p.8のデラウェア全国1位の対象年と、生食用を含む全収穫量かワイン原料用だけかを確認してください。",
+      "next_action": "p.8のデラウェア全国1位の対象年と、生食用を含む全収穫量かワイン原料用だけかを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0855",
+      "source_pages": [
+        "8"
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0856-01"
+      ],
+      "finding": "p.8の「最も活気」が評価表現か統計的順位か、比較年と客観的指標（開設数等）を確認してください。指標がなければ最上級部分は出題対象外とする判断を共有してください。",
+      "next_action": "p.8の「最も活気」が評価表現か統計的順位か、比較年と客観的指標（開設数等）を確認してください。指標がなければ最上級部分は出題対象外とする判断を共有してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0858",
+      "source_pages": [
+        "9"
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0858-01"
+      ],
+      "finding": "p.9のメルロ全国トップの対象年と、生産数量が収穫量か産地別のワイナリー受入量かを確認してください。全用途と醸造用も区別してください。",
+      "next_action": "p.9のメルロ全国トップの対象年と、生産数量が収穫量か産地別のワイナリー受入量かを確認してください。全用途と醸造用も区別してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0859",
+      "source_pages": [
+        "9"
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0858-01"
+      ],
+      "finding": "p.9のシャルドネ全国トップの対象年と、生産数量が収穫量か産地別のワイナリー受入量かを確認してください。",
+      "next_action": "p.9のシャルドネ全国トップの対象年と、生産数量が収穫量か産地別のワイナリー受入量かを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0860",
+      "source_pages": [
+        "9"
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0858-01"
+      ],
+      "finding": "p.9のソーヴィニヨン・ブラン全国トップの対象年と、生産数量が収穫量か産地別のワイナリー受入量かを確認してください。",
+      "next_action": "p.9のソーヴィニヨン・ブラン全国トップの対象年と、生産数量が収穫量か産地別のワイナリー受入量かを確認してください。",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0861",
+      "source_pages": [
+        "10"
+      ],
+      "previous_status": "adapted",
+      "status": "direct",
+      "outcome": "resolved",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": true,
+      "reference_ids": [
+        "NTA-H29"
+      ],
+      "question_ids": [
+        "Q-K0783-01",
+        "Q-K0861-01"
+      ],
+      "finding": "63項目再確認で出題可能と判断。2018-03-31現在、平成29年度に生産又は出荷実績のあるワイナリー81/303場。日本ワインだけの製成場数や全果実酒製造場数ではない。",
+      "next_action": "",
+      "effective_needs_review": false
+    },
+    {
+      "knowledge_id": "K0864",
+      "source_pages": [
+        "10"
+      ],
+      "previous_status": "adapted",
+      "status": "adapted",
+      "outcome": "pending",
+      "source_image_rechecked": true,
+      "source_needs_review_original": false,
+      "eligible_after_recheck": false,
+      "reference_ids": [],
+      "question_ids": [
+        "Q-K0862-01"
+      ],
+      "finding": "p.10の甲州とマスカット・ベーリーA約8割の対象年と、山梨県の栽培面積・収穫量・仕込み量のどれを分母とするかを確認してください。",
+      "next_action": "p.10の甲州とマスカット・ベーリーA約8割の対象年と、山梨県の栽培面積・収穫量・仕込み量のどれを分母とするかを確認してください。",
+      "effective_needs_review": false
+    }
+  ]
+}
