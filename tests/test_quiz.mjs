@@ -300,3 +300,39 @@ test('registered pilot data derives country membership from rows and scores ever
   assert.equal(rawSession.current.format, 'pilot');
   assert.deepEqual(original, JSON.parse(text), 'source rows are never mutated by normalization or play');
 });
+
+test('the 500-question pack completes every country and the full round without repeats or answer drift', async () => {
+  const text = await readFile(new URL('../question-packs/wine-quiz-500.json', import.meta.url), 'utf8');
+  const original = JSON.parse(text);
+  const { questions } = parseQuestionPack(text);
+  const counts = countryCounts(questions);
+  assert.equal(questions.length, 500);
+  assert.equal(counts.get('フランス'), 149);
+  assert.equal(counts.get('スペイン'), 61);
+  assert.equal(counts.get('ポルトガル'), 33);
+  const originalsById = new Map(original.questions.map(row => [row.question_id, row]));
+  for (const [country, count] of [[null, 500], ...counts]) {
+    const session = new QuizSession(questions, () => 0, country);
+    const ids = new Set();
+    assert.equal(session.total, count);
+    while (session.current) {
+      const row = session.current;
+      assert.ok(!ids.has(row.id));
+      ids.add(row.id);
+      if (country !== null) assert.ok(row.countries.includes(country));
+      const originalRow = originalsById.get(row.id);
+      const correct = row.choices.find(choice => choice.text === originalRow.correct_answer);
+      assert.ok(correct);
+      assert.equal(session.answer(correct.id).correct, true);
+      assert.equal(session.answer(correct.id), null);
+      assert.equal(session.next(), true);
+    }
+    assert.equal(ids.size, count);
+    assert.equal(session.score, count);
+    assert.equal(session.complete, true);
+    session.restart();
+    assert.equal(session.score, 0);
+    assert.equal(session.total, count);
+  }
+  assert.deepEqual(original, JSON.parse(text), 'normalization and play do not rewrite the pack');
+});

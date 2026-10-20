@@ -2,8 +2,8 @@ import { isNativeQuestion, isPilotQuestion, normalizeQuestion, validQuestion } f
 
 export const MAX_PACK_BYTES = 2_000_000;
 export const MAX_PACK_QUESTIONS = 2000;
-export const DEFAULT_PACK_FILENAME = 'pilot-150.json';
-export const DEFAULT_PACK_PATH = '../question-packs/pilot-150.json';
+export const DEFAULT_PACK_FILENAME = 'wine-quiz-500.json';
+export const DEFAULT_PACK_PATH = '../question-packs/wine-quiz-500.json';
 
 /** Validate the entire file before exposing any questions to a running session. */
 export function parseQuestionPack(text) {

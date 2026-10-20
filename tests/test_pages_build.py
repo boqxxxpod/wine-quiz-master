@@ -33,7 +33,8 @@ class PublicBuildTests(unittest.TestCase):
         for relative in (".env", "data/questions-export.json", "data/wine-quiz.sqlite3",
                          "data/originals/private.jpg", "credentials/service-account.json",
                          "static/unlisted-export.json", "question-packs/private.json",
-                         "question-packs/batches/pilot-01.json", "app/store.py"):
+                         "question-packs/batches/pilot-01.json", "question-packs/pilot-150.json",
+                         "question-packs/batches/wine-quiz-01.json", "app/store.py"):
             path = self.root / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(canary, encoding="utf-8")

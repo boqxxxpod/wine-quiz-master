@@ -139,9 +139,9 @@ const questions = [
   question('france', ['フランス']), question('italy', ['イタリア']),
   question('cross-country', ['フランス', 'イタリア']), question('spain', ['スペイン']),
 ];
-const DEFAULT_PACK_PATH = '/question-packs/pilot-150.json';
-const registeredPilotText = readFileSync(new URL('../question-packs/pilot-150.json', import.meta.url), 'utf8');
-const registeredPilot = JSON.parse(registeredPilotText);
+const DEFAULT_PACK_PATH = '/question-packs/wine-quiz-500.json';
+const registeredStandardText = readFileSync(new URL('../question-packs/wine-quiz-500.json', import.meta.url), 'utf8');
+const registeredStandard = JSON.parse(registeredStandardText);
 
 async function startApp(mode, { pack = JSON.stringify(questions), status = 200, networkError = false, defaultFetcher } = {}) {
   const document = documentFromHtml(readFileSync(new URL('../static/index.html', import.meta.url), 'utf8'));
@@ -214,7 +214,7 @@ async function answerCorrectly(app) {
 
 for (const mode of ['server', 'pages']) {
   test(`${mode}: setup loads the standard pack without starting a round or calling APIs`, async () => {
-    const app = await startApp(mode, { pack: registeredPilotText });
+    const app = await startApp(mode, { pack: registeredStandardText });
     assert.deepEqual(app.requests, [DEFAULT_PACK_PATH]);
     assert.equal(app.$('#view-setup').hidden, false);
     assert.equal(app.$('#view-practice').hidden, true);
@@ -225,37 +225,37 @@ for (const mode of ['server', 'pages']) {
     assert.equal(app.$('.study-aside'), null);
     assert.equal(app.$('#count-all').checked, true);
     assert.equal(app.$('#question-count').disabled, true);
-    assert.equal(app.$('#question-count').max, '150');
-    assert.match(app.$('#scope-all-count').textContent, /150/);
-    for (const [country, count] of [['フランス', 32], ['スペイン', 16]]) {
+    assert.equal(app.$('#question-count').max, '500');
+    assert.match(app.$('#scope-all-count').textContent, /500/);
+    for (const [country, count] of [['フランス', 149], ['スペイン', 61], ['ポルトガル', 33]]) {
       const option = app.$('#practice-country').options.find(node => node.value === country);
       assert.ok(option.textContent.includes(String(count)), 'country membership is derived from rows');
     }
     const record = app.$('#pack-review-status');
     assert.equal(record.hidden, false);
-    assert.ok(record.textContent.includes(registeredPilot.metadata.qa_status));
+    assert.ok(record.textContent.includes(registeredStandard.metadata.qa_status));
     assert.equal(record.querySelector('a'), null);
     assert.doesNotMatch(record.textContent, /承認済み|人手確認済み|校閲済み|事実確認済み/);
     await app.$('#start-practice').click();
     assert.equal(app.$('#view-setup').hidden, true);
     assert.equal(app.$('#view-practice').hidden, false);
-    assert.match(app.$('#active-scope').textContent, /すべて.*150/);
-    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '150');
+    assert.match(app.$('#active-scope').textContent, /すべて.*500/);
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '500');
     assert.equal(app.document.activeElement, app.$('#question-prompt'));
     assert.equal(app.document.scrollTarget, app.$('#view-practice'));
     assert.deepEqual(app.requests, [DEFAULT_PACK_PATH]);
   });
 
-  for (const [country, count] of [['フランス', 32], ['スペイン', 16]]) {
+  for (const [country, count] of [['フランス', 149], ['スペイン', 61], ['ポルトガル', 33]]) {
     test(`${mode}: a full ${country} round keeps pilot evidence and stable scoring through restart`, async () => {
-      const app = await startApp(mode, { pack: registeredPilotText });
+      const app = await startApp(mode, { pack: registeredStandardText });
       await chooseCountry(app, country);
       assert.match(app.$('#scope-count').textContent, new RegExp(`${country}.*${count}`));
       await app.$('#start-practice').click();
       const seen = [];
       for (let index = 0; index < count; index += 1) {
         const id = app.$('.quiz-card').dataset.questionId;
-        const row = registeredPilot.questions.find(question => question.question_id === id);
+        const row = registeredStandard.questions.find(question => question.question_id === id);
         assert.ok(row.countries.includes(country));
         seen.push(id);
         assert.equal(app.$('#question-prompt').textContent, row.question);
@@ -273,7 +273,7 @@ for (const mode of ['server', 'pages']) {
         await app.$('.next-row button').click();
       }
       assert.equal(new Set(seen).size, count);
-      assert.ok(seen.includes('Q-K0019-01'));
+      assert.ok(seen.includes(country === 'ポルトガル' ? 'Q-K0491-01' : 'Q-K0019-01'));
       assert.match(app.$('.completion-score').textContent, new RegExp(`${count}.*${count}`));
       assert.equal(app.document.activeElement, app.$('.completion-card'));
       await app.$('.completion-card button').click();
@@ -389,7 +389,7 @@ for (const mode of ['server', 'pages']) {
   });
 
   test(`${mode}: invalid manual import preserves source, settings, and answered session`, async () => {
-    const app = await startApp(mode, { pack: registeredPilotText });
+    const app = await startApp(mode, { pack: registeredStandardText });
     await chooseCountry(app, 'フランス');
     await chooseCount(app, 2);
     await app.$('#start-practice').click();
@@ -409,7 +409,7 @@ for (const mode of ['server', 'pages']) {
     assert.equal(app.$('#pages-import-error').hidden, false);
     assert.equal(app.$('#question-pack').disabled, false);
     assert.equal(app.$('#clear-pack').disabled, true);
-    assert.ok(app.$('#pack-review-status').textContent.includes(registeredPilot.metadata.qa_status));
+    assert.ok(app.$('#pack-review-status').textContent.includes(registeredStandard.metadata.qa_status));
   });
 
   test(`${mode}: valid imports and restoring default return to setup and reset range and count`, async () => {
@@ -504,7 +504,7 @@ for (const mode of ['server', 'pages']) {
     assert.equal(app.$('#retry-pack').hidden, true);
     assert.equal(app.$('#question-pack').disabled, false);
     assert.equal(app.$('#start-practice').disabled, false);
-    assert.match(app.$('#pages-import-status').textContent, /pilot-150\.json.*4/);
+    assert.match(app.$('#pages-import-status').textContent, /wine-quiz-500\.json.*4/);
     await app.$('#start-practice').click();
     assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '4');
   });
@@ -522,7 +522,7 @@ for (const mode of ['server', 'pages']) {
       assert.equal(app.$('.choice'), null);
       assert.ok(app.$('#start-practice').disabled);
       assert.equal(app.$('#pages-import-error').hidden, false);
-      assert.match(app.$('#pages-import-error').textContent, /pilot-150\.json/);
+      assert.match(app.$('#pages-import-error').textContent, /wine-quiz-500\.json/);
       assert.equal(app.$('#retry-pack').hidden, false);
       assert.deepEqual(app.requests, [DEFAULT_PACK_PATH]);
     });
