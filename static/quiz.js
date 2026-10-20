@@ -1,3 +1,5 @@
+export const PRACTICE_COUNTS = Object.freeze([5, 10, 20, 30, 50, 70, 100]);
+
 /** All practice behavior stays in the browser; no API calls are made here. */
 export function shuffle(items, random = Math.random) {
   const result = [...items];

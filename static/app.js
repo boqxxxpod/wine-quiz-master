@@ -1,5 +1,5 @@
-import { QuizSession, countryCounts, questionsForCountry } from './quiz.js';
-import { parseQuestionPack, loadDefaultQuestionPack, DEFAULT_PACK_FILENAME, MAX_PACK_BYTES } from './pages.js';
+import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS } from './quiz.js?v=highlighted-20261020';
+import { parseQuestionPack, loadDefaultQuestionPack, DEFAULT_PACK_FILENAME, MAX_PACK_BYTES } from './pages.js?v=highlighted-20261020';
 
 const $ = selector => document.querySelector(selector);
 const state = { session: null, loadError: '', practiceQuestions: [], packMetadata: null, customPack: false, practiceLoading: false, importing: false };
@@ -31,13 +31,13 @@ function selectedCountry() {
 }
 
 function selectedCount() {
-  return $('#count-all').checked ? null : Number($('#question-count').value);
+  return $('#question-count').value === 'all' ? null : Number($('#question-count').value);
 }
 
 function alignCountToScope() {
   const total = questionsForCountry(state.practiceQuestions, selectedCountry()).length;
   const count = selectedCount();
-  if (Number.isInteger(count) && count > total && total > 0) $('#question-count').value = String(total);
+  if (count !== null && (!PRACTICE_COUNTS.includes(count) || count > total)) $('#question-count').value = 'all';
   renderScope();
 }
 
@@ -56,12 +56,14 @@ function renderScope(rebuildCountries = false) {
   const country = selectedCountry();
   const total = country === '' ? 0 : questionsForCountry(state.practiceQuestions, country).length;
   const count = selectedCount();
-  const invalidCount = count !== null && (!Number.isInteger(count) || count < 1 || count > total);
+  const invalidCount = count !== null && (!PRACTICE_COUNTS.includes(count) || count > total);
   const loading = state.practiceLoading || state.importing;
   select.disabled = !$('#scope-country').checked || loading;
-  for (const id of ['scope-all', 'scope-country', 'count-all', 'count-custom']) $(`#${id}`).disabled = loading;
-  $('#question-count').disabled = $('#count-all').checked || loading;
-  $('#question-count').max = String(total);
+  for (const id of ['scope-all', 'scope-country']) $(`#${id}`).disabled = loading;
+  $('#question-count').disabled = loading || total === 0;
+  for (const option of $('#question-count').options) {
+    option.disabled = option.value !== 'all' && Number(option.value) > total;
+  }
   $('#question-count').setAttribute('aria-invalid', String(invalidCount && total > 0));
   $('#scope-all-count').textContent = `（${state.practiceQuestions.length} 問）`;
   $('#count-all-label').textContent = `全問（${total} 問）`;
@@ -70,7 +72,7 @@ function renderScope(rebuildCountries = false) {
       : country === '' ? '練習する国を選んでください。'
         : total === 0 ? 'この範囲には問題がありません。別の範囲か問題集を選んでください。'
           : `対象：${country ?? 'すべて'} · ${total} 問`;
-  $('#count-error').textContent = invalidCount && total > 0 ? `出題数は 1〜${total} の整数で指定してください。` : '';
+  $('#count-error').textContent = invalidCount && total > 0 ? '選べる出題数から指定してください。' : '';
   $('#count-error').hidden = !invalidCount || total === 0;
   $('#start-practice').disabled = loading || Boolean(state.loadError) || total === 0 || invalidCount;
 }
@@ -111,9 +113,7 @@ function useQuestionPack(pack, fileName, custom = false) {
   state.session = null;
   $('#scope-all').checked = true;
   $('#scope-country').checked = false;
-  $('#count-all').checked = true;
-  $('#count-custom').checked = false;
-  $('#question-count').value = '1';
+  $('#question-count').value = 'all';
   $('#pages-import-status').textContent = `出題元：${fileName} · ${pack.questions.length} 問${custom ? '（このタブのみ）' : '（標準問題集）'}`;
   const qa = state.packMetadata?.qa_status;
   $('#pack-review-status').textContent = typeof qa === 'string' ? `問題集の検証記録：${qa}` : '';
@@ -187,7 +187,7 @@ const metadataLabels = {
   image: '画像', image_name: '画像名', image_file: '画像名', image_filename: '画像名',
   file_name: '画像名', filename: '画像名', page: 'ページ', page_number: 'ページ',
   position: '位置', location: '位置', url: 'URL', source_url: '出典URL',
-  knowledge_id: '知識ID', source_page: '教材ページ', topic: 'テーマ',
+  knowledge_id: '知識ID', source_page: '出典ページ', topic: 'テーマ',
 };
 
 function recordedMetadata(value) {
@@ -354,7 +354,6 @@ $('#retry-pack').addEventListener('click', loadDefaultPack);
 for (const id of ['scope-all', 'scope-country', 'practice-country']) {
   $(`#${id}`).addEventListener('change', alignCountToScope);
 }
-for (const id of ['count-all', 'count-custom']) $(`#${id}`).addEventListener('change', () => renderScope());
-$('#question-count').addEventListener('input', () => renderScope());
+$('#question-count').addEventListener('change', () => renderScope());
 $('#start-practice').addEventListener('click', startPractice);
 loadDefaultPack();

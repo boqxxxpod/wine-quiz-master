@@ -350,12 +350,12 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
         finally:
             busy_lock.release()
 
-    @app.get("/question-packs/wine-quiz-500.json", include_in_schema=False)
+    @app.get("/question-packs/wine-quiz-highlighted.json", include_in_schema=False)
     def standard_question_pack():
         pack_dir = APP_DIR / "question-packs"
-        pack = pack_dir / "wine-quiz-500.json"
+        pack = pack_dir / "wine-quiz-highlighted.json"
         if pack.is_symlink() or pack_dir.is_symlink() or not pack.resolve().is_relative_to(APP_DIR.resolve()) or not pack.is_file():
-            failure("question_pack_not_found", "標準問題集 wine-quiz-500.json が見つかりません。", 404)
+            failure("question_pack_not_found", "標準問題集 wine-quiz-highlighted.json が見つかりません。", 404)
         return FileResponse(pack, media_type="application/json")
 
     static_dir = APP_DIR / "static"

@@ -1,9 +1,9 @@
-import { isNativeQuestion, isPilotQuestion, normalizeQuestion, validQuestion } from './quiz.js';
+import { isNativeQuestion, isPilotQuestion, normalizeQuestion, validQuestion } from './quiz.js?v=highlighted-20261020';
 
 export const MAX_PACK_BYTES = 2_000_000;
 export const MAX_PACK_QUESTIONS = 2000;
-export const DEFAULT_PACK_FILENAME = 'wine-quiz-500.json';
-export const DEFAULT_PACK_PATH = '../question-packs/wine-quiz-500.json';
+export const DEFAULT_PACK_FILENAME = 'wine-quiz-highlighted.json';
+export const DEFAULT_PACK_PATH = '../question-packs/wine-quiz-highlighted.json';
 
 /** Validate the entire file before exposing any questions to a running session. */
 export function parseQuestionPack(text) {
@@ -58,7 +58,11 @@ export function parseQuestionPack(text) {
 export async function loadDefaultQuestionPack(fetcher = globalThis.fetch) {
   let response;
   try {
-    response = await fetcher(new URL(DEFAULT_PACK_PATH, import.meta.url));
+    const moduleUrl = new URL(import.meta.url);
+    const packUrl = new URL(DEFAULT_PACK_PATH, moduleUrl);
+    const version = moduleUrl.searchParams.get('v');
+    if (version) packUrl.searchParams.set('v', version);
+    response = await fetcher(packUrl, { cache: 'no-store' });
   } catch (error) {
     throw new Error(`${DEFAULT_PACK_FILENAME} を取得できません。接続と配置を確認してください。${error?.message ? ` (${error.message})` : ''}`);
   }
