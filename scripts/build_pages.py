@@ -6,7 +6,7 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PUBLIC_QUESTION_PACK = "question-packs/pilot-150.json"
+PUBLIC_QUESTION_PACK = "question-packs/wine-quiz-500.json"
 PUBLIC_FILES = (
     "static/index.html", "static/app.js", "static/quiz.js",
     "static/pages.js", "static/style.css", PUBLIC_QUESTION_PACK,
