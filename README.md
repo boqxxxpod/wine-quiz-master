@@ -114,6 +114,6 @@ node scripts/verify_standard_pack.mjs
 python scripts/build_pages.py
 ```
 
-PRでは `Validate quiz and application` がPython・Node.jsテスト、653問の構造・既存500問保持・864項目の対応分類・分割一致、Pagesビルドを実行します。新しい画面テストは8つの出題数での一巡と再開、国別件数が選択数より少なくなる場合、読み込み失敗と手動インポートの保持を含みます。
+2026-10-20の[GitHub Actions CI](https://github.com/boqxxxpod/wine-quiz-master/actions/runs/39374246122)（コード・データのコミット `c1cfb30cd7314173feb078a329d40c5c8fcda971`）で、Python 50件、Node.js 68件が成功しました。全件データ検証とPagesビルドも成功しています。 PRの `Validate quiz and application` で継続的に検証します。新しい画面テストは8つの出題数での一巡と再開、国別件数が選択数より少なくなる場合、読み込み失敗と手動インポートの保持を含みます。
 
 今回の実ブラウザでの再検証は行っていません。自動テストの合成DOMと出題処理で確認します。過去の実ブラウザ確認と未完了事項は [確認記録](docs/verification.md)、内容の保留や既存問題の制約は [検証レポート](question-packs/highlighted-validation-report.md) に記録しています。

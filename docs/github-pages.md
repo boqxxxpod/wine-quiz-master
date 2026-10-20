@@ -60,7 +60,7 @@ python scripts/build_pages.py
 
 ## 公開前の確認
 
-PRの `Validate quiz and application` ワークフローで次を実行します。Node.jsの画面操作テストは合成DOM上で行い、8つの出題数での一巡・再開・範囲変更を確認します。
+2026-10-20の[GitHub Actions CI](https://github.com/boqxxxpod/wine-quiz-master/actions/runs/39374246122)（コード・データのコミット `c1cfb30cd7314173feb078a329d40c5c8fcda971`）で、Python 50件、Node.js 68件が成功しました。全件データ検証とPagesビルドも成功しています。 PRの `Validate quiz and application` ワークフローで次を実行します。Node.jsの画面操作テストは合成DOM上で行い、8つの出題数での一巡・再開・範囲変更を確認します。
 
 ```sh
 python -m unittest discover -s tests -v
