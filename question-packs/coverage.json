@@ -1,28 +1,32 @@
 {
   "metadata": {
     "generated_on": "2026-10-20",
-    "basis": "元の864項目をIDごとに分類。direct・grouped・relatedは問題または解説で対応。adaptedは原記述の数値・順位等を完全には出題していない。deferredは出題保留。",
+    "basis": "864項目をID別に分類。今回の63項目は対応原画像35枚を再読。公的過去統計で補完した対象年は原文の年とは区別する。direct・grouped・relatedには解説での対応を含み、独立した設問数とは異なる。",
     "source_sha256": "4d6cd1ce22e9c6064cd4817cf2a37fb9540179ccf265cb8025dd5a780a425b97",
     "summary": {
       "source_items": 864,
       "source_needs_review": 9,
-      "question_count": 653,
+      "source_review_resolved": 7,
+      "source_review_open": 2,
+      "question_count": 662,
       "original_questions": 150,
-      "previous_questions": 500,
-      "added_questions": 153,
+      "previous_questions": 653,
+      "added_questions": 9,
       "status_counts": {
-        "direct": 643,
-        "grouped": 100,
-        "deferred_source_year": 10,
-        "adapted": 39,
-        "deferred_review": 9,
-        "related": 58,
-        "deferred_ambiguity": 5
+        "direct": 653,
+        "grouped": 102,
+        "deferred_source_year": 7,
+        "adapted": 35,
+        "related": 61,
+        "deferred_ambiguity": 5,
+        "deferred_review": 1
       },
-      "fully_represented_items": 801,
-      "adapted_items": 39,
-      "deferred_items": 24
-    }
+      "fully_represented_items": 816,
+      "adapted_items": 35,
+      "deferred_items": 13,
+      "remaining_items": 48
+    },
+    "latest_review": "remaining-review.json"
   },
   "entries": [
     {
@@ -97,9 +101,11 @@
         "フランス"
       ],
       "source_page": 12,
-      "status": "deferred_source_year",
-      "question_ids": [],
-      "reason": "順位の対象年が元知識・対応する周辺テキストから確定できない。"
+      "status": "direct",
+      "question_ids": [
+        "Q-K0006-01"
+      ],
+      "reason": "63項目再確認で出題可能と判断。2017年推計。全用途のブドウ栽培面積と、ジュース・マストを除くワイン生産量を区別。原文の統計年を2017年と認定したものではない。"
     },
     {
       "knowledge_id": "K0007",
@@ -109,11 +115,12 @@
         "イタリア"
       ],
       "source_page": 12,
-      "status": "adapted",
+      "status": "direct",
       "question_ids": [
-        "Q-K0007-01"
+        "Q-K0007-01",
+        "Q-K0006-01"
       ],
-      "reason": "三大生産国の組合せを扱い、対象年不明の生産量第2位は問わない。"
+      "reason": "既存の三大生産国の問題を保持し、新規Q-K0006-01の解説で、OIVの2017年ワイン生産量第2位を年・対象付きで補完。原文の統計年は未特定。"
     },
     {
       "knowledge_id": "K0008",
@@ -122,9 +129,11 @@
         "フランス"
       ],
       "source_page": 12,
-      "status": "deferred_source_year",
-      "question_ids": [],
-      "reason": "順位の対象年が元知識・対応する周辺テキストから確定できない。"
+      "status": "direct",
+      "question_ids": [
+        "Q-K0008-01"
+      ],
+      "reason": "63項目再確認で出題可能と判断。2017年国別ワイン輸出額。83か国の貿易データに基づくOIV公表値、ユーロ建て。"
     },
     {
       "knowledge_id": "K0009",
@@ -771,9 +780,9 @@
         "フランス"
       ],
       "source_page": 16,
-      "status": "deferred_review",
+      "status": "deferred_source_year",
       "question_ids": [],
-      "reason": "元知識がneeds_review=true。推測で出題しない。"
+      "reason": "原画像で「フランスの家庭」の限定は確認できたが、A.O.C.発泡ワインの消費順位の年・家庭内購入等の集計方法が不明。要確認のまま出題しない。"
     },
     {
       "knowledge_id": "K0059",
@@ -1454,9 +1463,11 @@
         "フランス"
       ],
       "source_page": 23,
-      "status": "deferred_review",
-      "question_ids": [],
-      "reason": "元知識がneeds_review=true。推測で出題しない。"
+      "status": "direct",
+      "question_ids": [
+        "Q-K0111-01"
+      ],
+      "reason": "63項目再確認で出題可能と判断。原画像でA.O.C.生産量とInter Rhône 2017年実績の対応を確認。色の一般的傾向に年不明の80%・13%・7%を転用しない。"
     },
     {
       "knowledge_id": "K0112",
@@ -1465,9 +1476,11 @@
         "フランス"
       ],
       "source_page": 23,
-      "status": "deferred_review",
-      "question_ids": [],
-      "reason": "元知識がneeds_review=true。推測で出題しない。"
+      "status": "related",
+      "question_ids": [
+        "Q-K0111-01"
+      ],
+      "reason": "原画像で対象がローヌ渓谷地方全体であることを確認し、追加解説に赤・ロゼ中心の傾向を記載。南部限定にはしない。"
     },
     {
       "knowledge_id": "K0113",
@@ -7007,9 +7020,11 @@
         "オーストリア"
       ],
       "source_page": 78,
-      "status": "deferred_review",
-      "question_ids": [],
-      "reason": "元知識がneeds_review=true。推測で出題しない。"
+      "status": "related",
+      "question_ids": [
+        "Q-K0540-01"
+      ],
+      "reason": "原画像で「溌剌」を確認。既存Q-K0540-01のフレッシュ感の説明が対応しているため、重複問題を追加しない。"
     },
     {
       "knowledge_id": "K0540",
@@ -7279,9 +7294,11 @@
         "オーストリア"
       ],
       "source_page": 81,
-      "status": "deferred_review",
-      "question_ids": [],
-      "reason": "元知識がneeds_review=true。推測で出題しない。"
+      "status": "direct",
+      "question_ids": [
+        "Q-K0560-01"
+      ],
+      "reason": "63項目再確認で出題可能と判断。見出しはNeusiedlersee DACだが、設問は湖を囲む地理上の産地に限定する。甘口が同DAC全体の認定規定とは述べない。"
     },
     {
       "knowledge_id": "K0561",
@@ -7381,9 +7398,11 @@
         "アメリカ"
       ],
       "source_page": "85",
-      "status": "deferred_source_year",
-      "question_ids": [],
-      "reason": "消費量の順位・生産量との比較について対象年を確認できない。"
+      "status": "direct",
+      "question_ids": [
+        "Q-K0568-01"
+      ],
+      "reason": "63項目再確認で出題可能と判断。2017年推計。国全体の総消費量。生産量はジュース・マストを除く。原文の統計年は未特定。"
     },
     {
       "knowledge_id": "K0569",
@@ -7392,9 +7411,11 @@
         "アメリカ"
       ],
       "source_page": "85",
-      "status": "deferred_source_year",
-      "question_ids": [],
-      "reason": "消費量の順位・生産量との比較について対象年を確認できない。"
+      "status": "related",
+      "question_ids": [
+        "Q-K0568-01"
+      ],
+      "reason": "OIVの2017年消費量と同年生産量を比較し、追加解説で消費量が生産量を上回ることを年・対象付きで補完。"
     },
     {
       "knowledge_id": "K0570",
@@ -8119,9 +8140,11 @@
         "チリ"
       ],
       "source_page": 95,
-      "status": "deferred_review",
-      "question_ids": [],
-      "reason": "元知識がneeds_review=true。推測で出題しない。"
+      "status": "direct",
+      "question_ids": [
+        "Q-K0625-01"
+      ],
+      "reason": "63項目再確認で出題可能と判断。原画像の10月〜4月＝乾期を採用。既存Q-K0626-01は生育期の降雨傾向を問うが、本問は暦上の期間を問う。"
     },
     {
       "knowledge_id": "K0626",
@@ -9322,9 +9345,11 @@
         "オーストラリア"
       ],
       "source_page": 109,
-      "status": "deferred_review",
-      "question_ids": [],
-      "reason": "元知識がneeds_review=true。推測で出題しない。"
+      "status": "direct",
+      "question_ids": [
+        "Q-K0718-01"
+      ],
+      "reason": "63項目再確認で出題可能と判断。原文の「主に…に注力」「冷涼な産地が多い」を保持し、「適性が唯一」「州全域」へ広げない。既存Q-K0717-01の気候問題とは問う知識が異なる。"
     },
     {
       "knowledge_id": "K0719",
@@ -9333,9 +9358,11 @@
         "オーストラリア"
       ],
       "source_page": 109,
-      "status": "deferred_review",
-      "question_ids": [],
-      "reason": "元知識がneeds_review=true。推測で出題しない。"
+      "status": "grouped",
+      "question_ids": [
+        "Q-K0718-01"
+      ],
+      "reason": "原画像でピノ・ノワールとシャルドネへの注力を確認。二品種の組合せを一問にまとめる。"
     },
     {
       "knowledge_id": "K0720",
@@ -10172,11 +10199,12 @@
         "日本"
       ],
       "source_page": "4",
-      "status": "adapted",
+      "status": "direct",
       "question_ids": [
-        "Q-K0857-01"
+        "Q-K0857-01",
+        "Q-K0784-01"
       ],
-      "reason": "年不明の生産量第2位は問わず、長野県の品種を扱う。"
+      "reason": "63項目再確認で出題可能と判断。日本ワインの製成数量、都道府県別、平成29会計年度。原文の統計年をこの年度と同定したものではない。"
     },
     {
       "knowledge_id": "K0785",
@@ -10185,11 +10213,12 @@
         "日本"
       ],
       "source_page": "4",
-      "status": "adapted",
+      "status": "grouped",
       "question_ids": [
-        "Q-K0841-01"
+        "Q-K0841-01",
+        "Q-K0784-01"
       ],
-      "reason": "年不明の生産量第3位は問わず、北海道の品種構成を扱う。"
+      "reason": "国税庁平成29年度の日本ワイン製成数量第3位＝北海道を、長野県第2位の問題の解説で年・対象付きで補完。"
     },
     {
       "knowledge_id": "K0786",
@@ -11174,11 +11203,12 @@
         "日本"
       ],
       "source_page": "10",
-      "status": "adapted",
+      "status": "direct",
       "question_ids": [
-        "Q-K0783-01"
+        "Q-K0783-01",
+        "Q-K0861-01"
       ],
-      "reason": "年不明のワイナリー約3割は問わず、山梨と甲府盆地・甲州の対応を扱う。"
+      "reason": "63項目再確認で出題可能と判断。2018-03-31現在、平成29年度に生産又は出荷実績のあるワイナリー81/303場。日本ワインだけの製成場数や全果実酒製造場数ではない。"
     },
     {
       "knowledge_id": "K0862",
@@ -12240,6 +12270,139 @@
         "K0863"
       ],
       "explanation_reference_question_id": "Q-K0783-01"
+    }
+  },
+  "supplemental_question_support": {
+    "Q-K0006-01": {
+      "knowledge_ids": [
+        "K0006",
+        "K0007"
+      ],
+      "reference_ids": [
+        "OIV-2018-04"
+      ],
+      "source_locator": "出典資料p.12、OIV印刷p.3–4・6–7",
+      "verified_scope": "2017年推計。全用途のブドウ栽培面積と、ジュース・マストを除くワイン生産量を区別。原文の統計年を2017年と認定したものではない。",
+      "single_answer_check": "同種の三候補を比較し、問題文に示す年・集計範囲または地域・性質で一候補に定まることを照合。",
+      "semantic_duplicate_check": "既存653問の問題文・解説と照合し、同じ内容の言い換えとなる独立問題がないことを確認。",
+      "validation_status": "auto_checked",
+      "human_approved": false
+    },
+    "Q-K0008-01": {
+      "knowledge_ids": [
+        "K0008"
+      ],
+      "reference_ids": [
+        "OIV-2018-04"
+      ],
+      "source_locator": "出典資料p.12、OIV印刷p.10・12",
+      "verified_scope": "2017年国別ワイン輸出額。83か国の貿易データに基づくOIV公表値、ユーロ建て。",
+      "single_answer_check": "同種の三候補を比較し、問題文に示す年・集計範囲または地域・性質で一候補に定まることを照合。",
+      "semantic_duplicate_check": "既存653問の問題文・解説と照合し、同じ内容の言い換えとなる独立問題がないことを確認。",
+      "validation_status": "auto_checked",
+      "human_approved": false
+    },
+    "Q-K0111-01": {
+      "knowledge_ids": [
+        "K0111",
+        "K0112"
+      ],
+      "reference_ids": [
+        "SOURCE-P023"
+      ],
+      "source_locator": "出典資料p.23、プロフィール",
+      "verified_scope": "原画像でA.O.C.生産量とInter Rhône 2017年実績の対応を確認。色の一般的傾向に年不明の80%・13%・7%を転用しない。",
+      "single_answer_check": "同種の三候補を比較し、問題文に示す年・集計範囲または地域・性質で一候補に定まることを照合。",
+      "semantic_duplicate_check": "既存653問の問題文・解説と照合し、同じ内容の言い換えとなる独立問題がないことを確認。",
+      "validation_status": "auto_checked",
+      "human_approved": false
+    },
+    "Q-K0560-01": {
+      "knowledge_ids": [
+        "K0560"
+      ],
+      "reference_ids": [
+        "SOURCE-P081"
+      ],
+      "source_locator": "出典資料p.81、ノイジードラーゼー見出し直下",
+      "verified_scope": "見出しはNeusiedlersee DACだが、設問は湖を囲む地理上の産地に限定する。甘口が同DAC全体の認定規定とは述べない。",
+      "single_answer_check": "同種の三候補を比較し、問題文に示す年・集計範囲または地域・性質で一候補に定まることを照合。",
+      "semantic_duplicate_check": "既存653問の問題文・解説と照合し、同じ内容の言い換えとなる独立問題がないことを確認。",
+      "validation_status": "auto_checked",
+      "human_approved": false
+    },
+    "Q-K0568-01": {
+      "knowledge_ids": [
+        "K0568",
+        "K0569"
+      ],
+      "reference_ids": [
+        "OIV-2018-04"
+      ],
+      "source_locator": "出典資料p.85、OIV印刷p.6・8",
+      "verified_scope": "2017年推計。国全体の総消費量。生産量はジュース・マストを除く。原文の統計年は未特定。",
+      "single_answer_check": "同種の三候補を比較し、問題文に示す年・集計範囲または地域・性質で一候補に定まることを照合。",
+      "semantic_duplicate_check": "既存653問の問題文・解説と照合し、同じ内容の言い換えとなる独立問題がないことを確認。",
+      "validation_status": "auto_checked",
+      "human_approved": false
+    },
+    "Q-K0625-01": {
+      "knowledge_ids": [
+        "K0625"
+      ],
+      "reference_ids": [
+        "SOURCE-P095"
+      ],
+      "source_locator": "出典資料p.95、気候風土",
+      "verified_scope": "原画像の10月〜4月＝乾期を採用。既存Q-K0626-01は生育期の降雨傾向を問うが、本問は暦上の期間を問う。",
+      "single_answer_check": "同種の三候補を比較し、問題文に示す年・集計範囲または地域・性質で一候補に定まることを照合。",
+      "semantic_duplicate_check": "既存653問の問題文・解説と照合し、同じ内容の言い換えとなる独立問題がないことを確認。",
+      "validation_status": "auto_checked",
+      "human_approved": false
+    },
+    "Q-K0718-01": {
+      "knowledge_ids": [
+        "K0718",
+        "K0719"
+      ],
+      "reference_ids": [
+        "SOURCE-P109"
+      ],
+      "source_locator": "出典資料p.109、ヴィクトリア州冒頭",
+      "verified_scope": "原文の「主に…に注力」「冷涼な産地が多い」を保持し、「適性が唯一」「州全域」へ広げない。既存Q-K0717-01の気候問題とは問う知識が異なる。",
+      "single_answer_check": "同種の三候補を比較し、問題文に示す年・集計範囲または地域・性質で一候補に定まることを照合。",
+      "semantic_duplicate_check": "既存653問の問題文・解説と照合し、同じ内容の言い換えとなる独立問題がないことを確認。",
+      "validation_status": "auto_checked",
+      "human_approved": false
+    },
+    "Q-K0784-01": {
+      "knowledge_ids": [
+        "K0784",
+        "K0785"
+      ],
+      "reference_ids": [
+        "NTA-H29"
+      ],
+      "source_locator": "出典資料p.4、国税庁印刷p.18・冒頭の調査対象期間",
+      "verified_scope": "日本ワインの製成数量、都道府県別、平成29会計年度。原文の統計年をこの年度と同定したものではない。",
+      "single_answer_check": "同種の三候補を比較し、問題文に示す年・集計範囲または地域・性質で一候補に定まることを照合。",
+      "semantic_duplicate_check": "既存653問の問題文・解説と照合し、同じ内容の言い換えとなる独立問題がないことを確認。",
+      "validation_status": "auto_checked",
+      "human_approved": false
+    },
+    "Q-K0861-01": {
+      "knowledge_ids": [
+        "K0861"
+      ],
+      "reference_ids": [
+        "NTA-H29"
+      ],
+      "source_locator": "出典資料p.10、国税庁印刷p.1・19",
+      "verified_scope": "2018-03-31現在、平成29年度に生産又は出荷実績のあるワイナリー81/303場。日本ワインだけの製成場数や全果実酒製造場数ではない。",
+      "single_answer_check": "同種の三候補を比較し、問題文に示す年・集計範囲または地域・性質で一候補に定まることを照合。",
+      "semantic_duplicate_check": "既存653問の問題文・解説と照合し、同じ内容の言い換えとなる独立問題がないことを確認。",
+      "validation_status": "auto_checked",
+      "human_approved": false
     }
   }
 }

@@ -306,12 +306,12 @@ test('the highlighted pack completes every country and the full round without re
   const original = JSON.parse(text);
   const { questions } = parseQuestionPack(text);
   const counts = countryCounts(questions);
-  assert.equal(questions.length, 653);
-  assert.equal(counts.get('フランス'), 198);
+  assert.equal(questions.length, 662);
+  assert.equal(counts.get('フランス'), 201);
   assert.equal(counts.get('スペイン'), 76);
   assert.equal(counts.get('ポルトガル'), 42);
   const originalsById = new Map(original.questions.map(row => [row.question_id, row]));
-  for (const [country, count] of [[null, 653], ...counts]) {
+  for (const [country, count] of [[null, 662], ...counts]) {
     const session = new QuizSession(questions, () => 0, country);
     const ids = new Set();
     assert.equal(session.total, count);
