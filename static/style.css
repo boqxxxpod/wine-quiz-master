@@ -174,3 +174,34 @@ input:disabled,select:disabled { background:#f1ede5; color:var(--muted); }
 .matching-select { width: 100%; min-width: 0; min-height: 44px; font: inherit; padding: 10px; }
 .match-correct { color: #196843; }
 .match-incorrect { color: #a12635; }
+:root { --place-accent: #746b43; }
+.place-entry { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; border-left: 4px solid var(--place-accent); }
+.place-entry h2 { margin-bottom: .4rem; }
+.place-entry p { margin-bottom: .6rem; }
+.place-entry button { flex-shrink: 0; }
+.place-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .6rem; margin: 1.4rem 0 .7rem; }
+.place-stats > div { padding: 1rem; background: #f2ede3; border-radius: .5rem; }
+.place-stats dt { font-size: .85rem; }
+.place-stats dd { margin: .5rem 0 0; font-size: 1.5rem; color: #702d3c; }
+.place-stats-help { margin: .5rem 0 1.5rem; font-size: .9rem; }
+.place-stats-help summary, .place-tree summary { cursor: pointer; padding: .65rem 0; }
+.place-tree ul { padding-left: 1.2rem; list-style: none; }
+.place-tree li { border-left: 1px solid #c7bca6; padding: .4rem 0 .4rem .8rem; overflow-wrap: anywhere; }
+.place-tree .source-details { font-size: .85rem; }
+.place-card progress { width: 100%; accent-color: #702d3c; height: .5rem; }
+.place-card .button { margin: .4rem .5rem .4rem 0; }
+.place-answer-list { font-size: 1.25rem; padding-left: 1.5rem; line-height: 1.8; }
+.place-history { border-top: 1px solid #d8cdbb; margin-top: 2rem; padding-top: 1rem; }
+#place-content .setup-card { margin-top: 1rem; }
+#place-content .field { margin: 1rem 0; }
+#place-content a { overflow-wrap: anywhere; }
+#place-reset-confirm { border: 1px solid #702d3c; padding: 1rem; margin-top: 1rem; }
+#place-reset-confirm button { margin: .3rem .5rem .3rem 0; }
+@media (max-width: 600px) {
+  .place-entry { flex-direction: column; align-items: stretch; }
+  .place-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .place-stats > div { padding: .8rem; }
+  .place-tree ul { padding-left: .5rem; }
+  .place-tree li { padding-left: .5rem; }
+  .place-card .button { width: 100%; margin-right: 0; }
+}

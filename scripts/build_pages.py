@@ -10,16 +10,18 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_QUESTION_PACK = "question-packs/wine-quiz-highlighted.json"
 PUBLIC_PRACTICE_PACK = "question-packs/wine-quiz-practice-20261031.json"
 PUBLIC_QUESTION_PACKS = (PUBLIC_QUESTION_PACK, PUBLIC_PRACTICE_PACK)
+PUBLIC_PLACE_PACK = "question-packs/place-relations.json"
+PUBLIC_PLACE_MODULES = ("static/places.js", "static/place-review.js", "static/place-master.js")
 PUBLIC_PRACTICE_ASSETS = tuple(f"question-packs/practice-assets/{name}" for name in (
     "fr-002.png", "it-007-2.png", "es-021.png",
     "it-023.jpg", "it-024.jpg", "it-025.jpg", "it-026.jpg",
 ))
 PUBLIC_FILES = (
     "static/index.html", "static/app.js", "static/quiz.js",
-    "static/pages.js", "static/style.css", *PUBLIC_QUESTION_PACKS, *PUBLIC_PRACTICE_ASSETS,
+    "static/pages.js", "static/style.css", *PUBLIC_PLACE_MODULES, *PUBLIC_QUESTION_PACKS, PUBLIC_PLACE_PACK, *PUBLIC_PRACTICE_ASSETS,
 )
 MARKER = ".wine-pages-artifact"
-SOURCE_ASSET_VERSION = "italy-retake-20261101"
+SOURCE_ASSET_VERSION = "place-master-20261101"
 
 
 def build(source_root: Path = ROOT, output: Path | None = None) -> Path:
@@ -45,7 +47,7 @@ def build(source_root: Path = ROOT, output: Path | None = None) -> Path:
             digest.update(source.read_bytes())
         # HTML, imported modules, and JSON share a version derived from public bytes.
         version = digest.hexdigest()[:16]
-        for name in ("index.html", "static/app.js", "static/pages.js"):
+        for name in ("index.html", *(name for name in PUBLIC_FILES if name.endswith(".js"))):
             asset = temporary / name
             asset.write_text(
                 asset.read_text(encoding="utf-8").replace(

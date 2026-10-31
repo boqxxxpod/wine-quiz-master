@@ -1,5 +1,6 @@
-import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS, practiceAssetUrl, validMatchingAnswer } from './quiz.js?v=italy-retake-20261101';
-import { parseQuestionPack, loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID, MAX_PACK_BYTES } from './pages.js?v=italy-retake-20261101';
+import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS, practiceAssetUrl, validMatchingAnswer } from './quiz.js?v=place-master-20261101';
+import { parseQuestionPack, loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID, MAX_PACK_BYTES } from './pages.js?v=place-master-20261101';
+import { initPlaceMaster } from './place-master.js?v=place-master-20261101';
 
 const $ = selector => document.querySelector(selector);
 const state = { session: null, loadError: '', practiceQuestions: [], packMetadata: null, customPack: false, practiceLoading: false, importing: false, bundledPackId: DEFAULT_PACK_ID, packLabel: '' };
@@ -89,6 +90,7 @@ function renderScope(rebuildCountries = false) {
 }
 
 function showSetup(focus = true) {
+  placeMaster.hide();
   $('#view-setup').hidden = false;
   $('#view-practice').hidden = true;
   renderScope();
@@ -136,7 +138,7 @@ function useQuestionPack(pack, fileName, custom = false) {
   $('#quiz-root').replaceChildren();
   $('#active-scope').textContent = '';
   renderScope(true);
-  showSetup(false);
+  if (!placeMaster.isOpen) showSetup(false);
 }
 
 async function loadBundledPack(packId = state.bundledPackId) {
@@ -448,6 +450,8 @@ async function importQuestionPack() {
   }
 }
 
+const placeMaster = initPlaceMaster({ onHome: () => showSetup() });
+$('#open-place-master').addEventListener('click', () => placeMaster.open());
 $('#back-to-setup').addEventListener('click', showSetup);
 $('.brand').addEventListener('click', event => { event.preventDefault(); showSetup(); });
 $('#question-pack').addEventListener('change', importQuestionPack);
