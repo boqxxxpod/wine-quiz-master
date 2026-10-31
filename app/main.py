@@ -352,8 +352,7 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
 
     @app.get("/question-packs/practice-assets/{filename}", include_in_schema=False)
     def practice_asset(filename: str):
-        if filename not in {"fr-002.png", "it-007-2.png", "es-021.png",
-                            "it-023.jpg", "it-024.jpg", "it-025.jpg", "it-026.jpg"}:
+        if filename not in {"fr-002.png", "it-007-2.png", "es-021.png"}:
             failure("question_asset_not_found", "原文画像が見つかりません。", 404)
         pack_dir = APP_DIR / "question-packs"
         asset_dir = pack_dir / "practice-assets"

@@ -1,7 +1,6 @@
 export const PRACTICE_COUNTS = Object.freeze([5, 10, 20, 30, 50, 70, 100]);
 export const PRACTICE_ASSETS = Object.freeze([
   'fr-002.png', 'it-007-2.png', 'es-021.png',
-  'it-023.jpg', 'it-024.jpg', 'it-025.jpg', 'it-026.jpg',
 ]);
 
 /** Only bundled crops can be displayed, including when importing a custom pack. */

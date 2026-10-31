@@ -1,5 +1,5 @@
-import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS, practiceAssetUrl, validMatchingAnswer } from './quiz.js?v=italy-retake-20261101';
-import { parseQuestionPack, loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID, MAX_PACK_BYTES } from './pages.js?v=italy-retake-20261101';
+import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS, practiceAssetUrl, validMatchingAnswer } from './quiz.js?v=italy-text-20261101';
+import { parseQuestionPack, loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID, MAX_PACK_BYTES } from './pages.js?v=italy-text-20261101';
 
 const $ = selector => document.querySelector(selector);
 const state = { session: null, loadError: '', practiceQuestions: [], packMetadata: null, customPack: false, practiceLoading: false, importing: false, bundledPackId: DEFAULT_PACK_ID, packLabel: '' };

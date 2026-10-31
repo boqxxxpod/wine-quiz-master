@@ -38,7 +38,9 @@ class PublicBuildTests(unittest.TestCase):
                          "static/unlisted-export.json", "question-packs/private.json",
                          "question-packs/batches/pilot-01.json", "question-packs/pilot-150.json",
                          "question-packs/batches/wine-quiz-01.json", "question-packs/wine-quiz-500.json",
-                         "question-packs/coverage.json", "question-packs/highlighted-batches/wine-quiz-01.json", "app/store.py"):
+                         "question-packs/coverage.json", "question-packs/highlighted-batches/wine-quiz-01.json", "app/store.py",
+                         "question-packs/practice-assets/it-023.jpg", "question-packs/practice-assets/it-024.jpg",
+                         "question-packs/practice-assets/it-025.jpg", "question-packs/practice-assets/it-026.jpg"):
             path = self.root / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(canary, encoding="utf-8")

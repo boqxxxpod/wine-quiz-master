@@ -30,27 +30,43 @@ test('all original numbered units have an auditable source, answer and unchanged
     assert.equal(sha(JSON.stringify(canonical(fields))), record.content_sha256, row.question_id);
     assert.equal(row.source_verbatim, true);
   }
-  assert.deepEqual(Object.keys(review.crops).sort(), [...PRACTICE_ASSETS].sort());
+  assert.deepEqual(rows.filter(row => row.source_image).map(row => row.source_image.filename).sort(), [...PRACTICE_ASSETS].sort());
   for (const [filename, record] of Object.entries(review.crops)) {
     assert.equal(sha(await readFile(new URL(`../question-packs/practice-assets/${filename}`, import.meta.url))), record.sha256);
   }
-  assert.equal(rows.filter(row => row.validation.source_text_compared).length, 222);
+  assert.equal(rows.filter(row => row.validation.source_text_compared).length, 226);
   const pending = rows.filter(row => row.validation.transcription_pending);
-  assert.equal(pending.length, 4);
+  assert.equal(pending.length, 0);
   assert.deepEqual(pending.map(row => row.id), original.metadata.transcription_pending_question_ids);
   assert.deepEqual(pending.map(row => row.id), review.unresolved.map(row => row.question_id));
-  for (const row of pending) {
-    assert.equal(row.source_image.kind, 'original');
-    assert.deepEqual(row.options, ['1','2','3'], 'controls refer to printed choices; they are not a guessed transcription');
-    assert.ok(row.validation.transcription_note);
-    assert.equal(row.validation.image_legibility_checked, true, 'legible images do not imply completed text transcription');
-    assert.match(row.validation.transcription_note, /文字転記は未実施/);
-    const source = row.sources.find(source => source.role === 'question');
-    assert.equal(source.image_index, 10, 'replacement keeps the original logical image number');
-    assert.equal(source.source_revision, review.image_replacements[0].source_revision);
+  assert.equal(original.metadata.transcribed_question_count, 226);
+  assert.equal(original.metadata.original_image_question_count, 0);
+  assert.equal(review.text_transcriptions[0].transcription_completed, true);
+});
+
+test('Italy 23–26 use complete original text and printed choices with no image dependency', () => {
+  const expected = [
+    ['ピエモンテ州で造られる白ワインのD.O.C.G.アスティに使われるブドウ品種を1つ選んでください。', ['モスカート・ビアンコ','アルネイス','コルテーゼ'], 0],
+    ['ヴェネト州でコルヴィーナ主体の収穫したブドウを2～3カ月陰干しすることによりエキス分を濃縮させ、発酵させるワインに該当するものを1つ選んでください。', ['レチョート・ディ・ソアーヴェ','アマローネ・デッラ・ヴァルポリチェッラ','グラッパ'], 1],
+    ['白ワインの名産地として有名なフリウリ・ヴェネツィア・ジューリア州で、果皮や種子と共に発酵しマセレーションするワインの名称に該当するものを1つ選んでください。', ['イエローワイン','オレンジワイン','グリーンワイン'], 1],
+    ['トスカーナ州のD.O.C.G.ワインで長期熟成能力が高いブルネッロ・ディ・モンタルチーノの主要品種を1つ選んでください。', ['プリミティーヴォ','サンジョヴェーゼ','モンテプルチャーノ'], 1],
+  ];
+  expected.forEach(([prompt, options, correctIndex], i) => {
+    const row = rows.find(row => row.id === `Q-PR20261031-IT-${String(i + 23).padStart(3, '0')}`);
+    assert.equal(row.prompt, prompt);
+    assert.deepEqual(row.options, options);
+    assert.equal(row.correct_index, correctIndex);
+    assert.equal(row.correct_answer, options[correctIndex]);
+    assert.equal(row.source_image, undefined);
+    assert.equal(row.validation.transcription_pending, false);
+    assert.equal(row.validation.source_text_compared, true);
+    assert.equal(row.sources[0].image_index, 10);
+    const quiz = new QuizSession([row], () => 0);
+    assert.equal(quiz.answer(`option-${correctIndex}`).correct, true);
+  });
+  for (const name of ['it-023.jpg','it-024.jpg','it-025.jpg','it-026.jpg']) {
+    assert.throws(() => practiceAssetUrl(name), /未登録/);
   }
-  assert.equal(review.image_replacements[0].transcription_completed, false);
-  assert.equal(review.image_replacements[0].image_legibility_checked, true);
 });
 
 test('original diagrams, two choices and the unsplit five pairs retain their relationships', () => {

@@ -12,14 +12,13 @@ PUBLIC_PRACTICE_PACK = "question-packs/wine-quiz-practice-20261031.json"
 PUBLIC_QUESTION_PACKS = (PUBLIC_QUESTION_PACK, PUBLIC_PRACTICE_PACK)
 PUBLIC_PRACTICE_ASSETS = tuple(f"question-packs/practice-assets/{name}" for name in (
     "fr-002.png", "it-007-2.png", "es-021.png",
-    "it-023.jpg", "it-024.jpg", "it-025.jpg", "it-026.jpg",
 ))
 PUBLIC_FILES = (
     "static/index.html", "static/app.js", "static/quiz.js",
     "static/pages.js", "static/style.css", *PUBLIC_QUESTION_PACKS, *PUBLIC_PRACTICE_ASSETS,
 )
 MARKER = ".wine-pages-artifact"
-SOURCE_ASSET_VERSION = "italy-retake-20261101"
+SOURCE_ASSET_VERSION = "italy-text-20261101"
 
 
 def build(source_root: Path = ROOT, output: Path | None = None) -> Path:

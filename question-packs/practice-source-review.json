@@ -4,24 +4,7 @@
   "image_numbering": "元資料27画像の1始まりの通し番号。問題01～24、解答表25～27。画像10のみ再撮影画像へ差し替え、他の番号は維持。",
   "human_approved": false,
   "external_fact_check_completed": false,
-  "unresolved": [
-    {
-      "question_id": "Q-PR20261031-IT-023",
-      "note": "2026-11-01の再撮影画像で問題文・全選択肢の判読を確認済み。テキストへの文字転記は未実施。"
-    },
-    {
-      "question_id": "Q-PR20261031-IT-024",
-      "note": "2026-11-01の再撮影画像で問題文・全選択肢の判読を確認済み。テキストへの文字転記は未実施。"
-    },
-    {
-      "question_id": "Q-PR20261031-IT-025",
-      "note": "2026-11-01の再撮影画像で問題文・全選択肢の判読を確認済み。テキストへの文字転記は未実施。"
-    },
-    {
-      "question_id": "Q-PR20261031-IT-026",
-      "note": "2026-11-01の再撮影画像で問題文・全選択肢の判読を確認済み。テキストへの文字転記は未実施。"
-    }
-  ],
+  "unresolved": [],
   "former_split_ids": {
     "Q-PR20261031-FR-046": [
       "Q-PR20261031-FR-46-1",
@@ -1065,8 +1048,8 @@
       "image_index": 10,
       "answer_key_image_index": 25,
       "answer": 1,
-      "comparison": "original_image; legibility_checked; transcription_pending",
-      "content_sha256": "1a623ee608a590457e34aee0e2632ef0deeff7998225e61f665e064bdd00ab02",
+      "comparison": "image_compared_transcription",
+      "content_sha256": "00db8f3283b3c40029e42a952479fb587b3ddca9f23e2653292311e3b5dcb7d9",
       "source_revision": "italy-retake-20261101"
     },
     {
@@ -1076,8 +1059,8 @@
       "image_index": 10,
       "answer_key_image_index": 25,
       "answer": 2,
-      "comparison": "original_image; legibility_checked; transcription_pending",
-      "content_sha256": "b0e7a8aa94e7d1ae056ee21334cb9e9923849ad913610311183319901ae026f7",
+      "comparison": "image_compared_transcription",
+      "content_sha256": "0d5477a9fe6726c9f00e19729b55312c845b32f4400d9e953c66855646932dd7",
       "source_revision": "italy-retake-20261101"
     },
     {
@@ -1087,8 +1070,8 @@
       "image_index": 10,
       "answer_key_image_index": 25,
       "answer": 2,
-      "comparison": "original_image; legibility_checked; transcription_pending",
-      "content_sha256": "72a2b3d55346597cb511f1e7419f976cec433f806cdaf59e27f22607060b3822",
+      "comparison": "image_compared_transcription",
+      "content_sha256": "cf1536815032f7afb01bda74a0e7dd48aaa84713267f30bd64c502e79fa10444",
       "source_revision": "italy-retake-20261101"
     },
     {
@@ -1098,8 +1081,8 @@
       "image_index": 10,
       "answer_key_image_index": 25,
       "answer": 2,
-      "comparison": "original_image; legibility_checked; transcription_pending",
-      "content_sha256": "cf8da2a76b846edd9b1dedb0880a0c08d65e6e9e6adb2723ac9e5c867289cff0",
+      "comparison": "image_compared_transcription",
+      "content_sha256": "a2cc6e8337ae17092b24d1b64fd9d5bc8101c70aa0df976fe9f6fd45515a3a74",
       "source_revision": "italy-retake-20261101"
     },
     {
@@ -2500,6 +2483,27 @@
           "sha256": "6f289a620a68d8a2d7e6191357934ac27d5d726631cb5d999d8340f91693034f"
         }
       }
+    }
+  ],
+  "text_transcriptions": [
+    {
+      "date": "2026-11-01",
+      "source_revision": "italy-retake-20261101",
+      "image_index": 10,
+      "question_ids": [
+        "Q-PR20261031-IT-023",
+        "Q-PR20261031-IT-024",
+        "Q-PR20261031-IT-025",
+        "Q-PR20261031-IT-026"
+      ],
+      "transcription_completed": true,
+      "source_text_compared": true,
+      "answer_numbers": [
+        1,
+        2,
+        2,
+        2
+      ]
     }
   ]
 }
