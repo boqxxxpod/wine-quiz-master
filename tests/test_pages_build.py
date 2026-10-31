@@ -10,7 +10,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from app.store import Store
-from scripts.build_pages import MARKER, PUBLIC_FILES, PUBLIC_QUESTION_PACK, PUBLIC_PRACTICE_PACK, PUBLIC_QUESTION_PACKS, PUBLIC_PRACTICE_ASSETS, SOURCE_ASSET_VERSION, ROOT, build
+from scripts.build_pages import MARKER, PUBLIC_FILES, PUBLIC_QUESTION_PACK, PUBLIC_PRACTICE_PACK, PUBLIC_QUESTION_PACKS, PUBLIC_PRACTICE_ASSETS, PUBLIC_PLACE_PACK, PUBLIC_PLACE_MODULES, SOURCE_ASSET_VERSION, ROOT, build
 from scripts.export_questions import export_questions
 
 
@@ -45,7 +45,7 @@ class PublicBuildTests(unittest.TestCase):
         build(self.root, self.output)
         actual = {str(path.relative_to(self.output)) for path in self.output.rglob("*") if path.is_file()}
         expected = {"index.html", "static/app.js", "static/quiz.js", "static/pages.js",
-                    "static/style.css", *PUBLIC_QUESTION_PACKS, *PUBLIC_PRACTICE_ASSETS, "static/runtime.js", ".nojekyll", MARKER}
+                    "static/style.css", *PUBLIC_PLACE_MODULES, PUBLIC_PLACE_PACK, *PUBLIC_QUESTION_PACKS, *PUBLIC_PRACTICE_ASSETS, "static/runtime.js", ".nojekyll", MARKER}
         self.assertEqual(actual, expected)
         for path in self.output.rglob("*"):
             if path.is_file():
@@ -69,9 +69,35 @@ class PublicBuildTests(unittest.TestCase):
         self.assertFalse(self.output.exists())
         self.assertEqual(list(self.output.parent.glob(".pages-build-*")), [])
 
+    def test_place_data_missing_or_symlinked_preserves_complete_artifact(self):
+        build(self.root, self.output)
+        before = {str(p.relative_to(self.output)): p.read_bytes() for p in self.output.rglob("*") if p.is_file()}
+        source = self.root / PUBLIC_PLACE_PACK
+        source.unlink()
+        with self.assertRaisesRegex(ValueError, PUBLIC_PLACE_PACK):
+            build(self.root, self.output)
+        outside = self.base / "private-places.json"
+        outside.write_text("PRIVATE CANARY")
+        source.symlink_to(outside)
+        with self.assertRaisesRegex(ValueError, PUBLIC_PLACE_PACK):
+            build(self.root, self.output)
+        self.assertEqual({str(p.relative_to(self.output)): p.read_bytes() for p in self.output.rglob("*") if p.is_file()}, before)
+
+    def test_place_module_imports_receive_public_version_and_review_stays_private(self):
+        build(ROOT, self.output)
+        html = (self.output / "index.html").read_text(encoding="utf-8")
+        version = re.search(r"app\.js\?v=([a-f0-9]{16})", html).group(1)
+        app = (self.output / "static/app.js").read_text(encoding="utf-8")
+        ui = (self.output / "static/place-master.js").read_text(encoding="utf-8")
+        self.assertIn(f"./place-master.js?v={version}", app)
+        for module in ("places.js", "place-review.js"):
+            self.assertIn(f"./{module}?v={version}", ui)
+        self.assertNotIn(f"v={SOURCE_ASSET_VERSION}", ui)
+        self.assertFalse((self.output / "question-packs/place-relations-validation.md").exists())
+
     def test_registered_pack_is_published_without_modifying_original_bytes(self):
         build(ROOT, self.output)
-        for relative in (*PUBLIC_QUESTION_PACKS, *PUBLIC_PRACTICE_ASSETS):
+        for relative in (*PUBLIC_QUESTION_PACKS, PUBLIC_PLACE_PACK, *PUBLIC_PRACTICE_ASSETS):
             self.assertEqual((self.output / relative).read_bytes(), (ROOT / relative).read_bytes())
 
     def test_asset_versions_match_through_imports_and_change_with_pack_or_crop_bytes(self):
@@ -89,7 +115,7 @@ class PublicBuildTests(unittest.TestCase):
             source = ROOT / relative
             target = self.root / relative
             target.write_bytes(source.read_bytes())
-        for relative in (*PUBLIC_QUESTION_PACKS, *PUBLIC_PRACTICE_ASSETS):
+        for relative in (*PUBLIC_QUESTION_PACKS, PUBLIC_PLACE_PACK, *PUBLIC_PRACTICE_ASSETS):
             pack = self.root / relative
             pack.write_bytes(pack.read_bytes() + b"\n")
             build(self.root, self.output)

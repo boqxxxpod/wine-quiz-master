@@ -152,3 +152,13 @@ Python unittest **36件**、Node.js の練習ロジックテスト **6件** が�
 - この版の実ブラウザでの画面再検証は行っていません。過去の画面確認記録と今回の自動検証は対象が異なります。
 
 2026-10-20の[GitHub Actions CI](https://github.com/boqxxxpod/wine-quiz-master/actions/runs/39374246122)（コード・データのコミット `c1cfb30cd7314173feb078a329d40c5c8fcda971`）で、Python 50件、Node.js 68件が成功しました。全件データ検証とPagesビルドも成功しています。
+
+## Issue #18：地名マスター（2026-11-01 JST）
+
+- 初期データ：コート・ド・ニュイ5村・7特級畑、15地名・15関係、方向別12カード。既存K0080〜K0088等を起点にBIVB・Chambolle-Musigny自治体の所在・格付けを照合し、記録を `question-packs/place-relations-validation.md` に追加。原教本の再読や人手承認の完了とは扱わない。
+- JavaScript：`node --test tests/*.mjs` と、個別件数が確認できる `node --test --test-isolation=none tests/*.mjs` で**118件成功**（新規21件）。実データの参照・全正解、任意深さ・複数親、1/3/7日、同日・期限前の段階進行防止、失敗と当日再確認、日付境界（Asia/Tokyo／America/Los_Angeles）、データ更新、不明版・不正JSON・保存不可、合成DOMでのモード切り替えと再読込を確認。
+- Python：`python -m unittest discover -s tests -v` で**58件成功**（新規3件）。地名JSON配信、許可リスト、欠損・シンボリックリンク拒否、Pagesへのバイト一致、地名JSONだけの変更による版更新、新モジュール間の版付きimport、照合記録を公開しないことを確認。
+- `node scripts/verify_standard_pack.mjs`、`python scripts/build_pages.py`、`git diff --check` 成功。既存のクイズJSON・問題ID・採点ロジックには変更なし。通常問題集は練習226問・教科書662問、既存国別件数・選択肢順・対応付け・手動読み込みの回帰テストが成功。
+- Chromium（Playwright、実 `/usr/bin/chromium`）でFastAPI（ルート）とPages成果物（`/wine-quiz-master/`）を各1440×960／360×960で検証。通常の教科書・練習問題から地名モードへ進み、ツリー展開、一村複数畑、両村に表示されるボンヌ・マール、5カードの自己評価、別方向の独立、再読み込み後の履歴、当日再確認1件、翌日期限の保持、リセットのキャンセル／確認、通常練習への復帰を確認。
+- 同ブラウザで初期20問の無効化、復習対象0件、正解表示前の自己評価不可、正解見出しへのフォーカス、取得404からの再読み込み、不正履歴を上書きしないことを確認。4つの画面条件すべてで横方向のはみ出し・JavaScriptエラー・外部通信・`/api/*` 通信は0件。新モジュールと地名JSONは配置サブパス・版番号を保つ。
+- 途中セッションの再開・ブラウザ間同期は未対応。初期保存形式はv1で、既知の旧版は未定義。不明な版は保護して専用履歴の確認付きリセットを案内する。地図出題・他国全面展開・AI生成・詳細分析は本MVPに含めない。

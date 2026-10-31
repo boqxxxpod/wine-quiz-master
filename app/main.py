@@ -364,7 +364,7 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
 
     @app.get("/question-packs/{filename}", include_in_schema=False)
     def bundled_question_pack(filename: str):
-        if filename not in {"wine-quiz-highlighted.json", "wine-quiz-practice-20261031.json"}:
+        if filename not in {"wine-quiz-highlighted.json", "wine-quiz-practice-20261031.json", "place-relations.json"}:
             failure("question_pack_not_found", "組み込み問題集が見つかりません。", 404)
         pack_dir = APP_DIR / "question-packs"
         pack = pack_dir / filename

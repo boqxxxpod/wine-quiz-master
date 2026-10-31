@@ -85,3 +85,11 @@ python scripts/build_pages.py
 - [GitHub Pages の静的ホスティング仕様](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)
 - [GitHub Actions を公開元に指定する手順](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
 - [configure-pages の初回有効化に必要な権限](https://github.com/actions/configure-pages/blob/v5/action.yml)
+
+## 地名マスターの配信
+
+ホームから独立した地名モードへ進めます。Pagesとサーバーで共通の `places.js`（データ検証・カード）、`place-review.js`（間隔反復・localStorage）、`place-master.js`（画面）を使い、`question-packs/place-relations.json` を追加で同梱します。地名JSONは既存の二つのクイズ問題集へ混ぜず、利用時のAPI・Drive・AI呼び出しはありません。
+
+`PUBLIC_PLACE_PACK`・`PUBLIC_PLACE_MODULES` で公開ファイルを限定し、追加ファイルも公開内容のダイジェストに含めます。全公開JavaScriptの版付きimportを書き換え、place-master → places/place-review → 地名JSONにも同じ版を伝えます。配置場所をモジュールURLから解決するので、`/wine-quiz-master/` 配下でも動作します。新JSONだけの変更でも公開版が変わります。FastAPIの許可リストにも地名JSONだけを追加し、ディレクトリ全体や照合Markdownを公開しません。
+
+初期収録は5村・7特級畑、混合12カードの部分収録です。操作・復習規則・自己評価・データ更新の扱いは [README](../README.md#地名マスター) を参照してください。地名履歴は版付きのlocalStorageへ自己評価のたびに保存し、再読み込み後も復習予定を保持します。通常クイズのタブ内セッションとは保存方法が異なります。履歴のブラウザ／オリジン間同期はなく、ブラウザデータの削除で失われます。保存不可・不正な保存版は画面で通知し、専用履歴を確認付きでリセットできます。

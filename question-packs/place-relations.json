@@ -1,0 +1,722 @@
+{
+  "schema_version": 1,
+  "dataset_id": "bourgogne-places",
+  "data_version": "2026-11-01.1",
+  "description": "コート・ド・ニュイの代表5村・特級畑7件。全ブルゴーニュや全特級畑の網羅ではない。",
+  "places": [
+    {
+      "id": "fr",
+      "label_ja": "フランス",
+      "kind": "country",
+      "aliases": [],
+      "knowledge_ids": [
+        "K0080"
+      ],
+      "source_ids": [
+        "bivb-location"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "地名の表記・種別・地理的所在と特級畑の格付け",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "bourgogne",
+      "label_ja": "ブルゴーニュ",
+      "kind": "region",
+      "aliases": [
+        "ブルゴーニュ地方"
+      ],
+      "knowledge_ids": [
+        "K0072"
+      ],
+      "source_ids": [
+        "bivb-location"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "地名の表記・種別・地理的所在と特級畑の格付け",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "cote-de-nuits",
+      "label_ja": "コート・ド・ニュイ",
+      "kind": "district",
+      "aliases": [],
+      "knowledge_ids": [
+        "K0072",
+        "K0080"
+      ],
+      "source_ids": [
+        "bivb-location",
+        "bivb-chambertin"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "地名の表記・種別・地理的所在と特級畑の格付け",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "gevrey-chambertin",
+      "label_ja": "ジュヴレ・シャンベルタン",
+      "kind": "village",
+      "aliases": [
+        "Gevrey-Chambertin"
+      ],
+      "knowledge_ids": [
+        "K0080",
+        "K0084"
+      ],
+      "source_ids": [
+        "bivb-chambertin"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "地名の表記・種別・地理的所在と特級畑の格付け",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "morey-saint-denis",
+      "label_ja": "モレ・サン・ドニ",
+      "kind": "village",
+      "aliases": [
+        "Morey-Saint-Denis"
+      ],
+      "knowledge_ids": [
+        "K0081",
+        "K0085"
+      ],
+      "source_ids": [
+        "bivb-morey"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "地名の表記・種別・地理的所在と特級畑の格付け",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "chambolle-musigny",
+      "label_ja": "シャンボール・ミュジニィ",
+      "kind": "village",
+      "aliases": [
+        "Chambolle-Musigny"
+      ],
+      "knowledge_ids": [
+        "K0082",
+        "K0086"
+      ],
+      "source_ids": [
+        "bivb-musigny",
+        "commune-chambolle"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "地名の表記・種別・地理的所在と特級畑の格付け",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "vougeot",
+      "label_ja": "ヴージョ",
+      "kind": "village",
+      "aliases": [
+        "Vougeot"
+      ],
+      "knowledge_ids": [
+        "K0087"
+      ],
+      "source_ids": [
+        "bivb-vougeot"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "地名の表記・種別・地理的所在と特級畑の格付け",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "vosne-romanee",
+      "label_ja": "ヴォーヌ・ロマネ",
+      "kind": "village",
+      "aliases": [
+        "Vosne-Romanée"
+      ],
+      "knowledge_ids": [
+        "K0083",
+        "K0088"
+      ],
+      "source_ids": [
+        "bivb-romanee"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "地名の表記・種別・地理的所在と特級畑の格付け",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "chambertin",
+      "label_ja": "シャンベルタン",
+      "kind": "vineyard",
+      "aliases": [
+        "Chambertin"
+      ],
+      "knowledge_ids": [
+        "K0084"
+      ],
+      "source_ids": [
+        "bivb-chambertin"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "地名の表記・種別・地理的所在と特級畑の格付け",
+        "human_approved": false
+      },
+      "classification": "grand_cru"
+    },
+    {
+      "id": "clos-de-tart",
+      "label_ja": "クロ・ド・タール",
+      "kind": "vineyard",
+      "aliases": [
+        "Clos de Tart"
+      ],
+      "knowledge_ids": [
+        "K0085"
+      ],
+      "source_ids": [
+        "bivb-morey"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "地名の表記・種別・地理的所在と特級畑の格付け",
+        "human_approved": false
+      },
+      "classification": "grand_cru"
+    },
+    {
+      "id": "clos-de-la-roche",
+      "label_ja": "クロ・ド・ラ・ロッシュ",
+      "kind": "vineyard",
+      "aliases": [
+        "Clos de la Roche"
+      ],
+      "knowledge_ids": [
+        "K0085"
+      ],
+      "source_ids": [
+        "bivb-morey"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "地名の表記・種別・地理的所在と特級畑の格付け",
+        "human_approved": false
+      },
+      "classification": "grand_cru"
+    },
+    {
+      "id": "musigny",
+      "label_ja": "ミュジニィ",
+      "kind": "vineyard",
+      "aliases": [
+        "ミュジニー",
+        "Musigny"
+      ],
+      "knowledge_ids": [
+        "K0082",
+        "K0086"
+      ],
+      "source_ids": [
+        "bivb-musigny"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "地名の表記・種別・地理的所在と特級畑の格付け",
+        "human_approved": false
+      },
+      "classification": "grand_cru"
+    },
+    {
+      "id": "bonnes-mares",
+      "label_ja": "ボンヌ・マール",
+      "kind": "vineyard",
+      "aliases": [
+        "Bonnes-Mares"
+      ],
+      "knowledge_ids": [
+        "K0082",
+        "PM-ADD-0001"
+      ],
+      "source_ids": [
+        "bivb-morey",
+        "commune-chambolle"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "地名の表記・種別・地理的所在と特級畑の格付け",
+        "human_approved": false
+      },
+      "classification": "grand_cru"
+    },
+    {
+      "id": "clos-de-vougeot",
+      "label_ja": "クロ・ド・ヴージョ",
+      "kind": "vineyard",
+      "aliases": [
+        "Clos de Vougeot"
+      ],
+      "knowledge_ids": [
+        "K0087"
+      ],
+      "source_ids": [
+        "bivb-vougeot"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "地名の表記・種別・地理的所在と特級畑の格付け",
+        "human_approved": false
+      },
+      "classification": "grand_cru"
+    },
+    {
+      "id": "romanee-conti",
+      "label_ja": "ロマネ・コンティ",
+      "kind": "vineyard",
+      "aliases": [
+        "Romanée-Conti"
+      ],
+      "knowledge_ids": [
+        "K0088"
+      ],
+      "source_ids": [
+        "bivb-romanee"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "地名の表記・種別・地理的所在と特級畑の格付け",
+        "human_approved": false
+      },
+      "classification": "grand_cru"
+    }
+  ],
+  "relations": [
+    {
+      "id": "fr--bourgogne",
+      "parent_id": "fr",
+      "child_id": "bourgogne",
+      "relation_type": "contains",
+      "knowledge_ids": [
+        "K0072"
+      ],
+      "source_ids": [
+        "bivb-location"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "親地名の地域内に子地名が所在する関係。格付けの上下関係を意味しない。",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "bourgogne--cote-de-nuits",
+      "parent_id": "bourgogne",
+      "child_id": "cote-de-nuits",
+      "relation_type": "contains",
+      "knowledge_ids": [
+        "K0072",
+        "K0080"
+      ],
+      "source_ids": [
+        "bivb-location"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "親地名の地域内に子地名が所在する関係。格付けの上下関係を意味しない。",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "cote-de-nuits--gevrey-chambertin",
+      "parent_id": "cote-de-nuits",
+      "child_id": "gevrey-chambertin",
+      "relation_type": "contains",
+      "knowledge_ids": [
+        "K0080",
+        "K0084"
+      ],
+      "source_ids": [
+        "bivb-chambertin"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "親地名の地域内に子地名が所在する関係。格付けの上下関係を意味しない。",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "cote-de-nuits--morey-saint-denis",
+      "parent_id": "cote-de-nuits",
+      "child_id": "morey-saint-denis",
+      "relation_type": "contains",
+      "knowledge_ids": [
+        "K0081",
+        "K0085"
+      ],
+      "source_ids": [
+        "bivb-morey"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "親地名の地域内に子地名が所在する関係。格付けの上下関係を意味しない。",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "cote-de-nuits--chambolle-musigny",
+      "parent_id": "cote-de-nuits",
+      "child_id": "chambolle-musigny",
+      "relation_type": "contains",
+      "knowledge_ids": [
+        "K0082",
+        "K0086"
+      ],
+      "source_ids": [
+        "bivb-musigny",
+        "commune-chambolle"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "親地名の地域内に子地名が所在する関係。格付けの上下関係を意味しない。",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "cote-de-nuits--vougeot",
+      "parent_id": "cote-de-nuits",
+      "child_id": "vougeot",
+      "relation_type": "contains",
+      "knowledge_ids": [
+        "K0087"
+      ],
+      "source_ids": [
+        "bivb-vougeot"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "親地名の地域内に子地名が所在する関係。格付けの上下関係を意味しない。",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "cote-de-nuits--vosne-romanee",
+      "parent_id": "cote-de-nuits",
+      "child_id": "vosne-romanee",
+      "relation_type": "contains",
+      "knowledge_ids": [
+        "K0083",
+        "K0088"
+      ],
+      "source_ids": [
+        "bivb-romanee"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "親地名の地域内に子地名が所在する関係。格付けの上下関係を意味しない。",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "gevrey-chambertin--chambertin",
+      "parent_id": "gevrey-chambertin",
+      "child_id": "chambertin",
+      "relation_type": "contains",
+      "knowledge_ids": [
+        "K0084"
+      ],
+      "source_ids": [
+        "bivb-chambertin"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "親地名の地域内に子地名が所在する関係。格付けの上下関係を意味しない。",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "morey-saint-denis--clos-de-tart",
+      "parent_id": "morey-saint-denis",
+      "child_id": "clos-de-tart",
+      "relation_type": "contains",
+      "knowledge_ids": [
+        "K0085"
+      ],
+      "source_ids": [
+        "bivb-morey"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "親地名の地域内に子地名が所在する関係。格付けの上下関係を意味しない。",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "morey-saint-denis--clos-de-la-roche",
+      "parent_id": "morey-saint-denis",
+      "child_id": "clos-de-la-roche",
+      "relation_type": "contains",
+      "knowledge_ids": [
+        "K0085"
+      ],
+      "source_ids": [
+        "bivb-morey"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "親地名の地域内に子地名が所在する関係。格付けの上下関係を意味しない。",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "chambolle-musigny--musigny",
+      "parent_id": "chambolle-musigny",
+      "child_id": "musigny",
+      "relation_type": "contains",
+      "knowledge_ids": [
+        "K0082",
+        "K0086"
+      ],
+      "source_ids": [
+        "bivb-musigny"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "親地名の地域内に子地名が所在する関係。格付けの上下関係を意味しない。",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "chambolle-musigny--bonnes-mares",
+      "parent_id": "chambolle-musigny",
+      "child_id": "bonnes-mares",
+      "relation_type": "contains",
+      "knowledge_ids": [
+        "K0082",
+        "PM-ADD-0001"
+      ],
+      "source_ids": [
+        "bivb-morey",
+        "commune-chambolle"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "親地名の地域内に子地名が所在する関係。格付けの上下関係を意味しない。",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "morey-saint-denis--bonnes-mares",
+      "parent_id": "morey-saint-denis",
+      "child_id": "bonnes-mares",
+      "relation_type": "contains",
+      "knowledge_ids": [
+        "K0082",
+        "PM-ADD-0001"
+      ],
+      "source_ids": [
+        "bivb-morey",
+        "commune-chambolle"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "親地名の地域内に子地名が所在する関係。格付けの上下関係を意味しない。",
+        "human_approved": false
+      },
+      "addition_reason": "既存解説はChambolle側の紹介に限る。複数村にまたがる地理を誤って単一回答にしないため、Morey側を公式PDFと自治体資料で追加確認。"
+    },
+    {
+      "id": "vougeot--clos-de-vougeot",
+      "parent_id": "vougeot",
+      "child_id": "clos-de-vougeot",
+      "relation_type": "contains",
+      "knowledge_ids": [
+        "K0087"
+      ],
+      "source_ids": [
+        "bivb-vougeot"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "親地名の地域内に子地名が所在する関係。格付けの上下関係を意味しない。",
+        "human_approved": false
+      }
+    },
+    {
+      "id": "vosne-romanee--romanee-conti",
+      "parent_id": "vosne-romanee",
+      "child_id": "romanee-conti",
+      "relation_type": "contains",
+      "knowledge_ids": [
+        "K0088"
+      ],
+      "source_ids": [
+        "bivb-romanee"
+      ],
+      "verification": {
+        "status": "source_verified",
+        "method": "産地公式・自治体資料の指定箇所を取得し、既存知識の候補と照合",
+        "checked_on": "2026-11-01",
+        "scope": "親地名の地域内に子地名が所在する関係。格付けの上下関係を意味しない。",
+        "human_approved": false
+      }
+    }
+  ],
+  "sources": [
+    {
+      "id": "bivb-location",
+      "title": "Locating the Bourgogne region",
+      "publisher": "BIVB",
+      "locator": "Bourgogneの産地一覧・France内の位置",
+      "url": "https://www.bourgogne-wines.com/wine-and-terroir/locating-the-bourgogne-region/locating-the-bourgogne-region,3202,14763.html",
+      "checked_on": "2026-11-01",
+      "edition_note": "公開版を確認。刊行年は推定しない。"
+    },
+    {
+      "id": "bivb-chambertin",
+      "title": "Chambertin",
+      "publisher": "BIVB",
+      "locator": "Appellation Grands Crus / Producing commune / Côte de Nuits",
+      "url": "https://www.bourgogne-wines.com/wine-and-terroir/bourgogne-and-its-appellations/chambertin,2458,9253.html?args=Y29tcF9pZD0yMjc4JmFjdGlvbj12aWV3RmljaGUmaWQ9MjY0Jnw%3D",
+      "checked_on": "2026-11-01",
+      "edition_note": "公開版を確認。刊行年は推定しない。"
+    },
+    {
+      "id": "bivb-morey",
+      "title": "Clos des Lambrays, Clos de la Roche, Clos de Tart, Clos Saint-Denis",
+      "publisher": "BIVB",
+      "locator": "PDF p.1 冒頭の格付け・生産村、およびBonnes-Maresの所在説明",
+      "url": "https://www.bourgogne-wines.com/wine-and-terroir/bourgogne-and-its-appellations/gallery_files/site/321/402/79294/79359.pdf",
+      "checked_on": "2026-11-01",
+      "edition_note": "公開版を確認。刊行年は推定しない。"
+    },
+    {
+      "id": "bivb-musigny",
+      "title": "Musigny",
+      "publisher": "BIVB",
+      "locator": "Appellation Grand Cru / Commune de production / Situation",
+      "url": "https://www.vins-bourgogne.fr/vins-et-terroirs/la-bourgogne-et-ses-appellations/musigny,2377,9170.html?args=Y29tcF9pZD0yMjA1JmFjdGlvbj12aWV3RmljaGUmaWQ9MzU5Jnw%3D",
+      "checked_on": "2026-11-01",
+      "edition_note": "公開版を確認。刊行年は推定しない。"
+    },
+    {
+      "id": "commune-chambolle",
+      "title": "Appellation",
+      "publisher": "Commune de Chambolle-Musigny",
+      "locator": "Région viticole / Climats classés en Grand Cru（Musigny・Bonnes-MaresとMorey側への広がり）",
+      "url": "https://chambollemusigny.fr/oenotourisme/appellation",
+      "checked_on": "2026-11-01",
+      "edition_note": "公開版を確認。刊行年は推定しない。"
+    },
+    {
+      "id": "bivb-vougeot",
+      "title": "Clos de Vougeot",
+      "publisher": "BIVB",
+      "locator": "Appellation Grand Cru / Producing commune / Location",
+      "url": "https://www.bourgogne-wines.com/wine-and-terroir/bourgogne-and-its-appellations/clos-de-vougeot,2458,9253.html?args=Y29tcF9pZD0yMjc4JmFjdGlvbj12aWV3RmljaGUmaWQ9Mjg2Jnw%3D",
+      "checked_on": "2026-11-01",
+      "edition_note": "公開版を確認。刊行年は推定しない。"
+    },
+    {
+      "id": "bivb-romanee",
+      "title": "Romanée-Conti",
+      "publisher": "BIVB",
+      "locator": "Appellations Grands Crus / Producing commune / Location",
+      "url": "https://www.bourgogne-wines.com/wine-and-terroir/bourgogne-and-its-appellations/romanee-conti,2458,9253.html?args=Y29tcF9pZD0yMjc4JmFjdGlvbj12aWV3RmljaGUmaWQ9MzgyJnw%3D",
+      "checked_on": "2026-11-01",
+      "edition_note": "公開版を確認。刊行年は推定しない。"
+    }
+  ],
+  "scopes": [
+    {
+      "id": "bourgogne-selected",
+      "label_ja": "ブルゴーニュ（コート・ド・ニュイの収録分）",
+      "country_id": "fr",
+      "root_id": "bourgogne",
+      "classification": "grand_cru",
+      "coverage": "selected",
+      "note": "収録対象はコート・ド・ニュイの5村・7特級畑です。各村のすべての畑を網羅していません。村→畑は収録分をすべて答えます。"
+    }
+  ],
+  "supplemental_knowledge": [
+    {
+      "id": "PM-ADD-0001",
+      "reason": "ボンヌ・マールのMorey側の所在を補い、複数村の全正解を示す。",
+      "source_ids": [
+        "bivb-morey",
+        "commune-chambolle"
+      ]
+    }
+  ]
+}
