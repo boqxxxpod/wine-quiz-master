@@ -3,13 +3,14 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
 
 from app.store import Store
-from scripts.build_pages import MARKER, PUBLIC_FILES, PUBLIC_QUESTION_PACK, PUBLIC_PRACTICE_PACK, PUBLIC_QUESTION_PACKS, SOURCE_ASSET_VERSION, ROOT, build
+from scripts.build_pages import MARKER, PUBLIC_FILES, PUBLIC_QUESTION_PACK, PUBLIC_PRACTICE_PACK, PUBLIC_QUESTION_PACKS, PUBLIC_PRACTICE_ASSETS, SOURCE_ASSET_VERSION, ROOT, build
 from scripts.export_questions import export_questions
 
 
@@ -44,7 +45,7 @@ class PublicBuildTests(unittest.TestCase):
         build(self.root, self.output)
         actual = {str(path.relative_to(self.output)) for path in self.output.rglob("*") if path.is_file()}
         expected = {"index.html", "static/app.js", "static/quiz.js", "static/pages.js",
-                    "static/style.css", *PUBLIC_QUESTION_PACKS, "static/runtime.js", ".nojekyll", MARKER}
+                    "static/style.css", *PUBLIC_QUESTION_PACKS, *PUBLIC_PRACTICE_ASSETS, "static/runtime.js", ".nojekyll", MARKER}
         self.assertEqual(actual, expected)
         for path in self.output.rglob("*"):
             if path.is_file():
@@ -70,7 +71,7 @@ class PublicBuildTests(unittest.TestCase):
 
     def test_registered_pack_is_published_without_modifying_original_bytes(self):
         build(ROOT, self.output)
-        for relative in PUBLIC_QUESTION_PACKS:
+        for relative in (*PUBLIC_QUESTION_PACKS, *PUBLIC_PRACTICE_ASSETS):
             self.assertEqual((self.output / relative).read_bytes(), (ROOT / relative).read_bytes())
 
     def test_asset_versions_match_through_imports_and_change_with_pack_bytes(self):
@@ -129,7 +130,10 @@ class PublicBuildTests(unittest.TestCase):
         source.unlink()
         pack_dir = source.parent
         for sibling in pack_dir.iterdir():
-            sibling.unlink()
+            if sibling.is_dir():
+                shutil.rmtree(sibling)
+            else:
+                sibling.unlink()
         pack_dir.rmdir()
         outside_dir = self.base / "private-packs"
         outside_dir.mkdir()
@@ -148,6 +152,21 @@ class PublicBuildTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, PUBLIC_PRACTICE_PACK):
             build(self.root, self.output)
         self.assertFalse(self.output.exists())
+
+    def test_missing_or_symlinked_crop_preserves_last_complete_artifact(self):
+        build(self.root, self.output)
+        before = {str(p.relative_to(self.output)): p.read_bytes() for p in self.output.rglob("*") if p.is_file()}
+        relative = PUBLIC_PRACTICE_ASSETS[0]
+        source = self.root / relative
+        source.unlink()
+        with self.assertRaisesRegex(ValueError, relative):
+            build(self.root, self.output)
+        private = self.base / "private.png"
+        private.write_bytes(b"PRIVATE CANARY")
+        source.symlink_to(private)
+        with self.assertRaisesRegex(ValueError, relative):
+            build(self.root, self.output)
+        self.assertEqual({str(p.relative_to(self.output)): p.read_bytes() for p in self.output.rglob("*") if p.is_file()}, before)
 
     def test_leaf_or_parent_symlink_cannot_copy_outside_source_tree(self):
         outside = self.base / "outside"

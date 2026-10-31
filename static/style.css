@@ -161,3 +161,16 @@ input:disabled,select:disabled { background:#f1ede5; color:var(--muted); }
   .completion-card .button { display:flex; width:100%; margin:10px 0 0; }
 }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; } }
+/* Original practice text and diagrams retain their source wording and labels. */
+.question-prompt, .question-context, .source-note { white-space: pre-wrap; }
+.question-context { padding: 16px; margin: 12px 0 24px; background: var(--surface, #f6f4f0); border: 1px solid #ddd; border-radius: 8px; }
+.context-label { font-size: .85rem; font-weight: 700; }
+.question-figure { margin: 20px 0; }
+.question-figure img { display: block; max-width: 100%; height: auto; margin-bottom: 12px; }
+.question-figure.diagram img { width: min(100%, 440px); }
+.question-figure figcaption { font-size: .9rem; margin-top: 12px; }
+.matching-list { display: grid; gap: 18px; }
+.matching-row { display: grid; gap: 8px; min-width: 0; }
+.matching-select { width: 100%; min-width: 0; min-height: 44px; font: inherit; padding: 10px; }
+.match-correct { color: #196843; }
+.match-incorrect { color: #a12635; }

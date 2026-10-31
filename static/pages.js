@@ -1,4 +1,4 @@
-import { isNativeQuestion, isPilotQuestion, normalizeQuestion, validQuestion } from './quiz.js?v=bundled-20261031';
+import { isNativeQuestion, isPilotQuestion, normalizeQuestion, validQuestion } from './quiz.js?v=verbatim-20261031';
 
 export const MAX_PACK_BYTES = 2_000_000;
 export const MAX_PACK_QUESTIONS = 2000;
@@ -45,10 +45,10 @@ export function parseQuestionPack(text) {
       } : null;
     }
     if (!validQuestion(question)) {
-      throw new Error(`${index + 1} 問目の三択・正解・解説・出典情報を確認できません。ファイル全体の読み込みを中止しました。`);
+      throw new Error(`${index + 1} 問目の選択肢・正解・解説・出典情報を確認できません。ファイル全体の読み込みを中止しました。`);
     }
     const texts = question.choices.map(choice => choice.text.trim().replace(/\s+/g, ' '));
-    if (new Set(texts).size !== 3) throw new Error(`${index + 1} 問目の選択肢に同じ内容があります。ファイル全体の読み込みを中止しました。`);
+    if (new Set(texts).size !== texts.length) throw new Error(`${index + 1} 問目の選択肢に同じ内容があります。ファイル全体の読み込みを中止しました。`);
     if (seen.has(question.id)) throw new Error('同じ問題 ID が複数あります。ファイル全体の読み込みを中止しました。');
     if (!native && !pilot && row.status !== undefined && row.status !== 'approved') {
       throw new Error(`${index + 1} 問目が承認済みではありません。承認済みの問題集を書き出してください。`);

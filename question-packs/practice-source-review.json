@@ -1,0 +1,2402 @@
+{
+  "issue": 14,
+  "review_date": "2026-10-31",
+  "image_numbering": "元資料27画像の1始まりの通し番号。問題01～24、解答表25～27。",
+  "human_approved": false,
+  "external_fact_check_completed": false,
+  "unresolved": [
+    {
+      "question_id": "Q-PR20261031-IT-023",
+      "note": "画像10のピントが甘く、問題文または選択肢の全字を確定できない。鮮明な原本での再確認が必要。"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-024",
+      "note": "画像10のピントが甘く、問題文または選択肢の全字を確定できない。鮮明な原本での再確認が必要。"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-025",
+      "note": "画像10のピントが甘く、問題文または選択肢の全字を確定できない。鮮明な原本での再確認が必要。"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-026",
+      "note": "画像10のピントが甘く、問題文または選択肢の全字を確定できない。鮮明な原本での再確認が必要。"
+    }
+  ],
+  "former_split_ids": {
+    "Q-PR20261031-FR-046": [
+      "Q-PR20261031-FR-46-1",
+      "Q-PR20261031-FR-46-2",
+      "Q-PR20261031-FR-46-3",
+      "Q-PR20261031-FR-46-4",
+      "Q-PR20261031-FR-46-5"
+    ]
+  },
+  "crops": {
+    "fr-002.png": {
+      "image_index": 3,
+      "preview_size": [
+        2200,
+        2933
+      ],
+      "box": [
+        1480,
+        395,
+        1990,
+        815
+      ],
+      "sha256": "c9d40601ad944ad96278854a9a9b945e2fa9df78801fa4af28adeab7bc264482"
+    },
+    "it-007-2.png": {
+      "image_index": 8,
+      "preview_size": [
+        2200,
+        2933
+      ],
+      "box": [
+        680,
+        2045,
+        1050,
+        2360
+      ],
+      "sha256": "848ea3bd6b2c07768b7cf6ae38ed5b5c20075be6217babff9ac0df35912ead61"
+    },
+    "es-021.png": {
+      "image_index": 14,
+      "preview_size": [
+        2200,
+        2933
+      ],
+      "box": [
+        680,
+        2120,
+        1130,
+        2425
+      ],
+      "sha256": "c19404d1b5f794239bd7c3a863715a35340b57ea7c8ddd70bb124830562b62c7"
+    },
+    "it-023.jpg": {
+      "image_index": 10,
+      "preview_size": [
+        2200,
+        2933
+      ],
+      "box": [
+        95,
+        90,
+        2025,
+        280
+      ],
+      "sha256": "5f18cf94dab57b2b76bf854d4fd08b621c983ef01fc780d6df3ae5411ae2493c"
+    },
+    "it-024.jpg": {
+      "image_index": 10,
+      "preview_size": [
+        2200,
+        2933
+      ],
+      "box": [
+        95,
+        315,
+        2060,
+        665
+      ],
+      "sha256": "49e54b8588feaa4baaee4130c04467f8bc268dff1b024e8859fe97ad13f28056"
+    },
+    "it-025.jpg": {
+      "image_index": 10,
+      "preview_size": [
+        2200,
+        2933
+      ],
+      "box": [
+        95,
+        715,
+        2025,
+        930
+      ],
+      "sha256": "f959880deed6893f1d32f531aec254d9205c24ddb306cf454985b5ade12c0f74"
+    },
+    "it-026.jpg": {
+      "image_index": 10,
+      "preview_size": [
+        2200,
+        2933
+      ],
+      "box": [
+        95,
+        980,
+        2060,
+        1220
+      ],
+      "sha256": "6f289a620a68d8a2d7e6191357934ac27d5d726631cb5d999d8340f91693034f"
+    }
+  },
+  "questions": [
+    {
+      "question_id": "Q-PR20261031-JP-001",
+      "country": "日本",
+      "question_number": "1",
+      "image_index": 1,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "c25f853a45bae84753566aa756e95165778e62c9f1190de5795d190946a2514d"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-002",
+      "country": "日本",
+      "question_number": "2",
+      "image_index": 1,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "7bb0c645c7c861d75a098202f1e80d9f4e91b0a42f7f75fb47fa513e78bbbf6a"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-003",
+      "country": "日本",
+      "question_number": "3",
+      "image_index": 1,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "0b1de5aa33850718a4d29afbd05dce8a1b129f6eb931168a6449f5c7aee8c372"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-004",
+      "country": "日本",
+      "question_number": "4",
+      "image_index": 1,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "0e8468d16e1eedf70b6cb0a0cf8a635f32354e21eba53f5a3abf25f9ef1feaf8"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-005",
+      "country": "日本",
+      "question_number": "5",
+      "image_index": 1,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "6f67535a8fc671c46228a2aef6ee9226f00a32ac98508e6ce9b6f8ef9411233b"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-006",
+      "country": "日本",
+      "question_number": "6",
+      "image_index": 1,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "a191730c337d0273dfc62110ecaabbf724717b158fc7ea4c0e4da9695c52e715"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-007",
+      "country": "日本",
+      "question_number": "7",
+      "image_index": 1,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "f77b1a370ed8b1f3643d45935c886aac63fb65b87592c9cb9bf184df8cb76f02"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-008",
+      "country": "日本",
+      "question_number": "8",
+      "image_index": 1,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "6a1e25483ce0bd18bb48fd36244a7cd2e72b0721632a251be9f8693f99a74228"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-009",
+      "country": "日本",
+      "question_number": "9",
+      "image_index": 1,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "ec8cdef35246bc0fec3992f06505390e8928f29ab5e88260ad8d48b02950f473"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-010",
+      "country": "日本",
+      "question_number": "10",
+      "image_index": 1,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "23c67e95c7a36a3a5206999097afeafd3a752e9fb664671e21a12f95ad1fa16a"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-011",
+      "country": "日本",
+      "question_number": "11",
+      "image_index": 2,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "4d7ebde82f88c7fc257ffdb3ac6b14808b227bc32da6fca3c67c50ef57469e7a"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-012",
+      "country": "日本",
+      "question_number": "12",
+      "image_index": 2,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "f0d3b8e0395141ab03868b8ec7d1e243eb1a1edc64eb977c9015d04f505d8aff"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-013",
+      "country": "日本",
+      "question_number": "13",
+      "image_index": 2,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "b8e7fe3d0ecfa1eeafd49662b06b4f0acdf1939e1cdaa3d259eaadfd6d4a49b7"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-014",
+      "country": "日本",
+      "question_number": "14",
+      "image_index": 2,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "4a58a4a8beddcd3d215c83350559a531fc0b8a58d44da3aeb5d09f5765e63126"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-015",
+      "country": "日本",
+      "question_number": "15",
+      "image_index": 2,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "5fbd9c593abab213b567e6c50f75489f47fdde3ed64a94b527114cc9966be1ab"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-016",
+      "country": "日本",
+      "question_number": "16",
+      "image_index": 2,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "01fd6392bcc65b342650f6148fd5b96186aa78d4cf64d796796241b48ebea1f6"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-017",
+      "country": "日本",
+      "question_number": "17",
+      "image_index": 2,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "ec8b75e90273e35dcde9b5f5cb81aa515cd98479190d584f72ba4f0faf15a656"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-018",
+      "country": "日本",
+      "question_number": "18",
+      "image_index": 2,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "bb1603e194879981ce94dd70cecdf3dd72ed734f81643728e25dfefd2b829526"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-019",
+      "country": "日本",
+      "question_number": "19",
+      "image_index": 2,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "84411eb5b16d0aba3b15080fd1410046db9dec658fa93b34b9475ffbb70f3c26"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-020",
+      "country": "日本",
+      "question_number": "20",
+      "image_index": 2,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "cbfc1231273d700055f0ee17a6730a3bc57125003d0031380af0e987cc6b2fb8"
+    },
+    {
+      "question_id": "Q-PR20261031-JP-021",
+      "country": "日本",
+      "question_number": "21",
+      "image_index": 2,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "c2f099c1387bb2e469756cc44299e44bacb591366baf14f8dcf1ee7fe093d18e"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-001",
+      "country": "フランス",
+      "question_number": "1",
+      "image_index": 3,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "c1edbe1b2e438e675f69eaa791c7d12a21fcdc058b33434fa723e859016ba21b"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-002",
+      "country": "フランス",
+      "question_number": "2",
+      "image_index": 3,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "a06a687b612265f5d06fd24b19b16a7bef0f1ae6b3a6ce0cfd6162fa6193fb03"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-003",
+      "country": "フランス",
+      "question_number": "3",
+      "image_index": 3,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "e4c5afd5899ecb18368189fedd427029660cd2224ed63a6b1c0ee82fb97d39d4"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-004",
+      "country": "フランス",
+      "question_number": "4",
+      "image_index": 3,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "3a43cc958d0e1d961e0ec5e3a1cc082a5a4b267c968b812173368f727ddd96a8"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-005",
+      "country": "フランス",
+      "question_number": "5",
+      "image_index": 3,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "c3eb7e37107eb914b4c0a5f12d127d4fb840450221996c8611a33ee7cde30deb"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-006",
+      "country": "フランス",
+      "question_number": "6",
+      "image_index": 3,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "daec4a48b094b309a79e39adda9e1b8aa1dfaf600ea08d4596754e9f562e61bc"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-007",
+      "country": "フランス",
+      "question_number": "7",
+      "image_index": 3,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "fec149f7a33766a75681309db0d40bbdeff83ba4c130da2bbd3fdc053202482a"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-008",
+      "country": "フランス",
+      "question_number": "8",
+      "image_index": 3,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "322e2417f1b676c2faea4fb995fb214a6997f9690690b4401d381e0d7d1d9bc1"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-009",
+      "country": "フランス",
+      "question_number": "9",
+      "image_index": 3,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "58a8e2ef3c60771f0222a622c1adfa43080c23b5af5dcaef0a886cc4c01ac1e8"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-010",
+      "country": "フランス",
+      "question_number": "10",
+      "image_index": 4,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "c5cf884c8fdd022971668e9871670d04e8cc572e221043ac549aec8b9c67005d"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-011",
+      "country": "フランス",
+      "question_number": "11",
+      "image_index": 4,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "3727388bcc130fcc0395c4ea54226c5506c10d5cc24a70a439ecb5a2cd341e79"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-012",
+      "country": "フランス",
+      "question_number": "12",
+      "image_index": 4,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "d21dabe78a268ae801798440c98a8f70f8c14e84b1dc4005b64ed9986f71e9c7"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-013",
+      "country": "フランス",
+      "question_number": "13",
+      "image_index": 4,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "5e1913360c4674bd608fc5b08387319a8841fcb0bbdce27dff4fedc182b5d362"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-014",
+      "country": "フランス",
+      "question_number": "14",
+      "image_index": 4,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "342ac6a9556d0607200e82bc7b227f86f45dc6dccb68166bdbe7258ed6dbabc2"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-015",
+      "country": "フランス",
+      "question_number": "15",
+      "image_index": 4,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "0ea6468a128f2956ccff2ee5bb7c34a59d890aafb1b77b4ad7703c693f192ef7"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-016",
+      "country": "フランス",
+      "question_number": "16",
+      "image_index": 4,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "3e1003d8b1a2dd95bc1311eeec2ec2741ce92422de71c3293ec6eae5006a59f4"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-017",
+      "country": "フランス",
+      "question_number": "17",
+      "image_index": 4,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "7df09ee0be6f7fd0c024e16e5dc8604f310e595660ecf96f26667142248c60ee"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-018",
+      "country": "フランス",
+      "question_number": "18",
+      "image_index": 4,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "220fc3f0c5f7331d4ce0355a67f51bbb1c0cd0d3fd8513fed387248830e9e0e9"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-019",
+      "country": "フランス",
+      "question_number": "19",
+      "image_index": 4,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "8b2d4e392149bf5de3f6c7796d53dd8b34999ca8769a47207772bee00223a3c9"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-020",
+      "country": "フランス",
+      "question_number": "20",
+      "image_index": 4,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "6a12efd2814686b6b7d5b3c5e8c32315c9b2f955c14c79b2d64f0890104d0761"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-021",
+      "country": "フランス",
+      "question_number": "21",
+      "image_index": 5,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "3ca73f807e39609c96b5e38a7c9e8bf68f328c67fed9d5b7ff0806a9da82192d"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-022",
+      "country": "フランス",
+      "question_number": "22",
+      "image_index": 5,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "b79e784ec7e2993b9084b83cebdd4b3238bbadca14a436087980607e250e8b5a"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-023",
+      "country": "フランス",
+      "question_number": "23",
+      "image_index": 5,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "c5642c88c0e1effa88104fa35772e13d28b812abf5936b5811bf1e5b244f5e78"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-024",
+      "country": "フランス",
+      "question_number": "24",
+      "image_index": 5,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "c76b5c6214fab9a125411742a217e9c980447e549fcbb6fac2cbb54adc5eed31"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-025",
+      "country": "フランス",
+      "question_number": "25",
+      "image_index": 5,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "ecaa31e9361ef4a1e253bf81152f4d45b74c7c7a51619616c22bc1e1d8fac357"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-026",
+      "country": "フランス",
+      "question_number": "26",
+      "image_index": 5,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "c0051df4ac6beb44dea6bcf79be86fbab43704694d05e472d61eea873b57d033"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-027",
+      "country": "フランス",
+      "question_number": "27",
+      "image_index": 5,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "26f05128a680b1109dc01f940e298eb4c4ff6347012a30ccafa3053a9a79c8fe"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-028",
+      "country": "フランス",
+      "question_number": "28",
+      "image_index": 5,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "b1502e7ae0ac39ab86da558d543ee6afcd066ca07877156bdca52ebee7a5bb25"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-029",
+      "country": "フランス",
+      "question_number": "29",
+      "image_index": 5,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "906a423356af0545c469813be8bdb5835bfc73503a31a5817da368b512d0462b"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-030",
+      "country": "フランス",
+      "question_number": "30",
+      "image_index": 5,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "a8e4258292a270e7e19e7fcdf3912f55531b1f4678a52c285e73ac8ac3df69eb"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-031",
+      "country": "フランス",
+      "question_number": "31",
+      "image_index": 6,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "06bbdfd8b90284eb8a90b204fb352ee816129744435a5bba5b66263d5d737928"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-032",
+      "country": "フランス",
+      "question_number": "32",
+      "image_index": 6,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "7ffe909bca761a3de42ebfd22a61b1e78a19e84db1f10523457b78e67b953e18"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-033",
+      "country": "フランス",
+      "question_number": "33",
+      "image_index": 6,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "e5065efbbcc54832ff5632e5e9ad6698c410576b5fbbee532be964b957d8ef43"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-034",
+      "country": "フランス",
+      "question_number": "34",
+      "image_index": 6,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "ae0d4105373c7c110203d8a073c7d40283f1e0a2541add18f61623ff573ad613"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-035",
+      "country": "フランス",
+      "question_number": "35",
+      "image_index": 6,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "6bed893b062408aa2c47cc1f5241cb5fdbdd33c1e87f3929e359fa7db686ceb7"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-036",
+      "country": "フランス",
+      "question_number": "36",
+      "image_index": 6,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "c2031905195be5270c00266af57e1086d46f6e37a44077612bc5527e685c604f"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-037",
+      "country": "フランス",
+      "question_number": "37",
+      "image_index": 6,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "8082c4173f6bb47aaaa4e2ab2cbec89cb35f408c5057cc0ea32f28b7ef684453"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-038",
+      "country": "フランス",
+      "question_number": "38",
+      "image_index": 6,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "8ab411e9af8b629c6a122da98aff01ddb5c5e272983cdfa7ffca2543ff5cae1f"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-039",
+      "country": "フランス",
+      "question_number": "39",
+      "image_index": 6,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "27ff3374a3920966f66aa3e234122d18717e75c06797e9c62aec6ef33fafd03c"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-040",
+      "country": "フランス",
+      "question_number": "40",
+      "image_index": 6,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "5c3e585dfb68f95c549efe36690c1f25028f7af9be7ca9a730e664b7f564d919"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-041",
+      "country": "フランス",
+      "question_number": "41",
+      "image_index": 6,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "c3d47f9eda91ccbfbd3d1b779555ac81e66aea02d5a0fa3e576d965bece37c14"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-042",
+      "country": "フランス",
+      "question_number": "42",
+      "image_index": 6,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "d2f5fc464266e17ed967692473da6c134d031d3e5b25ff97a349274081f75c4b"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-043",
+      "country": "フランス",
+      "question_number": "43",
+      "image_index": 7,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "655a4471475227fca422efa85d97fb27029e87efe41e9de7bb31bc3ea7979839"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-044",
+      "country": "フランス",
+      "question_number": "44",
+      "image_index": 7,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "bbebfa5ac276d25db15742904a6de2a039b3e178cfc7e0f6ba5d7c4ccb1b6b57"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-045",
+      "country": "フランス",
+      "question_number": "45",
+      "image_index": 7,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "b7952d56e0f8e4ac57de6980102f4f4c0885834f9571f717c7e2e478ed2ac1d1"
+    },
+    {
+      "question_id": "Q-PR20261031-FR-046",
+      "country": "フランス",
+      "question_number": "46",
+      "image_index": 7,
+      "answer_key_image_index": 25,
+      "answer": {
+        "1": "D",
+        "2": "A",
+        "3": "C",
+        "4": "E",
+        "5": "B"
+      },
+      "comparison": "image_compared_transcription",
+      "content_sha256": "9e70249cec1476b91c6b176046c5c3381e527ef7802ed2192fc535093c3a5eb7"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-001",
+      "country": "イタリア",
+      "question_number": "1",
+      "image_index": 8,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "25cd47fdf5eea76b50c81e4a284e5e71fd537ca2c1b312e44cc6b5e478c64a7b"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-002",
+      "country": "イタリア",
+      "question_number": "2",
+      "image_index": 8,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "67c9abc6a2afd8c0548d3614cdeff5b0486d467405b21466af2facd64a49df4a"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-003",
+      "country": "イタリア",
+      "question_number": "3",
+      "image_index": 8,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "afa339ac9289e4535b2dc58328313d6195d8205f8ccb77536309cd53d4ede9bc"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-004",
+      "country": "イタリア",
+      "question_number": "4",
+      "image_index": 8,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "7a9212ed78e9454ec79dbfd20a5ef4eed3f7d6833fa4ec5fddc136eb4e0b679f"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-005",
+      "country": "イタリア",
+      "question_number": "5",
+      "image_index": 8,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "097275c530327fb6b1188c8b9b99024e2b3c31c8d5f3bd3e9b4159488723ca5d"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-006",
+      "country": "イタリア",
+      "question_number": "6",
+      "image_index": 8,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "ab44d9568a5f04b4e616ef8b79ec322e4f7c1dc7ef043118f7e1cab8dd03d0c5"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-7-1",
+      "country": "イタリア",
+      "question_number": "7-1",
+      "image_index": 8,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "72e29cd4d84c3a42527cd515097a4e64a7b149c265711111565da3cef5c7caa3"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-7-2",
+      "country": "イタリア",
+      "question_number": "7-2",
+      "image_index": 8,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "6e97eea12685e91cca4dfde7ef111ddeeed1bfc50c2f3b051de3979e59fa5477"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-008",
+      "country": "イタリア",
+      "question_number": "8",
+      "image_index": 8,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "7df39a19a4587819471d8a6815b65c2cb48416dda18cc0d01ab223ca77c2de23"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-009",
+      "country": "イタリア",
+      "question_number": "9",
+      "image_index": 8,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "cf3d83894624dd70ddd3b5a25f6bb25a734c16c257c55c811c10641d31e0f333"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-010",
+      "country": "イタリア",
+      "question_number": "10",
+      "image_index": 9,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "2bec064f88ea1cba93778f4a6c551af95e45a9eeb7f9dbca52c6972a6038fe8d"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-011",
+      "country": "イタリア",
+      "question_number": "11",
+      "image_index": 9,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "829a89c420d94a1b215d44d08a1dfd3489fb0498514199aa191dc2dee4776216"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-012",
+      "country": "イタリア",
+      "question_number": "12",
+      "image_index": 9,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "7f8325045358dc2c9eb07d615cc0bca0a4a3fd50c4ef6317c35d292ec87905f4"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-013",
+      "country": "イタリア",
+      "question_number": "13",
+      "image_index": 9,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "17b59781b0eb2c064d67cf2bf7594b5f04392e39d3f7852c18a9ddcec8fa8b18"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-014",
+      "country": "イタリア",
+      "question_number": "14",
+      "image_index": 9,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "1d8cc62a2c8b1b9dc6ff165c5a70c93321e9a5f6528cfaf5000f79c790d2c4ea"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-015",
+      "country": "イタリア",
+      "question_number": "15",
+      "image_index": 9,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "d03f35c77f0d97b6c07c7c1088b11fae956f3602406a8b17751cd3ac47b475c7"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-016",
+      "country": "イタリア",
+      "question_number": "16",
+      "image_index": 9,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "73ece09226d6ae7d041e0a08e3a00d0216c5319ecddf32a4ab12e3c6f2a84419"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-017",
+      "country": "イタリア",
+      "question_number": "17",
+      "image_index": 9,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "ed5b5d040c7aa36c117c40e589c4531f8653161eea3cc1bdf66b41cb5a09d714"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-018",
+      "country": "イタリア",
+      "question_number": "18",
+      "image_index": 9,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "4aae8e41cc07d9fb406f21540a0914e0a112e022c2d1910b7de67b8d5e1e6b16"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-019",
+      "country": "イタリア",
+      "question_number": "19",
+      "image_index": 9,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "260178070ffdf767eca8fa83cd5181fcece72ca0069dddc8ee602fb62f831d06"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-020",
+      "country": "イタリア",
+      "question_number": "20",
+      "image_index": 9,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "119b136ebb13c52a6c1337c35be5d17595b542d296e9a51b435ad089a16e8778"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-021",
+      "country": "イタリア",
+      "question_number": "21",
+      "image_index": 9,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "82ca63fa845e903fe34dfaddfd3e2ed8363c41ad6b0545fa29a1355929720405"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-022",
+      "country": "イタリア",
+      "question_number": "22",
+      "image_index": 9,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "334f06971c5f214d04972cd06a55486b47e2fdbca43225a97506645b5a20195b"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-023",
+      "country": "イタリア",
+      "question_number": "23",
+      "image_index": 10,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "original_image; transcription_pending",
+      "content_sha256": "0d85668603f864732e365f0cd01a4ce84203d467474a65267f066046d5ca0418"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-024",
+      "country": "イタリア",
+      "question_number": "24",
+      "image_index": 10,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "original_image; transcription_pending",
+      "content_sha256": "e797c9a43663fbb37f189dfa561c14ea0344730b5c3a815c1874d8fcda856b19"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-025",
+      "country": "イタリア",
+      "question_number": "25",
+      "image_index": 10,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "original_image; transcription_pending",
+      "content_sha256": "49a8b42ddfdbfcf08aceeeb4d62568b6120c552d8675bca2fdcd8586a2553f90"
+    },
+    {
+      "question_id": "Q-PR20261031-IT-026",
+      "country": "イタリア",
+      "question_number": "26",
+      "image_index": 10,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "original_image; transcription_pending",
+      "content_sha256": "bf903e2d302d27ea0b4a5ce252c860437c5769273ea2a4a0c2175ce984473bd2"
+    },
+    {
+      "question_id": "Q-PR20261031-DE-001",
+      "country": "ドイツ",
+      "question_number": "1",
+      "image_index": 11,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "9d91f257bac2487057320d27688384e649751a35aa8d3fc252867fd9f71c2248"
+    },
+    {
+      "question_id": "Q-PR20261031-DE-002",
+      "country": "ドイツ",
+      "question_number": "2",
+      "image_index": 11,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "64e7300619b12ac397f87b1c4d16353825a92d48712611c4bbf83af42dc65fe0"
+    },
+    {
+      "question_id": "Q-PR20261031-DE-003",
+      "country": "ドイツ",
+      "question_number": "3",
+      "image_index": 11,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "0cb1aa1a076364f7c4cf1a145c7f8f4a28c50280f48cbd724bdc48cf991536ac"
+    },
+    {
+      "question_id": "Q-PR20261031-DE-004",
+      "country": "ドイツ",
+      "question_number": "4",
+      "image_index": 11,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "7d7c3b0890e8f3e158d63bf34742380d166d5cfc4f2e7b4cb18beae72805a3b2"
+    },
+    {
+      "question_id": "Q-PR20261031-DE-005",
+      "country": "ドイツ",
+      "question_number": "5",
+      "image_index": 11,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "032d670e343c96392f884247a307c88ae52b001b0e7e18ceab684b9bc9479ec2"
+    },
+    {
+      "question_id": "Q-PR20261031-DE-006",
+      "country": "ドイツ",
+      "question_number": "6",
+      "image_index": 11,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "1ad790e9f19d6fdb8eb2090feaefcfe318572af8a83bac9813cbf46a1b8595d9"
+    },
+    {
+      "question_id": "Q-PR20261031-DE-007",
+      "country": "ドイツ",
+      "question_number": "7",
+      "image_index": 11,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "893c290beefdc914a84db5c69d20b09d1ad9bab848f717d35882ce023e034efd"
+    },
+    {
+      "question_id": "Q-PR20261031-DE-008",
+      "country": "ドイツ",
+      "question_number": "8",
+      "image_index": 11,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "e9357bbfe7353ef0a9cc4f2ccd028f3c41aa6961b67ae8a022eab3d28d33c795"
+    },
+    {
+      "question_id": "Q-PR20261031-DE-009",
+      "country": "ドイツ",
+      "question_number": "9",
+      "image_index": 11,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "476aa16196c3b567976e38035dc672488a2ba88efcc545ead6381d5925fc1056"
+    },
+    {
+      "question_id": "Q-PR20261031-DE-010",
+      "country": "ドイツ",
+      "question_number": "10",
+      "image_index": 11,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "5433c47f9957109acac7cb90bc87fa02ee766cede89dbe61c4fea79ee1ab64c8"
+    },
+    {
+      "question_id": "Q-PR20261031-DE-011",
+      "country": "ドイツ",
+      "question_number": "11",
+      "image_index": 11,
+      "answer_key_image_index": 25,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "ad388266b802397bcbc16016907982779fdb789ed9825a65f09f9cb85e092567"
+    },
+    {
+      "question_id": "Q-PR20261031-DE-012",
+      "country": "ドイツ",
+      "question_number": "12",
+      "image_index": 12,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "2e16541687aae32aea9c78c43d7258907a6e71ed031d33edc1fad78cd91ff0e0"
+    },
+    {
+      "question_id": "Q-PR20261031-DE-013",
+      "country": "ドイツ",
+      "question_number": "13",
+      "image_index": 12,
+      "answer_key_image_index": 25,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "23baf979981351d5edebefd0d904b9868c6fe89071ad2fe74654096ccfcdb2e4"
+    },
+    {
+      "question_id": "Q-PR20261031-DE-014",
+      "country": "ドイツ",
+      "question_number": "14",
+      "image_index": 12,
+      "answer_key_image_index": 25,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "21d455853c5dffc364f831fbce8af14f8c89b83f4b79e28832195f40d617d299"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-001",
+      "country": "スペイン",
+      "question_number": "1",
+      "image_index": 13,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "403ab10614a36308c6575f743889fc68ea228770cb311e70d07e94ecd7869091"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-002",
+      "country": "スペイン",
+      "question_number": "2",
+      "image_index": 13,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "d79973cd474ca5a3ff6fa54e9e9a878575234a5200577dce394f4bcac0574e14"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-003",
+      "country": "スペイン",
+      "question_number": "3",
+      "image_index": 13,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "d5a0174a1ac945cf838a31335d945415bc7c1428bc15141ff04a03d465e71149"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-004",
+      "country": "スペイン",
+      "question_number": "4",
+      "image_index": 13,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "7dc6fff7d3c1ec4d7fe1ce1bd9debaf232ad50ae6ceae3669267cf1b74685b78"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-005",
+      "country": "スペイン",
+      "question_number": "5",
+      "image_index": 13,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "421a736943e012ab2f86a4b2672b6c42bc7967e938c5cdb7b6ac6e08812047e1"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-006",
+      "country": "スペイン",
+      "question_number": "6",
+      "image_index": 13,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "e04102370a9ac2979b77c52b924bb28f2b085efbfee4db2d93bf0f57da6750e1"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-007",
+      "country": "スペイン",
+      "question_number": "7",
+      "image_index": 13,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "590cf02980f870f775a451feb503d65f9b4e4e62524947fa983ba4cd2eee2923"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-008",
+      "country": "スペイン",
+      "question_number": "8",
+      "image_index": 13,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "486157d279221b9565fdf1cf48ca8862f38c1484dc583c61fae88c2c8bdd0b40"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-009",
+      "country": "スペイン",
+      "question_number": "9",
+      "image_index": 13,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "f7ce9af54fe3a53ff8460fd8dfb382683cb58af1d69a2256a7ce3a5273727320"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-010",
+      "country": "スペイン",
+      "question_number": "10",
+      "image_index": 13,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "36696375589ef61fda886a18a945e8907da9cbec3678deded1a55cf452cb8008"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-011",
+      "country": "スペイン",
+      "question_number": "11",
+      "image_index": 13,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "d108d0289800fb2b4236d5b57988dea246fdf0d5f7605e42f748d88963b719f5"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-012",
+      "country": "スペイン",
+      "question_number": "12",
+      "image_index": 14,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "b8b28b38f2c1deff64f0e0a21febd9b9379baf93f717b49610db50a3870a33f6"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-013",
+      "country": "スペイン",
+      "question_number": "13",
+      "image_index": 14,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "4ebbdd85314b68603e46b8c47e4dbc5e7c90c46cff30715682bd0bc8280a2ade"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-014",
+      "country": "スペイン",
+      "question_number": "14",
+      "image_index": 14,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "a991ab4a20f134e732ec04e1953b9f9016b2d6fc877352c0ad6a2c095865cd56"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-015",
+      "country": "スペイン",
+      "question_number": "15",
+      "image_index": 14,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "fb2d9709d4e5185d54ebc8d5e75056b830a7003a95d4fcfcc406612ab67f11d1"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-016",
+      "country": "スペイン",
+      "question_number": "16",
+      "image_index": 14,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "4b57e8d74f97516a78982ae84f41a8644bcc19a56b536642edb93d70d6efa1c3"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-017",
+      "country": "スペイン",
+      "question_number": "17",
+      "image_index": 14,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "9b5016634223d3871dbce980c6e4e58da20e334c1e5112d14a94e69b18904d65"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-018",
+      "country": "スペイン",
+      "question_number": "18",
+      "image_index": 14,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "8879c1b4f0c9041479af2547227b3d14d2e32e9de32038fec5086e46a98fbc3d"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-019",
+      "country": "スペイン",
+      "question_number": "19",
+      "image_index": 14,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "fc37ba9c5848bee1614999cc702e0b3377feceb8536ba966d16ab2c08b8924c5"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-020",
+      "country": "スペイン",
+      "question_number": "20",
+      "image_index": 14,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "0f5dd29c17827b3105094603b10cfe4ff3c56c9c0e296d8b5280dfcc2178d7c1"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-021",
+      "country": "スペイン",
+      "question_number": "21",
+      "image_index": 14,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "61c6a346ffb5b4b58ddbe1b70e4b24b78f95a67260567897195e7d348cbc4d8e"
+    },
+    {
+      "question_id": "Q-PR20261031-ES-022",
+      "country": "スペイン",
+      "question_number": "22",
+      "image_index": 14,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "061a197a175016c006fddd346a181a7fc50f19df157c4b36546c2be482c3fecb"
+    },
+    {
+      "question_id": "Q-PR20261031-PT-001",
+      "country": "ポルトガル",
+      "question_number": "1",
+      "image_index": 15,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "db17e2ab2f2211265ae413b97dfdfd48cd8e1c8814525c88811a815421c14437"
+    },
+    {
+      "question_id": "Q-PR20261031-PT-002",
+      "country": "ポルトガル",
+      "question_number": "2",
+      "image_index": 15,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "35883b0546043d8b1e7dd8650c1bc131847317acd4ef1ce27febe9e78a8ec8e3"
+    },
+    {
+      "question_id": "Q-PR20261031-PT-003",
+      "country": "ポルトガル",
+      "question_number": "3",
+      "image_index": 15,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "4330ca7cfd78255dffa26830e5e8ae4da773739507c6dded89f82ad52e9215a9"
+    },
+    {
+      "question_id": "Q-PR20261031-PT-004",
+      "country": "ポルトガル",
+      "question_number": "4",
+      "image_index": 15,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "fe6b9d8ef3b18e7f7cb75bfefc294ffc6c29f9a975566897b7219472c04ed47c"
+    },
+    {
+      "question_id": "Q-PR20261031-PT-005",
+      "country": "ポルトガル",
+      "question_number": "5",
+      "image_index": 15,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "5a9b07336dd05b3915eaf462c06e344ad76f1d4393edc274d714b51b64346125"
+    },
+    {
+      "question_id": "Q-PR20261031-PT-006",
+      "country": "ポルトガル",
+      "question_number": "6",
+      "image_index": 15,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "d0284be83f113f001d427e6ed92482d6c426abb3933667dc9d066d1bba75d491"
+    },
+    {
+      "question_id": "Q-PR20261031-PT-007",
+      "country": "ポルトガル",
+      "question_number": "7",
+      "image_index": 15,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "fc2250135ccc7a2775a71bbc43878a6fa58f945123550bb116887b50f0512eff"
+    },
+    {
+      "question_id": "Q-PR20261031-PT-008",
+      "country": "ポルトガル",
+      "question_number": "8",
+      "image_index": 15,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "502d11e435b32458194ea459221c935ca65f2e1423bcca40208de9669ba57e7c"
+    },
+    {
+      "question_id": "Q-PR20261031-PT-009",
+      "country": "ポルトガル",
+      "question_number": "9",
+      "image_index": 15,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "84e7703add488ff168805cdcadc5e550ede7ae9e414c073cb63941516dcae988"
+    },
+    {
+      "question_id": "Q-PR20261031-PT-010",
+      "country": "ポルトガル",
+      "question_number": "10",
+      "image_index": 15,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "20d6997b821f9e877aeb790daf565c961284685c2db5d76dae7a19d7f8926d53"
+    },
+    {
+      "question_id": "Q-PR20261031-PT-011",
+      "country": "ポルトガル",
+      "question_number": "11",
+      "image_index": 15,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "c3d44631e394a9799c50a8274f8a7297bd2576f306c380b3d22302b68e0a4f61"
+    },
+    {
+      "question_id": "Q-PR20261031-PT-012",
+      "country": "ポルトガル",
+      "question_number": "12",
+      "image_index": 15,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "0f06e6ebd2cc36b781ce75b127acb65e7d9faf74e51598c024af9c5a9426cd85"
+    },
+    {
+      "question_id": "Q-PR20261031-AT-001",
+      "country": "オーストリア",
+      "question_number": "1",
+      "image_index": 16,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "9734ac54d68b187e991a446132f0511b61da4e770fe2f9b4deb48451caa703d0"
+    },
+    {
+      "question_id": "Q-PR20261031-AT-002",
+      "country": "オーストリア",
+      "question_number": "2",
+      "image_index": 16,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "3c4bc53b3125c7482a43d546f6fbcf8727065a21145c7ef6a20a83661234509e"
+    },
+    {
+      "question_id": "Q-PR20261031-AT-003",
+      "country": "オーストリア",
+      "question_number": "3",
+      "image_index": 16,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "c422fdff4af9b58769cc56a410d8870a8e206723453055052fe770919b038015"
+    },
+    {
+      "question_id": "Q-PR20261031-AT-004",
+      "country": "オーストリア",
+      "question_number": "4",
+      "image_index": 16,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "94dfabdcdff0d56ecfecff3f8bc44900a6bc684e4478d5ff1a7755c5837bd8b6"
+    },
+    {
+      "question_id": "Q-PR20261031-AT-005",
+      "country": "オーストリア",
+      "question_number": "5",
+      "image_index": 16,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "bde71f1699c1ea0d01071c33d4fcd2d9a1986c20a7425597b8598eba09e28097"
+    },
+    {
+      "question_id": "Q-PR20261031-AT-006",
+      "country": "オーストリア",
+      "question_number": "6",
+      "image_index": 16,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "7b7cffbcebf733689318bb7fef0cebe4359f2930bd87da463d85878a9ac2f617"
+    },
+    {
+      "question_id": "Q-PR20261031-AT-007",
+      "country": "オーストリア",
+      "question_number": "7",
+      "image_index": 16,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "92f7bf30843b9e69a5845e97df82c7fc8fc6f19c3a6e3ee5f2480cb1f67fbb64"
+    },
+    {
+      "question_id": "Q-PR20261031-AT-008",
+      "country": "オーストリア",
+      "question_number": "8",
+      "image_index": 16,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "022ed8280057a3ea5460eaf055a5ab0fd24628843a3ccbf7ed01a30b8054841a"
+    },
+    {
+      "question_id": "Q-PR20261031-AT-009",
+      "country": "オーストリア",
+      "question_number": "9",
+      "image_index": 16,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "94b286525a5df23a5e7422772e9adc3feea43373e76d745d4f758f69e9acae94"
+    },
+    {
+      "question_id": "Q-PR20261031-AT-010",
+      "country": "オーストリア",
+      "question_number": "10",
+      "image_index": 16,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "b9c2eafaa9031bf06a3a39c024a6ba557e86e5b483e91cbdca57b259eb17f148"
+    },
+    {
+      "question_id": "Q-PR20261031-AT-011",
+      "country": "オーストリア",
+      "question_number": "11",
+      "image_index": 16,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "9a9ce06f1d3012e2c5b2b6a209a542d16e9c5841d3484e0597f28b23b10da8ef"
+    },
+    {
+      "question_id": "Q-PR20261031-US-001",
+      "country": "アメリカ",
+      "question_number": "1",
+      "image_index": 17,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "dbb8e82d63c7d8039ecbd81ba2fb5db3ad8509c7a6d48f0dcdaa125f6f75013c"
+    },
+    {
+      "question_id": "Q-PR20261031-US-002",
+      "country": "アメリカ",
+      "question_number": "2",
+      "image_index": 17,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "7f68a4f226b57d17596bf01e01af1ec1c5e601f1b02fd1a8e972c35f63a851c4"
+    },
+    {
+      "question_id": "Q-PR20261031-US-003",
+      "country": "アメリカ",
+      "question_number": "3",
+      "image_index": 17,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "d2b80f777dce2411a7e3bdbb8d946cb7228474edb23af99755beab0ccd3adfc6"
+    },
+    {
+      "question_id": "Q-PR20261031-US-004",
+      "country": "アメリカ",
+      "question_number": "4",
+      "image_index": 17,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "c2c4159c64a60738a549c28ec4896df313cc9c9db476542f58fe4fb48cacfb1f"
+    },
+    {
+      "question_id": "Q-PR20261031-US-005",
+      "country": "アメリカ",
+      "question_number": "5",
+      "image_index": 17,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "4bed2ba3bb940e7604ebca97e3a62dd2e1e2fec48c06d86359b9909c6ae611f7"
+    },
+    {
+      "question_id": "Q-PR20261031-US-006",
+      "country": "アメリカ",
+      "question_number": "6",
+      "image_index": 17,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "fc1a9d894cc65601559ae1666d53f7555af6cd78ca3467a478c06fcef154abf9"
+    },
+    {
+      "question_id": "Q-PR20261031-US-007",
+      "country": "アメリカ",
+      "question_number": "7",
+      "image_index": 17,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "0604ee4e56708ca80337d7f7600c968db82a06dbd45943970c0fce10a102c7bc"
+    },
+    {
+      "question_id": "Q-PR20261031-US-008",
+      "country": "アメリカ",
+      "question_number": "8",
+      "image_index": 17,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "8196363eb5ce7a92dfb7035054b560b9dbc09bc1a173e43a4be70c949248661e"
+    },
+    {
+      "question_id": "Q-PR20261031-US-009",
+      "country": "アメリカ",
+      "question_number": "9",
+      "image_index": 17,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "66c1c7af109885e72456b090db3e78263d8b0c5378382ea1a2d1a815091888ed"
+    },
+    {
+      "question_id": "Q-PR20261031-US-010",
+      "country": "アメリカ",
+      "question_number": "10",
+      "image_index": 17,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "a941a2c9e126e570035c02e844b5509277a0af77f981b4a98f347f1722973251"
+    },
+    {
+      "question_id": "Q-PR20261031-US-011",
+      "country": "アメリカ",
+      "question_number": "11",
+      "image_index": 17,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "d2106e40fc9d9661f8d7acedd17098fdb4bef598028a85752a29aea7bafa2dbe"
+    },
+    {
+      "question_id": "Q-PR20261031-US-012",
+      "country": "アメリカ",
+      "question_number": "12",
+      "image_index": 17,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "39e4d3a1b4fc94f153ae9de20497074ef450a54d3f46f2ea1ebb6f0f490837d9"
+    },
+    {
+      "question_id": "Q-PR20261031-US-013",
+      "country": "アメリカ",
+      "question_number": "13",
+      "image_index": 18,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "b49a6aab5d376c032748972845c3572efc6a203ebcb489785653c134d5525f50"
+    },
+    {
+      "question_id": "Q-PR20261031-US-014",
+      "country": "アメリカ",
+      "question_number": "14",
+      "image_index": 18,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "ebdefb44174acc79114c67c67aa41b582920372b3d3092ec7a3a0ef47eb4984f"
+    },
+    {
+      "question_id": "Q-PR20261031-US-015",
+      "country": "アメリカ",
+      "question_number": "15",
+      "image_index": 18,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "518f69ebce6c319e6e1da6599d5f000e83dec6fd3b0f71e52b343c00b7edba82"
+    },
+    {
+      "question_id": "Q-PR20261031-US-016",
+      "country": "アメリカ",
+      "question_number": "16",
+      "image_index": 18,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "f61fc4c4362cd7f643a5c82f649bb4f699176b351e9c99f7021044a94eb79ccc"
+    },
+    {
+      "question_id": "Q-PR20261031-US-017",
+      "country": "アメリカ",
+      "question_number": "17",
+      "image_index": 18,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "f81afb4031f604cbb589a2b486d0c03547ab4d7b126f222356e4389a48e78fae"
+    },
+    {
+      "question_id": "Q-PR20261031-US-018",
+      "country": "アメリカ",
+      "question_number": "18",
+      "image_index": 18,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "b931f7de54ca6eb1dc8aeffdac5149eb370d5f91e743b76ad96d51f5df9266d8"
+    },
+    {
+      "question_id": "Q-PR20261031-CL-001",
+      "country": "チリ",
+      "question_number": "1",
+      "image_index": 19,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "a10cd175cf5fc716522f9541a89e631c4250c8951be06b2a7466fff602a4defb"
+    },
+    {
+      "question_id": "Q-PR20261031-CL-002",
+      "country": "チリ",
+      "question_number": "2",
+      "image_index": 19,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "c640090c1fb0f29c3ed1b2195859daa16cc5a1005fb68b6814ebfb52b2e98e0f"
+    },
+    {
+      "question_id": "Q-PR20261031-CL-003",
+      "country": "チリ",
+      "question_number": "3",
+      "image_index": 19,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "8e66843888cd248a99549fbfa9f9607a2ae4acbfc65c049bb54aea611d0ca7c9"
+    },
+    {
+      "question_id": "Q-PR20261031-CL-004",
+      "country": "チリ",
+      "question_number": "4",
+      "image_index": 19,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "2c252c7360d89770672233eba48d6c4d1b93907fd5a893809e5e2da05aebf9c9"
+    },
+    {
+      "question_id": "Q-PR20261031-CL-005",
+      "country": "チリ",
+      "question_number": "5",
+      "image_index": 19,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "68495214bebd09097091409c76dc51add9b1bc2e1d8a9c961f75fa654f59d4a1"
+    },
+    {
+      "question_id": "Q-PR20261031-CL-006",
+      "country": "チリ",
+      "question_number": "6",
+      "image_index": 19,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "50a7a2be3ce5dd632acd070e3a3bb809047658554f8510edd475be5c62c47766"
+    },
+    {
+      "question_id": "Q-PR20261031-CL-007",
+      "country": "チリ",
+      "question_number": "7",
+      "image_index": 19,
+      "answer_key_image_index": 26,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "744ff1ab2a47954350d0f1774d2ea0888d789f8ef0a6a3f408b7587c43b3d3ec"
+    },
+    {
+      "question_id": "Q-PR20261031-CL-008",
+      "country": "チリ",
+      "question_number": "8",
+      "image_index": 19,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "2dccf8323a755cfd8494db35f250db4e785d6b4827479dbac7e8f420d4432229"
+    },
+    {
+      "question_id": "Q-PR20261031-CL-009",
+      "country": "チリ",
+      "question_number": "9",
+      "image_index": 19,
+      "answer_key_image_index": 26,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "c2c939b2039d526d0c4747fab80a87a8fb2554de6fb486adbb035a859965089e"
+    },
+    {
+      "question_id": "Q-PR20261031-CL-010",
+      "country": "チリ",
+      "question_number": "10",
+      "image_index": 19,
+      "answer_key_image_index": 26,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "248c1dd491bef19ac4ff43916fdc95c4b39529449b0aca19a1fa99f3cd9a2582"
+    },
+    {
+      "question_id": "Q-PR20261031-AR-001",
+      "country": "アルゼンチン",
+      "question_number": "1",
+      "image_index": 20,
+      "answer_key_image_index": 27,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "ba3316935adf797c778a664a39a6ea3b0e7fb9d9a3cf45fea04eab0a710d948f"
+    },
+    {
+      "question_id": "Q-PR20261031-AR-002",
+      "country": "アルゼンチン",
+      "question_number": "2",
+      "image_index": 20,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "4dc7dbe2204a7996d1efbd1b68d3950c3e41a51a9e48db423927c40104b6de70"
+    },
+    {
+      "question_id": "Q-PR20261031-AR-003",
+      "country": "アルゼンチン",
+      "question_number": "3",
+      "image_index": 20,
+      "answer_key_image_index": 27,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "fe7e6c62140b74b4a50b1eb6559a06dca049e5d4ec6aa58cfdc782d3699a946a"
+    },
+    {
+      "question_id": "Q-PR20261031-AR-004",
+      "country": "アルゼンチン",
+      "question_number": "4",
+      "image_index": 20,
+      "answer_key_image_index": 27,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "5e5fc265724d221a8e712186d60cd8486220c745f1a217ab718fc05c583df11c"
+    },
+    {
+      "question_id": "Q-PR20261031-AR-005",
+      "country": "アルゼンチン",
+      "question_number": "5",
+      "image_index": 20,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "516d9365a55fb0c205bd78ee7532c3ff9875f9418d6d2d719a796fa0d4cdc64e"
+    },
+    {
+      "question_id": "Q-PR20261031-AR-006",
+      "country": "アルゼンチン",
+      "question_number": "6",
+      "image_index": 20,
+      "answer_key_image_index": 27,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "00d3850311781b902dc4f7f467833e6b529e0a98a4ce8a382fbc63bb4fae6dcf"
+    },
+    {
+      "question_id": "Q-PR20261031-AR-007",
+      "country": "アルゼンチン",
+      "question_number": "7",
+      "image_index": 20,
+      "answer_key_image_index": 27,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "079036ae4a1ba5fa7cf768e0c4e5c69da0009a8e97d47a9233a17db41c4eaa25"
+    },
+    {
+      "question_id": "Q-PR20261031-AR-008",
+      "country": "アルゼンチン",
+      "question_number": "8",
+      "image_index": 20,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "e39e89f05c458b120a844809e14518d9a39c102520b001453fe0612650961623"
+    },
+    {
+      "question_id": "Q-PR20261031-AR-009",
+      "country": "アルゼンチン",
+      "question_number": "9",
+      "image_index": 20,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "299383836d6e94cc1e5bf79aacb750d5cd4fd109459e987ebe6c15ba9be0ec87"
+    },
+    {
+      "question_id": "Q-PR20261031-AR-010",
+      "country": "アルゼンチン",
+      "question_number": "10",
+      "image_index": 20,
+      "answer_key_image_index": 27,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "e8bd08bff2dbaeee93e31ca8b13ada4509c8312b031a7a5e15741c65fb780e73"
+    },
+    {
+      "question_id": "Q-PR20261031-AU-001",
+      "country": "オーストラリア",
+      "question_number": "1",
+      "image_index": 21,
+      "answer_key_image_index": 27,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "be11fa907b8405dad54618d677e3a03438d3e556ea5184884a522d446d85f554"
+    },
+    {
+      "question_id": "Q-PR20261031-AU-002",
+      "country": "オーストラリア",
+      "question_number": "2",
+      "image_index": 21,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "a85d772c3f474fb39489530f604b7293b03c34c130e75a818b19c6057e975aaa"
+    },
+    {
+      "question_id": "Q-PR20261031-AU-003",
+      "country": "オーストラリア",
+      "question_number": "3",
+      "image_index": 21,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "f94faaf30f1ce36459820674935af2d22d73145da08b4a170f2b33761aa6f027"
+    },
+    {
+      "question_id": "Q-PR20261031-AU-004",
+      "country": "オーストラリア",
+      "question_number": "4",
+      "image_index": 21,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "a10ae60832b05c5af1b4b3742b0f7616367a575eff35a639dd2c98ae60ab5399"
+    },
+    {
+      "question_id": "Q-PR20261031-AU-005",
+      "country": "オーストラリア",
+      "question_number": "5",
+      "image_index": 21,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "4e01307aebb27c2f9a871406e575ee6264ecc626ea1547dfbc40086984c1941c"
+    },
+    {
+      "question_id": "Q-PR20261031-AU-006",
+      "country": "オーストラリア",
+      "question_number": "6",
+      "image_index": 21,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "f6b4111a1ba1e0b970c1ff468911600e4aad588589a511f80ff4a60db091ddff"
+    },
+    {
+      "question_id": "Q-PR20261031-AU-007",
+      "country": "オーストラリア",
+      "question_number": "7",
+      "image_index": 21,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "b9a0319b0ab3df2b8fa3a6f6637fe0741e63a7975465f2519fa4b6dfea746d34"
+    },
+    {
+      "question_id": "Q-PR20261031-AU-008",
+      "country": "オーストラリア",
+      "question_number": "8",
+      "image_index": 21,
+      "answer_key_image_index": 27,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "f447bf5ed5aa37f1ce1040f27a284b45885011d5407ac941423404195a1791fd"
+    },
+    {
+      "question_id": "Q-PR20261031-AU-009",
+      "country": "オーストラリア",
+      "question_number": "9",
+      "image_index": 21,
+      "answer_key_image_index": 27,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "459a0618341bdc5b56cca509023f2d4de86887c47476b4b59509e44a6a2b05b4"
+    },
+    {
+      "question_id": "Q-PR20261031-AU-010",
+      "country": "オーストラリア",
+      "question_number": "10",
+      "image_index": 21,
+      "answer_key_image_index": 27,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "897b8d0fb1486f64f08d9221db0eaf936403f03d3c4f2b024f0b7b8b7f4a85d9"
+    },
+    {
+      "question_id": "Q-PR20261031-AU-011",
+      "country": "オーストラリア",
+      "question_number": "11",
+      "image_index": 22,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "0c795c75baadcba9ca9346581a8810b7d0650cb55873c266831a51ad9a0261ba"
+    },
+    {
+      "question_id": "Q-PR20261031-AU-012",
+      "country": "オーストラリア",
+      "question_number": "12",
+      "image_index": 22,
+      "answer_key_image_index": 27,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "5ff63d682273ae830aa1ad0252d9775c9964f5da4838138850b0dbbc4b63feb8"
+    },
+    {
+      "question_id": "Q-PR20261031-AU-013",
+      "country": "オーストラリア",
+      "question_number": "13",
+      "image_index": 22,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "dcec4073b43af657ea0fa3aca75055679f8fd98e77b0dfd07ebc26de400f551b"
+    },
+    {
+      "question_id": "Q-PR20261031-AU-014",
+      "country": "オーストラリア",
+      "question_number": "14",
+      "image_index": 22,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "72612107419eaa25348dad5eaab164d4f90cf93310951f0c1f2530185d9a1883"
+    },
+    {
+      "question_id": "Q-PR20261031-AU-015",
+      "country": "オーストラリア",
+      "question_number": "15",
+      "image_index": 22,
+      "answer_key_image_index": 27,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "f5734214824a24b7ae7a911611d52f3629c77bb9f11f162fa2fc213b08081dd8"
+    },
+    {
+      "question_id": "Q-PR20261031-NZ-001",
+      "country": "ニュージーランド",
+      "question_number": "1",
+      "image_index": 23,
+      "answer_key_image_index": 27,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "aa6ad1c70e305171b5d2ace24f10bd0d26be395f5c754125f8f015d1a552862f"
+    },
+    {
+      "question_id": "Q-PR20261031-NZ-002",
+      "country": "ニュージーランド",
+      "question_number": "2",
+      "image_index": 23,
+      "answer_key_image_index": 27,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "dbfbfca5e8db3bbb9c128bd7865f395e7c0eb3fb03c8d9dbb4332d624386ba9e"
+    },
+    {
+      "question_id": "Q-PR20261031-NZ-003",
+      "country": "ニュージーランド",
+      "question_number": "3",
+      "image_index": 23,
+      "answer_key_image_index": 27,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "9d2fc440a084c7d654bfa53e5eb628ba60e34a7da5f914f14b32526631b6c864"
+    },
+    {
+      "question_id": "Q-PR20261031-NZ-004",
+      "country": "ニュージーランド",
+      "question_number": "4",
+      "image_index": 23,
+      "answer_key_image_index": 27,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "94a425705318acdaa1c81c7b2ea25d15b345eac422050cc63a10acf7cb4c8e29"
+    },
+    {
+      "question_id": "Q-PR20261031-NZ-005",
+      "country": "ニュージーランド",
+      "question_number": "5",
+      "image_index": 23,
+      "answer_key_image_index": 27,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "7a00e34e2b3dd216ec3bab4ead7d32bf37955825a4e2db4b10de1d091af9cc67"
+    },
+    {
+      "question_id": "Q-PR20261031-NZ-006",
+      "country": "ニュージーランド",
+      "question_number": "6",
+      "image_index": 23,
+      "answer_key_image_index": 27,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "bede6b7f0537946e2073707d0741f87a98a6e74f43348d674d8dd2983cf44286"
+    },
+    {
+      "question_id": "Q-PR20261031-NZ-007",
+      "country": "ニュージーランド",
+      "question_number": "7",
+      "image_index": 23,
+      "answer_key_image_index": 27,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "e4cfca9aa78a8c0c012d6b363a90572fb8bb67fa43def4e4d3d3c3c553a9586b"
+    },
+    {
+      "question_id": "Q-PR20261031-NZ-008",
+      "country": "ニュージーランド",
+      "question_number": "8",
+      "image_index": 23,
+      "answer_key_image_index": 27,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "43a65e1b5263184f2cd69d228b241f92dc803c707699c8121b5a10128092b655"
+    },
+    {
+      "question_id": "Q-PR20261031-NZ-009",
+      "country": "ニュージーランド",
+      "question_number": "9",
+      "image_index": 23,
+      "answer_key_image_index": 27,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "ba7fb6b2627456599bb4d8ee2ab9d2b6f91df0799165ae3f86540b304dd5c404"
+    },
+    {
+      "question_id": "Q-PR20261031-ZA-001",
+      "country": "南アフリカ",
+      "question_number": "1",
+      "image_index": 24,
+      "answer_key_image_index": 27,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "9ef8383dc0f540c4606519f334ab09dc638f046e2b6280886cb6ee2ca0156cf2"
+    },
+    {
+      "question_id": "Q-PR20261031-ZA-002",
+      "country": "南アフリカ",
+      "question_number": "2",
+      "image_index": 24,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "373668fc8f804f9345d9a201c094453c1b0523fcb06851821cec7ea1dcc0fca4"
+    },
+    {
+      "question_id": "Q-PR20261031-ZA-003",
+      "country": "南アフリカ",
+      "question_number": "3",
+      "image_index": 24,
+      "answer_key_image_index": 27,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "7151758eaffe787504bcf7dda2d5a22d4168270b6a11c15fca194b2d1510fbbe"
+    },
+    {
+      "question_id": "Q-PR20261031-ZA-004",
+      "country": "南アフリカ",
+      "question_number": "4",
+      "image_index": 24,
+      "answer_key_image_index": 27,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "010459eadf241055e0306d3a7fd292db63436ac76eecb936ff65290b3deafdd4"
+    },
+    {
+      "question_id": "Q-PR20261031-ZA-005",
+      "country": "南アフリカ",
+      "question_number": "5",
+      "image_index": 24,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "9a5f776c79b724d3caab95b09b774ac1988c24fa528eaf56ea088196a7f026c3"
+    },
+    {
+      "question_id": "Q-PR20261031-ZA-006",
+      "country": "南アフリカ",
+      "question_number": "6",
+      "image_index": 24,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "e850da8e48b6892c6308ae49a27a87e03a4007e43f97eb20b323fd47e50850ac"
+    },
+    {
+      "question_id": "Q-PR20261031-ZA-007",
+      "country": "南アフリカ",
+      "question_number": "7",
+      "image_index": 24,
+      "answer_key_image_index": 27,
+      "answer": 1,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "25a3d3f3edaf69cd3436875bc12d0329b74da3c47ffe4fe532c937fe9cc26179"
+    },
+    {
+      "question_id": "Q-PR20261031-ZA-008",
+      "country": "南アフリカ",
+      "question_number": "8",
+      "image_index": 24,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "18e2d0538369c1253cc2dba493b359787a73ea613de18386c68ec9bb64fc4dba"
+    },
+    {
+      "question_id": "Q-PR20261031-ZA-009",
+      "country": "南アフリカ",
+      "question_number": "9",
+      "image_index": 24,
+      "answer_key_image_index": 27,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "2b66a61502b67a5e2fb4e1142eaceae2e964388a5dabff2cdf1c24f7e9879a04"
+    },
+    {
+      "question_id": "Q-PR20261031-ZA-010",
+      "country": "南アフリカ",
+      "question_number": "10",
+      "image_index": 24,
+      "answer_key_image_index": 27,
+      "answer": 3,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "7865a3c010b40c5e34b7e968af46046c9b6be5672a8cb8e681ff11e68c3a24b7"
+    },
+    {
+      "question_id": "Q-PR20261031-ZA-011",
+      "country": "南アフリカ",
+      "question_number": "11",
+      "image_index": 24,
+      "answer_key_image_index": 27,
+      "answer": 2,
+      "comparison": "image_compared_transcription",
+      "content_sha256": "2e87d56261c0050fdfe52872e73431d03db791ec8d09d49035b0cf8446401eed"
+    }
+  ]
+}

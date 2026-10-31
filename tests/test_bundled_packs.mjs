@@ -5,7 +5,7 @@ import { BUNDLED_PACKS, parseQuestionPack, MAX_PACK_BYTES } from '../static/page
 import { QuizSession, countryCounts, PRACTICE_COUNTS } from '../static/quiz.js';
 
 const expectedPracticeCounts = {
-  日本:21, フランス:50, イタリア:27, ドイツ:14, スペイン:22, ポルトガル:12, オーストリア:11,
+  日本:21, フランス:46, イタリア:27, ドイツ:14, スペイン:22, ポルトガル:12, オーストリア:11,
   アメリカ:18, チリ:10, アルゼンチン:10, オーストラリア:15, ニュージーランド:9, 南アフリカ:11,
 };
 const banks = await Promise.all(BUNDLED_PACKS.map(async pack => {
@@ -14,14 +14,14 @@ const banks = await Promise.all(BUNDLED_PACKS.map(async pack => {
 }));
 const practice = banks.find(bank => bank.id === 'practice');
 
-test('the bundled practice file contains the created 230 questions and exact 13-country counts', () => {
+test('the bundled practice file contains the created 226 questions and exact 13-country counts', () => {
   assert.ok(Buffer.byteLength(practice.text) < MAX_PACK_BYTES);
-  assert.equal(practice.parsed.questions.length, 230);
-  assert.equal(practice.original.metadata.question_count, 230);
+  assert.equal(practice.parsed.questions.length, 226);
+  assert.equal(practice.original.metadata.question_count, 226);
   assert.deepEqual(practice.original.metadata.country_counts, expectedPracticeCounts);
   assert.deepEqual(Object.fromEntries(countryCounts(practice.parsed.questions)), expectedPracticeCounts);
-  assert.equal(new Set(practice.parsed.questions.map(row => row.knowledge_id)).size, 230);
-  assert.equal(new Set(practice.parsed.questions.map(row => row.prompt)).size, 230);
+  assert.equal(new Set(practice.parsed.questions.map(row => row.knowledge_id)).size, 226);
+  assert.equal(new Set(practice.parsed.questions.map(row => row.prompt)).size, 226);
   const textbookIds = new Set(banks.find(bank => bank.id === 'textbook').parsed.questions.map(row => row.id));
   for (const row of practice.parsed.questions) assert.equal(textbookIds.has(row.id), false);
 });
@@ -38,7 +38,7 @@ test('practice parsing retains all editorial, answer-key, temporal, and review r
   const numberedItems = new Set();
   for (const [index, row] of practice.parsed.questions.entries()) {
     for (const [key, value] of Object.entries(practice.original.questions[index])) assert.deepEqual(row[key], value);
-    assert.equal(row.choices.find(choice => choice.id === row.correct_choice_id).text, row.correct_answer);
+    if (row.question_type !== 'matching') assert.equal(row.choices.find(choice => choice.id === row.correct_choice_id).text, row.correct_answer);
     assert.equal(row.status, 'auto_checked');
     assert.equal(row.validation.answer_key_compared, true);
     assert.equal(row.validation.human_approved, false);
@@ -73,11 +73,17 @@ for (const bank of banks) {
           seen.add(row.id);
           assert.ok(byId.has(row.id));
           if (country !== null) assert.ok(row.countries.includes(country));
-          assert.equal(row.choices.find(choice => choice.id === row.correct_choice_id).text, byId.get(row.id).correct_answer);
           const wrong = session.answers.length === 0;
-          const selected = row.choices.find(choice => (choice.id === row.correct_choice_id) !== wrong);
-          assert.equal(session.answer(selected.id).correct, !wrong);
-          assert.equal(session.answer(selected.id), null);
+          let selected;
+          if (row.question_type === 'matching') {
+            selected = { ...row.correct_matches };
+            if (wrong) [selected['1'], selected['2']] = [selected['2'], selected['1']];
+          } else {
+            assert.equal(row.choices.find(choice => choice.id === row.correct_choice_id).text, byId.get(row.id).correct_answer);
+            selected = row.choices.find(choice => (choice.id === row.correct_choice_id) !== wrong).id;
+          }
+          assert.equal(session.answer(selected).correct, !wrong);
+          assert.equal(session.answer(selected), null);
           assert.equal(session.next(), true);
         }
         assert.equal(seen.size, total);

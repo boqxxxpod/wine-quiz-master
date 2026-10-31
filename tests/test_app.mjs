@@ -242,9 +242,9 @@ for (const mode of ['server', 'pages']) {
     assert.equal(app.$('#question-count').value, 'all');
     assert.equal(app.$('#quiz-root').children.length, 0);
     assert.equal(app.$('#active-scope').textContent, '');
-    assert.match(app.$('#pages-import-status').textContent, /練習問題.*230/);
+    assert.match(app.$('#pages-import-status').textContent, /練習問題.*226/);
     assert.ok(app.$('#pack-review-status').textContent.includes(registeredPractice.metadata.qa_status));
-    assert.match(app.$('#scope-all-count').textContent, /230/);
+    assert.match(app.$('#scope-all-count').textContent, /226/);
     assert.equal(app.$('#practice-country').options.length, 14);
     for (const [country, count] of Object.entries(registeredPractice.metadata.country_counts)) {
       const option = app.$('#practice-country').options.find(option => option.value === country);
@@ -279,23 +279,83 @@ for (const mode of ['server', 'pages']) {
     assert.deepEqual(app.requests, [DEFAULT_PACK_PATH, PRACTICE_PACK_PATH, DEFAULT_PACK_PATH]);
   });
 
-  test(`${mode}: all 230 practice questions keep shuffled answers, explanations, evidence, and scoring`, async () => {
+  test(`${mode}: matching blocks incomplete or repeated choices, grades once and resets on restart`, async () => {
+    const row = registeredPractice.questions.find(row => row.question_type === 'matching');
+    const app = await startApp(mode, { practicePack: JSON.stringify({ metadata: {}, questions: [row] }) });
+    await chooseBundledPack(app, 'practice');
+    await app.$('#start-practice').click();
+    const selects = app.document.querySelectorAll('.matching-select');
+    assert.equal(app.$('.matching-submit').disabled, true);
+    selects[0].value = 'D';
+    await selects[0].dispatch('change');
+    selects[1].value = 'D';
+    await selects[1].dispatch('change');
+    assert.equal(app.$('.matching-submit').disabled, true);
+    assert.match(app.$('.matching-list .answer-hint').textContent, /同じ記号/);
+    assert.equal(app.$('.answer-panel'), null);
+    const wrong = { ...row.correct_matches, 1:'A', 2:'D' };
+    for (const select of selects) {
+      select.value = wrong[select.dataset.itemId];
+      await select.dispatch('change');
+    }
+    assert.equal(app.$('.matching-submit').disabled, false);
+    await app.$('.matching-submit').click();
+    assert.equal(app.document.querySelectorAll('.match-incorrect').length, 2);
+    assert.match(app.$('.question-score').textContent, /正解 0 \/ 1 · 回答 1/);
+    for (const select of app.document.querySelectorAll('.matching-select')) {
+      assert.equal(select.disabled, true);
+      select.value = row.correct_matches[select.dataset.itemId];
+      await select.dispatch('change');
+    }
+    assert.match(app.$('.question-score').textContent, /正解 0 \/ 1 · 回答 1/);
+    await app.$('.next-row button').click();
+    assert.match(app.$('.completion-score').textContent, /0.*1/);
+    await app.$('.completion-card button').click();
+    assert.ok(app.document.querySelectorAll('.matching-select').every(node => node.value === '' && !node.disabled));
+    assert.equal(app.$('.matching-submit').disabled, true);
+    assert.equal(app.$('.answer-panel'), null);
+  });
+
+  test(`${mode}: all 226 practice questions keep source numbering, explanations, evidence, and scoring`, async () => {
     const app = await startApp(mode);
     await chooseBundledPack(app, 'practice');
     await app.$('#start-practice').click();
     const seen = new Set();
-    for (let index = 0; index < 230; index += 1) {
+    for (let index = 0; index < 226; index += 1) {
       const id = app.$('.quiz-card').dataset.questionId;
       assert.equal(seen.has(id), false);
       seen.add(id);
       const row = registeredPractice.questions.find(row => row.question_id === id);
       assert.ok(row);
       assert.equal(app.$('#question-prompt').textContent, row.question);
-      assert.deepEqual(app.document.querySelectorAll('.choice-text').map(node => node.textContent).sort(), [...row.options].sort());
-      const choice = app.document.querySelectorAll('.choice').find(node =>
-        index === 0 ? node.querySelector('.choice-text').textContent !== row.correct_answer
-          : node.querySelector('.choice-text').textContent === row.correct_answer);
-      await choice.click();
+      if (row.question_type === 'matching') {
+        const selects = app.document.querySelectorAll('.matching-select');
+        assert.equal(selects.length, 5);
+        assert.equal(app.$('.matching-submit').disabled, true);
+        for (const select of selects) {
+          select.value = row.correct_matches[select.dataset.itemId];
+          await select.dispatch('change');
+        }
+        if (index === 0) {
+          [selects[0].value, selects[1].value] = [selects[1].value, selects[0].value];
+          await selects[0].dispatch('change');
+          await selects[1].dispatch('change');
+        }
+        assert.equal(app.$('.matching-submit').disabled, false);
+        await app.$('.matching-submit').click();
+        assert.ok(app.document.querySelectorAll('.matching-select').every(node => node.disabled));
+      } else {
+        const image = row.source_image?.kind === 'original';
+        assert.deepEqual(app.document.querySelectorAll('.choice-text').map(node => node.textContent),
+          image ? ['画像の選択肢 1', '画像の選択肢 2', '画像の選択肢 3'] : row.options);
+        assert.deepEqual(app.document.querySelectorAll('.choice-letter').map(node => node.textContent), row.options.map((_, i) => String(i + 1)));
+        const choices = app.document.querySelectorAll('.choice');
+        await choices[index === 0 ? (row.correct_index + 1) % choices.length : row.correct_index].click();
+      }
+      if (row.source_image) {
+        assert.ok(app.$('.question-figure img').src.includes(`/question-packs/practice-assets/${row.source_image.filename}`));
+        assert.equal(app.$('.question-figure img').alt, row.source_image.alt);
+      }
       assert.ok(app.document.querySelectorAll('.choice').every(node => node.disabled));
       assert.equal(app.$('.explanation-body').textContent, row.explanation);
       assert.ok(app.$('.correct-answer').textContent.includes(row.correct_answer));
@@ -303,16 +363,17 @@ for (const mode of ['server', 'pages']) {
         assert.ok(app.$('.pilot-evidence').textContent.includes(String(value)));
       }
       assert.match(app.$('.pilot-review-note').textContent, /auto_checked.*人手確認前/);
+      if (row.source_note) assert.ok(app.$('.source-note').textContent.includes(row.source_note));
       assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), String(index + 1));
-      assert.match(app.$('.question-score').textContent, new RegExp(`正解 ${index} / 230 · 回答 ${index + 1}`));
+      assert.match(app.$('.question-score').textContent, new RegExp(`正解 ${index} / 226 · 回答 ${index + 1}`));
       await app.$('.next-row button').click();
     }
-    assert.equal(seen.size, 230);
-    assert.match(app.$('.completion-score').textContent, /229.*230/);
+    assert.equal(seen.size, 226);
+    assert.match(app.$('.completion-score').textContent, /225.*226/);
     await app.$('.completion-card button').click();
     assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '0');
-    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '230');
-    assert.match(app.$('#active-scope').textContent, /練習問題.*すべて.*230/);
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '226');
+    assert.match(app.$('#active-scope').textContent, /練習問題.*すべて.*226/);
     assert.deepEqual(app.requests, [DEFAULT_PACK_PATH, PRACTICE_PACK_PATH]);
   });
 
@@ -330,10 +391,10 @@ for (const mode of ['server', 'pages']) {
     assert.equal(app.$('#pack-practice').checked, true);
     assert.equal(app.$('#question-count').value, 'all');
     assert.equal(app.$('#quiz-root').children.length, 0);
-    assert.match(app.$('#count-all-label').textContent, /230/);
+    assert.match(app.$('#count-all-label').textContent, /226/);
     await importPack(app, 'broken JSON');
     assert.equal(app.$('#pack-practice').checked, true);
-    assert.match(app.$('#pages-import-status').textContent, /練習問題.*230/);
+    assert.match(app.$('#pages-import-status').textContent, /練習問題.*226/);
     assert.deepEqual(app.requests, [DEFAULT_PACK_PATH, PRACTICE_PACK_PATH, PRACTICE_PACK_PATH]);
   });
 
@@ -357,7 +418,7 @@ for (const mode of ['server', 'pages']) {
     await selecting;
     assert.equal(app.$('#pack-practice').disabled, false);
     assert.equal(app.$('#start-practice').disabled, false);
-    assert.match(app.$('#pages-import-status').textContent, /練習問題.*230/);
+    assert.match(app.$('#pages-import-status').textContent, /練習問題.*226/);
   });
 
   for (const [failure, fetcher] of [
@@ -379,7 +440,7 @@ for (const mode of ['server', 'pages']) {
       await app.$('#retry-pack').click();
       assert.equal(app.$('#retry-pack').hidden, true);
       assert.equal(app.$('#start-practice').disabled, false);
-      assert.match(app.$('#pages-import-status').textContent, /練習問題.*230/);
+      assert.match(app.$('#pages-import-status').textContent, /練習問題.*226/);
       assert.deepEqual(app.requests, [DEFAULT_PACK_PATH, PRACTICE_PACK_PATH, PRACTICE_PACK_PATH]);
     });
   }
