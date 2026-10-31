@@ -243,6 +243,108 @@ test('an invalid restart preserves the active round and answers', () => {
   assert.equal(session.score, 1);
 });
 
+const fixedRandom = () => 0.999999;
+function finishRound(session) {
+  while (session.current) {
+    session.answer(session.current.correct_choice_id);
+    session.next();
+  }
+}
+
+test('restarts choose an unseen first question from outside the previous fixed-size subset', () => {
+  const rows = ['one', 'two', 'three', 'four'].map(question);
+  const original = JSON.stringify(rows);
+  const session = new QuizSession(rows, fixedRandom, null, 2);
+  const previous = session.order.map(row => row.id);
+  assert.deepEqual(previous, ['one', 'two']);
+  finishRound(session);
+  const history = session.history;
+  assert.deepEqual(history, { questionIds:previous, firstId:'one', lastId:'two' });
+  session.restart();
+  assert.equal(previous.includes(session.current.id), false);
+  assert.equal(session.total, 2);
+  assert.equal(new Set(session.order.map(row => row.id)).size, 2);
+  assert.equal(session.score, 0);
+  assert.equal(session.answers.length, 0);
+  assert.equal(session.index, 0);
+  assert.deepEqual(history, { questionIds:previous, firstId:'one', lastId:'two' }, 'saved history is a snapshot');
+  finishRound(session);
+  assert.equal(session.score, 2);
+  assert.equal(JSON.stringify(rows), original);
+});
+
+test('only displayed questions enter history, including the unanswered current question', () => {
+  const session = new QuizSession(['one','two','three'].map(question), fixedRandom);
+  assert.deepEqual(session.history.questionIds, ['one']);
+  session.answer('b');
+  session.next();
+  assert.equal(session.current.id, 'two');
+  assert.equal(session.answered, false);
+  const history = session.history;
+  assert.deepEqual(history, { questionIds:['one','two'], firstId:'one', lastId:'two' });
+  session.restart();
+  assert.equal(session.current.id, 'three', 'planned but never displayed questions are eligible');
+  assert.equal(session.score, 0);
+  const replacement = new QuizSession(['one','two','three'].map(question), fixedRandom, null, 2, history);
+  assert.equal(replacement.current.id, 'three', 'a new session can reuse the same displayed history');
+});
+
+test('completed full rounds avoid both the old first and last with a constant random source', () => {
+  const session = new QuizSession(['one','two','three'].map(question), fixedRandom);
+  for (let round = 0; round < 8; round += 1) {
+    finishRound(session);
+    const { firstId, lastId } = session.history;
+    session.restart();
+    assert.notEqual(session.current.id, firstId);
+    assert.notEqual(session.current.id, lastId);
+    assert.equal(session.total, 3);
+    assert.equal(new Set(session.order.map(row => row.id)).size, 3);
+    assert.equal(session.selectedId, null);
+  }
+});
+
+test('two-question rounds prioritize a different first when avoiding both ends is impossible', () => {
+  const session = new QuizSession(['one','two'].map(question), fixedRandom);
+  finishRound(session);
+  session.restart();
+  assert.equal(session.current.id, 'two');
+  assert.equal(session.total, 2);
+  finishRound(session);
+  session.restart();
+  assert.equal(session.current.id, 'one');
+});
+
+test('history never adds questions outside a changed country scope', () => {
+  const rows = [nativeQuestion('one'), nativeQuestion('two'), nativeQuestion('three'), nativeQuestion('italy', ['イタリア'])];
+  const session = new QuizSession(rows, fixedRandom, 'フランス', 2);
+  finishRound(session);
+  session.restart('フランス');
+  assert.equal(session.current.id, 'three');
+  assert.ok(session.order.every(row => row.countries.includes('フランス')));
+  session.restart('イタリア', 1);
+  assert.equal(session.current.id, 'italy');
+  finishRound(session);
+  session.restart();
+  assert.equal(session.current.id, 'italy');
+  assert.equal(session.total, 1);
+});
+
+test('one-question and empty pools terminate safely and preserve normal scoring and reset', () => {
+  for (const rows of [[], [question('only')]]) {
+    let calls = 0;
+    const session = new QuizSession(rows, () => { calls += 1; return 0; });
+    for (let round = 0; round < 5; round += 1) {
+      finishRound(session);
+      assert.equal(session.score, rows.length);
+      session.restart();
+      assert.equal(session.total, rows.length);
+      assert.equal(session.score, 0);
+      assert.equal(session.current?.id ?? null, rows.length ? 'only' : null);
+    }
+    assert.ok(calls < 50, 'no retry loop when another first is unavailable');
+  }
+});
+
 test('null and malformed options are rejected safely by validation and sessions', () => {
   const native = nativeQuestion('invalid');
   for (const row of [null, undefined, 3, [], { ...question('bad'), choices: [null, {}, {}] },

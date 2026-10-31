@@ -147,7 +147,7 @@ const registeredPracticeText = readFileSync(new URL(`..${PRACTICE_PACK_PATH}`, i
 const registeredPractice = JSON.parse(registeredPracticeText);
 
 async function startApp(mode, { pack = JSON.stringify(questions), status = 200, networkError = false, defaultFetcher,
-  practicePack = registeredPracticeText, practiceStatus = 200, practiceFetcher } = {}) {
+  practicePack = registeredPracticeText, practiceStatus = 200, practiceFetcher, random } = {}) {
   const document = documentFromHtml(readFileSync(new URL('../static/index.html', import.meta.url), 'utf8'));
   const requests = [];
   const fetch = async input => {
@@ -166,6 +166,7 @@ async function startApp(mode, { pack = JSON.stringify(questions), status = 200, 
   };
   const context = vm.createContext({
     document, fetch, URL, URLSearchParams, TextEncoder, console,
+    ...(random ? { Math:Object.assign(Object.create(Math), { random }) } : {}),
     location: { hash: '', href: 'https://app.example/' }, history: { replaceState() {} },
     window: { innerWidth: 1200, addEventListener() {} },
     // Toast lifetimes should not keep a test process open.
@@ -225,6 +226,125 @@ async function answerCorrectly(app) {
 }
 
 for (const mode of ['server', 'pages']) {
+  const fixedRandom = () => 0.999999;
+  const historyRows = Array.from({ length:8 }, (_, index) => question(`history-${index}`, ['フランス']));
+
+  test(`${mode}: both restart paths avoid the previous five questions with constant randomness`, async () => {
+    const app = await startApp(mode, { pack:JSON.stringify(historyRows), random:fixedRandom });
+    await chooseCount(app, 5);
+    await app.$('#start-practice').click();
+    const seen = new Set();
+    for (let index = 0; index < 5; index += 1) {
+      seen.add(app.$('.quiz-card').dataset.questionId);
+      await answerCorrectly(app);
+      await app.$('.next-row button').click();
+    }
+    assert.match(app.$('.completion-score').textContent, /5.*5/);
+    await app.$('.completion-card button').click();
+    assert.equal(seen.has(app.$('.quiz-card').dataset.questionId), false);
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '5');
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '0');
+    const displayed = app.$('.quiz-card').dataset.questionId;
+    await app.$('#back-to-setup').click();
+    await app.$('#start-practice').click();
+    assert.notEqual(app.$('.quiz-card').dataset.questionId, displayed, 'an unanswered first is also previous exposure');
+    assert.equal(app.$('.answer-panel'), null);
+    assert.match(app.$('.question-score').textContent, /正解 0 \/ 5 · 回答 0/);
+  });
+
+  test(`${mode}: full rounds change the first question on restart and setup-based new sessions`, async () => {
+    const app = await startApp(mode, { pack:JSON.stringify(questions), random:fixedRandom });
+    await app.$('#start-practice').click();
+    for (const route of ['restart','setup']) {
+      const ids = [];
+      for (let index = 0; index < 4; index += 1) {
+        ids.push(app.$('.quiz-card').dataset.questionId);
+        await answerCorrectly(app);
+        await app.$('.next-row button').click();
+      }
+      if (route === 'restart') await app.$('.completion-card button').click();
+      else {
+        await app.document.querySelectorAll('.completion-card button')[1].click();
+        await app.$('#start-practice').click();
+      }
+      assert.notEqual(app.$('.quiz-card').dataset.questionId, ids[0]);
+      assert.notEqual(app.$('.quiz-card').dataset.questionId, ids.at(-1));
+      assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '4');
+      assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '0');
+    }
+  });
+
+  test(`${mode}: bundled histories are separate even with overlapping IDs and survive pack switching`, async () => {
+    const pack = JSON.stringify(historyRows);
+    const app = await startApp(mode, { pack, practicePack:pack, random:fixedRandom });
+    await app.$('#start-practice').click();
+    const textbookFirst = app.$('.quiz-card').dataset.questionId;
+    await answerCorrectly(app);
+    await app.$('#back-to-setup').click();
+    await chooseBundledPack(app, 'practice');
+    await app.$('#start-practice').click();
+    assert.equal(app.$('.quiz-card').dataset.questionId, textbookFirst, 'another bank has independent history');
+    await app.$('#back-to-setup').click();
+    await chooseBundledPack(app, 'textbook');
+    await app.$('#start-practice').click();
+    assert.notEqual(app.$('.quiz-card').dataset.questionId, textbookFirst);
+    await app.$('#back-to-setup').click();
+    await chooseBundledPack(app, 'practice');
+    await app.$('#start-practice').click();
+    assert.notEqual(app.$('.quiz-card').dataset.questionId, textbookFirst);
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '0');
+  });
+
+  test(`${mode}: changed countries stay scoped and one-question imports can restart`, async () => {
+    const app = await startApp(mode, { pack:JSON.stringify(questions), random:fixedRandom });
+    await chooseCountry(app, 'フランス');
+    await app.$('#start-practice').click();
+    const first = app.$('.quiz-card').dataset.questionId;
+    await app.$('#back-to-setup').click();
+    await chooseCountry(app, 'イタリア');
+    await app.$('#start-practice').click();
+    const id = app.$('.quiz-card').dataset.questionId;
+    assert.notEqual(id, first);
+    assert.ok(questions.find(row => row.id === id).countries.includes('イタリア'));
+    await app.$('#back-to-setup').click();
+    await chooseCountry(app, 'フランス');
+    await app.$('#start-practice').click();
+    assert.ok(questions.find(row => row.id === app.$('.quiz-card').dataset.questionId).countries.includes('フランス'));
+    await app.$('#back-to-setup').click();
+    await importPack(app, JSON.stringify([questions[0]]));
+    for (let round = 0; round < 2; round += 1) {
+      await app.$('#start-practice').click();
+      assert.equal(app.$('.quiz-card').dataset.questionId, 'france');
+      await answerCorrectly(app);
+      await app.$('.next-row button').click();
+      await app.$('.completion-card button').click();
+      assert.equal(app.$('.quiz-card').dataset.questionId, 'france');
+      assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '0');
+      await app.$('#back-to-setup').click();
+    }
+  });
+
+  test(`${mode}: invalid imports preserve history and valid new files get independent history`, async () => {
+    const app = await startApp(mode, { pack:JSON.stringify(historyRows), random:fixedRandom });
+    await app.$('#start-practice').click();
+    const first = app.$('.quiz-card').dataset.questionId;
+    await app.$('#back-to-setup').click();
+    await importPack(app, '{broken');
+    await app.$('#start-practice').click();
+    assert.notEqual(app.$('.quiz-card').dataset.questionId, first);
+    await app.$('#back-to-setup').click();
+    await importPack(app, JSON.stringify(historyRows), 'same-name.json');
+    await app.$('#start-practice').click();
+    assert.equal(app.$('.quiz-card').dataset.questionId, first);
+    await app.$('#back-to-setup').click();
+    await app.$('#start-practice').click();
+    assert.notEqual(app.$('.quiz-card').dataset.questionId, first);
+    await app.$('#back-to-setup').click();
+    await importPack(app, JSON.stringify(historyRows.slice(0, 3)), 'same-name.json');
+    await app.$('#start-practice').click();
+    assert.equal(app.$('.quiz-card').dataset.questionId, first, 'a new file must not inherit another file history');
+  });
+
   test(`${mode}: switching real banks resets answers, country, counts, and available countries`, async () => {
     const app = await startApp(mode, { pack: registeredStandardText });
     assert.equal(app.$('#pack-textbook').checked, true);
