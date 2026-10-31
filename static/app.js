@@ -1,8 +1,17 @@
-import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS } from './quiz.js?v=highlighted-20261020';
-import { parseQuestionPack, loadDefaultQuestionPack, DEFAULT_PACK_FILENAME, MAX_PACK_BYTES } from './pages.js?v=highlighted-20261020';
+import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS } from './quiz.js?v=bundled-20261031';
+import { parseQuestionPack, loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID, MAX_PACK_BYTES } from './pages.js?v=bundled-20261031';
 
 const $ = selector => document.querySelector(selector);
-const state = { session: null, loadError: '', practiceQuestions: [], packMetadata: null, customPack: false, practiceLoading: false, importing: false };
+const state = { session: null, loadError: '', practiceQuestions: [], packMetadata: null, customPack: false, practiceLoading: false, importing: false, bundledPackId: DEFAULT_PACK_ID, packLabel: '' };
+
+function syncPackSelection() {
+  for (const pack of BUNDLED_PACKS) {
+    $(`#pack-${pack.id}`).checked = !state.customPack && state.bundledPackId === pack.id;
+  }
+  const pack = BUNDLED_PACKS.find(item => item.id === state.bundledPackId);
+  $('#clear-pack').textContent = `${pack.label}に戻す`;
+  $('#retry-pack').textContent = `${pack.label}を再読み込み`;
+}
 
 function element(tag, className = '', text = '') {
   const node = document.createElement(tag);
@@ -52,12 +61,14 @@ function renderScope(rebuildCountries = false) {
       option.value = country;
       select.append(option);
     }
+    select.value = '';
   }
   const country = selectedCountry();
   const total = country === '' ? 0 : questionsForCountry(state.practiceQuestions, country).length;
   const count = selectedCount();
   const invalidCount = count !== null && (!PRACTICE_COUNTS.includes(count) || count > total);
   const loading = state.practiceLoading || state.importing;
+  for (const pack of BUNDLED_PACKS) $(`#pack-${pack.id}`).disabled = loading;
   select.disabled = !$('#scope-country').checked || loading;
   for (const id of ['scope-all', 'scope-country']) $(`#${id}`).disabled = loading;
   $('#question-count').disabled = loading || total === 0;
@@ -108,25 +119,31 @@ function useQuestionPack(pack, fileName, custom = false) {
   state.practiceQuestions = pack.questions;
   state.packMetadata = pack.metadata ?? null;
   state.customPack = custom;
+  state.packLabel = custom ? fileName : BUNDLED_PACKS.find(item => item.id === state.bundledPackId).label;
   state.loadError = '';
   state.practiceLoading = false;
   state.session = null;
   $('#scope-all').checked = true;
   $('#scope-country').checked = false;
   $('#question-count').value = 'all';
-  $('#pages-import-status').textContent = `出題元：${fileName} · ${pack.questions.length} 問${custom ? '（このタブのみ）' : '（標準問題集）'}`;
+  syncPackSelection();
+  $('#pages-import-status').textContent = `出題元：${custom ? fileName : `${state.packLabel}（${fileName}）`} · ${pack.questions.length} 問${custom ? '（このタブのみ）' : '（組み込み問題集）'}`;
   const qa = state.packMetadata?.qa_status;
   $('#pack-review-status').textContent = typeof qa === 'string' ? `問題集の検証記録：${qa}` : '';
   $('#pack-review-status').hidden = typeof qa !== 'string' || !qa.trim();
   $('#pages-import-error').hidden = true;
   $('#clear-pack').disabled = !custom;
   $('#quiz-root').replaceChildren();
+  $('#active-scope').textContent = '';
   renderScope(true);
   showSetup(false);
 }
 
-async function loadDefaultPack() {
-  if (state.practiceLoading || state.importing) return;
+async function loadBundledPack(packId = state.bundledPackId) {
+  if (state.practiceLoading || state.importing) { syncPackSelection(); return; }
+  const pack = BUNDLED_PACKS.find(item => item.id === packId);
+  if (!pack) { syncPackSelection(); return; }
+  state.bundledPackId = pack.id;
   state.practiceLoading = true;
   $('#retry-pack').disabled = true;
   state.loadError = '';
@@ -134,19 +151,22 @@ async function loadDefaultPack() {
   state.packMetadata = null;
   state.session = null;
   state.customPack = false;
+  state.packLabel = pack.label;
+  syncPackSelection();
   $('#question-pack').disabled = true;
   $('#clear-pack').disabled = true;
   $('#pages-import-error').hidden = true;
-  $('#pages-import-status').textContent = `${DEFAULT_PACK_FILENAME} を読み込んでいます。`;
+  $('#pages-import-status').textContent = `${pack.label}（${pack.filename}）を読み込んでいます。`;
   $('#pack-review-status').hidden = true;
   $('#quiz-root').replaceChildren();
+  $('#active-scope').textContent = '';
   showSetup(false);
   renderScope(true);
   try {
-    useQuestionPack(await loadDefaultQuestionPack(), DEFAULT_PACK_FILENAME);
+    useQuestionPack(await loadBundledQuestionPack(pack.id), pack.filename);
   } catch (error) {
     state.loadError = error.message;
-    $('#pages-import-status').textContent = `出題元：${DEFAULT_PACK_FILENAME} · 読み込み失敗`;
+    $('#pages-import-status').textContent = `出題元：${pack.label}（${pack.filename}） · 読み込み失敗`;
     $('#pages-import-error').textContent = error.message;
     $('#pages-import-error').hidden = false;
   } finally {
@@ -247,7 +267,7 @@ function evidence(question) {
 function renderPractice() {
   const session = state.session;
   if (!session?.total) { $('#quiz-root').replaceChildren(); return; }
-  $('#active-scope').textContent = `${session.country ?? 'すべて'} · ${session.total} 問`;
+  $('#active-scope').textContent = `${state.packLabel} · ${session.country ?? 'すべて'} · ${session.total} 問`;
   if (session.complete) { renderCompletion(); return; }
   const question = session.current;
   const card = element('div', 'quiz-card');
@@ -349,11 +369,16 @@ async function importQuestionPack() {
 $('#back-to-setup').addEventListener('click', showSetup);
 $('.brand').addEventListener('click', event => { event.preventDefault(); showSetup(); });
 $('#question-pack').addEventListener('change', importQuestionPack);
-$('#clear-pack').addEventListener('click', loadDefaultPack);
-$('#retry-pack').addEventListener('click', loadDefaultPack);
+$('#clear-pack').addEventListener('click', () => loadBundledPack());
+$('#retry-pack').addEventListener('click', () => loadBundledPack());
+for (const pack of BUNDLED_PACKS) {
+  $(`#pack-${pack.id}`).addEventListener('change', event => {
+    if (event.target.checked) return loadBundledPack(pack.id);
+  });
+}
 for (const id of ['scope-all', 'scope-country', 'practice-country']) {
   $(`#${id}`).addEventListener('change', alignCountToScope);
 }
 $('#question-count').addEventListener('change', () => renderScope());
 $('#start-practice').addEventListener('click', startPractice);
-loadDefaultPack();
+loadBundledPack();

@@ -59,8 +59,8 @@ input::file-selector-button { background:#eee6d7; color:#5a4433; border:0; paddi
 .field-help { color:var(--muted); font-size:12px; line-height:1.8; margin-top:10px; }
 .pages-import-error,.field-error { color:#8c243c; font-size:13px; white-space:pre-wrap; overflow-wrap:anywhere; margin-top:10px; }
 #retry-pack { margin-top:12px; }
-.scope-options,.count-options { display:flex; align-items:center; flex-wrap:wrap; gap:12px 20px; min-width:0; padding:0; border:0; margin:15px 0 10px; }
-.scope-options label,.count-options label { display:flex; align-items:center; gap:7px; min-height:40px; }
+.pack-options,.scope-options,.count-options { display:flex; align-items:center; flex-wrap:wrap; gap:12px 20px; min-width:0; padding:0; border:0; margin:15px 0 10px; }
+.pack-options label,.scope-options label,.count-options label { display:flex; align-items:center; gap:7px; min-height:40px; }
 input[type="radio"] { accent-color:var(--wine); width:17px; height:17px; margin:0; }
 select,input[type="number"] { max-width:100%; min-height:44px; padding:8px 10px; border:1px solid var(--line); border-radius:5px; background:var(--white); color:var(--ink); }
 input[type="number"] { width:96px; }

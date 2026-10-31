@@ -89,32 +89,38 @@ class HttpTests(unittest.TestCase):
 
     def test_standard_pack_returns_original_json_without_exposing_pack_directory(self):
         with patch("app.main.DriveClient", side_effect=AssertionError("Drive must not run")), patch("app.luna.LunaClient", side_effect=AssertionError("Luna must not run")):
-            response = self.client.get("/question-packs/wine-quiz-highlighted.json")
-            self.assertEqual(response.status_code, 200)
-            self.assertEqual(response.headers["content-type"], "application/json")
-            self.assertEqual(response.content, (APP_DIR / "question-packs/wine-quiz-highlighted.json").read_bytes())
+            for filename, count in [("wine-quiz-highlighted.json", 662), ("wine-quiz-practice-20261031.json", 230)]:
+                with self.subTest(filename=filename):
+                    response = self.client.get(f"/question-packs/{filename}")
+                    self.assertEqual(response.status_code, 200)
+                    self.assertEqual(response.headers["content-type"], "application/json")
+                    self.assertEqual(response.content, (APP_DIR / "question-packs" / filename).read_bytes())
+                    self.assertEqual(len(response.json()["questions"]), count)
             for route in ("/question-packs/", "/question-packs/README.md", "/question-packs/batches/pilot-01.json", "/question-packs/private.json", "/question-packs/wine-quiz-500.json", "/question-packs/coverage.json", "/question-packs/highlighted-batches/wine-quiz-01.json", "/question-packs/pilot-150.json", "/question-packs/batches/wine-quiz-01.json"):
                 with self.subTest(route=route):
                     self.assertEqual(self.client.get(route).status_code, 404)
 
-    def test_standard_pack_rejects_missing_file_and_symlinks(self):
-        root = Path(self.temp.name) / "public-root"
-        pack_dir = root / "question-packs"
-        pack_dir.mkdir(parents=True)
-        pack = pack_dir / "wine-quiz-highlighted.json"
-        outside = Path(self.temp.name) / "private.json"
-        outside.write_text('{"private":"do-not-serve"}', encoding="utf-8")
-        with patch("app.main.APP_DIR", root):
-            self.assertEqual(self.client.get("/question-packs/wine-quiz-highlighted.json").status_code, 404)
-            pack.symlink_to(outside)
-            self.assertEqual(self.client.get("/question-packs/wine-quiz-highlighted.json").status_code, 404)
-            pack.unlink()
-            pack_dir.rmdir()
-            outside_dir = Path(self.temp.name) / "private-packs"
-            outside_dir.mkdir()
-            (outside_dir / pack.name).write_bytes(outside.read_bytes())
-            pack_dir.symlink_to(outside_dir, target_is_directory=True)
-            self.assertEqual(self.client.get("/question-packs/wine-quiz-highlighted.json").status_code, 404)
+    def test_bundled_packs_reject_missing_files_and_leaf_or_parent_symlinks(self):
+        for filename in ("wine-quiz-highlighted.json", "wine-quiz-practice-20261031.json"):
+            with self.subTest(filename=filename):
+                root = Path(self.temp.name) / filename
+                pack_dir = root / "question-packs"
+                pack_dir.mkdir(parents=True)
+                pack = pack_dir / filename
+                outside = root / "private.json"
+                outside.write_text('{"private":"do-not-serve"}', encoding="utf-8")
+                route = f"/question-packs/{filename}"
+                with patch("app.main.APP_DIR", root):
+                    self.assertEqual(self.client.get(route).status_code, 404)
+                    pack.symlink_to(outside)
+                    self.assertEqual(self.client.get(route).status_code, 404)
+                    pack.unlink()
+                    pack_dir.rmdir()
+                    outside_dir = root / "private-packs"
+                    outside_dir.mkdir()
+                    (outside_dir / filename).write_bytes(outside.read_bytes())
+                    pack_dir.symlink_to(outside_dir, target_is_directory=True)
+                    self.assertEqual(self.client.get(route).status_code, 404)
 
     def test_source_json_never_exposes_server_paths(self):
         result = self.client.get(f"/api/sources/{self.sid}")

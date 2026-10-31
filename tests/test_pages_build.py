@@ -9,7 +9,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from app.store import Store
-from scripts.build_pages import MARKER, PUBLIC_FILES, PUBLIC_QUESTION_PACK, ROOT, build
+from scripts.build_pages import MARKER, PUBLIC_FILES, PUBLIC_QUESTION_PACK, PUBLIC_PRACTICE_PACK, PUBLIC_QUESTION_PACKS, SOURCE_ASSET_VERSION, ROOT, build
 from scripts.export_questions import export_questions
 
 
@@ -26,7 +26,8 @@ class PublicBuildTests(unittest.TestCase):
             path.write_text(f"public source: {relative}\n", encoding="utf-8")
         # Packaging tests use an explicitly synthetic pack, never invented study content.
         self.synthetic_pack = json.dumps({"source": "synthetic-build-fixture", "questions": []})
-        (self.root / PUBLIC_QUESTION_PACK).write_text(self.synthetic_pack, encoding="utf-8")
+        for relative in PUBLIC_QUESTION_PACKS:
+            (self.root / relative).write_text(self.synthetic_pack, encoding="utf-8")
         self.output = self.root / "dist-pages"
 
     def test_allowlist_artifact_never_contains_private_runtime_or_extra_files(self):
@@ -43,13 +44,22 @@ class PublicBuildTests(unittest.TestCase):
         build(self.root, self.output)
         actual = {str(path.relative_to(self.output)) for path in self.output.rglob("*") if path.is_file()}
         expected = {"index.html", "static/app.js", "static/quiz.js", "static/pages.js",
-                    "static/style.css", PUBLIC_QUESTION_PACK, "static/runtime.js", ".nojekyll", MARKER}
+                    "static/style.css", *PUBLIC_QUESTION_PACKS, "static/runtime.js", ".nojekyll", MARKER}
         self.assertEqual(actual, expected)
         for path in self.output.rglob("*"):
             if path.is_file():
                 self.assertNotIn(canary, path.read_text(encoding="utf-8"))
         self.assertEqual((self.output / "static/runtime.js").read_text(), "export const mode = 'pages';\n")
-        self.assertEqual((self.output / PUBLIC_QUESTION_PACK).read_text(encoding="utf-8"), self.synthetic_pack)
+        for relative in PUBLIC_QUESTION_PACKS:
+            self.assertEqual((self.output / relative).read_text(encoding="utf-8"), self.synthetic_pack)
+
+    def test_missing_practice_pack_preserves_last_complete_artifact(self):
+        build(self.root, self.output)
+        before = {str(p.relative_to(self.output)): p.read_bytes() for p in self.output.rglob("*") if p.is_file()}
+        (self.root / PUBLIC_PRACTICE_PACK).unlink()
+        with self.assertRaisesRegex(ValueError, PUBLIC_PRACTICE_PACK):
+            build(self.root, self.output)
+        self.assertEqual({str(p.relative_to(self.output)): p.read_bytes() for p in self.output.rglob("*") if p.is_file()}, before)
 
     def test_missing_bundled_questions_fail_explicitly_without_publishing_empty_pack(self):
         (self.root / PUBLIC_QUESTION_PACK).unlink()
@@ -59,10 +69,9 @@ class PublicBuildTests(unittest.TestCase):
         self.assertEqual(list(self.output.parent.glob(".pages-build-*")), [])
 
     def test_registered_pack_is_published_without_modifying_original_bytes(self):
-        original = (ROOT / PUBLIC_QUESTION_PACK).read_bytes()
         build(ROOT, self.output)
-        self.assertEqual((self.output / PUBLIC_QUESTION_PACK).read_bytes(), original)
-        self.assertEqual((ROOT / PUBLIC_QUESTION_PACK).read_bytes(), original)
+        for relative in PUBLIC_QUESTION_PACKS:
+            self.assertEqual((self.output / relative).read_bytes(), (ROOT / relative).read_bytes())
 
     def test_asset_versions_match_through_imports_and_change_with_pack_bytes(self):
         build(ROOT, self.output)
@@ -74,17 +83,19 @@ class PublicBuildTests(unittest.TestCase):
             versions = re.findall(r"\.js\?v=([^'\"]+)", content)
             self.assertTrue(versions)
             self.assertEqual(set(versions), {version})
-            self.assertNotIn("v=highlighted-20261020", content)
+            self.assertNotIn(f"v={SOURCE_ASSET_VERSION}", content)
         for relative in PUBLIC_FILES:
             source = ROOT / relative
             target = self.root / relative
             target.write_bytes(source.read_bytes())
-        pack = self.root / PUBLIC_QUESTION_PACK
-        pack.write_bytes(pack.read_bytes() + b"\n")
-        build(self.root, self.output)
-        updated = (self.output / "index.html").read_text(encoding="utf-8")
-        self.assertNotIn(f"app.js?v={version}", updated)
-        self.assertEqual((self.output / PUBLIC_QUESTION_PACK).read_bytes(), pack.read_bytes())
+        for relative in PUBLIC_QUESTION_PACKS:
+            pack = self.root / relative
+            pack.write_bytes(pack.read_bytes() + b"\n")
+            build(self.root, self.output)
+            updated = (self.output / "index.html").read_text(encoding="utf-8")
+            self.assertNotIn(f"app.js?v={version}", updated)
+            version = re.search(r"app\.js\?v=([a-f0-9]{16})", updated).group(1)
+            self.assertEqual((self.output / relative).read_bytes(), pack.read_bytes())
 
     def test_unrelated_directory_and_source_ancestors_cannot_be_overwritten(self):
         unrelated = self.base / "important"
@@ -117,12 +128,24 @@ class PublicBuildTests(unittest.TestCase):
         self.assertFalse(self.output.exists())
         source.unlink()
         pack_dir = source.parent
+        for sibling in pack_dir.iterdir():
+            sibling.unlink()
         pack_dir.rmdir()
         outside_dir = self.base / "private-packs"
         outside_dir.mkdir()
         (outside_dir / source.name).write_text("PRIVATE QUESTION CANARY", encoding="utf-8")
         pack_dir.symlink_to(outside_dir, target_is_directory=True)
         with self.assertRaisesRegex(ValueError, PUBLIC_QUESTION_PACK):
+            build(self.root, self.output)
+        self.assertFalse(self.output.exists())
+
+    def test_practice_pack_symlink_cannot_publish_unlisted_data(self):
+        outside = self.base / "private-practice.json"
+        outside.write_text("PRIVATE QUESTION CANARY", encoding="utf-8")
+        source = self.root / PUBLIC_PRACTICE_PACK
+        source.unlink()
+        source.symlink_to(outside)
+        with self.assertRaisesRegex(ValueError, PUBLIC_PRACTICE_PACK):
             build(self.root, self.output)
         self.assertFalse(self.output.exists())
 

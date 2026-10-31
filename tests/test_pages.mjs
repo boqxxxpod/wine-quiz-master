@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { parseQuestionPack, loadDefaultQuestionPack, DEFAULT_PACK_FILENAME, MAX_PACK_BYTES, MAX_PACK_QUESTIONS } from '../static/pages.js';
+import { parseQuestionPack, loadDefaultQuestionPack, loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID, DEFAULT_PACK_FILENAME, MAX_PACK_BYTES, MAX_PACK_QUESTIONS } from '../static/pages.js';
 
 const question = (id = 'question-1') => ({
   id, prompt: 'JSON 形式を検証するためのテストです。',
@@ -243,4 +243,35 @@ test('default pack carries the module version and bypasses stale cached JSON', a
   assert.equal(requested.searchParams.get('v'), 'cache-test');
   assert.ok(requested.pathname.endsWith('/question-packs/wine-quiz-highlighted.json'));
   assert.equal(result.questions.length, 1);
+});
+
+test('both registered banks resolve relative to the deployed module and use the same cache version', async () => {
+  const { loadBundledQuestionPack: loadVersioned } = await import('../static/pages.js?v=banks-test');
+  assert.equal(DEFAULT_PACK_ID, 'textbook');
+  assert.deepEqual(BUNDLED_PACKS.map(pack => [pack.id, pack.label]), [['practice', '練習問題'], ['textbook', '教科書問題']]);
+  for (const pack of BUNDLED_PACKS) {
+    const result = await loadVersioned(pack.id, async (url, options) => {
+      const expected = new URL(pack.path, import.meta.url);
+      expected.searchParams.set('v', 'banks-test');
+      assert.equal(url.href, expected.href);
+      assert.equal(options.cache, 'no-store');
+      return { ok:true, text:async () => pilotPack([pilotQuestion()]) };
+    });
+    assert.equal(result.questions.length, 1);
+  }
+});
+
+test('unregistered banks are rejected before any request', async () => {
+  for (const id of [undefined, '', 'unknown', '../private.json', 'https://drive.google.com/file']) {
+    await assert.rejects(loadBundledQuestionPack(id, () => assert.fail('unregistered path must not be fetched')), /組み込み問題集/);
+  }
+});
+
+test('practice loading reports its own failure without requesting a fallback bank', async () => {
+  let calls = 0;
+  await assert.rejects(loadBundledQuestionPack('practice', async () => {
+    calls += 1;
+    return { ok:false, status:404 };
+  }), /wine-quiz-practice-20261031\.json.*404/);
+  assert.equal(calls, 1);
 });

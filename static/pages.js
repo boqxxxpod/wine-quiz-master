@@ -1,9 +1,14 @@
-import { isNativeQuestion, isPilotQuestion, normalizeQuestion, validQuestion } from './quiz.js?v=highlighted-20261020';
+import { isNativeQuestion, isPilotQuestion, normalizeQuestion, validQuestion } from './quiz.js?v=bundled-20261031';
 
 export const MAX_PACK_BYTES = 2_000_000;
 export const MAX_PACK_QUESTIONS = 2000;
 export const DEFAULT_PACK_FILENAME = 'wine-quiz-highlighted.json';
 export const DEFAULT_PACK_PATH = '../question-packs/wine-quiz-highlighted.json';
+export const DEFAULT_PACK_ID = 'textbook';
+export const BUNDLED_PACKS = Object.freeze([
+  Object.freeze({ id: 'practice', label: '練習問題', filename: 'wine-quiz-practice-20261031.json', path: '../question-packs/wine-quiz-practice-20261031.json' }),
+  Object.freeze({ id: DEFAULT_PACK_ID, label: '教科書問題', filename: DEFAULT_PACK_FILENAME, path: DEFAULT_PACK_PATH }),
+]);
 
 /** Validate the entire file before exposing any questions to a running session. */
 export function parseQuestionPack(text) {
@@ -54,24 +59,31 @@ export function parseQuestionPack(text) {
   return pilot ? { version: 1, questions, metadata: pack.metadata } : { version: 1, questions };
 }
 
-/** A missing or invalid default file is actionable; never replace it with demo data. */
-export async function loadDefaultQuestionPack(fetcher = globalThis.fetch) {
+/** Load only a registered, same-origin pack; a failed selection never falls back. */
+export async function loadBundledQuestionPack(packId, fetcher = globalThis.fetch) {
+  const pack = BUNDLED_PACKS.find(item => item.id === packId);
+  if (!pack) throw new Error('組み込み問題集を選んでください。');
   let response;
   try {
     const moduleUrl = new URL(import.meta.url);
-    const packUrl = new URL(DEFAULT_PACK_PATH, moduleUrl);
+    const packUrl = new URL(pack.path, moduleUrl);
     const version = moduleUrl.searchParams.get('v');
     if (version) packUrl.searchParams.set('v', version);
     response = await fetcher(packUrl, { cache: 'no-store' });
   } catch (error) {
-    throw new Error(`${DEFAULT_PACK_FILENAME} を取得できません。接続と配置を確認してください。${error?.message ? ` (${error.message})` : ''}`);
+    throw new Error(`${pack.filename} を取得できません。接続と配置を確認してください。${error?.message ? ` (${error.message})` : ''}`);
   }
   if (!response?.ok) {
-    throw new Error(`${DEFAULT_PACK_FILENAME} を読み込めません (HTTP ${response?.status ?? '不明'})。問題集ファイルの配置を確認してください。`);
+    throw new Error(`${pack.filename} を読み込めません (HTTP ${response?.status ?? '不明'})。問題集ファイルの配置を確認してください。`);
   }
   try {
     return parseQuestionPack(await response.text());
   } catch (error) {
-    throw new Error(`${DEFAULT_PACK_FILENAME} の読み込みに失敗しました: ${error?.message ?? '不明なエラー'}`);
+    throw new Error(`${pack.filename} の読み込みに失敗しました: ${error?.message ?? '不明なエラー'}`);
   }
+}
+
+/** Keep the original default loader available to integrations and manual reset. */
+export async function loadDefaultQuestionPack(fetcher = globalThis.fetch) {
+  return loadBundledQuestionPack(DEFAULT_PACK_ID, fetcher);
 }
