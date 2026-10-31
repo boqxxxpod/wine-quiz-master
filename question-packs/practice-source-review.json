@@ -1,25 +1,25 @@
 {
   "issue": 14,
-  "review_date": "2026-10-31",
-  "image_numbering": "元資料27画像の1始まりの通し番号。問題01～24、解答表25～27。",
+  "review_date": "2026-11-01",
+  "image_numbering": "元資料27画像の1始まりの通し番号。問題01～24、解答表25～27。画像10のみ再撮影画像へ差し替え、他の番号は維持。",
   "human_approved": false,
   "external_fact_check_completed": false,
   "unresolved": [
     {
       "question_id": "Q-PR20261031-IT-023",
-      "note": "画像10のピントが甘く、問題文または選択肢の全字を確定できない。鮮明な原本での再確認が必要。"
+      "note": "2026-11-01の再撮影画像で問題文・全選択肢の判読を確認済み。テキストへの文字転記は未実施。"
     },
     {
       "question_id": "Q-PR20261031-IT-024",
-      "note": "画像10のピントが甘く、問題文または選択肢の全字を確定できない。鮮明な原本での再確認が必要。"
+      "note": "2026-11-01の再撮影画像で問題文・全選択肢の判読を確認済み。テキストへの文字転記は未実施。"
     },
     {
       "question_id": "Q-PR20261031-IT-025",
-      "note": "画像10のピントが甘く、問題文または選択肢の全字を確定できない。鮮明な原本での再確認が必要。"
+      "note": "2026-11-01の再撮影画像で問題文・全選択肢の判読を確認済み。テキストへの文字転記は未実施。"
     },
     {
       "question_id": "Q-PR20261031-IT-026",
-      "note": "画像10のピントが甘く、問題文または選択肢の全字を確定できない。鮮明な原本での再確認が必要。"
+      "note": "2026-11-01の再撮影画像で問題文・全選択肢の判読を確認済み。テキストへの文字転記は未実施。"
     }
   ],
   "former_split_ids": {
@@ -76,59 +76,79 @@
     },
     "it-023.jpg": {
       "image_index": 10,
-      "preview_size": [
-        2200,
-        2933
+      "source_revision": "italy-retake-20261101",
+      "source_size": [
+        3456,
+        4608
       ],
       "box": [
-        95,
-        90,
-        2025,
-        280
+        240,
+        120,
+        3200,
+        430
       ],
-      "sha256": "5f18cf94dab57b2b76bf854d4fd08b621c983ef01fc780d6df3ae5411ae2493c"
+      "size": [
+        2960,
+        310
+      ],
+      "sha256": "8737eb9d1a941f56a0cf427f4349e1cdc22ad3fbbd173131d0cffe463a328bdf"
     },
     "it-024.jpg": {
       "image_index": 10,
-      "preview_size": [
-        2200,
-        2933
+      "source_revision": "italy-retake-20261101",
+      "source_size": [
+        3456,
+        4608
       ],
       "box": [
-        95,
-        315,
-        2060,
-        665
+        240,
+        440,
+        3260,
+        1040
       ],
-      "sha256": "49e54b8588feaa4baaee4130c04467f8bc268dff1b024e8859fe97ad13f28056"
+      "size": [
+        3020,
+        600
+      ],
+      "sha256": "169762d312e7f9240d19b2ae23d5b7b70e69cfc792bd5123ec929d4b79d28bc2"
     },
     "it-025.jpg": {
       "image_index": 10,
-      "preview_size": [
-        2200,
-        2933
+      "source_revision": "italy-retake-20261101",
+      "source_size": [
+        3456,
+        4608
       ],
       "box": [
-        95,
-        715,
-        2025,
-        930
+        240,
+        1050,
+        3240,
+        1435
       ],
-      "sha256": "f959880deed6893f1d32f531aec254d9205c24ddb306cf454985b5ade12c0f74"
+      "size": [
+        3000,
+        385
+      ],
+      "sha256": "c034bd5c4a1edbb7463da73e7ec28af699634d412daba7733f8c794fb703f4cf"
     },
     "it-026.jpg": {
       "image_index": 10,
-      "preview_size": [
-        2200,
-        2933
+      "source_revision": "italy-retake-20261101",
+      "source_size": [
+        3456,
+        4608
       ],
       "box": [
-        95,
-        980,
-        2060,
-        1220
+        240,
+        1450,
+        3230,
+        1840
       ],
-      "sha256": "6f289a620a68d8a2d7e6191357934ac27d5d726631cb5d999d8340f91693034f"
+      "size": [
+        2990,
+        390
+      ],
+      "sha256": "3efc3e43e6fe3200331647d1657ca52103295846541c784ce46ed21d8d18e33a"
     }
   },
   "questions": [
@@ -1045,8 +1065,9 @@
       "image_index": 10,
       "answer_key_image_index": 25,
       "answer": 1,
-      "comparison": "original_image; transcription_pending",
-      "content_sha256": "0d85668603f864732e365f0cd01a4ce84203d467474a65267f066046d5ca0418"
+      "comparison": "original_image; legibility_checked; transcription_pending",
+      "content_sha256": "1a623ee608a590457e34aee0e2632ef0deeff7998225e61f665e064bdd00ab02",
+      "source_revision": "italy-retake-20261101"
     },
     {
       "question_id": "Q-PR20261031-IT-024",
@@ -1055,8 +1076,9 @@
       "image_index": 10,
       "answer_key_image_index": 25,
       "answer": 2,
-      "comparison": "original_image; transcription_pending",
-      "content_sha256": "e797c9a43663fbb37f189dfa561c14ea0344730b5c3a815c1874d8fcda856b19"
+      "comparison": "original_image; legibility_checked; transcription_pending",
+      "content_sha256": "b0e7a8aa94e7d1ae056ee21334cb9e9923849ad913610311183319901ae026f7",
+      "source_revision": "italy-retake-20261101"
     },
     {
       "question_id": "Q-PR20261031-IT-025",
@@ -1065,8 +1087,9 @@
       "image_index": 10,
       "answer_key_image_index": 25,
       "answer": 2,
-      "comparison": "original_image; transcription_pending",
-      "content_sha256": "49a8b42ddfdbfcf08aceeeb4d62568b6120c552d8675bca2fdcd8586a2553f90"
+      "comparison": "original_image; legibility_checked; transcription_pending",
+      "content_sha256": "72a2b3d55346597cb511f1e7419f976cec433f806cdaf59e27f22607060b3822",
+      "source_revision": "italy-retake-20261101"
     },
     {
       "question_id": "Q-PR20261031-IT-026",
@@ -1075,8 +1098,9 @@
       "image_index": 10,
       "answer_key_image_index": 25,
       "answer": 2,
-      "comparison": "original_image; transcription_pending",
-      "content_sha256": "bf903e2d302d27ea0b4a5ce252c860437c5769273ea2a4a0c2175ce984473bd2"
+      "comparison": "original_image; legibility_checked; transcription_pending",
+      "content_sha256": "cf8da2a76b846edd9b1dedb0880a0c08d65e6e9e6adb2723ac9e5c867289cff0",
+      "source_revision": "italy-retake-20261101"
     },
     {
       "question_id": "Q-PR20261031-DE-001",
@@ -2397,6 +2421,85 @@
       "answer": 2,
       "comparison": "image_compared_transcription",
       "content_sha256": "2e87d56261c0050fdfe52872e73431d03db791ec8d09d49035b0cf8446401eed"
+    }
+  ],
+  "image_replacements": [
+    {
+      "issue": 16,
+      "source_revision": "italy-retake-20261101",
+      "replaces_image_index": 10,
+      "uploaded_at": "2026-11-01T07:24:30+09:00",
+      "source_size": [
+        3456,
+        4608
+      ],
+      "source_sha256": "139b40968bcd5d91bdcdf9ff62032826f2f6b7a7c8102b0440f4b2c0779bae44",
+      "question_numbers": [
+        "23",
+        "24",
+        "25",
+        "26"
+      ],
+      "image_legibility_checked": true,
+      "transcription_completed": false,
+      "previous_crops": {
+        "it-023.jpg": {
+          "image_index": 10,
+          "preview_size": [
+            2200,
+            2933
+          ],
+          "box": [
+            95,
+            90,
+            2025,
+            280
+          ],
+          "sha256": "5f18cf94dab57b2b76bf854d4fd08b621c983ef01fc780d6df3ae5411ae2493c"
+        },
+        "it-024.jpg": {
+          "image_index": 10,
+          "preview_size": [
+            2200,
+            2933
+          ],
+          "box": [
+            95,
+            315,
+            2060,
+            665
+          ],
+          "sha256": "49e54b8588feaa4baaee4130c04467f8bc268dff1b024e8859fe97ad13f28056"
+        },
+        "it-025.jpg": {
+          "image_index": 10,
+          "preview_size": [
+            2200,
+            2933
+          ],
+          "box": [
+            95,
+            715,
+            2025,
+            930
+          ],
+          "sha256": "f959880deed6893f1d32f531aec254d9205c24ddb306cf454985b5ade12c0f74"
+        },
+        "it-026.jpg": {
+          "image_index": 10,
+          "preview_size": [
+            2200,
+            2933
+          ],
+          "box": [
+            95,
+            980,
+            2060,
+            1220
+          ],
+          "sha256": "6f289a620a68d8a2d7e6191357934ac27d5d726631cb5d999d8340f91693034f"
+        }
+      }
     }
   ]
 }

@@ -30,8 +30,8 @@
     "human_approved": false,
     "external_fact_check_completed": false,
     "temporal_policy": "年不明の統計も原文の数値・表現を保持し、年度については解説・注記で補足。2026年の最新統計を示さない。",
-    "source_description": "ワイン検定 練習問題（問題24画像・解答表3画像）",
-    "qa_status": "auto_checked：原文・解答表と照合。イタリア問23～26は原文画像で収録（文字転記は要確認）。外部事実確認・人による校閲は未完了。",
+    "source_description": "ワイン検定 練習問題（問題24画像・解答表3画像。イタリア画像10は2026-11-01の再撮影画像へ差し替え）",
+    "qa_status": "auto_checked：原文・解答表と照合。イタリア問23～26は再撮影画像に差し替え、画像の判読を確認（文字転記は未実施）。外部事実確認・人による校閲は未完了。",
     "transcribed_question_count": 222,
     "original_image_question_count": 4,
     "transcription_pending_question_ids": [
@@ -41,7 +41,9 @@
       "Q-PR20261031-IT-026"
     ],
     "source_wording_policy": "短文化・言い換え・表記統一・誤記の修正を行わない。選択肢順と原資料の番号を保持。印刷上の折り返し・段組みの空白のみ画面に合わせる。",
-    "implementation_issue": 14
+    "implementation_issue": 14,
+    "updated_date": "2026-11-01",
+    "image_replacement_issue": 16
   },
   "questions": [
     {
@@ -4438,15 +4440,16 @@
       ],
       "correct_index": 0,
       "correct_answer": "1",
-      "explanation": "解答表では「1」が正答です。問題文・選択肢は原文画像を参照してください。文字転記は要確認です。",
-      "source_page": "練習問題・画像10／イタリア 問23",
+      "explanation": "解答表では「1」が正答です。問題文・選択肢は原文画像を参照してください。文字転記は未実施です。",
+      "source_page": "練習問題・画像10（再撮影）／イタリア 問23",
       "status": "auto_checked",
       "version": 1,
       "sources": [
         {
           "role": "question",
           "image_index": 10,
-          "question_number": "23"
+          "question_number": "23",
+          "source_revision": "italy-retake-20261101"
         },
         {
           "role": "answer_key",
@@ -4461,19 +4464,20 @@
         "structure_checked": true,
         "human_approved": false,
         "external_fact_check_completed": false,
-        "editorial_note": "原文画像を表示。判読できない文字を推測で転記していない。",
+        "editorial_note": "再撮影画像で出題。問題文・指示文・全選択肢を含む切り出しと判読を確認。文字転記は未実施。",
         "temporal_note": null,
         "previous_editorial_note": "問題文の短文化、表記統一、解説追加。正答と選択肢の順序は解答表に対応。",
         "source_text_compared": false,
         "transcription_pending": true,
-        "transcription_note": "画像10のピントが甘く、問題文または選択肢の全字を確定できない。鮮明な原本での再確認が必要。"
+        "transcription_note": "2026-11-01の再撮影画像で問題文・全選択肢の判読を確認済み。テキストへの文字転記は未実施。",
+        "image_legibility_checked": true
       },
       "source_verbatim": true,
       "question_type": "single_choice",
       "source_image": {
         "filename": "it-023.jpg",
         "kind": "original",
-        "alt": "イタリア 問23の原文の問題文・指示文・選択肢。文字転記は要確認。"
+        "alt": "イタリア 問23の原文の問題文・指示文・選択肢（再撮影画像）。"
       }
     },
     {
@@ -4492,15 +4496,16 @@
       ],
       "correct_index": 1,
       "correct_answer": "2",
-      "explanation": "解答表では「2」が正答です。問題文・選択肢は原文画像を参照してください。文字転記は要確認です。",
-      "source_page": "練習問題・画像10／イタリア 問24",
+      "explanation": "解答表では「2」が正答です。問題文・選択肢は原文画像を参照してください。文字転記は未実施です。",
+      "source_page": "練習問題・画像10（再撮影）／イタリア 問24",
       "status": "auto_checked",
       "version": 1,
       "sources": [
         {
           "role": "question",
           "image_index": 10,
-          "question_number": "24"
+          "question_number": "24",
+          "source_revision": "italy-retake-20261101"
         },
         {
           "role": "answer_key",
@@ -4515,19 +4520,20 @@
         "structure_checked": true,
         "human_approved": false,
         "external_fact_check_completed": false,
-        "editorial_note": "原文画像を表示。判読できない文字を推測で転記していない。",
+        "editorial_note": "再撮影画像で出題。問題文・指示文・全選択肢を含む切り出しと判読を確認。文字転記は未実施。",
         "temporal_note": null,
         "previous_editorial_note": "問題文の短文化、表記統一、解説追加。正答と選択肢の順序は解答表に対応。",
         "source_text_compared": false,
         "transcription_pending": true,
-        "transcription_note": "画像10のピントが甘く、問題文または選択肢の全字を確定できない。鮮明な原本での再確認が必要。"
+        "transcription_note": "2026-11-01の再撮影画像で問題文・全選択肢の判読を確認済み。テキストへの文字転記は未実施。",
+        "image_legibility_checked": true
       },
       "source_verbatim": true,
       "question_type": "single_choice",
       "source_image": {
         "filename": "it-024.jpg",
         "kind": "original",
-        "alt": "イタリア 問24の原文の問題文・指示文・選択肢。文字転記は要確認。"
+        "alt": "イタリア 問24の原文の問題文・指示文・選択肢（再撮影画像）。"
       }
     },
     {
@@ -4546,15 +4552,16 @@
       ],
       "correct_index": 1,
       "correct_answer": "2",
-      "explanation": "解答表では「2」が正答です。問題文・選択肢は原文画像を参照してください。文字転記は要確認です。",
-      "source_page": "練習問題・画像10／イタリア 問25",
+      "explanation": "解答表では「2」が正答です。問題文・選択肢は原文画像を参照してください。文字転記は未実施です。",
+      "source_page": "練習問題・画像10（再撮影）／イタリア 問25",
       "status": "auto_checked",
       "version": 1,
       "sources": [
         {
           "role": "question",
           "image_index": 10,
-          "question_number": "25"
+          "question_number": "25",
+          "source_revision": "italy-retake-20261101"
         },
         {
           "role": "answer_key",
@@ -4569,19 +4576,20 @@
         "structure_checked": true,
         "human_approved": false,
         "external_fact_check_completed": false,
-        "editorial_note": "原文画像を表示。判読できない文字を推測で転記していない。",
+        "editorial_note": "再撮影画像で出題。問題文・指示文・全選択肢を含む切り出しと判読を確認。文字転記は未実施。",
         "temporal_note": null,
         "previous_editorial_note": "ピントの甘い画像のため、読み取れる製法の要点と解答表を用いて設問を整理。",
         "source_text_compared": false,
         "transcription_pending": true,
-        "transcription_note": "画像10のピントが甘く、問題文または選択肢の全字を確定できない。鮮明な原本での再確認が必要。"
+        "transcription_note": "2026-11-01の再撮影画像で問題文・全選択肢の判読を確認済み。テキストへの文字転記は未実施。",
+        "image_legibility_checked": true
       },
       "source_verbatim": true,
       "question_type": "single_choice",
       "source_image": {
         "filename": "it-025.jpg",
         "kind": "original",
-        "alt": "イタリア 問25の原文の問題文・指示文・選択肢。文字転記は要確認。"
+        "alt": "イタリア 問25の原文の問題文・指示文・選択肢（再撮影画像）。"
       }
     },
     {
@@ -4600,15 +4608,16 @@
       ],
       "correct_index": 1,
       "correct_answer": "2",
-      "explanation": "解答表では「2」が正答です。問題文・選択肢は原文画像を参照してください。文字転記は要確認です。",
-      "source_page": "練習問題・画像10／イタリア 問26",
+      "explanation": "解答表では「2」が正答です。問題文・選択肢は原文画像を参照してください。文字転記は未実施です。",
+      "source_page": "練習問題・画像10（再撮影）／イタリア 問26",
       "status": "auto_checked",
       "version": 1,
       "sources": [
         {
           "role": "question",
           "image_index": 10,
-          "question_number": "26"
+          "question_number": "26",
+          "source_revision": "italy-retake-20261101"
         },
         {
           "role": "answer_key",
@@ -4623,19 +4632,20 @@
         "structure_checked": true,
         "human_approved": false,
         "external_fact_check_completed": false,
-        "editorial_note": "原文画像を表示。判読できない文字を推測で転記していない。",
+        "editorial_note": "再撮影画像で出題。問題文・指示文・全選択肢を含む切り出しと判読を確認。文字転記は未実施。",
         "temporal_note": null,
         "previous_editorial_note": "問題文の短文化、表記統一、解説追加。正答と選択肢の順序は解答表に対応。",
         "source_text_compared": false,
         "transcription_pending": true,
-        "transcription_note": "画像10のピントが甘く、問題文または選択肢の全字を確定できない。鮮明な原本での再確認が必要。"
+        "transcription_note": "2026-11-01の再撮影画像で問題文・全選択肢の判読を確認済み。テキストへの文字転記は未実施。",
+        "image_legibility_checked": true
       },
       "source_verbatim": true,
       "question_type": "single_choice",
       "source_image": {
         "filename": "it-026.jpg",
         "kind": "original",
-        "alt": "イタリア 問26の原文の問題文・指示文・選択肢。文字転記は要確認。"
+        "alt": "イタリア 問26の原文の問題文・指示文・選択肢（再撮影画像）。"
       }
     },
     {
