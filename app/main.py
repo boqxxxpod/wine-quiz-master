@@ -350,6 +350,18 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
         finally:
             busy_lock.release()
 
+    @app.get("/question-packs/practice-assets/{filename}", include_in_schema=False)
+    def practice_asset(filename: str):
+        if filename not in {"fr-002.png", "it-007-2.png", "es-021.png",
+                            "it-023.jpg", "it-024.jpg", "it-025.jpg", "it-026.jpg"}:
+            failure("question_asset_not_found", "原文画像が見つかりません。", 404)
+        pack_dir = APP_DIR / "question-packs"
+        asset_dir = pack_dir / "practice-assets"
+        asset = asset_dir / filename
+        if any(path.is_symlink() for path in (pack_dir, asset_dir, asset)) or not asset.resolve().is_relative_to(APP_DIR.resolve()) or not asset.is_file():
+            failure("question_asset_not_found", "原文画像が見つかりません。", 404)
+        return FileResponse(asset, media_type="image/png" if filename.endswith(".png") else "image/jpeg")
+
     @app.get("/question-packs/{filename}", include_in_schema=False)
     def bundled_question_pack(filename: str):
         if filename not in {"wine-quiz-highlighted.json", "wine-quiz-practice-20261031.json"}:

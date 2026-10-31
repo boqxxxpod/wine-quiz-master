@@ -89,7 +89,7 @@ class HttpTests(unittest.TestCase):
 
     def test_standard_pack_returns_original_json_without_exposing_pack_directory(self):
         with patch("app.main.DriveClient", side_effect=AssertionError("Drive must not run")), patch("app.luna.LunaClient", side_effect=AssertionError("Luna must not run")):
-            for filename, count in [("wine-quiz-highlighted.json", 662), ("wine-quiz-practice-20261031.json", 230)]:
+            for filename, count in [("wine-quiz-highlighted.json", 662), ("wine-quiz-practice-20261031.json", 226)]:
                 with self.subTest(filename=filename):
                     response = self.client.get(f"/question-packs/{filename}")
                     self.assertEqual(response.status_code, 200)
@@ -121,6 +121,39 @@ class HttpTests(unittest.TestCase):
                     (outside_dir / filename).write_bytes(outside.read_bytes())
                     pack_dir.symlink_to(outside_dir, target_is_directory=True)
                     self.assertEqual(self.client.get(route).status_code, 404)
+
+    def test_practice_crops_serve_exact_bundled_bytes_without_external_services(self):
+        from scripts.build_pages import PUBLIC_PRACTICE_ASSETS
+        with patch("app.main.DriveClient", side_effect=AssertionError("Drive must not run")), patch("app.luna.LunaClient", side_effect=AssertionError("Luna must not run")):
+            for relative in PUBLIC_PRACTICE_ASSETS:
+                response = self.client.get(f"/{relative}")
+                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.content, (APP_DIR / relative).read_bytes())
+                self.assertEqual(response.headers["content-type"], "image/png" if relative.endswith(".png") else "image/jpeg")
+            for route in ("/question-packs/practice-assets/", "/question-packs/practice-assets/private.jpg",
+                          "/question-packs/practice-source-review.json", "/question-packs/practice-assets/%2e%2e%2fprivate.jpg"):
+                self.assertEqual(self.client.get(route).status_code, 404)
+
+    def test_practice_crops_reject_missing_files_and_symlinks_at_each_level(self):
+        root = Path(self.temp.name) / "assets-test"
+        asset_dir = root / "question-packs/practice-assets"
+        asset_dir.mkdir(parents=True)
+        target = asset_dir / "fr-002.png"
+        private = root / "private.png"
+        private.write_bytes(b"PRIVATE CANARY")
+        route = "/question-packs/practice-assets/fr-002.png"
+        with patch("app.main.APP_DIR", root):
+            self.assertEqual(self.client.get(route).status_code, 404)
+            target.symlink_to(private)
+            self.assertEqual(self.client.get(route).status_code, 404)
+            target.unlink()
+            asset_dir.rmdir()
+            asset_dir.symlink_to(root, target_is_directory=True)
+            self.assertEqual(self.client.get(route).status_code, 404)
+            asset_dir.unlink()
+            asset_dir.parent.rmdir()
+            asset_dir.parent.symlink_to(root, target_is_directory=True)
+            self.assertEqual(self.client.get(route).status_code, 404)
 
     def test_source_json_never_exposes_server_paths(self):
         result = self.client.get(f"/api/sources/{self.sid}")

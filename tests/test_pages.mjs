@@ -40,8 +40,8 @@ test('rejects duplicate question IDs and ambiguous choices', () => {
   assert.throws(() => parseQuestionPack(pack([repeatedText])), /同じ内容/);
   const repeatedId = question();
   repeatedId.choices[1].id = 'a';
-  assert.throws(() => parseQuestionPack(pack([repeatedId])), /三択/);
-  assert.throws(() => parseQuestionPack(pack([{ ...question(), correct_choice_id: 'missing' }])), /三択/);
+  assert.throws(() => parseQuestionPack(pack([repeatedId])), /選択肢/);
+  assert.throws(() => parseQuestionPack(pack([{ ...question(), correct_choice_id: 'missing' }])), /選択肢/);
 });
 
 test('rejects missing provenance and questions explicitly awaiting review', () => {

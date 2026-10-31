@@ -1,8 +1,8 @@
 # ワイン検定：組み込み問題集
 
-開始画面で「練習問題（230問）」と「教科書問題（662問）」を選べます。両方のJSON本体をサーバーとPagesに同梱し、Driveへのアクセスや手動インポートなしで利用できます。
+開始画面で「練習問題（226問）」と「教科書問題（662問）」を選べます。両方のJSON本体をサーバーとPagesに同梱し、Driveへのアクセスや手動インポートなしで利用できます。
 
-練習問題は [wine-quiz-practice-20261031.json](wine-quiz-practice-20261031.json) に収録しています。問題24画像・解答表3画像の元226設問から230問を作成しました（フランス問46を5問に分割）。13か国の配分、元設問番号・画像の通し番号、解答表との対応、編集理由・年度不明の統計への注記を保持しています。DriveのID・URL・元画像名は配信JSONに含めません。全問 `auto_checked`、`human_approved: false`、`external_fact_check_completed: false` で、機械検証と内容の承認を区別しています。
+練習問題は [wine-quiz-practice-20261031.json](wine-quiz-practice-20261031.json) に収録しています。問題24画像・解答表3画像の元226設問を原文・元の単位で保持しています（フランス問46は5組の対応付けを1問として採点）。222問は文字転記、イタリア問23〜26は原文画像で出題し、文字転記は要確認です。地図3点と原文4点を同梱しています。[照合結果・未確認事項](practice-validation-report.md)、[全226件の対応表](practice-source-review.json) を参照してください。13か国の配分、元設問番号・画像の通し番号、解答表との対応、編集理由・年度不明の統計への注記を保持しています。DriveのID・URL・元画像名は配信JSONに含めません。全問 `auto_checked`、`human_approved: false`、`external_fact_check_completed: false` で、機械検証と内容の承認を区別しています。
 
 ## 教科書問題（黄色マーカー知識対応版）
 
@@ -12,7 +12,7 @@
 
 | ファイル | 内容 |
 | --- | --- |
-| [wine-quiz-practice-20261031.json](wine-quiz-practice-20261031.json) | 練習問題230問・13か国。metadataとquestions |
+| [wine-quiz-practice-20261031.json](wine-quiz-practice-20261031.json) | 練習問題226問・13か国。metadataとquestions |
 | [wine-quiz-highlighted.json](wine-quiz-highlighted.json) | 現行662問。metadataとquestions |
 | [highlighted-batches/](highlighted-batches/) | 50問×13、12問×1。順に結合すると統合版と完全一致 |
 | [coverage.json](coverage.json) | 864項目の対応先・状態・根拠ID |

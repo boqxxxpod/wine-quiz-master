@@ -1,4 +1,17 @@
 export const PRACTICE_COUNTS = Object.freeze([5, 10, 20, 30, 50, 70, 100]);
+export const PRACTICE_ASSETS = Object.freeze([
+  'fr-002.png', 'it-007-2.png', 'es-021.png',
+  'it-023.jpg', 'it-024.jpg', 'it-025.jpg', 'it-026.jpg',
+]);
+
+/** Only bundled crops can be displayed, including when importing a custom pack. */
+export function practiceAssetUrl(filename, moduleUrl = import.meta.url) {
+  if (!PRACTICE_ASSETS.includes(filename)) throw new Error('未登録の原文画像です。');
+  const url = new URL(`../question-packs/practice-assets/${filename}`, moduleUrl);
+  const version = new URL(moduleUrl).searchParams.get('v');
+  if (version) url.searchParams.set('v', version);
+  return url;
+}
 
 /** All practice behavior stays in the browser; no API calls are made here. */
 export function shuffle(items, random = Math.random) {
@@ -35,8 +48,10 @@ export function normalizeQuestion(question) {
       format: 'pilot',
       id: question.question_id,
       prompt: question.question,
-      choices: Array.isArray(question.options) ? question.options.map((text, index) => ({ id: `option-${index}`, text })) : question.options,
-      correct_choice_id: `option-${question.correct_index}`,
+      choices: Array.isArray(question.options) ? question.options.map((text, index) => ({
+        id: question.question_type === 'matching' ? String.fromCharCode(65 + index) : `option-${index}`, text,
+      })) : question.options,
+      ...(question.question_type === 'matching' ? {} : { correct_choice_id: `option-${question.correct_index}` }),
     };
   }
   if (!isNativeQuestion(question)) return question;
@@ -56,19 +71,37 @@ export function validQuestion(question) {
   const prompt = native ? question.question : normalized.prompt;
   const choices = native ? question.options : normalized.choices;
   const correctId = native ? question.correct_option_id : normalized.correct_choice_id;
+  const verbatim = pilot && question.source_verbatim === true;
+  const matching = verbatim && question.question_type === 'matching';
+  const choiceCount = matching ? 5 : verbatim && question.options?.length === 2 ? 2 : 3;
   if (!nonemptyString(normalized.id) || !nonemptyString(prompt) ||
-    !Array.isArray(choices) || choices.length !== 3 ||
+    !Array.isArray(choices) || choices.length !== choiceCount ||
     !choices.every(choice => record(choice) && nonemptyString(choice.id) && nonemptyString(choice.text)) ||
-    new Set(choices.map(choice => choice.id)).size !== 3 ||
-    choices.filter(choice => choice.id === correctId).length !== 1 ||
+    new Set(choices.map(choice => choice.id)).size !== choiceCount ||
+    (!matching && choices.filter(choice => choice.id === correctId).length !== 1) ||
     !nonemptyString(question.explanation)) return false;
 
+  if (question.source_image !== undefined && (!verbatim || !record(question.source_image) ||
+    !PRACTICE_ASSETS.includes(question.source_image.filename) || !nonemptyString(question.source_image.alt) ||
+    !['diagram', 'original'].includes(question.source_image.kind))) return false;
+  if (question.context !== undefined && (!verbatim || !record(question.context) ||
+    !nonemptyString(question.context.question) || !Array.isArray(question.context.options) ||
+    question.context.options.length !== 3 || !question.context.options.every(nonemptyString))) return false;
+
   if (pilot) {
+    if (!['single_choice', 'matching'].includes(question.question_type ?? 'single_choice') ||
+      (question.question_type === 'matching' && !matching)) return false;
+    if (matching) {
+      if (!Array.isArray(question.matching_items) || question.matching_items.length !== 5 ||
+        !question.matching_items.every(item => record(item) && nonemptyString(item.id) && nonemptyString(item.text)) ||
+        new Set(question.matching_items.map(item => item.id)).size !== 5 ||
+        !validMatchingAnswer(normalized, question.correct_matches) ||
+        question.correct_answer !== question.matching_items.map(item => `${item.id}-${question.correct_matches[item.id]}`).join('、')) return false;
+    } else if (!Number.isInteger(question.correct_index) || question.correct_index < 0 || question.correct_index >= choiceCount ||
+      !nonemptyString(question.correct_answer) || question.options[question.correct_index] !== question.correct_answer) return false;
     return nonemptyString(question.knowledge_id) && nonemptyString(question.country) &&
       validCountries(question) && question.countries.includes(question.country) &&
       nonemptyString(question.topic) &&
-      Number.isInteger(question.correct_index) && question.correct_index >= 0 && question.correct_index < 3 &&
-      nonemptyString(question.correct_answer) && question.options[question.correct_index] === question.correct_answer &&
       (typeof question.source_page === 'number' ? Number.isFinite(question.source_page) : nonemptyString(question.source_page)) &&
       ['auto_checked', 'approved'].includes(question.status) &&
       (question.version === undefined || question.version === 1);
@@ -84,6 +117,14 @@ export function validQuestion(question) {
       (question.validation === undefined || record(question.validation));
   }
   return ['quote', 'file_name', 'source_id', 'region_id'].every(key => nonemptyString(question[key]));
+}
+
+/** A matching response is complete only when each original item has one unique match. */
+export function validMatchingAnswer(question, answer) {
+  return record(answer) && Array.isArray(question.matching_items) && Array.isArray(question.choices) &&
+    Object.keys(answer).length === question.matching_items.length &&
+    question.matching_items.every(item => Object.hasOwn(answer, item.id) && question.choices.some(choice => choice.id === answer[item.id])) &&
+    new Set(Object.values(answer)).size === question.matching_items.length;
 }
 
 function uniqueValidQuestions(questions) {
@@ -133,7 +174,7 @@ export class QuizSession {
     this.questionCount = questionCount;
     this.order = selected.map(question => ({
       ...question,
-      choices: shuffle(question.choices, this.random),
+      choices: question.source_verbatim ? [...question.choices] : shuffle(question.choices, this.random),
     }));
     this.index = 0;
     this.answers = [];
@@ -148,12 +189,16 @@ export class QuizSession {
   get score() { return this.answers.filter(answer => answer.correct).length; }
 
   answer(choiceId) {
-    if (!this.current || this.answered || !this.current.choices.some(choice => choice.id === choiceId)) return null;
+    if (!this.current || this.answered) return null;
+    const matching = this.current.question_type === 'matching';
+    if (matching ? !validMatchingAnswer(this.current, choiceId) : !this.current.choices.some(choice => choice.id === choiceId)) return null;
+    if (matching) choiceId = Object.freeze({ ...choiceId });
     this.selectedId = choiceId;
     const result = {
       questionId: this.current.id,
       choiceId,
-      correct: choiceId === this.current.correct_choice_id,
+      correct: matching ? this.current.matching_items.every(item => choiceId[item.id] === this.current.correct_matches[item.id])
+        : choiceId === this.current.correct_choice_id,
     };
     this.answers.push(result);
     return result;

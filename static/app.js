@@ -1,5 +1,5 @@
-import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS } from './quiz.js?v=bundled-20261031';
-import { parseQuestionPack, loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID, MAX_PACK_BYTES } from './pages.js?v=bundled-20261031';
+import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS, practiceAssetUrl, validMatchingAnswer } from './quiz.js?v=verbatim-20261031';
+import { parseQuestionPack, loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID, MAX_PACK_BYTES } from './pages.js?v=verbatim-20261031';
 
 const $ = selector => document.querySelector(selector);
 const state = { session: null, loadError: '', practiceQuestions: [], packMetadata: null, customPack: false, practiceLoading: false, importing: false, bundledPackId: DEFAULT_PACK_ID, packLabel: '' };
@@ -236,6 +236,8 @@ function evidence(question) {
     const description = question.status === 'auto_checked' ? '（機械検証済み・人手確認前）' : '';
     box.append(element('p', 'pilot-review-note', `検証記録：${question.status}${description}`),
       element('p', 'pages-evidence-note', '原画像の確認・外部の事実確認・人による校閲の完了を示すものではありません。'));
+    if (question.sources) box.append(recordedMetadata(question.sources));
+    if (question.validation) box.append(recordedMetadata(question.validation));
     return box;
   }
   if (Array.isArray(question.sources)) {
@@ -264,6 +266,81 @@ function evidence(question) {
   return box;
 }
 
+function answerAndRender(value) {
+  if (!state.session.answer(value)) return;
+  renderPractice();
+  $('.answer-summary').focus({ preventScroll: true });
+  $('.answer-summary').scrollIntoView({ block: 'nearest' });
+}
+
+function matchingChoices(question, session) {
+  const group = element('div', 'matching-list');
+  group.setAttribute('role', 'group');
+  group.setAttribute('aria-labelledby', 'question-prompt');
+  const selections = session.answered ? session.selectedId : Object.create(null);
+  const submit = button('回答する', 'button button-primary matching-submit', () => answerAndRender(selections));
+  const hint = element('p', 'answer-hint', '各番号に対応する A～E を選んでください。同じ記号は一度だけ使います。');
+  hint.setAttribute('aria-live', 'polite');
+  for (const item of question.matching_items) {
+    const label = element('label', 'matching-row');
+    label.append(element('span', '', `${item.id}. ${item.text}`));
+    const select = element('select', 'matching-select');
+    select.dataset.itemId = item.id;
+    select.setAttribute('aria-label', `${item.id}. ${item.text} に対応するグラン・クリュ`);
+    const empty = element('option', '', '選んでください');
+    empty.value = '';
+    select.append(empty);
+    for (const choice of question.choices) {
+      const option = element('option', '', `${choice.id}. ${choice.text}`);
+      option.value = choice.id;
+      select.append(option);
+    }
+    select.value = selections[item.id] ?? '';
+    select.disabled = session.answered;
+    select.addEventListener('change', () => {
+      if (session.answered) return;
+      selections[item.id] = select.value;
+      submit.disabled = !validMatchingAnswer(question, selections);
+      const values = Object.values(selections).filter(Boolean);
+      hint.textContent = new Set(values).size !== values.length ? '同じ記号が選ばれています。各記号は一度だけ使ってください。'
+        : 'すべて選んだら「回答する」を押してください。';
+    });
+    label.append(select);
+    if (session.answered) {
+      const correctId = question.correct_matches[item.id];
+      const correct = selections[item.id] === correctId;
+      label.append(element('span', correct ? 'match-correct' : 'match-incorrect', `${correct ? '✓' : '×'} 正答 ${correctId}. ${question.choices.find(choice => choice.id === correctId).text}`));
+    }
+    group.append(label);
+  }
+  submit.disabled = session.answered || !validMatchingAnswer(question, selections);
+  if (!session.answered) group.append(hint, submit);
+  return group;
+}
+
+function originalContent(question) {
+  const content = element('div', 'original-content');
+  if (question.context) {
+    const context = element('aside', 'question-context');
+    context.append(element('p', 'context-label', '関連する設問の原文（イタリア 問7-1）'),
+      element('p', '', question.context.question));
+    for (const [index, text] of question.context.options.entries()) context.append(element('p', '', `${index + 1}. ${text}`));
+    content.append(context);
+  }
+  if (question.source_image) {
+    const source = question.source_image;
+    const url = practiceAssetUrl(source.filename);
+    const figure = element('figure', `question-figure ${source.kind}`);
+    const img = element('img');
+    img.src = url.href;
+    img.alt = source.alt;
+    figure.append(img, link(source.kind === 'original' ? '原文画像を拡大' : '地図を拡大', url.href));
+    if (source.kind === 'original') figure.append(element('figcaption', '', '原文画像で出題しています。文字の転記は要確認です。画像内の選択肢の番号で回答してください。'));
+    content.append(figure);
+  }
+  return content;
+}
+
 function renderPractice() {
   const session = state.session;
   if (!session?.total) { $('#quiz-root').replaceChildren(); return; }
@@ -288,20 +365,19 @@ function renderPractice() {
   const prompt = element('h2', 'question-prompt', question.prompt);
   prompt.id = 'question-prompt';
   prompt.tabIndex = -1;
-  const choices = element('div', 'choice-list');
+  const matching = question.question_type === 'matching';
+  const choices = matching ? matchingChoices(question, session) : element('div', 'choice-list');
   choices.setAttribute('role', 'group');
   choices.setAttribute('aria-labelledby', 'question-prompt');
-  question.choices.forEach((choice, index) => {
+  if (!matching) question.choices.forEach((choice, index) => {
     const correct = session.answered && choice.id === question.correct_choice_id;
     const wrong = session.answered && choice.id === session.selectedId && !correct;
     const choiceButton = button('', `choice${correct ? ' correct' : ''}${wrong ? ' incorrect' : ''}`, () => {
-      if (!session.answer(choice.id)) return;
-      renderPractice();
-      $('.answer-summary').focus({ preventScroll: true });
-      $('.answer-summary').scrollIntoView({ block: 'nearest' });
+      answerAndRender(choice.id);
     });
     choiceButton.disabled = session.answered;
-    choiceButton.append(element('span', 'choice-letter', String.fromCharCode(65 + index)), element('span', 'choice-text', choice.text));
+    choiceButton.append(element('span', 'choice-letter', question.source_verbatim ? String(index + 1) : String.fromCharCode(65 + index)),
+      element('span', 'choice-text', question.source_image?.kind === 'original' ? `画像の選択肢 ${index + 1}` : choice.text));
     if (correct || wrong) {
       const marker = element('span', 'choice-state', correct ? '✓' : '×');
       marker.setAttribute('aria-label', correct ? '正しい回答' : '選んだ回答・不正解');
@@ -309,8 +385,11 @@ function renderPractice() {
     }
     choices.append(choiceButton);
   });
-  card.append(header, progress, element('div', 'question-category', question.countries?.join('・') || '三択問題'), prompt, choices);
-  if (!session.answered) card.append(element('p', 'answer-hint', '答えをひとつ選ぶと、正解と解説を表示します。'));
+  card.append(header, progress, element('div', 'question-category', question.source_verbatim ? question.source_page : question.countries?.join('・') || '三択問題'),
+    prompt, originalContent(question), choices);
+  if (!session.answered) {
+    if (!matching) card.append(element('p', 'answer-hint', '答えをひとつ選ぶと、正解と解説を表示します。'));
+  }
   else {
     const answer = session.answers[session.answers.length - 1];
     const correctChoice = question.choices.find(choice => choice.id === question.correct_choice_id);
@@ -328,10 +407,13 @@ function renderPractice() {
     row.append(next);
     summary.append(verdict, row);
     const correctAnswer = element('p', 'correct-answer', '正しい回答：');
-    correctAnswer.append(element('strong', '', correctChoice.text));
+    correctAnswer.append(element('strong', '', matching ? question.correct_answer
+      : question.source_image?.kind === 'original' ? `画像の選択肢 ${question.correct_index + 1}` : correctChoice.text));
     const details = element('details', 'source-details');
     details.append(element('summary', '', '出典・検証記録を確認'), evidence(question));
     panel.append(summary, correctAnswer, element('h3', 'explanation-label', '解説'), element('p', 'explanation-body', question.explanation), details);
+    const notes = [question.source_note, question.validation?.temporal_note].filter(Boolean);
+    if (notes.length) panel.append(element('h3', 'explanation-label', '原資料への注記'), element('p', 'source-note', notes.join('\n')));
     card.append(panel);
   }
   $('#quiz-root').replaceChildren(card);
