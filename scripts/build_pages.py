@@ -8,12 +8,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_QUESTION_PACK = "question-packs/wine-quiz-highlighted.json"
+PUBLIC_PRACTICE_PACK = "question-packs/wine-quiz-practice-20261031.json"
+PUBLIC_QUESTION_PACKS = (PUBLIC_QUESTION_PACK, PUBLIC_PRACTICE_PACK)
 PUBLIC_FILES = (
     "static/index.html", "static/app.js", "static/quiz.js",
-    "static/pages.js", "static/style.css", PUBLIC_QUESTION_PACK,
+    "static/pages.js", "static/style.css", *PUBLIC_QUESTION_PACKS,
 )
 MARKER = ".wine-pages-artifact"
-SOURCE_ASSET_VERSION = "highlighted-20261020"
+SOURCE_ASSET_VERSION = "bundled-20261031"
 
 
 def build(source_root: Path = ROOT, output: Path | None = None) -> Path:
