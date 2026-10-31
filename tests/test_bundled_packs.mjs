@@ -82,10 +82,19 @@ for (const bank of banks) {
         }
         assert.equal(seen.size, total);
         assert.equal(session.score, total - 1);
+        const history = session.history;
+        // Keep the random output fixed across a restart to catch an unguarded reshuffle.
+        session.random = () => 0.999999;
         session.restart();
         assert.equal(session.total, total);
         assert.equal(session.score, 0);
         assert.equal(session.answers.length, 0);
+        if (available > total) assert.equal(seen.has(session.current.id), false);
+        else {
+          assert.notEqual(session.current.id, history.firstId);
+          assert.notEqual(session.current.id, history.lastId);
+        }
+        assert.ok(session.order.every(row => byId.has(row.id) && (country === null || row.countries.includes(country))));
       }
     }
   });

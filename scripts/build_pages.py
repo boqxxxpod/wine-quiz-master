@@ -15,7 +15,7 @@ PUBLIC_FILES = (
     "static/pages.js", "static/style.css", *PUBLIC_QUESTION_PACKS,
 )
 MARKER = ".wine-pages-artifact"
-SOURCE_ASSET_VERSION = "bundled-20261031"
+SOURCE_ASSET_VERSION = "round-start-20261031"
 
 
 def build(source_root: Path = ROOT, output: Path | None = None) -> Path:

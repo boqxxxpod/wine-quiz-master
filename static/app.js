@@ -1,8 +1,13 @@
-import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS } from './quiz.js?v=bundled-20261031';
-import { parseQuestionPack, loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID, MAX_PACK_BYTES } from './pages.js?v=bundled-20261031';
+import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS } from './quiz.js?v=round-start-20261031';
+import { parseQuestionPack, loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID, MAX_PACK_BYTES } from './pages.js?v=round-start-20261031';
 
 const $ = selector => document.querySelector(selector);
-const state = { session: null, loadError: '', practiceQuestions: [], packMetadata: null, customPack: false, practiceLoading: false, importing: false, bundledPackId: DEFAULT_PACK_ID, packLabel: '' };
+const packHistories = new Map(BUNDLED_PACKS.map(pack => [pack.id, { previousRound: null }]));
+const state = { session: null, loadError: '', practiceQuestions: [], packMetadata: null, customPack: false, practiceLoading: false, importing: false, bundledPackId: DEFAULT_PACK_ID, packLabel: '', packHistory: null };
+
+function rememberRound() {
+  if (state.session) state.packHistory.previousRound = state.session.history;
+}
 
 function syncPackSelection() {
   for (const pack of BUNDLED_PACKS) {
@@ -108,7 +113,8 @@ function startPractice() {
   // Validate again when starting, even if a value changed without an input event.
   renderScope();
   if ($('#start-practice').disabled) return;
-  state.session = new QuizSession(state.practiceQuestions, Math.random, selectedCountry(), selectedCount());
+  rememberRound();
+  state.session = new QuizSession(state.practiceQuestions, Math.random, selectedCountry(), selectedCount(), state.packHistory.previousRound);
   $('#view-setup').hidden = true;
   $('#view-practice').hidden = false;
   renderPractice();
@@ -116,6 +122,9 @@ function startPractice() {
 }
 
 function useQuestionPack(pack, fileName, custom = false) {
+  rememberRound();
+  // Each imported file gets its own history; bundled histories survive switching and reloading packs.
+  state.packHistory = custom ? { previousRound: null } : packHistories.get(state.bundledPackId);
   state.practiceQuestions = pack.questions;
   state.packMetadata = pack.metadata ?? null;
   state.customPack = custom;
@@ -143,6 +152,7 @@ async function loadBundledPack(packId = state.bundledPackId) {
   if (state.practiceLoading || state.importing) { syncPackSelection(); return; }
   const pack = BUNDLED_PACKS.find(item => item.id === packId);
   if (!pack) { syncPackSelection(); return; }
+  rememberRound();
   state.bundledPackId = pack.id;
   state.practiceLoading = true;
   $('#retry-pack').disabled = true;

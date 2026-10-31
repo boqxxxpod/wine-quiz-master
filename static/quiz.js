@@ -114,21 +114,35 @@ export function availableCountries(questions) {
   return [...countryCounts(questions).keys()].sort((a, b) => a.localeCompare(b, 'ja'));
 }
 
+/** Choose within the shuffled pool before slicing, so an unseen start can be outside the old subset. */
+function preferNewStart(shuffled, previousRound) {
+  if (!previousRound || shuffled.length < 2) return;
+  const seen = new Set(previousRound.questionIds);
+  let candidates = shuffled.filter(question => !seen.has(question.id));
+  if (!candidates.length) candidates = shuffled.filter(question => question.id !== previousRound.firstId);
+  if (!candidates.length) candidates = shuffled;
+  const first = candidates.find(question => question.id !== previousRound.lastId) ?? candidates[0];
+  const index = shuffled.indexOf(first);
+  [shuffled[0], shuffled[index]] = [shuffled[index], shuffled[0]];
+}
+
 export class QuizSession {
-  constructor(questions, random = Math.random, country = null, questionCount = null) {
+  constructor(questions, random = Math.random, country = null, questionCount = null, previousRound = null) {
     this.random = random;
     this.questions = uniqueValidQuestions(questions).map(normalizeQuestion);
     this.country = country;
     this.questionCount = questionCount;
-    this.restart();
+    this.restart(country, questionCount, previousRound);
   }
 
-  restart(country = this.country, questionCount = this.questionCount) {
+  restart(country = this.country, questionCount = this.questionCount, previousRound = this.history) {
     const available = questionsForCountry(this.questions, country);
     if (questionCount !== null && (!Number.isInteger(questionCount) || questionCount < 1 || questionCount > available.length)) {
       throw new RangeError('Question count must be an integer within the selected range.');
     }
-    const selected = shuffle(available, this.random).slice(0, questionCount ?? available.length);
+    const shuffled = shuffle(available, this.random);
+    preferNewStart(shuffled, previousRound);
+    const selected = shuffled.slice(0, questionCount ?? available.length);
     this.country = country;
     this.questionCount = questionCount;
     this.order = selected.map(question => ({
@@ -146,6 +160,12 @@ export class QuizSession {
   get complete() { return this.total > 0 && this.index >= this.total; }
   get answered() { return this.selectedId !== null; }
   get score() { return this.answers.filter(answer => answer.correct).length; }
+
+  /** Include the current unanswered question, but not questions that have never been shown. */
+  get history() {
+    const questionIds = this.order.slice(0, this.index + 1).map(question => question.id);
+    return { questionIds, firstId: questionIds[0] ?? null, lastId: questionIds.at(-1) ?? null };
+  }
 
   answer(choiceId) {
     if (!this.current || this.answered || !this.current.choices.some(choice => choice.id === choiceId)) return null;
