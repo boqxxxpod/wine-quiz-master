@@ -74,7 +74,7 @@ class PublicBuildTests(unittest.TestCase):
         for relative in (*PUBLIC_QUESTION_PACKS, *PUBLIC_PRACTICE_ASSETS):
             self.assertEqual((self.output / relative).read_bytes(), (ROOT / relative).read_bytes())
 
-    def test_asset_versions_match_through_imports_and_change_with_pack_bytes(self):
+    def test_asset_versions_match_through_imports_and_change_with_pack_or_crop_bytes(self):
         build(ROOT, self.output)
         html = (self.output / "index.html").read_text(encoding="utf-8")
         version = re.search(r"app\.js\?v=([a-f0-9]{16})", html).group(1)
@@ -89,7 +89,7 @@ class PublicBuildTests(unittest.TestCase):
             source = ROOT / relative
             target = self.root / relative
             target.write_bytes(source.read_bytes())
-        for relative in PUBLIC_QUESTION_PACKS:
+        for relative in (*PUBLIC_QUESTION_PACKS, *PUBLIC_PRACTICE_ASSETS):
             pack = self.root / relative
             pack.write_bytes(pack.read_bytes() + b"\n")
             build(self.root, self.output)

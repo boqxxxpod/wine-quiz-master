@@ -1,5 +1,5 @@
-import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS, practiceAssetUrl, validMatchingAnswer } from './quiz.js?v=verbatim-20261031';
-import { parseQuestionPack, loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID, MAX_PACK_BYTES } from './pages.js?v=verbatim-20261031';
+import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS, practiceAssetUrl, validMatchingAnswer } from './quiz.js?v=italy-retake-20261101';
+import { parseQuestionPack, loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID, MAX_PACK_BYTES } from './pages.js?v=italy-retake-20261101';
 
 const $ = selector => document.querySelector(selector);
 const state = { session: null, loadError: '', practiceQuestions: [], packMetadata: null, customPack: false, practiceLoading: false, importing: false, bundledPackId: DEFAULT_PACK_ID, packLabel: '' };
@@ -335,7 +335,7 @@ function originalContent(question) {
     img.src = url.href;
     img.alt = source.alt;
     figure.append(img, link(source.kind === 'original' ? '原文画像を拡大' : '地図を拡大', url.href));
-    if (source.kind === 'original') figure.append(element('figcaption', '', '原文画像で出題しています。文字の転記は要確認です。画像内の選択肢の番号で回答してください。'));
+    if (source.kind === 'original') figure.append(element('figcaption', '', '原文画像で出題しています。画像内の選択肢の番号で回答してください。読みづらい場合は「原文画像を拡大」を開いてください。'));
     content.append(figure);
   }
   return content;

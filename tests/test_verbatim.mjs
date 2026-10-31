@@ -43,7 +43,14 @@ test('all original numbered units have an auditable source, answer and unchanged
     assert.equal(row.source_image.kind, 'original');
     assert.deepEqual(row.options, ['1','2','3'], 'controls refer to printed choices; they are not a guessed transcription');
     assert.ok(row.validation.transcription_note);
+    assert.equal(row.validation.image_legibility_checked, true, 'legible images do not imply completed text transcription');
+    assert.match(row.validation.transcription_note, /文字転記は未実施/);
+    const source = row.sources.find(source => source.role === 'question');
+    assert.equal(source.image_index, 10, 'replacement keeps the original logical image number');
+    assert.equal(source.source_revision, review.image_replacements[0].source_revision);
   }
+  assert.equal(review.image_replacements[0].transcription_completed, false);
+  assert.equal(review.image_replacements[0].image_legibility_checked, true);
 });
 
 test('original diagrams, two choices and the unsplit five pairs retain their relationships', () => {

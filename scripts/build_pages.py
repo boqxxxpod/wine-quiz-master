@@ -19,7 +19,7 @@ PUBLIC_FILES = (
     "static/pages.js", "static/style.css", *PUBLIC_QUESTION_PACKS, *PUBLIC_PRACTICE_ASSETS,
 )
 MARKER = ".wine-pages-artifact"
-SOURCE_ASSET_VERSION = "verbatim-20261031"
+SOURCE_ASSET_VERSION = "italy-retake-20261101"
 
 
 def build(source_root: Path = ROOT, output: Path | None = None) -> Path:
