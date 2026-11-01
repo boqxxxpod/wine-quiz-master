@@ -79,6 +79,12 @@ python scripts/build_pages.py
 - [GitHub Actions を公開元に指定する手順](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
 - [configure-pages の初回有効化に必要な権限](https://github.com/actions/configure-pages/blob/v5/action.yml)
 
+## しおりの保存と配信
+
+回答後のしおり追加・解除と、設定での「しおりが付いた問題だけ出題する」・全削除は、両版で共通の `static/bookmarks.js` と画面処理を使用します。このモジュールも公開許可リストと内容由来のキャッシュ版に含めます。しおりは `wineQuizMaster.bookmarks.v1` のブラウザ保存だけで管理し、API通信・外部サービスへの送信はありません。
+
+絞り込みは問題集・国別範囲と組み合わせ、対象0問では開始できません。全削除は設定の「しおりの管理」から確認操作を経て、しおり専用キーだけを削除します。教材の見直し記録は削除しません。サーバー版とPages版のオリジンが異なる場合も含め、別サイト・別端末・別ブラウザのしおりとは同期しません。
+
 ## 地名マスターの配信
 
 ホーム最下部（練習開始ボタンの後）の「地名の教材を読む」から、見取り図・村ごとの本文・似た地名の比較を読めます。名前の目隠しと、村ごとの見直し記録を同じ教材に組み込み、問題の設定・出題・正解表示を経由しません。

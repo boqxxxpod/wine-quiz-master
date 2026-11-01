@@ -57,6 +57,17 @@ h1 { font:600 29px/1.6 var(--serif); letter-spacing:.04em; }
 .pack-options,.scope-options,.count-options { display:flex; align-items:center; flex-wrap:wrap; gap:12px 20px; min-width:0; padding:0; border:0; margin:15px 0 10px; }
 .pack-options label,.scope-options label,.count-options label { display:flex; align-items:center; gap:7px; min-height:40px; }
 input[type="radio"] { accent-color:var(--wine); width:17px; height:17px; margin:0; }
+input[type="checkbox"] { accent-color:var(--wine); width:18px; height:18px; margin:0; flex:0 0 18px; }
+.bookmark-settings { margin:12px 0; }
+.bookmark-filter { display:flex; align-items:center; gap:8px; min-height:44px; }
+.bookmark-management { margin-top:8px; font-size:13px; }
+.bookmark-management summary { cursor:pointer; color:var(--wine); padding:8px 0; }
+.bookmark-management .button { margin-top:10px; }
+.bookmark-confirm { margin-top:12px; padding:14px; border:1px solid var(--line); border-radius:6px; }
+.bookmark-controls { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:12px; }
+.bookmark-state { color:var(--muted); font-size:13px; }
+.bookmark-toggle[aria-pressed="true"] { background:var(--wine-light); border-color:var(--wine); }
+.bookmark-warning { flex-basis:100%; margin-top:0; }
 select,input[type="number"] { max-width:100%; min-height:44px; padding:8px 10px; border:1px solid var(--line); border-radius:5px; background:var(--white); color:var(--ink); }
 input[type="number"] { width:96px; }
 input:disabled,select:disabled { background:#f1ede5; color:var(--muted); }
@@ -69,6 +80,7 @@ input:disabled,select:disabled { background:#f1ede5; color:var(--muted); }
 .button-secondary:hover:not(:disabled) { background:#f3eee7; }
 .start-button { width:100%; margin-top:20px; min-height:48px; }
 .practice-toolbar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; }
+.practice-toolbar > .button { flex-shrink:0; }
 #active-scope { color:var(--muted); font-size:13px; text-align:right; }
 .quiz-card { background:var(--white); border:1px solid var(--line); border-radius:10px; padding:22px 28px; }
 .question-header { display:flex; align-items:center; justify-content:space-between; gap:12px; }

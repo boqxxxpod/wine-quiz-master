@@ -1,8 +1,10 @@
-import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS, practiceAssetUrl, validMatchingAnswer } from './quiz.js?v=home-practice-20261101';
-import { loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID } from './pages.js?v=home-practice-20261101';
-import { initPlaceMaster } from './place-master.js?v=home-practice-20261101';
+import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS, practiceAssetUrl, validMatchingAnswer } from './quiz.js?v=bookmarks-20261101';
+import { loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID } from './pages.js?v=bookmarks-20261101';
+import { initPlaceMaster } from './place-master.js?v=bookmarks-20261101';
+import { BookmarkStore } from './bookmarks.js?v=bookmarks-20261101';
 
 const $ = selector => document.querySelector(selector);
+const bookmarks = new BookmarkStore();
 const state = { session: null, loadError: '', practiceQuestions: [], packMetadata: null, practiceLoading: false, bundledPackId: DEFAULT_PACK_ID, packLabel: '' };
 
 function syncPackSelection() {
@@ -43,31 +45,48 @@ function selectedCount() {
   return $('#question-count').value === 'all' ? null : Number($('#question-count').value);
 }
 
+function bookmarkPackKey() {
+  return `bundled:${state.bundledPackId}`;
+}
+
+function candidateQuestions() {
+  return $('#bookmarks-only').checked ? bookmarks.questions(bookmarkPackKey(), state.practiceQuestions) : state.practiceQuestions;
+}
+
 function alignCountToScope() {
-  const total = questionsForCountry(state.practiceQuestions, selectedCountry()).length;
+  const total = questionsForCountry(candidateQuestions(), selectedCountry()).length;
   const count = selectedCount();
   if (count !== null && (!PRACTICE_COUNTS.includes(count) || count > total)) $('#question-count').value = 'all';
   renderScope();
 }
 
 function renderScope(rebuildCountries = false) {
-  const countries = countryCounts(state.practiceQuestions);
+  const questions = candidateQuestions();
+  const countries = countryCounts(questions);
   const select = $('#practice-country');
   if (rebuildCountries) {
     select.replaceChildren(element('option', '', '国を選んでください'));
     select.firstElementChild.value = '';
-    for (const country of [...countries.keys()].sort((a, b) => a.localeCompare(b, 'ja'))) {
-      const option = element('option', '', `${country}（${countries.get(country)} 問）`);
+    for (const country of [...countryCounts(state.practiceQuestions).keys()].sort((a, b) => a.localeCompare(b, 'ja'))) {
+      const option = element('option');
       option.value = country;
       select.append(option);
     }
     select.value = '';
   }
+  for (const option of select.options) {
+    if (option.value) option.textContent = `${option.value}（${countries.get(option.value) ?? 0} 問）`;
+  }
   const country = selectedCountry();
-  const total = country === '' ? 0 : questionsForCountry(state.practiceQuestions, country).length;
+  const total = country === '' ? 0 : questionsForCountry(questions, country).length;
   const count = selectedCount();
   const invalidCount = count !== null && (!PRACTICE_COUNTS.includes(count) || count > total);
   const loading = state.practiceLoading;
+  $('#bookmarks-only').disabled = loading;
+  $('#clear-bookmarks').disabled = loading;
+  $('#bookmark-count').textContent = `この問題集のしおり：${bookmarks.questions(bookmarkPackKey(), state.practiceQuestions).length} 問 · 全問題集のしおり：${bookmarks.count()} 問`;
+  $('#bookmark-storage-warning').textContent = bookmarks.warning;
+  $('#bookmark-storage-warning').hidden = !bookmarks.warning;
   for (const pack of BUNDLED_PACKS) $(`#pack-${pack.id}`).disabled = loading;
   select.disabled = !$('#scope-country').checked || loading;
   for (const id of ['scope-all', 'scope-country']) $(`#${id}`).disabled = loading;
@@ -76,13 +95,13 @@ function renderScope(rebuildCountries = false) {
     option.disabled = option.value !== 'all' && Number(option.value) > total;
   }
   $('#question-count').setAttribute('aria-invalid', String(invalidCount && total > 0));
-  $('#scope-all-count').textContent = `（${state.practiceQuestions.length} 問）`;
+  $('#scope-all-count').textContent = `（${questions.length} 問）`;
   $('#count-all-label').textContent = `全問（${total} 問）`;
   $('#scope-count').textContent = loading ? '問題集を読み込んでいます。'
     : state.loadError ? '問題集を読み込めないため、開始できません。'
       : country === '' ? '練習する国を選んでください。'
-        : total === 0 ? 'この範囲には問題がありません。別の範囲か問題集を選んでください。'
-          : `対象：${country ?? 'すべて'} · ${total} 問`;
+        : total === 0 ? ($('#bookmarks-only').checked ? 'この範囲にしおりが付いた問題はありません。「しおりが付いた問題だけ出題する」をオフにするか、別の範囲・問題集を選んでください。' : 'この範囲には問題がありません。別の範囲か問題集を選んでください。')
+          : `対象：${country ?? 'すべて'}${$('#bookmarks-only').checked ? ' · しおり付きのみ' : ''} · ${total} 問`;
   $('#count-error').textContent = invalidCount && total > 0 ? '選べる出題数から指定してください。' : '';
   $('#count-error').hidden = !invalidCount || total === 0;
   $('#start-practice').disabled = loading || Boolean(state.loadError) || total === 0 || invalidCount;
@@ -92,7 +111,7 @@ function showSetup(focus = true) {
   placeMaster.hide();
   $('#view-setup').hidden = false;
   $('#view-practice').hidden = true;
-  renderScope();
+  alignCountToScope();
   if (focus) {
     $('#setup-heading').focus({ preventScroll: true });
     $('#view-setup').scrollIntoView({ block: 'start' });
@@ -109,7 +128,8 @@ function startPractice() {
   // Validate again when starting, even if a value changed without an input event.
   renderScope();
   if ($('#start-practice').disabled) return;
-  state.session = new QuizSession(state.practiceQuestions, Math.random, selectedCountry(), selectedCount());
+  state.session = new QuizSession(candidateQuestions(), Math.random, selectedCountry(), selectedCount());
+  state.session.bookmarksOnly = $('#bookmarks-only').checked;
   $('#view-setup').hidden = true;
   $('#view-practice').hidden = false;
   renderPractice();
@@ -181,9 +201,9 @@ function renderCompletion() {
   const score = element('div', 'completion-score', String(session.score));
   score.append(element('span', '', `/ ${session.total} 問正解`));
   const restart = button('同じ設定でもう一巡', 'button button-primary', () => {
-    session.restart();
-    renderPractice();
-    focusQuestion();
+    alignCountToScope();
+    if ($('#start-practice').disabled) showSetup();
+    else startPractice();
   });
   card.append(score, element('p', '', '選んだ範囲から、もう一度ランダムに出題します。'), restart,
     button('設定を変更する', 'button button-secondary', showSetup));
@@ -339,7 +359,7 @@ function originalContent(question) {
 function renderPractice() {
   const session = state.session;
   if (!session?.total) { $('#quiz-root').replaceChildren(); return; }
-  $('#active-scope').textContent = `${state.packLabel} · ${session.country ?? 'すべて'} · ${session.total} 問`;
+  $('#active-scope').textContent = `${state.packLabel} · ${session.country ?? 'すべて'}${session.bookmarksOnly ? ' · しおり付きのみ' : ''} · ${session.total} 問`;
   if (session.complete) { renderCompletion(); return; }
   const question = session.current;
   const card = element('div', 'quiz-card');
@@ -406,7 +426,7 @@ function renderPractice() {
       : question.source_image?.kind === 'original' ? `画像の選択肢 ${question.correct_index + 1}` : correctChoice.text));
     const details = element('details', 'source-details');
     details.append(element('summary', '', '出典・検証記録を確認'), evidence(question));
-    panel.append(summary, correctAnswer, element('h3', 'explanation-label', '解説'), element('p', 'explanation-body', question.explanation), details);
+    panel.append(summary, bookmarkControls(question), correctAnswer, element('h3', 'explanation-label', '解説'), element('p', 'explanation-body', question.explanation), details);
     const notes = [question.source_note, question.validation?.temporal_note].filter(Boolean);
     if (notes.length) panel.append(element('h3', 'explanation-label', '原資料への注記'), element('p', 'source-note', notes.join('\n')));
     card.append(panel);
@@ -414,7 +434,49 @@ function renderPractice() {
   $('#quiz-root').replaceChildren(card);
 }
 
+function bookmarkControls(question) {
+  const controls = element('div', 'bookmark-controls');
+  const status = element('span', 'bookmark-state');
+  status.setAttribute('role', 'status');
+  const warning = element('p', 'bookmark-warning field-error');
+  warning.setAttribute('role', 'status');
+  const toggle = button('', 'button button-secondary bookmark-toggle', () => {
+    bookmarks.toggle(bookmarkPackKey(), question.id);
+    update();
+    renderScope();
+  });
+  function update() {
+    const marked = bookmarks.has(bookmarkPackKey(), question.id);
+    toggle.textContent = marked ? 'しおりを外す' : 'しおりを付ける';
+    toggle.setAttribute('aria-pressed', String(marked));
+    status.textContent = marked ? 'しおり付き' : 'しおりなし';
+    warning.textContent = bookmarks.warning;
+    warning.hidden = !bookmarks.warning;
+  }
+  update();
+  controls.append(toggle, status, warning);
+  return controls;
+}
+
+function closeBookmarkConfirmation() {
+  $('#bookmark-clear-confirm').hidden = true;
+  $('#clear-bookmarks').focus({ preventScroll: true });
+}
+
 const placeMaster = initPlaceMaster({ onHome: () => showSetup() });
+$('#clear-bookmarks').addEventListener('click', () => {
+  $('#bookmark-action-status').textContent = '';
+  $('#bookmark-clear-confirm').hidden = false;
+  $('#cancel-clear-bookmarks').focus({ preventScroll: true });
+});
+$('#cancel-clear-bookmarks').addEventListener('click', closeBookmarkConfirmation);
+$('#confirm-clear-bookmarks').addEventListener('click', () => {
+  const cleared = bookmarks.clear();
+  $('#bookmark-action-status').textContent = cleared ? 'すべての問題集のしおりを削除しました。' : 'しおりを削除できませんでした。保存領域の利用を許可してから、もう一度お試しください。';
+  closeBookmarkConfirmation();
+  alignCountToScope();
+});
+$('#bookmarks-only').addEventListener('change', alignCountToScope);
 $('#open-place-master').addEventListener('click', () => placeMaster.open());
 $('#back-to-setup').addEventListener('click', showSetup);
 $('.brand').addEventListener('click', event => { event.preventDefault(); showSetup(); });

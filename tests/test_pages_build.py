@@ -46,7 +46,7 @@ class PublicBuildTests(unittest.TestCase):
             path.write_text(canary, encoding="utf-8")
         build(self.root, self.output)
         actual = {str(path.relative_to(self.output)) for path in self.output.rglob("*") if path.is_file()}
-        expected = {"index.html", "static/app.js", "static/quiz.js", "static/pages.js",
+        expected = {"index.html", "static/app.js", "static/quiz.js", "static/pages.js", "static/bookmarks.js",
                     "static/style.css", *PUBLIC_PLACE_MODULES, PUBLIC_PLACE_PACK, *PUBLIC_QUESTION_PACKS, *PUBLIC_PRACTICE_ASSETS, "static/runtime.js", ".nojekyll", MARKER}
         self.assertEqual(actual, expected)
         for path in self.output.rglob("*"):
@@ -63,6 +63,21 @@ class PublicBuildTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, PUBLIC_PRACTICE_PACK):
             build(self.root, self.output)
         self.assertEqual({str(p.relative_to(self.output)): p.read_bytes() for p in self.output.rglob("*") if p.is_file()}, before)
+
+    def test_bookmarks_module_is_versioned_and_changes_invalidate_public_assets(self):
+        build(ROOT, self.output)
+        html = (self.output / "index.html").read_text(encoding="utf-8")
+        version = re.search(r"app\.js\?v=([a-f0-9]{16})", html).group(1)
+        app = (self.output / "static/app.js").read_text(encoding="utf-8")
+        self.assertIn(f"./bookmarks.js?v={version}", app)
+        self.assertEqual((self.output / "static/bookmarks.js").read_bytes(), (ROOT / "static/bookmarks.js").read_bytes())
+        # Even a bookmark-only update must change the entry point's cache version.
+        for relative in PUBLIC_FILES:
+            (self.root / relative).write_bytes((ROOT / relative).read_bytes())
+        (self.root / "static/bookmarks.js").write_text("// changed bookmark module\n", encoding="utf-8")
+        build(self.root, self.output)
+        changed_html = (self.output / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn(f"app.js?v={version}", changed_html)
 
     def test_missing_bundled_questions_fail_explicitly_without_publishing_empty_pack(self):
         (self.root / PUBLIC_QUESTION_PACK).unlink()

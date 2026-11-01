@@ -17,10 +17,10 @@ PUBLIC_PRACTICE_ASSETS = tuple(f"question-packs/practice-assets/{name}" for name
 ))
 PUBLIC_FILES = (
     "static/index.html", "static/app.js", "static/quiz.js",
-    "static/pages.js", "static/style.css", *PUBLIC_PLACE_MODULES, *PUBLIC_QUESTION_PACKS, PUBLIC_PLACE_PACK, *PUBLIC_PRACTICE_ASSETS,
+    "static/pages.js", "static/bookmarks.js", "static/style.css", *PUBLIC_PLACE_MODULES, *PUBLIC_QUESTION_PACKS, PUBLIC_PLACE_PACK, *PUBLIC_PRACTICE_ASSETS,
 )
 MARKER = ".wine-pages-artifact"
-SOURCE_ASSET_VERSION = "home-practice-20261101"
+SOURCE_ASSET_VERSION = "bookmarks-20261101"
 
 
 def build(source_root: Path = ROOT, output: Path | None = None) -> Path:
