@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { parsePlaceData, placeCards, descendantIds, loadPlaceData, PlaceSession } from '../static/places.js';
+import { parsePlaceData, placeCards, placeLessons, descendantIds, loadPlaceData, PlaceSession } from '../static/places.js';
 
 const raw = JSON.parse(readFileSync(new URL('../question-packs/place-relations.json', import.meta.url), 'utf8'));
 const parse = data => parsePlaceData(JSON.stringify(data));
@@ -33,6 +33,27 @@ test('multiple vineyards per village and a single shared vineyard with two corre
   const reverse = cards.find(card => card.subject_id === 'bonnes-mares');
   assert.deepEqual(reverse.answer_ids, ['chambolle-musigny', 'morey-saint-denis']);
   assert.match(reverse.prompt, /2村/); assert.notEqual(reverse.id, forward.id);
+});
+
+test('readable lessons group every vineyard under the correct village and retain stable notebook identity', () => {
+  const lessons = placeLessons(model, scope);
+  assert.equal(lessons.length, 5);
+  assert.deepEqual(lessons.find(lesson => lesson.village.id === 'morey-saint-denis').vineyards.map(place => place.id), ['clos-de-tart', 'clos-de-la-roche', 'bonnes-mares']);
+  assert.ok(lessons.every(lesson => lesson.id.startsWith('notebook:') && lesson.districts[0].id === 'cote-de-nuits'));
+  const renamed = structuredClone(raw); renamed.places.find(place => place.id === 'chambertin').label_ja = '合成テスト用の表示名';
+  assert.deepEqual(placeLessons(parse(renamed), scope).map(lesson => [lesson.id, lesson.signature]), lessons.map(lesson => [lesson.id, lesson.signature]));
+  const changed = structuredClone(raw); changed.relations = changed.relations.filter(edge => edge.id !== 'morey-saint-denis--bonnes-mares');
+  const changedLessons = placeLessons(parse(changed), scope);
+  assert.notEqual(changedLessons.find(lesson => lesson.village.id === 'chambolle-musigny').signature,
+    lessons.find(lesson => lesson.village.id === 'chambolle-musigny').signature);
+  const moved = structuredClone(raw);
+  moved.places.push({ ...moved.places.find(place => place.id === 'cote-de-nuits'), id: 'synthetic-subdistrict' });
+  const parentEdge = moved.relations.find(edge => edge.child_id === 'gevrey-chambertin');
+  moved.relations.push({ ...parentEdge, id: 'synthetic-subdistrict-parent', child_id: 'synthetic-subdistrict' });
+  parentEdge.parent_id = 'synthetic-subdistrict';
+  const movedLessons = placeLessons(parse(moved), scope);
+  assert.notEqual(movedLessons[0].signature, lessons[0].signature);
+  assert.equal(movedLessons[1].signature, lessons[1].signature);
 });
 
 test('stable identity and signature survive renamed/reordered places; answer changes invalidate only related cards', () => {
