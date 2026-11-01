@@ -7,8 +7,8 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23702d3c'/%3E%3Cpath d='M10 6h12l-1 10c-.3 4-2.5 6-5 6s-4.7-2-5-6L10 6Zm6 16v5m-5 0h10' fill='none' stroke='%23fffaf3' stroke-width='1.3'/%3E%3C/svg%3E">
   <meta name="description" content="問題集から、ひとつずつ。すべての問題や国別の出題で学ぶワイン検定の練習アプリ。">
   <title>ワインの手帖 — ワイン検定の練習</title>
-  <link rel="stylesheet" href="./static/style.css?v=home-practice-20261101">
-  <script type="module" src="./static/app.js?v=home-practice-20261101"></script>
+  <link rel="stylesheet" href="./static/style.css?v=bookmarks-20261101">
+  <script type="module" src="./static/app.js?v=bookmarks-20261101"></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">本文へ移動</a>
@@ -46,6 +46,23 @@
             <label><input id="scope-country" type="radio" name="practice-scope" value="country"> 国別</label>
             <label class="visually-hidden" for="practice-country">練習する国</label><select id="practice-country" disabled aria-describedby="scope-count"><option value="">国を選んでください</option></select>
           </fieldset>
+          <div class="bookmark-settings">
+            <label class="bookmark-filter"><input id="bookmarks-only" type="checkbox" aria-describedby="bookmark-count"> しおりが付いた問題だけ出題する</label>
+            <p id="bookmark-count" class="field-help" role="status"></p>
+            <details class="bookmark-management">
+              <summary>しおりの管理</summary>
+              <p class="field-help">しおりは回答後に付けたり外したりできます。このブラウザ・このサイトに保存され、別端末・別ブラウザとは同期されません。</p>
+              <p id="bookmark-clear-help" class="field-help">削除すると、選択中の問題集や国にかかわらず、すべての問題集のしおりが消えます。教材の見直し記録は残ります。</p>
+              <button id="clear-bookmarks" type="button" class="button button-secondary" aria-describedby="bookmark-clear-help">しおりをすべて削除</button>
+              <div id="bookmark-clear-confirm" class="bookmark-confirm" role="group" aria-label="すべてのしおりの削除確認" hidden>
+                <p>すべての問題集のしおりを削除しますか？ この操作は取り消せません。</p>
+                <button id="cancel-clear-bookmarks" type="button" class="button button-secondary">キャンセル</button>
+                <button id="confirm-clear-bookmarks" type="button" class="button button-primary">すべてのしおりを削除する</button>
+              </div>
+              <p id="bookmark-action-status" class="field-help" role="status"></p>
+            </details>
+            <p id="bookmark-storage-warning" class="field-error" role="status" hidden></p>
+          </div>
           <p id="scope-count" class="scope-count" role="status">問題集を読み込んでいます。</p>
           <h2 id="count-heading"><span class="step-number">03</span> 出題数</h2>
           <div class="count-options">
