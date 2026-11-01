@@ -7,8 +7,8 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23702d3c'/%3E%3Cpath d='M10 6h12l-1 10c-.3 4-2.5 6-5 6s-4.7-2-5-6L10 6Zm6 16v5m-5 0h10' fill='none' stroke='%23fffaf3' stroke-width='1.3'/%3E%3C/svg%3E">
   <meta name="description" content="問題集から、ひとつずつ。すべての問題や国別の出題で学ぶワイン検定の練習アプリ。">
   <title>ワインの手帖 — ワイン検定の練習</title>
-  <link rel="stylesheet" href="./static/style.css?v=italy-text-20261101">
-  <script type="module" src="./static/app.js?v=italy-text-20261101"></script>
+  <link rel="stylesheet" href="./static/style.css?v=place-text-20261101">
+  <script type="module" src="./static/app.js?v=place-text-20261101"></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">本文へ移動</a>
@@ -27,6 +27,11 @@
           <h1 id="setup-heading" tabindex="-1">今日の練習を、選ぶ。</h1>
           <p class="page-description">問題集と範囲、出題数を選んで始めましょう。</p>
         </div>
+        <section class="setup-card place-entry" aria-labelledby="place-entry-heading">
+          <div><p class="eyebrow">名前を、つながりで覚える。</p><h2 id="place-entry-heading">地名マスター</h2>
+          <p>ブルゴーニュの地域・村・畑をたどり、双方向の暗記と復習で身につけましょう。</p></div>
+          <button id="open-place-master" type="button" class="button button-secondary">地名マスターを開く →</button>
+        </section>
         <section id="pages-import" class="setup-card pages-import" aria-labelledby="pages-import-heading">
           <h2 id="pages-import-heading"><span class="step-number">01</span> 問題集</h2>
           <fieldset class="pack-options" aria-describedby="pack-help"><legend class="visually-hidden">組み込み問題集を選択</legend>
@@ -75,6 +80,20 @@
       <section id="view-practice" aria-label="練習" hidden>
         <div class="practice-toolbar"><button id="back-to-setup" type="button" class="button button-secondary">← 設定に戻る</button><p id="active-scope"></p></div>
         <div id="quiz-root" class="quiz-root" aria-live="polite"></div>
+      </section>
+      <section id="view-place-master" aria-labelledby="place-heading" hidden>
+        <div class="practice-toolbar"><button id="place-home" type="button" class="button button-secondary">← ホームへ</button></div>
+        <div class="page-heading"><p class="eyebrow">名前を、つながりで覚える。</p>
+          <h1 id="place-heading" tabindex="-1">地名マスター</h1>
+          <p class="page-description">地域から村へ、村から畑へ。思い出す練習を、少しずつ。</p></div>
+        <div id="place-stats" aria-label="選択中の範囲・方向の学習状況" aria-live="polite"></div>
+        <details class="place-stats-help"><summary>学習状況の数え方</summary>
+          <p>村→畑・畑→村は別のカードです。学習済みは自己評価済み、覚えたは最後の評価が「覚えた」の数です。復習が必要には未習得・期限到来・当日再確認待ち、今日の復習には期限超過を含む本日までの期限と当日再確認待ちを数えます。数値は重なります。</p></details>
+        <p id="place-storage-warning" class="field-error" role="status" hidden></p>
+        <div id="place-content"></div>
+        <div class="place-history"><p class="field-help">履歴はこのブラウザ・このサイトに保存されます。ブラウザデータの削除で失われ、別端末・別ブラウザ・別のURLのサーバー版／Pages版とは同期されません。</p>
+          <button id="place-reset" type="button" class="button button-secondary" hidden>履歴をリセット</button>
+          <div id="place-reset-confirm" role="group" aria-label="学習履歴のリセット確認" hidden></div></div>
       </section>
       <footer class="page-footer">答えて、理由を知る。自分のペースで、何度でも。</footer>
     </main>

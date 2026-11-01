@@ -101,7 +101,7 @@ class HttpTests(unittest.TestCase):
                     self.assertEqual(self.client.get(route).status_code, 404)
 
     def test_bundled_packs_reject_missing_files_and_leaf_or_parent_symlinks(self):
-        for filename in ("wine-quiz-highlighted.json", "wine-quiz-practice-20261031.json"):
+        for filename in ("wine-quiz-highlighted.json", "wine-quiz-practice-20261031.json", "place-relations.json"):
             with self.subTest(filename=filename):
                 root = Path(self.temp.name) / filename
                 pack_dir = root / "question-packs"
@@ -121,6 +121,16 @@ class HttpTests(unittest.TestCase):
                     (outside_dir / filename).write_bytes(outside.read_bytes())
                     pack_dir.symlink_to(outside_dir, target_is_directory=True)
                     self.assertEqual(self.client.get(route).status_code, 404)
+
+    def test_place_data_is_bundled_without_external_services_or_review_files(self):
+        with patch("app.main.DriveClient", side_effect=AssertionError("Drive must not run")), patch(
+            "app.luna.LunaClient", side_effect=AssertionError("Luna must not run")
+        ):
+            response = self.client.get("/question-packs/place-relations.json?v=test")
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.content, (APP_DIR / "question-packs/place-relations.json").read_bytes())
+            self.assertEqual(len(response.json()["places"]), 15)
+            self.assertEqual(self.client.get("/question-packs/place-relations-validation.md").status_code, 404)
 
     def test_practice_crops_serve_exact_bundled_bytes_without_external_services(self):
         from scripts.build_pages import PUBLIC_PRACTICE_ASSETS
