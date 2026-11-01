@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { placeBrowser } from './helpers/place-browser.mjs';
 
 const raw = readFileSync(new URL('../question-packs/place-relations.json', import.meta.url), 'utf8');
+const assetVersion = readFileSync(new URL('../static/index.html', import.meta.url), 'utf8').match(/app\.js\?v=([^"']+)/)[1];
 
 test('ordinary quizzes load independently; place mode uses versioned subpath URL and returns home', async () => {
   const app = await placeBrowser();
@@ -12,7 +13,8 @@ test('ordinary quizzes load independently; place mode uses versioned subpath URL
   await app.$('#open-place-master').click();
   assert.equal(app.$('#view-setup').hidden, true); assert.equal(app.$('#view-place-master').hidden, false);
   assert.equal(app.requests.at(-1).pathname, '/wine-quiz-master/question-packs/place-relations.json');
-  assert.equal(app.requests.at(-1).searchParams.get('v'), 'place-master-20261101');
+  assert.equal(app.requests[0].searchParams.get('v'), assetVersion);
+  assert.equal(app.requests.at(-1).searchParams.get('v'), assetVersion);
   assert.equal(app.$('#place-stat-learned').textContent, '0 件');
   assert.ok(app.$('#place-count').options.find(option => option.value === '20').disabled);
   await app.$('#place-home').click(); assert.equal(app.$('#view-setup').hidden, false);

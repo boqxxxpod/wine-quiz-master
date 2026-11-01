@@ -141,6 +141,8 @@ class HttpTests(unittest.TestCase):
                 self.assertEqual(response.content, (APP_DIR / relative).read_bytes())
                 self.assertEqual(response.headers["content-type"], "image/png" if relative.endswith(".png") else "image/jpeg")
             for route in ("/question-packs/practice-assets/", "/question-packs/practice-assets/private.jpg",
+                          "/question-packs/practice-assets/it-023.jpg", "/question-packs/practice-assets/it-024.jpg",
+                          "/question-packs/practice-assets/it-025.jpg", "/question-packs/practice-assets/it-026.jpg",
                           "/question-packs/practice-source-review.json", "/question-packs/practice-assets/%2e%2e%2fprivate.jpg"):
                 self.assertEqual(self.client.get(route).status_code, 404)
 

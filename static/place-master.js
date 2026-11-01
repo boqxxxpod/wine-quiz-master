@@ -1,5 +1,5 @@
-import { loadPlaceData, placeCards, PlaceSession, PLACE_COUNTS, safePlaceUrl } from './places.js?v=place-master-20261101';
-import { PlaceReviewStore, localDay, reviewStats, selectPlaceCards, retryCards } from './place-review.js?v=place-master-20261101';
+import { loadPlaceData, placeCards, PlaceSession, PLACE_COUNTS, safePlaceUrl } from './places.js?v=place-text-20261101';
+import { PlaceReviewStore, localDay, reviewStats, selectPlaceCards, retryCards } from './place-review.js?v=place-text-20261101';
 
 const kindLabels = { country: '国', region: '地方', district: '地区', village: '村', vineyard: '特級畑' };
 
