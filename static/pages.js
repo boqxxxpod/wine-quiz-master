@@ -1,19 +1,19 @@
-import { isNativeQuestion, isPilotQuestion, normalizeQuestion, validQuestion } from './quiz.js?v=place-notebook-20261101';
+import { isNativeQuestion, isPilotQuestion, normalizeQuestion, validQuestion } from './quiz.js?v=home-practice-20261101';
 
 export const MAX_PACK_BYTES = 2_000_000;
 export const MAX_PACK_QUESTIONS = 2000;
-export const DEFAULT_PACK_FILENAME = 'wine-quiz-highlighted.json';
-export const DEFAULT_PACK_PATH = '../question-packs/wine-quiz-highlighted.json';
-export const DEFAULT_PACK_ID = 'textbook';
+export const DEFAULT_PACK_FILENAME = 'wine-quiz-practice-20261031.json';
+export const DEFAULT_PACK_PATH = '../question-packs/wine-quiz-practice-20261031.json';
+export const DEFAULT_PACK_ID = 'practice';
 export const BUNDLED_PACKS = Object.freeze([
-  Object.freeze({ id: 'practice', label: '練習問題', filename: 'wine-quiz-practice-20261031.json', path: '../question-packs/wine-quiz-practice-20261031.json' }),
-  Object.freeze({ id: DEFAULT_PACK_ID, label: '教科書問題', filename: DEFAULT_PACK_FILENAME, path: DEFAULT_PACK_PATH }),
+  Object.freeze({ id: DEFAULT_PACK_ID, label: '練習問題', filename: DEFAULT_PACK_FILENAME, path: DEFAULT_PACK_PATH }),
+  Object.freeze({ id: 'textbook', label: '教科書問題', filename: 'wine-quiz-highlighted.json', path: '../question-packs/wine-quiz-highlighted.json' }),
 ]);
 
 /** Validate the entire file before exposing any questions to a running session. */
 export function parseQuestionPack(text) {
   if (typeof text !== 'string' || new TextEncoder().encode(text).length > MAX_PACK_BYTES) {
-    throw new Error('問題集は 2 MB 以下の JSON ファイルを選んでください。');
+    throw new Error('問題集のデータは 2 MB 以下にしてください。');
   }
   let pack;
   try { pack = JSON.parse(text); }
@@ -83,7 +83,7 @@ export async function loadBundledQuestionPack(packId, fetcher = globalThis.fetch
   }
 }
 
-/** Keep the original default loader available to integrations and manual reset. */
+/** Resolve the initial bundled bank from the same registry as explicit selections. */
 export async function loadDefaultQuestionPack(fetcher = globalThis.fetch) {
   return loadBundledQuestionPack(DEFAULT_PACK_ID, fetcher);
 }

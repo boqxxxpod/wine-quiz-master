@@ -1,16 +1,15 @@
-import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS, practiceAssetUrl, validMatchingAnswer } from './quiz.js?v=place-notebook-20261101';
-import { parseQuestionPack, loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID, MAX_PACK_BYTES } from './pages.js?v=place-notebook-20261101';
-import { initPlaceMaster } from './place-master.js?v=place-notebook-20261101';
+import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS, practiceAssetUrl, validMatchingAnswer } from './quiz.js?v=home-practice-20261101';
+import { loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID } from './pages.js?v=home-practice-20261101';
+import { initPlaceMaster } from './place-master.js?v=home-practice-20261101';
 
 const $ = selector => document.querySelector(selector);
-const state = { session: null, loadError: '', practiceQuestions: [], packMetadata: null, customPack: false, practiceLoading: false, importing: false, bundledPackId: DEFAULT_PACK_ID, packLabel: '' };
+const state = { session: null, loadError: '', practiceQuestions: [], packMetadata: null, practiceLoading: false, bundledPackId: DEFAULT_PACK_ID, packLabel: '' };
 
 function syncPackSelection() {
   for (const pack of BUNDLED_PACKS) {
-    $(`#pack-${pack.id}`).checked = !state.customPack && state.bundledPackId === pack.id;
+    $(`#pack-${pack.id}`).checked = state.bundledPackId === pack.id;
   }
   const pack = BUNDLED_PACKS.find(item => item.id === state.bundledPackId);
-  $('#clear-pack').textContent = `${pack.label}に戻す`;
   $('#retry-pack').textContent = `${pack.label}を再読み込み`;
 }
 
@@ -68,7 +67,7 @@ function renderScope(rebuildCountries = false) {
   const total = country === '' ? 0 : questionsForCountry(state.practiceQuestions, country).length;
   const count = selectedCount();
   const invalidCount = count !== null && (!PRACTICE_COUNTS.includes(count) || count > total);
-  const loading = state.practiceLoading || state.importing;
+  const loading = state.practiceLoading;
   for (const pack of BUNDLED_PACKS) $(`#pack-${pack.id}`).disabled = loading;
   select.disabled = !$('#scope-country').checked || loading;
   for (const id of ['scope-all', 'scope-country']) $(`#${id}`).disabled = loading;
@@ -117,11 +116,10 @@ function startPractice() {
   focusQuestion();
 }
 
-function useQuestionPack(pack, fileName, custom = false) {
+function useQuestionPack(pack, fileName) {
   state.practiceQuestions = pack.questions;
   state.packMetadata = pack.metadata ?? null;
-  state.customPack = custom;
-  state.packLabel = custom ? fileName : BUNDLED_PACKS.find(item => item.id === state.bundledPackId).label;
+  state.packLabel = BUNDLED_PACKS.find(item => item.id === state.bundledPackId).label;
   state.loadError = '';
   state.practiceLoading = false;
   state.session = null;
@@ -129,12 +127,11 @@ function useQuestionPack(pack, fileName, custom = false) {
   $('#scope-country').checked = false;
   $('#question-count').value = 'all';
   syncPackSelection();
-  $('#pages-import-status').textContent = `出題元：${custom ? fileName : `${state.packLabel}（${fileName}）`} · ${pack.questions.length} 問${custom ? '（このタブのみ）' : '（組み込み問題集）'}`;
+  $('#pages-import-status').textContent = `出題元：${state.packLabel}（${fileName}） · ${pack.questions.length} 問（組み込み問題集）`;
   const qa = state.packMetadata?.qa_status;
   $('#pack-review-status').textContent = typeof qa === 'string' ? `問題集の検証記録：${qa}` : '';
   $('#pack-review-status').hidden = typeof qa !== 'string' || !qa.trim();
   $('#pages-import-error').hidden = true;
-  $('#clear-pack').disabled = !custom;
   $('#quiz-root').replaceChildren();
   $('#active-scope').textContent = '';
   renderScope(true);
@@ -142,7 +139,7 @@ function useQuestionPack(pack, fileName, custom = false) {
 }
 
 async function loadBundledPack(packId = state.bundledPackId) {
-  if (state.practiceLoading || state.importing) { syncPackSelection(); return; }
+  if (state.practiceLoading) { syncPackSelection(); return; }
   const pack = BUNDLED_PACKS.find(item => item.id === packId);
   if (!pack) { syncPackSelection(); return; }
   state.bundledPackId = pack.id;
@@ -152,11 +149,8 @@ async function loadBundledPack(packId = state.bundledPackId) {
   state.practiceQuestions = [];
   state.packMetadata = null;
   state.session = null;
-  state.customPack = false;
   state.packLabel = pack.label;
   syncPackSelection();
-  $('#question-pack').disabled = true;
-  $('#clear-pack').disabled = true;
   $('#pages-import-error').hidden = true;
   $('#pages-import-status').textContent = `${pack.label}（${pack.filename}）を読み込んでいます。`;
   $('#pack-review-status').hidden = true;
@@ -173,7 +167,6 @@ async function loadBundledPack(packId = state.bundledPackId) {
     $('#pages-import-error').hidden = false;
   } finally {
     state.practiceLoading = false;
-    $('#question-pack').disabled = false;
     $('#retry-pack').hidden = !state.loadError;
     $('#retry-pack').disabled = false;
     renderScope();
@@ -421,41 +414,10 @@ function renderPractice() {
   $('#quiz-root').replaceChildren(card);
 }
 
-async function importQuestionPack() {
-  const input = $('#question-pack');
-  const file = input.files?.[0];
-  if (!file || state.practiceLoading || state.importing) return;
-  state.importing = true;
-  $('#retry-pack').disabled = true;
-  input.disabled = true;
-  $('#clear-pack').disabled = true;
-  $('#pages-import-error').hidden = true;
-  renderScope();
-  try {
-    if (file.size > MAX_PACK_BYTES) throw new Error('問題集は 2 MB 以下の JSON ファイルを選んでください。');
-    const pack = parseQuestionPack(await file.text());
-    // Only a fully valid file replaces the source, settings, and current session.
-    useQuestionPack(pack, file.name, true);
-    $('#retry-pack').hidden = true;
-  } catch (error) {
-    $('#pages-import-error').textContent = `${file.name} を読み込めませんでした。${error.message}\n現在の出題元・設定・回答状況を保持しています。`;
-    $('#pages-import-error').hidden = false;
-  } finally {
-    state.importing = false;
-    $('#retry-pack').disabled = false;
-    input.value = '';
-    input.disabled = false;
-    $('#clear-pack').disabled = !state.customPack;
-    renderScope();
-  }
-}
-
 const placeMaster = initPlaceMaster({ onHome: () => showSetup() });
 $('#open-place-master').addEventListener('click', () => placeMaster.open());
 $('#back-to-setup').addEventListener('click', showSetup);
 $('.brand').addEventListener('click', event => { event.preventDefault(); showSetup(); });
-$('#question-pack').addEventListener('change', importQuestionPack);
-$('#clear-pack').addEventListener('click', () => loadBundledPack());
 $('#retry-pack').addEventListener('click', () => loadBundledPack());
 for (const pack of BUNDLED_PACKS) {
   $(`#pack-${pack.id}`).addEventListener('change', event => {

@@ -51,11 +51,6 @@ h1 { font:600 29px/1.6 var(--serif); letter-spacing:.04em; }
 .step-number { color:var(--wine); font:20px Georgia,serif; margin-right:9px; }
 .pages-import-status { margin-top:12px; overflow-wrap:anywhere; }
 .pack-review-status { margin-top:5px; color:var(--muted); font-size:12px; overflow-wrap:anywhere; }
-.pages-import-controls { display:flex; gap:14px; align-items:flex-end; flex-wrap:wrap; margin-top:18px; }
-.field { flex:1; min-width:min(100%,240px); }
-.field label { display:block; font-size:12px; margin-bottom:6px; }
-.field input { width:100%; padding:7px; border:1px solid var(--line); border-radius:5px; min-height:44px; color:var(--ink); background:var(--white); font-size:12px; }
-input::file-selector-button { background:#eee6d7; color:#5a4433; border:0; padding:6px 9px; border-radius:3px; margin-right:7px; cursor:pointer; }
 .field-help { color:var(--muted); font-size:12px; line-height:1.8; margin-top:10px; }
 .pages-import-error,.field-error { color:#8c243c; font-size:13px; white-space:pre-wrap; overflow-wrap:anywhere; margin-top:10px; }
 #retry-pack { margin-top:12px; }
@@ -142,8 +137,6 @@ input:disabled,select:disabled { background:#f1ede5; color:var(--muted); }
   h1 { font-size:25px; }
   .page-description { font-size:13px; }
   .setup-card { padding:18px; }
-  .pages-import-controls { align-items:stretch; gap:10px; }
-  .pages-import-controls .button { font-size:12px; }
   .scope-options,.count-options { gap:10px 16px; }
   .practice-toolbar { margin-bottom:10px; }
   .practice-toolbar .button { font-size:12px; padding:9px 11px; }
