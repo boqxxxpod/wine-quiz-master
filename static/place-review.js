@@ -88,9 +88,9 @@ function validEntry(entry) {
 }
 
 export class PlaceReviewStore {
-  constructor(model, cards, storageProvider = () => globalThis.localStorage) {
+  constructor(model, cards, storageProvider = () => globalThis.localStorage, keyPrefix = PLACE_STORAGE_PREFIX) {
     this.model = model; this.cards = cards; this.entries = Object.create(null); this.warning = ''; this.blocked = false;
-    this.key = `${PLACE_STORAGE_PREFIX}${model.dataset_id}`;
+    this.key = `${keyPrefix}${model.dataset_id}`;
     try { this.storage = storageProvider(); if (!this.storage) throw new Error(); }
     catch { this.warning = '履歴を保存できません。この回の学習のみ有効です。ブラウザの保存設定を確認してください。'; }
     this.load();

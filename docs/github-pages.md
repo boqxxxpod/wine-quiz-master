@@ -88,8 +88,8 @@ python scripts/build_pages.py
 
 ## 地名マスターの配信
 
-ホームから独立した地名モードへ進めます。Pagesとサーバーで共通の `places.js`（データ検証・カード）、`place-review.js`（間隔反復・localStorage）、`place-master.js`（画面）を使い、`question-packs/place-relations.json` を追加で同梱します。地名JSONは既存の二つのクイズ問題集へ混ぜず、利用時のAPI・Drive・AI呼び出しはありません。
+ホームの「地名の教材を読む」から、見取り図・村ごとの本文・似た地名の比較を読めます。名前の目隠しと、村ごとの見直し記録を同じ教材に組み込み、問題の設定・出題・正解表示を経由しません。
 
-`PUBLIC_PLACE_PACK`・`PUBLIC_PLACE_MODULES` で公開ファイルを限定し、追加ファイルも公開内容のダイジェストに含めます。全公開JavaScriptの版付きimportを書き換え、place-master → places/place-review → 地名JSONにも同じ版を伝えます。配置場所をモジュールURLから解決するので、`/wine-quiz-master/` 配下でも動作します。新JSONだけの変更でも公開版が変わります。FastAPIの許可リストにも地名JSONだけを追加し、ディレクトリ全体や照合Markdownを公開しません。
+Pagesとサーバーは `place-master.js`（教材画面）、`places.js`（地名データ・村ごとのまとまり）、`place-review.js`（暦日計算・保存）と `question-packs/place-relations.json` を共用します。データは既存のクイズ二件へ混ぜず、学習時のAPI・Drive・AI呼び出しは不要です。公開許可リスト、内容由来の版番号、全JavaScriptの版付きimport、モジュールURL起点のJSON取得を維持し、`/wine-quiz-master/` 配下でも動作します。
 
-初期収録は5村・7特級畑、混合12カードの部分収録です。操作・復習規則・自己評価・データ更新の扱いは [README](../README.md#地名マスター) を参照してください。地名履歴は版付きのlocalStorageへ自己評価のたびに保存し、再読み込み後も復習予定を保持します。通常クイズのタブ内セッションとは保存方法が異なります。履歴のブラウザ／オリジン間同期はなく、ブラウザデータの削除で失われます。保存不可・不正な保存版は画面で通知し、専用履歴を確認付きでリセットできます。
+教材の見直し記録は `wineQuizMaster.placeNotebook.v1:bourgogne-places` に保存し、以前の暗記カード履歴は読み書きせず保持します。記録はブラウザ・オリジン単位で同期せず、保存不可でも教材は読めます。初期収録は5村・7特級畑の部分収録で、詳細は [README](../README.md#地名マスター) を参照してください。

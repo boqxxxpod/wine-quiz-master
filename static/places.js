@@ -124,6 +124,30 @@ export function placeCards(model, scopeId, direction = 'mixed') {
   return cards.sort((a, b) => a.id.localeCompare(b.id));
 }
 
+/** One readable lesson per village, with all verified vineyard relationships. */
+export function placeLessons(model, scopeId) {
+  const cards = placeCards(model, scopeId, 'village_to_vineyard');
+  const byVillage = new Map(cards.map(card => [card.subject_id, card]));
+  return [...model.places.values()].filter(place => byVillage.has(place.id)).map(village => {
+    const card = byVillage.get(village.id);
+    const vineyards = model.relations.filter(edge => edge.parent_id === village.id && card.answer_ids.includes(edge.child_id))
+      .map(edge => model.places.get(edge.child_id));
+    const memberships = vineyards.map(place => [place.id, model.parents.get(place.id).map(edge => edge.parent_id).sort()]);
+    const ancestry = new Map();
+    const collectParents = id => {
+      for (const edge of model.parents.get(id)) {
+        if (ancestry.has(edge.id)) continue;
+        ancestry.set(edge.id, [edge.id, edge.parent_id, edge.child_id, edge.relation_type]); collectParents(edge.parent_id);
+      }
+    };
+    collectParents(village.id);
+    return { id: `notebook:${scopeId}:${village.id}`, signature: JSON.stringify([card.signature, memberships.sort((a, b) => a[0].localeCompare(b[0])),
+      [...ancestry.values()].sort((a, b) => a[0].localeCompare(b[0]))]),
+      village, vineyards, source_ids: card.source_ids, knowledge_ids: card.knowledge_ids,
+      districts: model.parents.get(village.id).map(edge => model.places.get(edge.parent_id)) };
+  });
+}
+
 export async function loadPlaceData(fetcher = globalThis.fetch) {
   const url = new URL('../question-packs/place-relations.json', import.meta.url);
   const version = new URL(import.meta.url).searchParams.get('v');
