@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
-import { parseQuestionPack, DEFAULT_PACK_FILENAME, DEFAULT_PACK_PATH, MAX_PACK_BYTES } from '../static/pages.js';
+import { parseQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID, DEFAULT_PACK_FILENAME, DEFAULT_PACK_PATH, MAX_PACK_BYTES } from '../static/pages.js';
 import { countryCounts, questionsForCountry, PRACTICE_COUNTS } from '../static/quiz.js';
 
 const expectedCounts = new Map([
@@ -26,11 +26,21 @@ function sortedKeys(value) {
   return value;
 }
 const countsObject = rows => Object.fromEntries(countryCounts(rows));
+const textbookPack = BUNDLED_PACKS.find(pack => pack.id === 'textbook');
 
 try {
-  assert.equal(DEFAULT_PACK_FILENAME, 'wine-quiz-highlighted.json');
+  assert.equal(DEFAULT_PACK_ID, 'practice');
+  assert.equal(DEFAULT_PACK_FILENAME, 'wine-quiz-practice-20261031.json');
+  assert.equal(DEFAULT_PACK_PATH, '../question-packs/wine-quiz-practice-20261031.json');
+  const initialPack = BUNDLED_PACKS.find(pack => pack.id === DEFAULT_PACK_ID);
+  assert.equal(initialPack.filename, DEFAULT_PACK_FILENAME);
+  assert.equal(initialPack.path, DEFAULT_PACK_PATH);
+  const initial = parseQuestionPack(await readFile(new URL(DEFAULT_PACK_PATH, new URL('../static/pages.js', import.meta.url)), 'utf8'));
+  assert.equal(initial.questions.length, 226);
+  assert.equal(countryCounts(initial.questions).size, 13);
+  assert.equal(textbookPack.filename, 'wine-quiz-highlighted.json');
   assert.deepEqual(PRACTICE_COUNTS, [5, 10, 20, 30, 50, 70, 100]);
-  const path = new URL(DEFAULT_PACK_PATH, new URL('../static/pages.js', import.meta.url));
+  const path = new URL(textbookPack.path, new URL('../static/pages.js', import.meta.url));
   const text = await readFile(path, 'utf8');
   assert.ok(Buffer.byteLength(text) <= MAX_PACK_BYTES, '統合問題集が2MBを超えています。');
   const original = JSON.parse(text);
@@ -240,8 +250,8 @@ try {
   assert.doesNotMatch(text, /https?:\/\/|drive\.google\.com|IMG\d+|"surrounding_text"|"source_knowledge"|"sources"/);
   assert.doesNotMatch(JSON.stringify(ledger), /https?:\/\/|drive\.google\.com|IMG\d+|"surrounding_text"|"source_knowledge"|"sources"/);
   assert.doesNotMatch(JSON.stringify(review), /drive\.google\.com|IMG\d+|"surrounding_text"|"source_knowledge"/);
-  console.log(DEFAULT_PACK_FILENAME + ': 662問・既存653問保持・9問追加・63項目中15項目補完／48項目保留・14バッチ一致・2MB以内を確認しました。');
+  console.log('既定の練習問題226問・13か国、' + textbookPack.filename + ': 662問・既存653問保持・9問追加・63項目中15項目補完／48項目保留・14バッチ一致・2MB以内を確認しました。');
 } catch (error) {
-  console.error(DEFAULT_PACK_FILENAME + ' の検証に失敗しました: ' + error.message);
+  console.error('組み込み問題集の検証に失敗しました: ' + error.message);
   process.exitCode = 1;
 }

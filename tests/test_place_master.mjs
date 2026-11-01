@@ -10,6 +10,8 @@ const legacyKey = 'wineQuizMaster.placeMaster.v1:bourgogne-places';
 
 test('opening the material shows all five lessons and overview immediately without a question flow', async () => {
   const app = await placeBrowser(); assert.equal(app.requests.length, 1);
+  assert.equal(app.requests[0].pathname, '/wine-quiz-master/question-packs/wine-quiz-practice-20261031.json');
+  assert.equal(app.$('#pack-practice').checked, true);
   await app.$('#open-place-master').click();
   assert.equal(app.$('#view-setup').hidden, true); assert.equal(app.$('#view-place-master').hidden, false);
   assert.equal(app.requests.at(-1).pathname, '/wine-quiz-master/question-packs/place-relations.json');
@@ -23,6 +25,18 @@ test('opening the material shows all five lessons and overview immediately witho
   assert.equal(app.storage.size, 0); // Reading never records an assessment automatically.
   await app.$('#place-home').click(); await app.$('#start-practice').click();
   assert.equal(app.$('#view-practice').hidden, false); assert.equal(app.$('#view-place-master').hidden, true);
+});
+
+test('returning from the material preserves an explicitly selected textbook and its practice settings', async () => {
+  const app = await placeBrowser();
+  app.$('#pack-textbook').checked = true; await app.$('#pack-textbook').dispatch('change');
+  await app.choose('#question-count', '5');
+  const before = app.requests.length;
+  await app.$('#open-place-master').click(); await app.$('#place-home').click();
+  assert.equal(app.$('#pack-textbook').checked, true); assert.equal(app.$('#pack-practice').checked, false);
+  assert.equal(app.$('#question-count').value, '5'); assert.match(app.$('#scope-all-count').textContent, /662/);
+  assert.equal(app.requests.length, before + 1); // Only the place dataset was fetched.
+  await app.$('#start-practice').click(); assert.match(app.$('#active-scope').textContent, /教科書問題.*5/);
 });
 
 test('vineyard covers hide the actual names and one reveal updates all references consistently', async () => {

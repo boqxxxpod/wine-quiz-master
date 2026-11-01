@@ -139,28 +139,30 @@ const questions = [
   question('france', ['フランス']), question('italy', ['イタリア']),
   question('cross-country', ['フランス', 'イタリア']), question('spain', ['スペイン']),
 ];
-const DEFAULT_PACK_PATH = '/question-packs/wine-quiz-highlighted.json';
-const PRACTICE_PACK_PATH = '/question-packs/wine-quiz-practice-20261031.json';
+const DEFAULT_PACK_PATH = '/question-packs/wine-quiz-practice-20261031.json';
+const PRACTICE_PACK_PATH = DEFAULT_PACK_PATH;
+const TEXTBOOK_PACK_PATH = '/question-packs/wine-quiz-highlighted.json';
 const registeredStandardText = readFileSync(new URL('../question-packs/wine-quiz-highlighted.json', import.meta.url), 'utf8');
 const registeredStandard = JSON.parse(registeredStandardText);
 const registeredPracticeText = readFileSync(new URL(`..${PRACTICE_PACK_PATH}`, import.meta.url), 'utf8');
 const registeredPractice = JSON.parse(registeredPracticeText);
 
 async function startApp(mode, { pack = JSON.stringify(questions), status = 200, networkError = false, defaultFetcher,
-  practicePack = registeredPracticeText, practiceStatus = 200, practiceFetcher } = {}) {
+  practicePack = pack, practiceStatus = status, practiceFetcher = defaultFetcher,
+  textbookPack = registeredStandardText, textbookStatus = 200, textbookFetcher } = {}) {
   const document = documentFromHtml(readFileSync(new URL('../static/index.html', import.meta.url), 'utf8'));
   const requests = [];
   const fetch = async input => {
     const path = new URL(String(input), 'https://app.example/').pathname;
     requests.push(path);
-    if (path === DEFAULT_PACK_PATH) {
-      if (defaultFetcher) return defaultFetcher(requests.length);
-      if (networkError) throw new Error('Synthetic network error');
-      return { ok: status === 200, status, text: async () => pack, json: async () => JSON.parse(pack) };
-    }
     if (path === PRACTICE_PACK_PATH) {
       if (practiceFetcher) return practiceFetcher(requests.filter(item => item === path).length);
+      if (networkError) throw new Error('Synthetic network error');
       return { ok: practiceStatus === 200, status: practiceStatus, text: async () => practicePack };
+    }
+    if (path === TEXTBOOK_PACK_PATH) {
+      if (textbookFetcher) return textbookFetcher(requests.filter(item => item === path).length);
+      return { ok: textbookStatus === 200, status: textbookStatus, text: async () => textbookPack };
     }
     assert.fail(`unexpected network request ${path}`);
   };
@@ -203,11 +205,6 @@ async function chooseCountry(app, country) {
   await app.$('#practice-country').dispatch('change');
 }
 
-async function importPack(app, text, name = 'synthetic-import.json') {
-  app.$('#question-pack').files = [{ name, size: Buffer.byteLength(text), text: async () => text }];
-  await app.$('#question-pack').dispatch('change');
-}
-
 async function chooseCount(app, count) {
   app.$('#question-count').value = String(count);
   await app.$('#question-count').dispatch('change');
@@ -226,7 +223,9 @@ async function answerCorrectly(app) {
 
 for (const mode of ['server', 'pages']) {
   test(`${mode}: switching real banks resets answers, country, counts, and available countries`, async () => {
-    const app = await startApp(mode, { pack: registeredStandardText });
+    const app = await startApp(mode, { practicePack: registeredPracticeText });
+    assert.equal(app.$('#pack-practice').checked, true);
+    await chooseBundledPack(app, 'textbook');
     assert.equal(app.$('#pack-textbook').checked, true);
     await chooseCountry(app, 'フランス');
     await chooseCount(app, 100);
@@ -276,13 +275,12 @@ for (const mode of ['server', 'pages']) {
     assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '662');
     assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '0');
     assert.ok(registeredStandard.questions.some(row => row.question_id === app.$('.quiz-card').dataset.questionId));
-    assert.deepEqual(app.requests, [DEFAULT_PACK_PATH, PRACTICE_PACK_PATH, DEFAULT_PACK_PATH]);
+    assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, TEXTBOOK_PACK_PATH, PRACTICE_PACK_PATH, TEXTBOOK_PACK_PATH]);
   });
 
   test(`${mode}: matching blocks incomplete or repeated choices, grades once and resets on restart`, async () => {
     const row = registeredPractice.questions.find(row => row.question_type === 'matching');
     const app = await startApp(mode, { practicePack: JSON.stringify({ metadata: {}, questions: [row] }) });
-    await chooseBundledPack(app, 'practice');
     await app.$('#start-practice').click();
     const selects = app.document.querySelectorAll('.matching-select');
     assert.equal(app.$('.matching-submit').disabled, true);
@@ -317,8 +315,7 @@ for (const mode of ['server', 'pages']) {
   });
 
   test(`${mode}: all 226 practice questions keep source numbering, explanations, evidence, and scoring`, async () => {
-    const app = await startApp(mode);
-    await chooseBundledPack(app, 'practice');
+    const app = await startApp(mode, { practicePack: registeredPracticeText });
     await app.$('#start-practice').click();
     const seen = new Set();
     for (let index = 0; index < 226; index += 1) {
@@ -374,51 +371,26 @@ for (const mode of ['server', 'pages']) {
     assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '0');
     assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '226');
     assert.match(app.$('#active-scope').textContent, /練習問題.*すべて.*226/);
-    assert.deepEqual(app.requests, [DEFAULT_PACK_PATH, PRACTICE_PACK_PATH]);
+    assert.deepEqual(app.requests, [PRACTICE_PACK_PATH]);
   });
 
-  test(`${mode}: manual imports leave the bank selector empty and restore the last selected bank`, async () => {
-    const app = await startApp(mode);
-    await chooseBundledPack(app, 'practice');
-    await importPack(app, JSON.stringify(questions));
-    assert.equal(app.$('#pack-practice').checked, false);
-    assert.equal(app.$('#pack-textbook').checked, false);
-    assert.equal(app.$('#clear-pack').textContent, '練習問題に戻す');
-    await app.$('#start-practice').click();
-    await answerCorrectly(app);
-    await app.$('#back-to-setup').click();
-    await app.$('#clear-pack').click();
-    assert.equal(app.$('#pack-practice').checked, true);
-    assert.equal(app.$('#question-count').value, 'all');
-    assert.equal(app.$('#quiz-root').children.length, 0);
-    assert.match(app.$('#count-all-label').textContent, /226/);
-    await importPack(app, 'broken JSON');
-    assert.equal(app.$('#pack-practice').checked, true);
-    assert.match(app.$('#pages-import-status').textContent, /練習問題.*226/);
-    assert.deepEqual(app.requests, [DEFAULT_PACK_PATH, PRACTICE_PACK_PATH, PRACTICE_PACK_PATH]);
-  });
-
-  test(`${mode}: a pending practice fetch blocks other selections and discards the previous session`, async () => {
+  test(`${mode}: a pending bank fetch blocks other selections and discards the previous session`, async () => {
     let finish;
-    const app = await startApp(mode, { practiceFetcher: () => new Promise(resolve => { finish = resolve; }) });
-    await app.$('#start-practice').click();
-    await answerCorrectly(app);
-    await app.$('#back-to-setup').click();
-    const selecting = chooseBundledPack(app, 'practice');
+    const app = await startApp(mode, { textbookFetcher: () => new Promise(resolve => { finish = resolve; }) });
+    await app.$('#start-practice').click(); await answerCorrectly(app); await app.$('#back-to-setup').click();
+    const selecting = chooseBundledPack(app, 'textbook');
     assert.equal(app.$('#pack-practice').disabled, true);
     assert.equal(app.$('#pack-textbook').disabled, true);
-    assert.equal(app.$('#question-pack').disabled, true);
     assert.equal(app.$('#start-practice').disabled, true);
     assert.equal(app.$('#quiz-root').children.length, 0);
-    await chooseBundledPack(app, 'textbook');
-    assert.equal(app.$('#pack-practice').checked, true);
-    assert.equal(app.$('#pack-textbook').checked, false);
-    assert.deepEqual(app.requests, [DEFAULT_PACK_PATH, PRACTICE_PACK_PATH]);
-    finish({ ok:true, text:async () => registeredPracticeText });
-    await selecting;
-    assert.equal(app.$('#pack-practice').disabled, false);
+    await chooseBundledPack(app, 'practice');
+    assert.equal(app.$('#pack-practice').checked, false);
+    assert.equal(app.$('#pack-textbook').checked, true);
+    assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, TEXTBOOK_PACK_PATH]);
+    finish({ ok:true, text:async () => registeredStandardText }); await selecting;
+    assert.equal(app.$('#pack-textbook').disabled, false);
     assert.equal(app.$('#start-practice').disabled, false);
-    assert.match(app.$('#pages-import-status').textContent, /練習問題.*226/);
+    assert.match(app.$('#pages-import-status').textContent, /教科書問題.*662/);
   });
 
   for (const [failure, fetcher] of [
@@ -429,58 +401,70 @@ for (const mode of ['server', 'pages']) {
     test(`${mode}: practice ${failure} stops practice and retries the selected bank`, async () => {
       const app = await startApp(mode, { practiceFetcher: call => call === 1 ? fetcher()
         : { ok:true, text:async () => registeredPracticeText } });
-      await chooseBundledPack(app, 'practice');
       assert.equal(app.$('#start-practice').disabled, true);
       assert.equal(app.$('#quiz-root').children.length, 0);
       assert.equal(app.$('#pack-practice').checked, true);
       assert.equal(app.$('#retry-pack').hidden, false);
       assert.match(app.$('#pages-import-error').textContent, /wine-quiz-practice-20261031\.json/);
       assert.equal(app.$('#retry-pack').textContent, '練習問題を再読み込み');
-      assert.deepEqual(app.requests, [DEFAULT_PACK_PATH, PRACTICE_PACK_PATH]);
+      assert.deepEqual(app.requests, [PRACTICE_PACK_PATH]);
       await app.$('#retry-pack').click();
       assert.equal(app.$('#retry-pack').hidden, true);
       assert.equal(app.$('#start-practice').disabled, false);
       assert.match(app.$('#pages-import-status').textContent, /練習問題.*226/);
-      assert.deepEqual(app.requests, [DEFAULT_PACK_PATH, PRACTICE_PACK_PATH, PRACTICE_PACK_PATH]);
+      assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, PRACTICE_PACK_PATH]);
     });
   }
 
-  test(`${mode}: setup loads the standard pack without starting a round or calling APIs`, async () => {
-    const app = await startApp(mode, { pack: registeredStandardText });
-    assert.deepEqual(app.requests, [DEFAULT_PACK_PATH]);
-    assert.equal(app.$('#view-setup').hidden, false);
-    assert.equal(app.$('#view-practice').hidden, true);
-    assert.equal(app.$('.choice'), null);
-    assert.equal(app.$('.main-nav'), null);
-    assert.equal(app.$('#view-sources'), null);
-    assert.equal(app.$('#view-settings'), null);
-    assert.equal(app.$('.study-aside'), null);
-    assert.equal(app.$('#question-count').value, 'all');
+  test(`${mode}: practice is the initial bank and the material entry follows the start button without file controls`, async () => {
+    const app = await startApp(mode, { practicePack: registeredPracticeText });
+    assert.deepEqual(app.requests, [PRACTICE_PACK_PATH]);
+    assert.equal(app.$('#pack-practice').checked, true); assert.equal(app.$('#pack-textbook').checked, false);
+    for (const selector of ['input[type="file"]', '#question-pack', '#clear-pack', '#import-help', '.pages-import-controls']) assert.equal(app.$(selector), null);
+    const setup = app.$('#view-setup');
+    assert.equal(setup.children.filter(child => child.tagName === 'SECTION').at(-1), app.$('.place-entry'));
+    const buttons = setup.querySelectorAll('button');
+    assert.ok(buttons.indexOf(app.$('#start-practice')) < buttons.indexOf(app.$('#open-place-master')));
+    assert.equal(app.$('#view-setup').hidden, false); assert.equal(app.$('#view-practice').hidden, true);
+    assert.equal(app.$('.choice'), null); assert.equal(app.$('.main-nav'), null);
+    assert.equal(app.$('#view-sources'), null); assert.equal(app.$('#view-settings'), null); assert.equal(app.$('.study-aside'), null);
+    assert.equal(app.$('#scope-all').checked, true); assert.equal(app.$('#question-count').value, 'all');
     assert.equal(app.$('#question-count').disabled, false);
     assert.deepEqual(app.$('#question-count').options.map(option => option.value), ['5', '10', '20', '30', '50', '70', '100', 'all']);
-    assert.match(app.$('#scope-all-count').textContent, /662/);
-    for (const [country, count] of [['フランス', 201], ['スペイン', 76], ['ポルトガル', 42]]) {
+    assert.match(app.$('#scope-all-count').textContent, /226/); assert.equal(app.$('#practice-country').options.length, 14);
+    for (const [country, count] of Object.entries(registeredPractice.metadata.country_counts)) {
       const option = app.$('#practice-country').options.find(node => node.value === country);
-      assert.ok(option.textContent.includes(String(count)), 'country membership is derived from rows');
+      assert.equal(option.textContent, `${country}（${count} 問）`);
     }
-    const record = app.$('#pack-review-status');
-    assert.equal(record.hidden, false);
-    assert.ok(record.textContent.includes(registeredStandard.metadata.qa_status));
-    assert.equal(record.querySelector('a'), null);
+    const record = app.$('#pack-review-status'); assert.equal(record.hidden, false);
+    assert.ok(record.textContent.includes(registeredPractice.metadata.qa_status)); assert.equal(record.querySelector('a'), null);
     assert.doesNotMatch(record.textContent, /承認済み|人手確認済み|校閲済み|事実確認済み/);
     await app.$('#start-practice').click();
-    assert.equal(app.$('#view-setup').hidden, true);
-    assert.equal(app.$('#view-practice').hidden, false);
-    assert.match(app.$('#active-scope').textContent, /すべて.*662/);
-    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '662');
-    assert.equal(app.document.activeElement, app.$('#question-prompt'));
-    assert.equal(app.document.scrollTarget, app.$('#view-practice'));
-    assert.deepEqual(app.requests, [DEFAULT_PACK_PATH]);
+    assert.equal(app.$('#view-setup').hidden, true); assert.equal(app.$('#view-practice').hidden, false);
+    assert.match(app.$('#active-scope').textContent, /練習問題.*すべて.*226/);
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '226');
+    assert.equal(app.document.activeElement, app.$('#question-prompt')); assert.equal(app.document.scrollTarget, app.$('#view-practice'));
+    assert.deepEqual(app.requests, [PRACTICE_PACK_PATH]);
+  });
+
+  test(`${mode}: a failed textbook selection retries textbook without falling back to practice`, async () => {
+    const app = await startApp(mode, { textbookFetcher: call => call === 1 ? { ok: false, status: 404 }
+      : { ok: true, text: async () => registeredStandardText } });
+    await chooseBundledPack(app, 'textbook');
+    assert.equal(app.$('#pack-textbook').checked, true); assert.equal(app.$('#start-practice').disabled, true);
+    assert.equal(app.$('#retry-pack').textContent, '教科書問題を再読み込み');
+    assert.match(app.$('#pages-import-error').textContent, /wine-quiz-highlighted\.json/);
+    assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, TEXTBOOK_PACK_PATH]);
+    await app.$('#retry-pack').click(); assert.equal(app.$('#retry-pack').hidden, true);
+    assert.match(app.$('#pages-import-status').textContent, /教科書問題.*662/);
+    assert.equal(app.$('#start-practice').disabled, false);
+    assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, TEXTBOOK_PACK_PATH, TEXTBOOK_PACK_PATH]);
   });
 
   for (const [country, count] of [['フランス', 201], ['スペイン', 76], ['ポルトガル', 42]]) {
     test(`${mode}: a full ${country} round keeps pilot evidence and stable scoring through restart`, async () => {
-      const app = await startApp(mode, { pack: registeredStandardText });
+      const app = await startApp(mode);
+      await chooseBundledPack(app, 'textbook');
       await chooseCountry(app, country);
       assert.match(app.$('#scope-count').textContent, new RegExp(`${country}.*${count}`));
       await app.$('#start-practice').click();
@@ -512,7 +496,7 @@ for (const mode of ['server', 'pages']) {
       assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), String(count));
       assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '0');
       assert.match(app.$('#active-scope').textContent, new RegExp(`${country}.*${count}`));
-      assert.deepEqual(app.requests, [DEFAULT_PACK_PATH]);
+      assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, TEXTBOOK_PACK_PATH]);
     });
   }
 
@@ -635,131 +619,21 @@ for (const mode of ['server', 'pages']) {
     assert.deepEqual(app.requests, [DEFAULT_PACK_PATH]);
   });
 
-  test(`${mode}: invalid manual import preserves source, settings, and answered session`, async () => {
-    const app = await startApp(mode, { pack: registeredStandardText });
-    await chooseCountry(app, 'フランス');
-    await chooseCount(app, 5);
-    await app.$('#start-practice').click();
-    await app.$('.choice').click();
-    const questionId = app.$('.quiz-card').dataset.questionId;
-    const label = app.$('#active-scope').textContent;
-    await app.$('#back-to-setup').click();
-    const packLabel = app.$('#pages-import-status').textContent;
-    await importPack(app, JSON.stringify([questions[0], { ...questions[1], correct_option_id: 'absent' }]));
-    assert.equal(app.$('.quiz-card').dataset.questionId, questionId);
-    assert.equal(app.$('#active-scope').textContent, label);
-    assert.equal(app.$('#pages-import-status').textContent, packLabel);
-    assert.ok(app.$('.answer-panel'));
-    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '1');
-    assert.equal(app.$('#practice-country').value, 'フランス');
-    assert.equal(app.$('#question-count').value, '5');
-    assert.equal(app.$('#pages-import-error').hidden, false);
-    assert.equal(app.$('#question-pack').disabled, false);
-    assert.equal(app.$('#clear-pack').disabled, true);
-    assert.ok(app.$('#pack-review-status').textContent.includes(registeredStandard.metadata.qa_status));
-  });
-
-  test(`${mode}: valid imports and restoring default return to setup and reset range and count`, async () => {
-    const app = await startApp(mode);
-    await chooseCountry(app, 'フランス');
-    await chooseCount(app, 'all');
-    await importPack(app, JSON.stringify([questions[3]]));
-    assert.match(app.$('#pages-import-status').textContent, /synthetic-import\.json.*1/);
-    assert.equal(app.$('#question-count').value, 'all');
-    assert.equal(app.$('#scope-all').checked, true);
-    assert.equal(app.$('#count-all-label').textContent, '全問（1 問）');
-    assert.equal(app.$('#view-setup').hidden, false);
-    assert.equal(app.$('.choice'), null);
-    await app.$('#start-practice').click();
-    assert.equal(app.$('.quiz-card').dataset.questionId, 'spain');
-    await app.$('#back-to-setup').click();
-    await importPack(app, '[]');
-    assert.equal(app.$('.choice'), null);
-    assert.equal(app.$('#start-practice').disabled, true);
-    assert.equal(app.$('#clear-pack').disabled, false);
-    await app.$('#clear-pack').click();
-    assert.equal(app.requests.filter(path => path === DEFAULT_PACK_PATH).length, 2);
-    assert.equal(app.$('.choice'), null);
-    assert.equal(app.$('#start-practice').disabled, false);
-    assert.equal(app.$('#scope-all').checked, true);
-    assert.equal(app.$('#scope-country').checked, false);
-    assert.equal(app.$('#question-count').value, 'all');
-    assert.equal(app.$('#count-all-label').textContent, '全問（4 問）');
-    assert.equal(app.$('#clear-pack').disabled, true);
-    assert.equal(app.$('#pages-import-error').hidden, true);
-    await app.$('#start-practice').click();
-    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '0');
-    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '4');
-  });
-
-  test(`${mode}: pending manual imports disable controls until validation finishes`, async () => {
-    const app = await startApp(mode);
-    let finish;
-    app.$('#question-pack').files = [{ name:'slow.json', size:10, text:() => new Promise(resolve => { finish = resolve; }) }];
-    const importing = app.$('#question-pack').dispatch('change');
-    assert.equal(app.$('#question-pack').disabled, true);
-    assert.equal(app.$('#clear-pack').disabled, true);
-    assert.equal(app.$('#start-practice').disabled, true);
-    assert.equal(app.$('#pack-practice').disabled, true);
-    assert.equal(app.$('#pack-textbook').disabled, true);
-    await chooseBundledPack(app, 'practice');
-    assert.equal(app.$('#pack-textbook').checked, true);
-    assert.equal(app.$('#pack-practice').checked, false);
-    assert.deepEqual(app.requests, [DEFAULT_PACK_PATH]);
-    finish(JSON.stringify(questions));
-    await importing;
-    assert.equal(app.$('#question-pack').disabled, false);
-    assert.equal(app.$('#start-practice').disabled, false);
-  });
-
-  test(`${mode}: retry after an initial failure cannot overlap a pending custom import`, async () => {
-    const app = await startApp(mode, { status:404 });
-    assert.equal(app.$('#retry-pack').hidden, false);
-    assert.equal(app.$('#retry-pack').disabled, false);
-    let finishFile;
-    app.$('#question-pack').files = [{ name:'custom.json', size:10,
-      text:() => new Promise(resolve => { finishFile = resolve; }) }];
-    const importing = app.$('#question-pack').dispatch('change');
-    assert.equal(app.$('#retry-pack').disabled, true);
-    await app.$('#retry-pack').click();
-    // Programmatic events can bypass disabled buttons; the shared load guard must also hold.
-    await app.$('#retry-pack').dispatch('click');
-    await app.$('#clear-pack').dispatch('click');
-    assert.deepEqual(app.requests, [DEFAULT_PACK_PATH]);
-    finishFile(JSON.stringify([questions[3]]));
-    await importing;
-    assert.equal(app.$('#retry-pack').disabled, false);
-    assert.equal(app.$('#retry-pack').hidden, true);
-    assert.match(app.$('#pages-import-status').textContent, /custom\.json.*1/);
-    await app.$('#start-practice').click();
-    assert.equal(app.$('.quiz-card').dataset.questionId, 'spain');
-    assert.deepEqual(app.requests, [DEFAULT_PACK_PATH]);
-  });
-
-  test(`${mode}: repeated retries and imports cannot overlap a pending default fetch`, async () => {
+  test(`${mode}: repeated retries and selections cannot overlap a pending default fetch`, async () => {
     let finishFetch;
     const app = await startApp(mode, { defaultFetcher:call => call === 1
-      ? { ok:false, status:404 }
-      : new Promise(resolve => { finishFetch = resolve; }) });
+      ? { ok:false, status:404 } : new Promise(resolve => { finishFetch = resolve; }) });
     const retrying = app.$('#retry-pack').click();
     assert.equal(app.$('#retry-pack').disabled, true);
-    assert.equal(app.$('#question-pack').disabled, true);
     assert.equal(app.$('#start-practice').disabled, true);
-    await app.$('#retry-pack').dispatch('click');
-    await app.$('#clear-pack').dispatch('click');
-    app.$('#question-pack').files = [{ name:'racing.json', size:10,
-      text:() => assert.fail('custom file must not be read during a default fetch') }];
-    await app.$('#question-pack').dispatch('change');
-    assert.deepEqual(app.requests, [DEFAULT_PACK_PATH, DEFAULT_PACK_PATH]);
-    finishFetch({ ok:true, status:200, text:async () => JSON.stringify(questions) });
-    await retrying;
-    assert.equal(app.$('#retry-pack').disabled, false);
-    assert.equal(app.$('#retry-pack').hidden, true);
-    assert.equal(app.$('#question-pack').disabled, false);
+    await app.$('#retry-pack').dispatch('click'); await chooseBundledPack(app, 'textbook');
+    assert.equal(app.$('#pack-practice').checked, true); assert.equal(app.$('#pack-textbook').checked, false);
+    assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, PRACTICE_PACK_PATH]);
+    finishFetch({ ok:true, status:200, text:async () => JSON.stringify(questions) }); await retrying;
+    assert.equal(app.$('#retry-pack').disabled, false); assert.equal(app.$('#retry-pack').hidden, true);
     assert.equal(app.$('#start-practice').disabled, false);
-    assert.match(app.$('#pages-import-status').textContent, /wine-quiz-highlighted\.json.*4/);
-    await app.$('#start-practice').click();
-    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '4');
+    assert.match(app.$('#pages-import-status').textContent, /wine-quiz-practice-20261031\.json.*4/);
+    await app.$('#start-practice').click(); assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '4');
   });
 
   for (const [name, options] of [
@@ -775,7 +649,7 @@ for (const mode of ['server', 'pages']) {
       assert.equal(app.$('.choice'), null);
       assert.ok(app.$('#start-practice').disabled);
       assert.equal(app.$('#pages-import-error').hidden, false);
-      assert.match(app.$('#pages-import-error').textContent, /wine-quiz-highlighted\.json/);
+      assert.match(app.$('#pages-import-error').textContent, /wine-quiz-practice-20261031\.json/);
       assert.equal(app.$('#retry-pack').hidden, false);
       assert.deepEqual(app.requests, [DEFAULT_PACK_PATH]);
     });
