@@ -1,7 +1,7 @@
-import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS, practiceAssetUrl, validMatchingAnswer } from './quiz.js?v=bookmarks-20261101';
-import { loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID } from './pages.js?v=bookmarks-20261101';
-import { initPlaceMaster } from './place-master.js?v=bookmarks-20261101';
-import { BookmarkStore } from './bookmarks.js?v=bookmarks-20261101';
+import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS, practiceAssetUrl, validMatchingAnswer } from './quiz.js?v=bookmark-filter-20261103';
+import { loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID } from './pages.js?v=bookmark-filter-20261103';
+import { initPlaceMaster } from './place-master.js?v=bookmark-filter-20261103';
+import { BookmarkStore } from './bookmarks.js?v=bookmark-filter-20261103';
 
 const $ = selector => document.querySelector(selector);
 const bookmarks = new BookmarkStore();
@@ -49,8 +49,24 @@ function bookmarkPackKey() {
   return `bundled:${state.bundledPackId}`;
 }
 
+const bookmarkFilterLabels = { all: 'すべて', bookmarked: 'しおり付きのみ', unbookmarked: 'しおりなしのみ' };
+
+function selectedBookmarkFilter() {
+  return $('#bookmark-filter').value;
+}
+
 function candidateQuestions() {
-  return $('#bookmarks-only').checked ? bookmarks.questions(bookmarkPackKey(), state.practiceQuestions) : state.practiceQuestions;
+  const filter = selectedBookmarkFilter();
+  if (filter === 'all') return state.practiceQuestions;
+  const packKey = bookmarkPackKey();
+  return state.practiceQuestions.filter(question => bookmarks.has(packKey, question.id) === (filter === 'bookmarked'));
+}
+
+function emptyScopeMessage(filter) {
+  if (filter === 'all') return 'この範囲には問題がありません。別の範囲か問題集を選んでください。';
+  const reason = filter === 'bookmarked' ? 'この範囲にしおりが付いた問題はありません。'
+    : 'この範囲にしおりが付いていない問題はありません。';
+  return `${reason}出題条件を「すべて」にするか、別の範囲・問題集を選んでください。`;
 }
 
 function alignCountToScope() {
@@ -82,7 +98,8 @@ function renderScope(rebuildCountries = false) {
   const count = selectedCount();
   const invalidCount = count !== null && (!PRACTICE_COUNTS.includes(count) || count > total);
   const loading = state.practiceLoading;
-  $('#bookmarks-only').disabled = loading;
+  const bookmarkFilter = selectedBookmarkFilter();
+  $('#bookmark-filter').disabled = loading;
   $('#clear-bookmarks').disabled = loading;
   $('#bookmark-count').textContent = `この問題集のしおり：${bookmarks.questions(bookmarkPackKey(), state.practiceQuestions).length} 問 · 全問題集のしおり：${bookmarks.count()} 問`;
   $('#bookmark-storage-warning').textContent = bookmarks.warning;
@@ -100,8 +117,8 @@ function renderScope(rebuildCountries = false) {
   $('#scope-count').textContent = loading ? '問題集を読み込んでいます。'
     : state.loadError ? '問題集を読み込めないため、開始できません。'
       : country === '' ? '練習する国を選んでください。'
-        : total === 0 ? ($('#bookmarks-only').checked ? 'この範囲にしおりが付いた問題はありません。「しおりが付いた問題だけ出題する」をオフにするか、別の範囲・問題集を選んでください。' : 'この範囲には問題がありません。別の範囲か問題集を選んでください。')
-          : `対象：${country ?? 'すべて'}${$('#bookmarks-only').checked ? ' · しおり付きのみ' : ''} · ${total} 問`;
+        : total === 0 ? emptyScopeMessage(bookmarkFilter)
+          : `対象：${country ?? 'すべて'}${bookmarkFilter === 'all' ? '' : ` · ${bookmarkFilterLabels[bookmarkFilter]}`} · ${total} 問`;
   $('#count-error').textContent = invalidCount && total > 0 ? '選べる出題数から指定してください。' : '';
   $('#count-error').hidden = !invalidCount || total === 0;
   $('#start-practice').disabled = loading || Boolean(state.loadError) || total === 0 || invalidCount;
@@ -129,7 +146,7 @@ function startPractice() {
   renderScope();
   if ($('#start-practice').disabled) return;
   state.session = new QuizSession(candidateQuestions(), Math.random, selectedCountry(), selectedCount());
-  state.session.bookmarksOnly = $('#bookmarks-only').checked;
+  state.session.bookmarkFilter = selectedBookmarkFilter();
   $('#view-setup').hidden = true;
   $('#view-practice').hidden = false;
   renderPractice();
@@ -359,7 +376,7 @@ function originalContent(question) {
 function renderPractice() {
   const session = state.session;
   if (!session?.total) { $('#quiz-root').replaceChildren(); return; }
-  $('#active-scope').textContent = `${state.packLabel} · ${session.country ?? 'すべて'}${session.bookmarksOnly ? ' · しおり付きのみ' : ''} · ${session.total} 問`;
+  $('#active-scope').textContent = `${state.packLabel} · ${session.country ?? 'すべて'}${session.bookmarkFilter === 'all' ? '' : ` · ${bookmarkFilterLabels[session.bookmarkFilter]}`} · ${session.total} 問`;
   if (session.complete) { renderCompletion(); return; }
   const question = session.current;
   const card = element('div', 'quiz-card');
@@ -476,7 +493,7 @@ $('#confirm-clear-bookmarks').addEventListener('click', () => {
   closeBookmarkConfirmation();
   alignCountToScope();
 });
-$('#bookmarks-only').addEventListener('change', alignCountToScope);
+$('#bookmark-filter').addEventListener('change', alignCountToScope);
 $('#open-place-master').addEventListener('click', () => placeMaster.open());
 $('#back-to-setup').addEventListener('click', showSetup);
 $('.brand').addEventListener('click', event => { event.preventDefault(); showSetup(); });

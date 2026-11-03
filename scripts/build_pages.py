@@ -20,7 +20,7 @@ PUBLIC_FILES = (
     "static/pages.js", "static/bookmarks.js", "static/style.css", *PUBLIC_PLACE_MODULES, *PUBLIC_QUESTION_PACKS, PUBLIC_PLACE_PACK, *PUBLIC_PRACTICE_ASSETS,
 )
 MARKER = ".wine-pages-artifact"
-SOURCE_ASSET_VERSION = "bookmarks-20261101"
+SOURCE_ASSET_VERSION = "bookmark-filter-20261103"
 
 
 def build(source_root: Path = ROOT, output: Path | None = None) -> Path:

@@ -117,6 +117,9 @@ function documentFromHtml(html) {
       if (!voidTags.has(name) && !token.endsWith('/>')) stack.push(node);
     } else stack.at(-1).append(new Node('', token));
   }
+  for (const select of document.querySelectorAll('select')) {
+    select.value = (select.options.find(option => option.getAttribute('selected') !== null) ?? select.options[0])?.value ?? '';
+  }
   document.createElement = name => new Node(name);
   document.createTextNode = text => new Node('', text);
   return document;
@@ -236,9 +239,13 @@ async function answerCorrectly(app) {
   await correct.click();
 }
 
+async function chooseBookmarkFilter(app, value) {
+  app.$('#bookmark-filter').value = value;
+  await app.$('#bookmark-filter').dispatch('change');
+}
+
 async function chooseBookmarksOnly(app, checked = true) {
-  app.$('#bookmarks-only').checked = checked;
-  await app.$('#bookmarks-only').dispatch('change');
+  await chooseBookmarkFilter(app, checked ? 'bookmarked' : 'all');
 }
 
 for (const mode of ['server', 'pages']) {
@@ -247,7 +254,7 @@ for (const mode of ['server', 'pages']) {
       const storage = memoryStorage();
       const pack = JSON.stringify([questions[0]]);
       const app = await startApp(mode, { pack, storage });
-      assert.equal(app.$('#bookmarks-only').checked, false);
+      assert.equal(app.$('#bookmark-filter').value, 'all');
       await app.$('#start-practice').click();
       assert.equal(app.$('.bookmark-toggle'), null, 'bookmark actions belong to answered questions');
       const choice = app.document.querySelectorAll('.choice').find(node => node.textContent.includes(`Synthetic choice ${correct ? 'b' : 'a'}`));
@@ -270,7 +277,7 @@ for (const mode of ['server', 'pages']) {
       await chooseBookmarksOnly(app);
       assert.equal(app.$('#count-all-label').textContent, '全問（1 問）');
       const reloaded = await startApp(mode, { pack, storage });
-      assert.equal(reloaded.$('#bookmarks-only').checked, false, 'the initial setting remains unrestricted');
+      assert.equal(reloaded.$('#bookmark-filter').value, 'all', 'the initial setting remains unrestricted');
       await chooseBookmarksOnly(reloaded);
       assert.equal(reloaded.$('#count-all-label').textContent, '全問（1 問）');
       await reloaded.$('#start-practice').click();
@@ -332,6 +339,162 @@ for (const mode of ['server', 'pages']) {
     assert.equal(app.$('#start-practice').disabled, false);
     await app.$('#start-practice').click();
     assert.equal(app.$('.quiz-card').dataset.questionId, 'spain');
+  });
+
+  test(`${mode}: unbookmarked-only includes every question with no bookmarks and none when all are bookmarked`, async () => {
+    const app = await startApp(mode);
+    assert.equal(app.$('#bookmark-filter').value, 'all');
+    assert.deepEqual(app.$('#bookmark-filter').options.map(option => option.value), ['all', 'bookmarked', 'unbookmarked']);
+    await chooseBookmarkFilter(app, 'unbookmarked');
+    assert.equal(app.$('#count-all-label').textContent, '全問（4 問）');
+    assert.equal(app.$('#start-practice').disabled, false);
+    await app.$('#start-practice').click();
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '4');
+    assert.match(app.$('#active-scope').textContent, /しおりなしのみ/);
+
+    const storage = storageWithBookmarks({ 'bundled:practice': questions.map(row => row.id) });
+    const marked = await startApp(mode, { storage });
+    assert.equal(marked.$('#count-all-label').textContent, '全問（4 問）', 'all remains the default with saved bookmarks');
+    await chooseBookmarkFilter(marked, 'unbookmarked');
+    assert.equal(marked.$('#count-all-label').textContent, '全問（0 問）');
+    assert.equal(marked.$('#start-practice').disabled, true);
+    assert.match(marked.$('#scope-count').textContent, /この範囲にしおりが付いていない問題はありません/);
+    await marked.$('#start-practice').click();
+    assert.equal(marked.$('#view-practice').hidden, true);
+    await chooseBookmarkFilter(marked, 'bookmarked');
+    assert.equal(marked.$('#count-all-label').textContent, '全問（4 問）');
+    assert.equal(marked.$('#start-practice').disabled, false);
+  });
+
+  test(`${mode}: unbookmarked-only combines countries and counts without including bookmarked or deleted IDs`, async () => {
+    const rows = [...questions, ...Array.from({ length: 8 }, (_, i) => question(`extra-${i}`, ['フランス']))];
+    const storage = storageWithBookmarks({ 'bundled:practice': ['france', 'cross-country', 'spain', 'deleted-question'] });
+    const app = await startApp(mode, { pack: JSON.stringify(rows), storage });
+    await chooseCount(app, 10);
+    await chooseBookmarkFilter(app, 'unbookmarked');
+    assert.equal(app.$('#question-count').value, 'all');
+    assert.equal(app.$('#scope-all-count').textContent, '（9 問）');
+    assert.equal(app.$('#count-all-label').textContent, '全問（9 問）');
+    assert.equal(app.$('#question-count').options.find(option => option.value === '10').disabled, true);
+    assert.equal(app.$('#question-count').options.find(option => option.value === '5').disabled, false);
+    const countryCounts = Object.fromEntries(app.$('#practice-country').options.filter(option => option.value).map(option => [option.value, option.textContent]));
+    assert.deepEqual(countryCounts, { 'イタリア': 'イタリア（1 問）', 'スペイン': 'スペイン（0 問）', 'フランス': 'フランス（8 問）' });
+    await chooseCountry(app, 'フランス');
+    assert.equal(app.$('#count-all-label').textContent, '全問（8 問）');
+    await chooseCount(app, 5);
+    await chooseBookmarkFilter(app, 'all');
+    await chooseBookmarkFilter(app, 'unbookmarked');
+    assert.equal(app.$('#question-count').value, '5', 'valid presets survive changes to the bookmark filter');
+    await app.$('#start-practice').click();
+    const seen = new Set();
+    for (let index = 0; index < 5; index += 1) {
+      const id = app.$('.quiz-card').dataset.questionId;
+      assert.match(id, /^extra-\d$/);
+      assert.equal(seen.has(id), false, 'a round must not repeat an eligible question');
+      seen.add(id);
+      assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '5');
+      await answerCorrectly(app);
+      await app.$('.next-row button').click();
+    }
+    assert.match(app.$('.completion-score').textContent, /5.*5/);
+    await app.$('#back-to-setup').click();
+    await chooseCountry(app, 'イタリア');
+    assert.equal(app.$('#question-count').value, 'all');
+    assert.equal(app.$('#count-all-label').textContent, '全問（1 問）');
+    await app.$('#start-practice').click();
+    assert.equal(app.$('.quiz-card').dataset.questionId, 'italy');
+    await app.$('#back-to-setup').click();
+    await chooseCountry(app, 'スペイン');
+    assert.equal(app.$('#count-all-label').textContent, '全問（0 問）');
+    assert.equal(app.$('#start-practice').disabled, true);
+    assert.match(app.$('#scope-count').textContent, /しおりが付いていない問題はありません/);
+    await chooseBookmarkFilter(app, 'all');
+    assert.equal(app.$('#count-all-label').textContent, '全問（1 問）');
+    assert.equal(app.$('#start-practice').disabled, false);
+  });
+
+  test(`${mode}: unbookmarked-only uses the selected bank when question IDs match`, async () => {
+    const pack = JSON.stringify([questions[0]]);
+    const storage = storageWithBookmarks({ 'bundled:practice': ['france'] });
+    const app = await startApp(mode, { pack, textbookPack: pack, storage });
+    await chooseBookmarkFilter(app, 'unbookmarked');
+    assert.equal(app.$('#start-practice').disabled, true);
+    await chooseBundledPack(app, 'textbook');
+    assert.equal(app.$('#bookmark-filter').value, 'unbookmarked');
+    assert.equal(app.$('#count-all-label').textContent, '全問（1 問）');
+    assert.equal(app.$('#start-practice').disabled, false);
+    await app.$('#start-practice').click();
+    assert.equal(app.$('.quiz-card').dataset.questionId, 'france');
+    await answerCorrectly(app);
+    assert.equal(app.$('.bookmark-toggle').getAttribute('aria-pressed'), 'false');
+    await app.$('#back-to-setup').click();
+    await chooseBundledPack(app, 'practice');
+    assert.equal(app.$('#bookmark-filter').value, 'unbookmarked');
+    assert.equal(app.$('#count-all-label').textContent, '全問（0 問）');
+    assert.equal(app.$('#start-practice').disabled, true);
+  });
+
+  test(`${mode}: adding bookmarks preserves an unbookmarked round and applies the latest state on restart`, async () => {
+    const storage = storageWithBookmarks({ 'bundled:practice': ['italy', 'spain'] });
+    const app = await startApp(mode, { storage });
+    await chooseBookmarkFilter(app, 'unbookmarked');
+    await app.$('#start-practice').click();
+    const firstId = app.$('.quiz-card').dataset.questionId;
+    await answerCorrectly(app);
+    const score = app.$('.question-score').textContent;
+    const explanation = app.$('.explanation-body').textContent;
+    const progress = app.$('[role="progressbar"]').getAttribute('aria-valuenow');
+    await app.$('.bookmark-toggle').click();
+    assert.equal(app.$('.quiz-card').dataset.questionId, firstId);
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '2');
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), progress);
+    assert.equal(app.$('.question-score').textContent, score);
+    assert.equal(app.$('.explanation-body').textContent, explanation);
+    await app.$('.next-row button').click();
+    const remainingId = app.$('.quiz-card').dataset.questionId;
+    assert.notEqual(remainingId, firstId);
+    assert.ok(['france', 'cross-country'].includes(remainingId));
+    await answerCorrectly(app);
+    await app.$('.next-row button').click();
+    assert.match(app.$('.completion-score').textContent, /2.*2/);
+    await app.$('.completion-card button').click();
+    assert.equal(app.$('.quiz-card').dataset.questionId, remainingId);
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '1');
+    assert.match(app.$('#active-scope').textContent, /しおりなしのみ/);
+    await answerCorrectly(app);
+    await app.$('.bookmark-toggle').click();
+    await app.$('.next-row button').click();
+    await app.$('.completion-card button').click();
+    assert.equal(app.$('#view-setup').hidden, false);
+    assert.equal(app.$('#view-practice').hidden, true);
+    assert.equal(app.$('#bookmark-filter').value, 'unbookmarked');
+    assert.equal(app.$('#count-all-label').textContent, '全問（0 問）');
+    assert.equal(app.$('#start-practice').disabled, true);
+    assert.match(app.$('#scope-count').textContent, /しおりが付いていない問題はありません/);
+  });
+
+  test(`${mode}: clearing all bookmarks restores unbookmarked candidates and start eligibility`, async () => {
+    const otherKey = 'wineQuizMaster.placeNotebook.v1:bourgogne-places';
+    const storage = storageWithBookmarks({
+      'bundled:practice': questions.map(row => row.id), 'bundled:textbook': ['france'],
+    }, { [otherKey]: 'keep notebook' });
+    const app = await startApp(mode, { storage });
+    await chooseCountry(app, 'フランス');
+    await chooseBookmarkFilter(app, 'unbookmarked');
+    assert.equal(app.$('#count-all-label').textContent, '全問（0 問）');
+    assert.equal(app.$('#start-practice').disabled, true);
+    await app.$('#clear-bookmarks').click();
+    await app.$('#cancel-clear-bookmarks').click();
+    assert.equal(app.$('#start-practice').disabled, true);
+    assert.equal(app.$('#count-all-label').textContent, '全問（0 問）');
+    await app.$('#clear-bookmarks').click();
+    await app.$('#confirm-clear-bookmarks').click();
+    assert.equal(app.$('#count-all-label').textContent, '全問（2 問）');
+    assert.equal(app.$('#start-practice').disabled, false);
+    assert.equal(storage.getItem(BOOKMARK_STORAGE_KEY), null);
+    assert.equal(storage.getItem(otherKey), 'keep notebook');
+    await app.$('#start-practice').click();
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuemax'), '2');
   });
 
   test(`${mode}: removing bookmarks preserves an active round and refreshes restart candidates`, async () => {

@@ -59,7 +59,7 @@ h1 { font:600 29px/1.6 var(--serif); letter-spacing:.04em; }
 input[type="radio"] { accent-color:var(--wine); width:17px; height:17px; margin:0; }
 input[type="checkbox"] { accent-color:var(--wine); width:18px; height:18px; margin:0; flex:0 0 18px; }
 .bookmark-settings { margin:12px 0; }
-.bookmark-filter { display:flex; align-items:center; gap:8px; min-height:44px; }
+.bookmark-filter { display:flex; align-items:center; flex-wrap:wrap; gap:8px 12px; min-height:44px; }
 .bookmark-management { margin-top:8px; font-size:13px; }
 .bookmark-management summary { cursor:pointer; color:var(--wine); padding:8px 0; }
 .bookmark-management .button { margin-top:10px; }
