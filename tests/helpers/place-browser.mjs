@@ -112,6 +112,9 @@ function documentFromHtml(html) {
       if (!voidTags.has(name) && !token.endsWith('/>')) stack.push(node);
     } else stack.at(-1).append(new Node('', token));
   }
+  for (const select of document.querySelectorAll('select')) {
+    select.value = (select.options.find(option => option.getAttribute('selected') !== null) ?? select.options[0])?.value ?? '';
+  }
   document.createElement = name => new Node(name);
   document.createTextNode = text => new Node('', text);
   return document;
