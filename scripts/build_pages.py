@@ -9,7 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_QUESTION_PACK = "question-packs/wine-quiz-highlighted.json"
 PUBLIC_PRACTICE_PACK = "question-packs/wine-quiz-practice-20261031.json"
-PUBLIC_QUESTION_PACKS = (PUBLIC_QUESTION_PACK, PUBLIC_PRACTICE_PACK)
+PUBLIC_PRETEXT_PACK = "question-packs/wine-quiz-pretext.json"
+PUBLIC_QUESTION_PACKS = (PUBLIC_QUESTION_PACK, PUBLIC_PRACTICE_PACK, PUBLIC_PRETEXT_PACK)
 PUBLIC_PLACE_PACK = "question-packs/place-relations.json"
 PUBLIC_PLACE_MODULES = ("static/places.js", "static/place-review.js", "static/place-master.js")
 PUBLIC_PRACTICE_ASSETS = tuple(f"question-packs/practice-assets/{name}" for name in (
@@ -20,7 +21,7 @@ PUBLIC_FILES = (
     "static/pages.js", "static/bookmarks.js", "static/style.css", *PUBLIC_PLACE_MODULES, *PUBLIC_QUESTION_PACKS, PUBLIC_PLACE_PACK, *PUBLIC_PRACTICE_ASSETS,
 )
 MARKER = ".wine-pages-artifact"
-SOURCE_ASSET_VERSION = "bookmark-filter-20261103"
+SOURCE_ASSET_VERSION = "pretext-20261114"
 
 
 def build(source_root: Path = ROOT, output: Path | None = None) -> Path:

@@ -1,7 +1,7 @@
-import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS, practiceAssetUrl, validMatchingAnswer } from './quiz.js?v=bookmark-filter-20261103';
-import { loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID } from './pages.js?v=bookmark-filter-20261103';
-import { initPlaceMaster } from './place-master.js?v=bookmark-filter-20261103';
-import { BookmarkStore } from './bookmarks.js?v=bookmark-filter-20261103';
+import { QuizSession, countryCounts, questionsForCountry, PRACTICE_COUNTS, practiceAssetUrl, validMatchingAnswer } from './quiz.js?v=pretext-20261114';
+import { loadBundledQuestionPack, BUNDLED_PACKS, DEFAULT_PACK_ID } from './pages.js?v=pretext-20261114';
+import { initPlaceMaster } from './place-master.js?v=pretext-20261114';
+import { BookmarkStore } from './bookmarks.js?v=pretext-20261114';
 
 const $ = selector => document.querySelector(selector);
 const bookmarks = new BookmarkStore();

@@ -146,10 +146,13 @@ const questions = [
 const DEFAULT_PACK_PATH = '/question-packs/wine-quiz-practice-20261031.json';
 const PRACTICE_PACK_PATH = DEFAULT_PACK_PATH;
 const TEXTBOOK_PACK_PATH = '/question-packs/wine-quiz-highlighted.json';
+const PRETEXT_PACK_PATH = '/question-packs/wine-quiz-pretext.json';
 const registeredStandardText = readFileSync(new URL('../question-packs/wine-quiz-highlighted.json', import.meta.url), 'utf8');
 const registeredStandard = JSON.parse(registeredStandardText);
 const registeredPracticeText = readFileSync(new URL(`..${PRACTICE_PACK_PATH}`, import.meta.url), 'utf8');
 const registeredPractice = JSON.parse(registeredPracticeText);
+const registeredPretextText = readFileSync(new URL(`..${PRETEXT_PACK_PATH}`, import.meta.url), 'utf8');
+const registeredPretext = JSON.parse(registeredPretextText);
 
 function memoryStorage(records = {}) {
   const values = new Map(Object.entries(records));
@@ -167,7 +170,8 @@ function storageWithBookmarks(packs, records = {}) {
 
 async function startApp(mode, { pack = JSON.stringify(questions), status = 200, networkError = false, defaultFetcher,
   practicePack = pack, practiceStatus = status, practiceFetcher = defaultFetcher,
-  textbookPack = registeredStandardText, textbookStatus = 200, textbookFetcher, storage = memoryStorage() } = {}) {
+  textbookPack = registeredStandardText, textbookStatus = 200, textbookFetcher,
+  pretextPack = registeredPretextText, pretextStatus = 200, pretextFetcher, storage = memoryStorage() } = {}) {
   const document = documentFromHtml(readFileSync(new URL('../static/index.html', import.meta.url), 'utf8'));
   const requests = [];
   const fetch = async input => {
@@ -181,6 +185,10 @@ async function startApp(mode, { pack = JSON.stringify(questions), status = 200, 
     if (path === TEXTBOOK_PACK_PATH) {
       if (textbookFetcher) return textbookFetcher(requests.filter(item => item === path).length);
       return { ok: textbookStatus === 200, status: textbookStatus, text: async () => textbookPack };
+    }
+    if (path === PRETEXT_PACK_PATH) {
+      if (pretextFetcher) return pretextFetcher(requests.filter(item => item === path).length);
+      return { ok: pretextStatus === 200, status: pretextStatus, text: async () => pretextPack };
     }
     assert.fail(`unexpected network request ${path}`);
   };
@@ -287,31 +295,33 @@ for (const mode of ['server', 'pages']) {
     });
   }
 
-  test(`${mode}: bookmarks are isolated by bank even when question IDs match`, async () => {
-    const pack = JSON.stringify([questions[0]]);
-    const storage = memoryStorage();
-    const app = await startApp(mode, { pack, textbookPack: pack, storage });
-    await app.$('#start-practice').click();
-    await answerCorrectly(app);
-    await app.$('.bookmark-toggle').click();
-    await app.$('#back-to-setup').click();
-    await chooseBundledPack(app, 'textbook');
-    await app.$('#start-practice').click();
-    await answerCorrectly(app);
-    assert.equal(app.$('.bookmark-toggle').getAttribute('aria-pressed'), 'false');
-    await app.$('#back-to-setup').click();
-    await chooseBookmarksOnly(app);
-    assert.equal(app.$('#start-practice').disabled, true);
-    assert.equal(app.$('#count-all-label').textContent, '全問（0 問）');
-    await chooseBundledPack(app, 'practice');
-    await chooseBookmarksOnly(app);
-    assert.equal(app.$('#count-all-label').textContent, '全問（1 問）');
-    assert.equal(app.$('#start-practice').disabled, false);
-    await app.$('#start-practice').click();
-    await answerCorrectly(app);
-    assert.equal(app.$('.bookmark-toggle').getAttribute('aria-pressed'), 'true');
-    assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, TEXTBOOK_PACK_PATH, PRACTICE_PACK_PATH]);
-  });
+  for (const [otherBank, otherPath] of [['textbook', TEXTBOOK_PACK_PATH], ['pretext', PRETEXT_PACK_PATH]]) {
+    test(`${mode}: bookmarks are isolated from ${otherBank} even when question IDs match`, async () => {
+      const pack = JSON.stringify([questions[0]]);
+      const storage = memoryStorage();
+      const app = await startApp(mode, { pack, textbookPack: pack, pretextPack: pack, storage });
+      await app.$('#start-practice').click();
+      await answerCorrectly(app);
+      await app.$('.bookmark-toggle').click();
+      await app.$('#back-to-setup').click();
+      await chooseBundledPack(app, otherBank);
+      await app.$('#start-practice').click();
+      await answerCorrectly(app);
+      assert.equal(app.$('.bookmark-toggle').getAttribute('aria-pressed'), 'false');
+      await app.$('#back-to-setup').click();
+      await chooseBookmarksOnly(app);
+      assert.equal(app.$('#start-practice').disabled, true);
+      assert.equal(app.$('#count-all-label').textContent, '全問（0 問）');
+      await chooseBundledPack(app, 'practice');
+      await chooseBookmarksOnly(app);
+      assert.equal(app.$('#count-all-label').textContent, '全問（1 問）');
+      assert.equal(app.$('#start-practice').disabled, false);
+      await app.$('#start-practice').click();
+      await answerCorrectly(app);
+      assert.equal(app.$('.bookmark-toggle').getAttribute('aria-pressed'), 'true');
+      assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, otherPath, PRACTICE_PACK_PATH]);
+    });
+  }
 
   test(`${mode}: bookmark, country and question-count filters share the same candidates`, async () => {
     const storage = storageWithBookmarks({ 'bundled:practice': ['france', 'cross-country', 'deleted-question'] });
@@ -647,6 +657,76 @@ for (const mode of ['server', 'pages']) {
     assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, TEXTBOOK_PACK_PATH, PRACTICE_PACK_PATH, TEXTBOOK_PACK_PATH]);
   });
 
+  test(`${mode}: real pretext selection, country round, restart and saved bookmark filters stay in the new bank`, async () => {
+    const storage = memoryStorage();
+    const app = await startApp(mode, { practicePack: registeredPracticeText, storage });
+    assert.equal(app.$('#pack-practice').checked, true);
+    assert.equal(app.$('#pack-pretext').checked, false);
+    await chooseBundledPack(app, 'pretext');
+    const total = registeredPretext.questions.length;
+    assert.equal(app.$('#pack-practice').checked, false);
+    assert.equal(app.$('#pack-pretext').checked, true);
+    assert.match(app.$('#pages-import-status').textContent, new RegExp(`事前テキスト.*${total}`));
+    assert.equal(app.$('#scope-all-count').textContent, `（${total} 問）`);
+    assert.equal(app.$('#practice-country').options.length, 14);
+    for (const [country, count] of Object.entries(registeredPretext.metadata.country_counts)) {
+      const option = app.$('#practice-country').options.find(option => option.value === country);
+      assert.equal(option.textContent, `${country}（${count} 問）`);
+    }
+    assert.ok(app.$('#pack-review-status').textContent.includes(registeredPretext.metadata.qa_status));
+    const country = Object.entries(registeredPretext.metadata.country_counts).find(([, count]) => count >= 5)[0];
+    await chooseCountry(app, country);
+    await chooseCount(app, 5);
+    await app.$('#start-practice').click();
+    assert.match(app.$('#active-scope').textContent, new RegExp(`事前テキスト.*${country}.*5`));
+    const seen = new Set();
+    let bookmarkedId;
+    for (let index = 0; index < 5; index += 1) {
+      const id = app.$('.quiz-card').dataset.questionId;
+      const row = registeredPretext.questions.find(item => item.question_id === id);
+      assert.ok(row.countries.includes(country));
+      assert.equal(seen.has(id), false);
+      seen.add(id);
+      const correct = app.document.querySelectorAll('.choice').find(node => node.querySelector('.choice-text').textContent === row.correct_answer);
+      await correct.click();
+      assert.equal(app.$('.explanation-body').textContent, row.explanation);
+      assert.ok(app.$('.pilot-evidence').textContent.includes(row.source_page));
+      if (index === 0) {
+        await app.$('.bookmark-toggle').click();
+        bookmarkedId = id;
+      }
+      await app.$('.next-row button').click();
+    }
+    assert.equal(seen.size, 5);
+    assert.equal(app.$('.completion-score').textContent, '5/ 5 問正解');
+    await app.document.querySelectorAll('.completion-card button')[0].click();
+    assert.match(app.$('#active-scope').textContent, new RegExp(`事前テキスト.*${country}.*5`));
+    assert.equal(app.$('[role="progressbar"]').getAttribute('aria-valuenow'), '0');
+    await app.$('#back-to-setup').click();
+    await chooseBookmarkFilter(app, 'bookmarked');
+    assert.equal(app.$('#question-count').value, 'all', 'a fixed count exceeding the filtered pool resets');
+    assert.equal(app.$('#count-all-label').textContent, '全問（1 問）');
+    await app.$('#start-practice').click();
+    assert.equal(app.$('.quiz-card').dataset.questionId, bookmarkedId);
+    await app.$('#back-to-setup').click();
+    await chooseBookmarkFilter(app, 'unbookmarked');
+    assert.equal(app.$('#count-all-label').textContent, `全問（${registeredPretext.metadata.country_counts[country] - 1} 問）`);
+    await chooseBundledPack(app, 'practice');
+    assert.equal(app.$('#pack-pretext').checked, false);
+    assert.equal(app.$('#quiz-root').children.length, 0);
+    assert.equal(app.$('#question-count').value, 'all');
+    assert.equal(app.$('#practice-country').value, '');
+    await chooseBookmarkFilter(app, 'bookmarked');
+    assert.equal(app.$('#start-practice').disabled, true, 'pretext bookmarks cannot select practice questions');
+    const reloaded = await startApp(mode, { storage });
+    await chooseBundledPack(reloaded, 'pretext');
+    await chooseBookmarkFilter(reloaded, 'bookmarked');
+    assert.equal(reloaded.$('#count-all-label').textContent, '全問（1 問）');
+    await reloaded.$('#start-practice').click();
+    assert.equal(reloaded.$('.quiz-card').dataset.questionId, bookmarkedId);
+    assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, PRETEXT_PACK_PATH, PRACTICE_PACK_PATH]);
+  });
+
   test(`${mode}: matching blocks incomplete or repeated choices, grades once and resets on restart`, async () => {
     const row = registeredPractice.questions.find(row => row.question_type === 'matching');
     const app = await startApp(mode, { practicePack: JSON.stringify({ metadata: {}, questions: [row] }) });
@@ -816,19 +896,24 @@ for (const mode of ['server', 'pages']) {
     assert.deepEqual(app.requests, [PRACTICE_PACK_PATH]);
   });
 
-  test(`${mode}: a failed textbook selection retries textbook without falling back to practice`, async () => {
-    const app = await startApp(mode, { textbookFetcher: call => call === 1 ? { ok: false, status: 404 }
-      : { ok: true, text: async () => registeredStandardText } });
-    await chooseBundledPack(app, 'textbook');
-    assert.equal(app.$('#pack-textbook').checked, true); assert.equal(app.$('#start-practice').disabled, true);
-    assert.equal(app.$('#retry-pack').textContent, '教科書問題を再読み込み');
-    assert.match(app.$('#pages-import-error').textContent, /wine-quiz-highlighted\.json/);
-    assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, TEXTBOOK_PACK_PATH]);
-    await app.$('#retry-pack').click(); assert.equal(app.$('#retry-pack').hidden, true);
-    assert.match(app.$('#pages-import-status').textContent, /教科書問題.*662/);
-    assert.equal(app.$('#start-practice').disabled, false);
-    assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, TEXTBOOK_PACK_PATH, TEXTBOOK_PACK_PATH]);
-  });
+  for (const [id, label, path, text] of [
+    ['textbook', '教科書問題', TEXTBOOK_PACK_PATH, registeredStandardText],
+    ['pretext', '事前テキスト', PRETEXT_PACK_PATH, registeredPretextText],
+  ]) {
+    test(`${mode}: a failed ${id} selection retries the selected bank without falling back`, async () => {
+      const app = await startApp(mode, { [`${id}Fetcher`]: call => call === 1 ? { ok: false, status: 404 }
+        : { ok: true, text: async () => text } });
+      await chooseBundledPack(app, id);
+      assert.equal(app.$(`#pack-${id}`).checked, true); assert.equal(app.$('#start-practice').disabled, true);
+      assert.equal(app.$('#retry-pack').textContent, `${label}を再読み込み`);
+      assert.ok(app.$('#pages-import-error').textContent.includes(path.split('/').at(-1)));
+      assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, path]);
+      await app.$('#retry-pack').click(); assert.equal(app.$('#retry-pack').hidden, true);
+      assert.match(app.$('#pages-import-status').textContent, new RegExp(`${label}.*${JSON.parse(text).questions.length}`));
+      assert.equal(app.$('#start-practice').disabled, false);
+      assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, path, path]);
+    });
+  }
 
   for (const [country, count] of [['フランス', 201], ['スペイン', 76], ['ポルトガル', 42]]) {
     test(`${mode}: a full ${country} round keeps pilot evidence and stable scoring through restart`, async () => {

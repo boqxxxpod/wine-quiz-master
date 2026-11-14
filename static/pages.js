@@ -1,4 +1,4 @@
-import { isNativeQuestion, isPilotQuestion, normalizeQuestion, validQuestion } from './quiz.js?v=bookmark-filter-20261103';
+import { isNativeQuestion, isPilotQuestion, normalizeQuestion, validQuestion } from './quiz.js?v=pretext-20261114';
 
 export const MAX_PACK_BYTES = 2_000_000;
 export const MAX_PACK_QUESTIONS = 2000;
@@ -8,6 +8,7 @@ export const DEFAULT_PACK_ID = 'practice';
 export const BUNDLED_PACKS = Object.freeze([
   Object.freeze({ id: DEFAULT_PACK_ID, label: '練習問題', filename: DEFAULT_PACK_FILENAME, path: DEFAULT_PACK_PATH }),
   Object.freeze({ id: 'textbook', label: '教科書問題', filename: 'wine-quiz-highlighted.json', path: '../question-packs/wine-quiz-highlighted.json' }),
+  Object.freeze({ id: 'pretext', label: '事前テキスト', filename: 'wine-quiz-pretext.json', path: '../question-packs/wine-quiz-pretext.json' }),
 ]);
 
 /** Validate the entire file before exposing any questions to a running session. */
