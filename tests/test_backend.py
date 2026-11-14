@@ -96,12 +96,18 @@ class HttpTests(unittest.TestCase):
                     self.assertEqual(response.headers["content-type"], "application/json")
                     self.assertEqual(response.content, (APP_DIR / "question-packs" / filename).read_bytes())
                     self.assertEqual(len(response.json()["questions"]), count)
-            for route in ("/question-packs/", "/question-packs/README.md", "/question-packs/batches/pilot-01.json", "/question-packs/private.json", "/question-packs/wine-quiz-500.json", "/question-packs/coverage.json", "/question-packs/highlighted-batches/wine-quiz-01.json", "/question-packs/pilot-150.json", "/question-packs/batches/wine-quiz-01.json"):
+            response = self.client.get("/question-packs/wine-quiz-pretext.json?v=pretext-test")
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.headers["content-type"], "application/json")
+            self.assertEqual(response.content, (APP_DIR / "question-packs/wine-quiz-pretext.json").read_bytes())
+            self.assertEqual(response.json()["metadata"]["title"], "事前テキスト")
+            self.assertEqual(len(response.json()["questions"]), response.json()["metadata"]["question_count"])
+            for route in ("/question-packs/", "/question-packs/README.md", "/question-packs/batches/pilot-01.json", "/question-packs/private.json", "/question-packs/wine-quiz-500.json", "/question-packs/coverage.json", "/question-packs/highlighted-batches/wine-quiz-01.json", "/question-packs/pilot-150.json", "/question-packs/batches/wine-quiz-01.json", "/question-packs/pretext-source.txt", "/question-packs/pretext-coverage.json", "/question-packs/pretext-validation-report.md"):
                 with self.subTest(route=route):
                     self.assertEqual(self.client.get(route).status_code, 404)
 
     def test_bundled_packs_reject_missing_files_and_leaf_or_parent_symlinks(self):
-        for filename in ("wine-quiz-highlighted.json", "wine-quiz-practice-20261031.json", "place-relations.json"):
+        for filename in ("wine-quiz-highlighted.json", "wine-quiz-practice-20261031.json", "wine-quiz-pretext.json", "place-relations.json"):
             with self.subTest(filename=filename):
                 root = Path(self.temp.name) / filename
                 pack_dir = root / "question-packs"

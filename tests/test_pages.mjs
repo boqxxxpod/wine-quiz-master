@@ -245,10 +245,10 @@ test('default pack carries the module version and bypasses stale cached JSON', a
   assert.equal(result.questions.length, 1);
 });
 
-test('both registered banks resolve relative to the deployed module and use the same cache version', async () => {
+test('all registered banks resolve relative to the deployed module and use the same cache version', async () => {
   const { loadBundledQuestionPack: loadVersioned } = await import('../static/pages.js?v=banks-test');
   assert.equal(DEFAULT_PACK_ID, 'practice');
-  assert.deepEqual(BUNDLED_PACKS.map(pack => [pack.id, pack.label]), [['practice', '練習問題'], ['textbook', '教科書問題']]);
+  assert.deepEqual(BUNDLED_PACKS.map(pack => [pack.id, pack.label]), [['practice', '練習問題'], ['textbook', '教科書問題'], ['pretext', '事前テキスト']]);
   for (const pack of BUNDLED_PACKS) {
     const result = await loadVersioned(pack.id, async (url, options) => {
       const expected = new URL(pack.path, import.meta.url);

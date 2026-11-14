@@ -10,7 +10,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from app.store import Store
-from scripts.build_pages import MARKER, PUBLIC_FILES, PUBLIC_QUESTION_PACK, PUBLIC_PRACTICE_PACK, PUBLIC_QUESTION_PACKS, PUBLIC_PRACTICE_ASSETS, PUBLIC_PLACE_PACK, PUBLIC_PLACE_MODULES, SOURCE_ASSET_VERSION, ROOT, build
+from scripts.build_pages import MARKER, PUBLIC_FILES, PUBLIC_QUESTION_PACK, PUBLIC_PRACTICE_PACK, PUBLIC_PRETEXT_PACK, PUBLIC_QUESTION_PACKS, PUBLIC_PRACTICE_ASSETS, PUBLIC_PLACE_PACK, PUBLIC_PLACE_MODULES, SOURCE_ASSET_VERSION, ROOT, build
 from scripts.export_questions import export_questions
 
 
@@ -39,6 +39,7 @@ class PublicBuildTests(unittest.TestCase):
                          "question-packs/batches/pilot-01.json", "question-packs/pilot-150.json",
                          "question-packs/batches/wine-quiz-01.json", "question-packs/wine-quiz-500.json",
                          "question-packs/coverage.json", "question-packs/highlighted-batches/wine-quiz-01.json", "app/store.py",
+                         "question-packs/pretext-source.txt", "question-packs/pretext-coverage.json", "question-packs/pretext-validation-report.md",
                          "question-packs/practice-assets/it-023.jpg", "question-packs/practice-assets/it-024.jpg",
                          "question-packs/practice-assets/it-025.jpg", "question-packs/practice-assets/it-026.jpg"):
             path = self.root / relative
@@ -61,6 +62,20 @@ class PublicBuildTests(unittest.TestCase):
         before = {str(p.relative_to(self.output)): p.read_bytes() for p in self.output.rglob("*") if p.is_file()}
         (self.root / PUBLIC_PRACTICE_PACK).unlink()
         with self.assertRaisesRegex(ValueError, PUBLIC_PRACTICE_PACK):
+            build(self.root, self.output)
+        self.assertEqual({str(p.relative_to(self.output)): p.read_bytes() for p in self.output.rglob("*") if p.is_file()}, before)
+
+    def test_missing_or_symlinked_pretext_pack_preserves_last_complete_artifact(self):
+        build(self.root, self.output)
+        before = {str(p.relative_to(self.output)): p.read_bytes() for p in self.output.rglob("*") if p.is_file()}
+        source = self.root / PUBLIC_PRETEXT_PACK
+        source.unlink()
+        with self.assertRaisesRegex(ValueError, PUBLIC_PRETEXT_PACK):
+            build(self.root, self.output)
+        outside = self.base / "private-pretext.json"
+        outside.write_text("PRIVATE CANARY", encoding="utf-8")
+        source.symlink_to(outside)
+        with self.assertRaisesRegex(ValueError, PUBLIC_PRETEXT_PACK):
             build(self.root, self.output)
         self.assertEqual({str(p.relative_to(self.output)): p.read_bytes() for p in self.output.rglob("*") if p.is_file()}, before)
 

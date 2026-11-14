@@ -1,0 +1,2602 @@
+{
+  "metadata": {
+    "title": "事前テキスト：原文項目と設問の対応",
+    "created_date": "2026-11-14",
+    "source_file": "pretext-source.txt",
+    "source_sha256": "23a7a829077222a06ab1d9b48704084d56644b9a6021ed288bd7a34e7f79cb0a",
+    "source_item_count": 196,
+    "question_count": 235,
+    "status_counts": {
+      "question": 139,
+      "explanation": 0,
+      "partial": 43,
+      "held": 14
+    },
+    "item_unit": "国ごとに見出しを除いた原文の行単位。1項目に複数の知識を含む。",
+    "status_legend": {
+      "question": "本文の知識を設問・解説で扱う",
+      "explanation": "解説で補足",
+      "partial": "一部の知識を採用しheld_detailsの部分を保留",
+      "held": "項目全体を保留"
+    },
+    "external_fact_check_completed": false,
+    "human_approved": false,
+    "reference_scope": "referencesは各scopeの限定的な公式資料確認。全問・全選択肢の外部確認ではない。"
+  },
+  "items": [
+    {
+      "id": "PRETEXT-JP-S001",
+      "country": "日本",
+      "source_line": 2,
+      "source_text": "・日本ワインの定義：「日本ワイン」とは、国産ブドウ原料とした果実酒である。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-JP-001"
+      ],
+      "note": "国内収穫のブドウのみを使用することに加え、原文で省略された国内製造の条件を補って定義を設問化。",
+      "reference_ids": [
+        "REF-NTA-JAPAN-WINE"
+      ]
+    },
+    {
+      "id": "PRETEXT-JP-S002",
+      "country": "日本",
+      "source_line": 3,
+      "source_text": "・GIに認定された産地とその年：山梨　2013年、北海道　2018年",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-JP-002",
+        "Q-PRETEXT-JP-003"
+      ],
+      "note": "山梨2013年と北海道2018年を個別に出題。日本の全GI産地を列挙したものとは扱わない。",
+      "reference_ids": [
+        "REF-NTA-GI-DATES"
+      ]
+    },
+    {
+      "id": "PRETEXT-JP-S003",
+      "country": "日本",
+      "source_line": 4,
+      "source_text": "・明治初期、1874年に山田宥教(ひろのり)と詫間憲久(いさのり)が甲府で本格的なワイン造りを始めた",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-JP-004",
+        "Q-PRETEXT-JP-005"
+      ],
+      "note": "年・場所・人物の漢字表記を設問と解説で採用。",
+      "held_details": "山田宥教・詫間憲久の原文の読み仮名は未確認のため採用しない。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-JP-S004",
+      "country": "日本",
+      "source_line": 5,
+      "source_text": "・新潟県にワイナリーを創立した川上善兵衛は、日本の風土に適した葡萄を研究し1927年にマスカット・ベーリーAやブラッククイーンなど日本独自の改良品種を開発し「日本ワインの父」と呼ばれている",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-JP-006",
+        "Q-PRETEXT-JP-007",
+        "Q-PRETEXT-JP-008"
+      ],
+      "note": "新潟の川上善兵衛と育成品種を出題。ブラック・クイーンの表記を統一。",
+      "held_details": "1927年を品種の完成・命名年とするか、交配年とするかの確認、および「日本ワインの父」という称号の範囲は保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-JP-S005",
+      "country": "日本",
+      "source_line": 6,
+      "source_text": "・日本でワインに仕込まれている量が最も多い品種は、甲州種、次にマスカット・ベーリーA種。",
+      "status": "held",
+      "question_ids": [],
+      "note": "品種別の仕込量順位は統計年と集計条件が不明のため出題しない。",
+      "held_details": "甲州が最多、次がマスカット・ベーリーAという順位。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-JP-S006",
+      "country": "日本",
+      "source_line": 8,
+      "source_text": "北海道：ドイツ系品種が多く、★北海道の空知地方は、ピノ・ノワール種",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-JP-009",
+        "Q-PRETEXT-JP-010"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-JP-S007",
+      "country": "日本",
+      "source_line": 9,
+      "source_text": "岩手県：ヤマブドウ種",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-JP-011"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-JP-S008",
+      "country": "日本",
+      "source_line": 10,
+      "source_text": "山形県：デラウェア種（日本１位）",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-JP-012"
+      ],
+      "note": "山形県とデラウェアの対応を出題。",
+      "held_details": "日本1位という生産順位は対象年・統計条件不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-JP-S009",
+      "country": "日本",
+      "source_line": 11,
+      "source_text": "長野県：メルロ種、シャルドネ種、ソーヴィニヨン・ブラン種（生産数量は、いずれも全国トップ）",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-JP-013"
+      ],
+      "note": "長野県の代表的な品種としてメルロ、シャルドネ、ソーヴィニヨン・ブランの対応を出題。",
+      "held_details": "3品種とも生産数量が全国トップという順位は対象年・統計条件不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-JP-S010",
+      "country": "日本",
+      "source_line": 12,
+      "source_text": "山梨県：甲州種とマスカット・ベーリーＡ種（日本ワインの生産量が最大）",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-JP-014"
+      ],
+      "note": "山梨県と甲州、マスカット・ベーリーAの対応を出題。",
+      "held_details": "日本ワイン生産量が最大という順位は対象年・集計条件不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S001",
+      "country": "フランス",
+      "source_line": 15,
+      "source_text": "・地図の場所（ブルゴーニュ、ボルドー、ロワール、ローヌ、シャンパーニュ）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-001",
+        "Q-PRETEXT-FR-002",
+        "Q-PRETEXT-FR-003",
+        "Q-PRETEXT-FR-004",
+        "Q-PRETEXT-FR-005"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S002",
+      "country": "フランス",
+      "source_line": 16,
+      "source_text": "・ワイン法　AOC　EU統合でAOPへ",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-006"
+      ],
+      "note": "AOCとAOPの対応を出題。AOCが廃止されたとは表現しない。",
+      "reference_ids": [
+        "REF-DGCCRF-AOC-AOP"
+      ]
+    },
+    {
+      "id": "PRETEXT-FR-S003",
+      "country": "フランス",
+      "source_line": 18,
+      "source_text": "◆シャンパーニュ：品種（白ブドウは、シャルドネ種、黒ブドウは、ピノ・ノワール種、ムニエ種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-007",
+        "Q-PRETEXT-FR-008"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S004",
+      "country": "フランス",
+      "source_line": 19,
+      "source_text": "製造工程（スティルワインを瓶詰→瓶内二次発酵→動瓶→澱抜き→糖分調整）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-009",
+        "Q-PRETEXT-FR-010"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S005",
+      "country": "フランス",
+      "source_line": 20,
+      "source_text": "◆アルザス；品種（リースリング種、ゲヴェルツトラミネール種、ピノ・グリ種、ピノ･ノワール種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-011",
+        "Q-PRETEXT-FR-012"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S006",
+      "country": "フランス",
+      "source_line": 21,
+      "source_text": "山脈名（ヴォージュ山脈）ドイツとの国境",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-FR-013"
+      ],
+      "note": "山脈名を出題し、アルザスの西側と整理。山脈を国境と同一視しない。",
+      "held_details": "原文の「ドイツとの国境」が山脈に掛かるように読める部分は正答に採用しない。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S007",
+      "country": "フランス",
+      "source_line": 22,
+      "source_text": "クレマン・ダルザスはフランスの家庭で消費されるAOPのスパークリングワインの中で1位",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-FR-063"
+      ],
+      "note": "クレマン・ダルザスとアルザスのAOP発泡ワインの関係を出題。消費順位は採用しない。",
+      "held_details": "家庭で消費されるAOP発泡ワイン中1位という順位は、対象年・集計条件不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S008",
+      "country": "フランス",
+      "source_line": 23,
+      "source_text": "◆ブルゴーニュ：ブルゴーニュ地方は、ボージョレからシャブリまでの範囲で半大陸性気候",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-003",
+        "Q-PRETEXT-FR-014",
+        "Q-PRETEXT-FR-015"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S009",
+      "country": "フランス",
+      "source_line": 24,
+      "source_text": "品種（シャルドネ種、ピノ･ノワール種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-016"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S010",
+      "country": "フランス",
+      "source_line": 26,
+      "source_text": "ジュヴレ・シャンベルタン村：AOP：シャンベルタン",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-017"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S011",
+      "country": "フランス",
+      "source_line": 27,
+      "source_text": "モレ・サン・ドニ村：AOPクロ・ド・タール",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-018"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S012",
+      "country": "フランス",
+      "source_line": 28,
+      "source_text": "シャンボール・ミュジニ村：AOPミュジニイ",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-019"
+      ],
+      "note": "「ミュジニイ」「シャンボール・ミュジニ」を「ミュジニー」「シャンボール・ミュジニー」に表記整理。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S013",
+      "country": "フランス",
+      "source_line": 29,
+      "source_text": "ヴージョ村：AOPクロ・ド・ヴージョ",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-020"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S014",
+      "country": "フランス",
+      "source_line": 30,
+      "source_text": "ヴォーヌ・ロマネ村：AOPロマネ・コンティ",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-021"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S015",
+      "country": "フランス",
+      "source_line": 32,
+      "source_text": "アロース・コルトン村",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-022"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S016",
+      "country": "フランス",
+      "source_line": 33,
+      "source_text": "ラドワ村",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-022"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S017",
+      "country": "フランス",
+      "source_line": 34,
+      "source_text": "ペルナン・ヴェルジュレス村：AOPコルトン・シャルルマーニュ",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-022",
+        "Q-PRETEXT-FR-023"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S018",
+      "country": "フランス",
+      "source_line": 35,
+      "source_text": "ピュリニー・モンラッシェ村：AOPモンラッシェ",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-024"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S019",
+      "country": "フランス",
+      "source_line": 36,
+      "source_text": "シャサーニュ・モンラッシェ村：AOPモンラッシェ",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-024"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S020",
+      "country": "フランス",
+      "source_line": 37,
+      "source_text": "◆ジュラ・サヴォワ：ブルゴーニュの東側で、アルプス山脈から続くジュラ山脈のすそ野に畑が広がる",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-FR-025"
+      ],
+      "note": "ジュラとブルゴーニュの位置関係を出題。",
+      "held_details": "ジュラとサヴォワを一括してジュラ山脈のすそ野とする地形説明は保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S021",
+      "country": "フランス",
+      "source_line": 38,
+      "source_text": "品種（サヴァニャン種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-025",
+        "Q-PRETEXT-FR-026"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S022",
+      "country": "フランス",
+      "source_line": 39,
+      "source_text": "ヴァン・ジョーヌ（黄色ワイン）は黄色を帯びた辛口ワイン。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-026",
+        "Q-PRETEXT-FR-027"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S023",
+      "country": "フランス",
+      "source_line": 40,
+      "source_text": "AOP：シャトー・シャロン",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-027"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S024",
+      "country": "フランス",
+      "source_line": 41,
+      "source_text": "ヴァン・ド・パイユ（藁ワイン）は、藁の上で乾燥させた甘口ワイン。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-028"
+      ],
+      "note": "乾燥ブドウによる甘口ワインを出題。常に藁のみを使うという限定は加えない。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S025",
+      "country": "フランス",
+      "source_line": 42,
+      "source_text": "◆ローヌ：AOPワイン産地としてボルドーに次ぎ2位の規模、生産量の80％が赤、ロゼが13％で大半を占める。",
+      "status": "held",
+      "question_ids": [],
+      "note": "規模の順位と生産割合は対象年・指標が不明。",
+      "held_details": "ボルドーに次ぐ2位、赤80％、ロゼ13％の数値は保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S026",
+      "country": "フランス",
+      "source_line": 43,
+      "source_text": "北部ローヌ：ローヌ川沿いの狭く、急斜面な畑で穏やかな半大陸性気候である。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-029"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S027",
+      "country": "フランス",
+      "source_line": 44,
+      "source_text": "品種（黒ブドウは、シラー種　白ブドウは、ヴィオニエ種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-030",
+        "Q-PRETEXT-FR-031"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S028",
+      "country": "フランス",
+      "source_line": 45,
+      "source_text": "AOP：コート・ロティ（赤）」、「コンドリュー（白）」、「エルミタージュ（赤、白、VdP）",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-FR-031",
+        "Q-PRETEXT-FR-032",
+        "Q-PRETEXT-FR-033"
+      ],
+      "note": "コート・ロティ、コンドリュー、エルミタージュの色の対応を出題。",
+      "held_details": "エルミタージュの「VdP」は略称の意味と呼称の扱いが特定できないため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S029",
+      "country": "フランス",
+      "source_line": 46,
+      "source_text": "南部ローヌ：ゆるやかな起伏の土地に畑が広がり地中海性気候である。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-034"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S030",
+      "country": "フランス",
+      "source_line": 47,
+      "source_text": "「ミストラル」と呼ばれるローヌ渓谷から地中海沿岸に吹き抜ける北風が特徴。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-035"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S031",
+      "country": "フランス",
+      "source_line": 48,
+      "source_text": "品種（黒ブドウは、シラー種、グルナッシュ種　白ブドウは、ヴィオニエ種）",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-FR-036"
+      ],
+      "note": "南部ローヌの黒ブドウとしてグルナッシュとシラーを出題。",
+      "held_details": "ヴィオニエのみを南部ローヌの代表白品種とする読み方は避け、白品種の地域全体への一般化を保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S032",
+      "country": "フランス",
+      "source_line": 49,
+      "source_text": "AOP：「シャトーヌフ・デュ・パプ（赤、白）」、「ジゴンダス（赤、ロゼ）」、",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-FR-037",
+        "Q-PRETEXT-FR-038"
+      ],
+      "note": "シャトーヌフ・デュ・パプの赤・白と、ジゴンダスの所属地域を出題。",
+      "held_details": "ジゴンダスを赤・ロゼのみに限定する記述は制度の適用時点を確認できないため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S033",
+      "country": "フランス",
+      "source_line": 50,
+      "source_text": "◆プロヴァンス：ロゼ　フランスのAOCロゼのうちの生産量の割合42%",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-FR-039"
+      ],
+      "note": "プロヴァンスとロゼの関係を出題。",
+      "held_details": "AOCロゼの生産割合42％は対象年・集計条件不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S034",
+      "country": "フランス",
+      "source_line": 51,
+      "source_text": "◆ラングドックルーション：フランス南部、地中海沿岸のワイン産地、地中海性気候",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-040"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S035",
+      "country": "フランス",
+      "source_line": 52,
+      "source_text": "フランスの全IGPワインの80％を生産する",
+      "status": "held",
+      "question_ids": [],
+      "note": "IGPの割合は対象年・集計条件が不明。",
+      "held_details": "フランスの全IGPワインの80％という割合は保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S036",
+      "country": "フランス",
+      "source_line": 53,
+      "source_text": "ヴァン・ド・リキュール（VDL）と天然甘口ワイン（VDN）を合わせ、甘口ワインの一大産地であり、ルーション地方は、フランス最大のVDNの生産地である。",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-FR-041"
+      ],
+      "note": "VDNとVDLの略称・甘口ワインとの関連を設問と解説で扱う。",
+      "held_details": "ルーションがフランス最大のVDN生産地という順位は時点・集計条件不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S037",
+      "country": "フランス",
+      "source_line": 54,
+      "source_text": "AOP：バニュルス（赤　ロゼ　白）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-042",
+        "Q-PRETEXT-FR-043"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S038",
+      "country": "フランス",
+      "source_line": 55,
+      "source_text": "◆ボルドー：1855年　パリ万博の際にナポレオン3世の指示によりメドック地区のワイン60銘柄を１級から５級までの格付けをした。",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-FR-044"
+      ],
+      "note": "1855年・パリ万博・ナポレオン3世・1〜5級を設問と解説で扱う。",
+      "held_details": "「メドック地区の60銘柄」という地域と銘柄数は時点・対象の確認が必要なため保留。",
+      "reference_ids": [
+        "REF-CIVB-1855"
+      ]
+    },
+    {
+      "id": "PRETEXT-FR-S039",
+      "country": "フランス",
+      "source_line": 56,
+      "source_text": "北緯45度前後とワイン生産地としては北側に位置するが温暖な海洋性気候。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-045"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S040",
+      "country": "フランス",
+      "source_line": 57,
+      "source_text": "広域AOP★ボルドー（赤　辛口白　ロゼ）」、フランスのAOP産地の中では最大面積である。",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-FR-046"
+      ],
+      "note": "広域ボルドーAOPの赤・辛口白・ロゼを出題。",
+      "held_details": "フランスのAOP中最大面積という順位は対象年・集計単位不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S041",
+      "country": "フランス",
+      "source_line": 59,
+      "source_text": "ガロンヌ川とジロンド川の左岸に広がる。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-047"
+      ],
+      "note": "左岸の地理を出題。「ジロンド川」は河口域として表記する。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S042",
+      "country": "フランス",
+      "source_line": 60,
+      "source_text": "メドックAOP：メドック（赤）、オー・メドック（赤）、サン・テステフ（赤）、ポイヤック（赤）、サン・ジュリアン（赤）、マルゴー（赤）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-048",
+        "Q-PRETEXT-FR-049"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S043",
+      "country": "フランス",
+      "source_line": 61,
+      "source_text": "グラーヴAOP：グラーヴ（赤、白）、ペサック・レオニャン（赤、白）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-050"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S044",
+      "country": "フランス",
+      "source_line": 63,
+      "source_text": "ドルドーニュ川の右岸のリブルヌを中心とするエリア",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-051"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S045",
+      "country": "フランス",
+      "source_line": 64,
+      "source_text": "サン・テミリオン地区AOP：サン・テミリオン（赤）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-052"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S046",
+      "country": "フランス",
+      "source_line": 65,
+      "source_text": "ポムロール地区AOP：ポムロール（赤）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-052"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S047",
+      "country": "フランス",
+      "source_line": 66,
+      "source_text": "◆ロワール：フランス最大の大河ロワール川（1012ｍ）によって形成された、渓谷沿いに広がるワイン産地",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-FR-053"
+      ],
+      "note": "ロワール川沿いの産地という地理を出題。「1012ｍ」は距離の単位に誤記がある。",
+      "held_details": "原文の厳密な河川長は単位誤記と測定条件の確認が必要なため、数値問題にはしない。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S048",
+      "country": "フランス",
+      "source_line": 67,
+      "source_text": "ペイナンテ：品種（ミュスカデ種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-054"
+      ],
+      "note": "ミュスカデを出題し、解説で品種の別名ムロン・ド・ブルゴーニュを補足。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S049",
+      "country": "フランス",
+      "source_line": 68,
+      "source_text": "AOP：ミュスカデ（白）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-054"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S050",
+      "country": "フランス",
+      "source_line": 69,
+      "source_text": "アンジュソーミュール：品種（シュナン・ブラン種、カベルネ・フラン種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-055"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S051",
+      "country": "フランス",
+      "source_line": 70,
+      "source_text": "AOP：クーレ・ド・セラン（白）、カール・ド・ショーム（甘口白）、ボンヌゾー（甘口白）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-056",
+        "Q-PRETEXT-FR-057"
+      ],
+      "note": "呼称と白／甘口白の関係を出題。「クーレ・ド・セラン」はサヴニエールとの関係を解説で補足。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S052",
+      "country": "フランス",
+      "source_line": 71,
+      "source_text": "トゥーレーヌ：品種（シュナン・ブラン種、カベルネ・フラン種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-058"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S053",
+      "country": "フランス",
+      "source_line": 72,
+      "source_text": "AOP：シノン（赤、白、ロゼ）」、ヴーヴレ（白辛口～甘口　発泡）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-059",
+        "Q-PRETEXT-FR-060"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S054",
+      "country": "フランス",
+      "source_line": 73,
+      "source_text": "サントル・ニヴェルネ品種（ソーヴィニヨン・ブラン種、ピノ・ノワール種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-061"
+      ],
+      "note": "要点を新規設問・解説で確認。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-FR-S055",
+      "country": "フランス",
+      "source_line": 74,
+      "source_text": "AOP：サンセール（赤、白、ロゼ）、プイイ・フェメ（白）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-FR-062"
+      ],
+      "note": "「プイイ・フェメ」は「プイィ・フュメ」に表記整理。色の対応を出題。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S001",
+      "country": "イタリア",
+      "source_line": 77,
+      "source_text": "・地図　ピエモンテ、ヴェネト、トスカーナ",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-001",
+        "Q-PRETEXT-IT-002",
+        "Q-PRETEXT-IT-003"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S002",
+      "country": "イタリア",
+      "source_line": 78,
+      "source_text": "・イタリアはサヴォイア王家のもと1861年にイタリアを統一した。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-004"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S003",
+      "country": "イタリア",
+      "source_line": 79,
+      "source_text": "・ワイン法　DOC、さらに制約が厳しいDOCG",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-005"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S004",
+      "country": "イタリア",
+      "source_line": 81,
+      "source_text": "◆ピエモンテ：品種（モスカート・ビアンコ種、コルテーゼ種、ネッピオーロ種、バルベーラ種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-006",
+        "Q-PRETEXT-IT-007"
+      ],
+      "note": "ネッピオーロをネッビオーロに表記修正。黒2品種と白2品種を設問・解説でカバー。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S005",
+      "country": "イタリア",
+      "source_line": 82,
+      "source_text": "DOCG：アスティ（発泡白、甘口」、バルバレスコ（赤）、バローロ（赤）＝ワインの王",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-IT-007",
+        "Q-PRETEXT-IT-008",
+        "Q-PRETEXT-IT-009",
+        "Q-PRETEXT-IT-010"
+      ],
+      "note": "赤のバローロ・バルバレスコと、アスティの代表的な甘口発泡白を出題。",
+      "held_details": "アスティの呼称全体を甘口発泡白だけに限定する記述は採用しない。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S006",
+      "country": "イタリア",
+      "source_line": 83,
+      "source_text": "ガヴィ（白）＝コルテーゼ種",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-011"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S007",
+      "country": "イタリア",
+      "source_line": 84,
+      "source_text": "◆ロンバルディア：イタリアの北西部に位置する。イタリアで最も豊かな州でミラノを有す",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-IT-012"
+      ],
+      "note": "ロンバルディアの位置とミラノの所属を出題。",
+      "held_details": "「イタリアで最も豊かな州」は指標・時点が不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S008",
+      "country": "イタリア",
+      "source_line": 85,
+      "source_text": "品種（シャルドネ種、ピノ・ビアンコ種、ピノ・ネーロ種（別名ピノ・ノワール種））",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-013",
+        "Q-PRETEXT-IT-015"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S009",
+      "country": "イタリア",
+      "source_line": 86,
+      "source_text": "DOCG：フランチャコルタ（発泡白、発泡ロゼ）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-014",
+        "Q-PRETEXT-IT-015"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S010",
+      "country": "イタリア",
+      "source_line": 87,
+      "source_text": "◆ヴェネト：ブドウの搾りかすから造る蒸留酒の「グラッパ」がある。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-016"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S011",
+      "country": "イタリア",
+      "source_line": 88,
+      "source_text": "品種（ガルガネガ種、グレーラ種、コルヴィーナ種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-017"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S012",
+      "country": "イタリア",
+      "source_line": 89,
+      "source_text": "DOCG：アマローネ・デッラ・ヴァルポリチェッラ（赤）、コネリアーノ・ヴァルドッビアーネ・プロセッコ（白、発泡白）＝グレーラ種、ソアーヴェ・スペリオーレ（白）＝ガルガネガ種。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-018",
+        "Q-PRETEXT-IT-019",
+        "Q-PRETEXT-IT-020"
+      ],
+      "note": "3呼称の代表的な色・品種を設問と解説でカバー。原文のヴァルドッビアーネをヴァルドッビアーデネに表記修正。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S013",
+      "country": "イタリア",
+      "source_line": 90,
+      "source_text": "◆トスカーナ：革新の牽引役を務めたキアンティ・クラッシコの生産者で、自由な発想から生まれた近代的スタイル「スーパータスカン」としてもてはやされ、ボリゲリ地区でサッシカイアの大成功によりカベルネ・ソーヴィニヨン種を主体のボルドー品種ワインが生産",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-021",
+        "Q-PRETEXT-IT-022",
+        "Q-PRETEXT-IT-023"
+      ],
+      "note": "ボリゲリをボルゲリに修正。スーパータスカン、サッシカイア、ボルドー系品種の関係を設問化。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S014",
+      "country": "イタリア",
+      "source_line": 91,
+      "source_text": "品種（ヴェルナッチャ種、サンジョヴェーゼ種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-024",
+        "Q-PRETEXT-IT-025"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S015",
+      "country": "イタリア",
+      "source_line": 92,
+      "source_text": "DOCG：ブルネッロ・ディ・モンタルチーノ（赤）、キアンティ（赤）、キアンティ・クラシコ（赤）、ヴィーノ・ノビレ・ディ・モンテプルチャーノ（赤）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-026",
+        "Q-PRETEXT-IT-027",
+        "Q-PRETEXT-IT-028"
+      ],
+      "note": "キアンティ・クラシコなどの表記を一般的な呼称表記へ調整。列挙4呼称と赤ワインを設問・解説でカバー。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S016",
+      "country": "イタリア",
+      "source_line": 93,
+      "source_text": "◆カンパーニャ：品種（グレーコ種、フィアーノ種、アリアニコ種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-029"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S017",
+      "country": "イタリア",
+      "source_line": 94,
+      "source_text": "DOCG：タウラージ（赤）＝アリアニコ種",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-030"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S018",
+      "country": "イタリア",
+      "source_line": 95,
+      "source_text": "◆プーリア：品種（プリミティーボ種（別名ジンファンデル種））",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-031"
+      ],
+      "note": "プリミティーボをプリミティーヴォに表記調整。ジンファンデルとの別名関係を設問化。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S019",
+      "country": "イタリア",
+      "source_line": 96,
+      "source_text": "◆シチリア：シチリア島は、地中海最大の島で、イタリア最大の州である。島のシンボルはエトナ火山",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-032",
+        "Q-PRETEXT-IT-033"
+      ],
+      "note": "エトナ火山と地中海最大の島を設問化。イタリア最大の州は面積という比較尺度を明記して解説で補足。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S020",
+      "country": "イタリア",
+      "source_line": 97,
+      "source_text": "シチリア島でワインにアルコールを添加して造る酒精強化ワインは、マルサーラ",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-034"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S021",
+      "country": "イタリア",
+      "source_line": 98,
+      "source_text": "品種（カタッラット種、ネーロ・ダーヴォラ種、ネレッロ・マスカレーゼ種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-035"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-IT-S022",
+      "country": "イタリア",
+      "source_line": 99,
+      "source_text": "DOC：エトナ・ビアンコ（白）＝カッリカンテ種、エトナ・ロッソ（赤）＝ネレッロ・マスカレーゼ種",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-IT-036",
+        "Q-PRETEXT-IT-037"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-DE-S001",
+      "country": "ドイツ",
+      "source_line": 102,
+      "source_text": "・シュペートブルグンダー種（別名：ピノ・ノワール種）。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-DE-001"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-DE-S002",
+      "country": "ドイツ",
+      "source_line": 103,
+      "source_text": "・プレディカーツヴァインは、6段階 の特徴的なもの",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-DE-002"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-DE-S003",
+      "country": "ドイツ",
+      "source_line": 104,
+      "source_text": "アウスレーゼ：遅摘みせずとも完熟し、一部貴腐により凝縮したブドウを用いる",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-DE-003"
+      ],
+      "note": "原文の「遅摘みせずとも」を避け、十分に熟した房を選ぶ特徴と一部に貴腐を含み得る点を採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-DE-S004",
+      "country": "ドイツ",
+      "source_line": 105,
+      "source_text": "アイスヴァイン：樹上で氷点下7℃以下の寒気で凍結したブドウを凍結状態で醸造する",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-DE-004"
+      ],
+      "note": "樹上での自然凍結と氷点下7℃以下という条件を採用。原文の「凍結状態で醸造」は「凍った状態で圧搾」として、凍結したまま発酵するとの誤解を防ぐ。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-DE-S005",
+      "country": "ドイツ",
+      "source_line": 107,
+      "source_text": "◆モーゼル：白ワイン用品種が栽培面積の90％を占める",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-DE-005"
+      ],
+      "note": "白ワイン用品種が主体という特徴を出題。",
+      "held_details": "栽培面積の90％という割合は対象年・集計条件不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-DE-S006",
+      "country": "ドイツ",
+      "source_line": 108,
+      "source_text": "モーゼル川と、その２つの支流のザール川とルーヴァー川の３つの川の流域の産地で渓谷に畑が広がりその40％が30度以上の急斜面",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-DE-006"
+      ],
+      "note": "モーゼル川、ザール川、ルーヴァー川と渓谷・急斜面の特徴を出題・解説に採用。",
+      "held_details": "40％が30度以上の急斜面という数値は対象年・定義不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-DE-S007",
+      "country": "ドイツ",
+      "source_line": 109,
+      "source_text": "◆ラインガウ：ドイツワインの中心的存在でカビネット、シュペートレーゼ、そして貴腐ワイン、格付け畑はいずれもラインガウが発祥地",
+      "status": "held",
+      "question_ids": [],
+      "note": "ラインガウを複数の区分・貴腐ワイン・格付け畑すべての発祥地とする一括断定は出題しない。",
+      "held_details": "カビネット、シュペートレーゼ、貴腐ワイン、格付け畑の各発祥地という主張の個別確認が必要。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-DE-S008",
+      "country": "ドイツ",
+      "source_line": 110,
+      "source_text": "◆フランケン：ボックスボイテル",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-DE-007"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ES-S001",
+      "country": "スペイン",
+      "source_line": 113,
+      "source_text": "地理　リオハ、ラ・マンチャ、ガルシア",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-ES-001",
+        "Q-PRETEXT-ES-002"
+      ],
+      "note": "「ガルシア」を「ガリシア」に修正し、北部・内陸中央部・北西部の位置関係を文章で出題。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ES-S002",
+      "country": "スペイン",
+      "source_line": 114,
+      "source_text": "ワイン法　DO：高級ワインの中核的なカテゴリー",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-ES-003"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ES-S003",
+      "country": "スペイン",
+      "source_line": 115,
+      "source_text": "DOCa：DOの中でも厳しい基準で認められた最高品質ワイン",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-ES-004"
+      ],
+      "note": "DOCaがDOの中でより厳しい基準を満たす呼称である関係を採用。他区分も含めた単純な最上位順位とは表現しない。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ES-S004",
+      "country": "スペイン",
+      "source_line": 117,
+      "source_text": "◆リオハ：品種（テンプラニーリョ）　スペインの代表品種黒ブドウ",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-ES-005"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ES-S005",
+      "country": "スペイン",
+      "source_line": 118,
+      "source_text": "◆ガリシア州の産地リアス・バイシャス：品種（アルバリーニョ）　海のワイン",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-ES-006",
+        "Q-PRETEXT-ES-007"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ES-S006",
+      "country": "スペイン",
+      "source_line": 119,
+      "source_text": "◆カスティーリャ・イ・レオン州 の産地リベラ・デル・ドゥエロ：ベガ・シシリアやペスケラを始め、世界的名声を得るブランドのワイナリーがある",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-ES-008",
+        "Q-PRETEXT-ES-009"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ES-S007",
+      "country": "スペイン",
+      "source_line": 120,
+      "source_text": "◆カスティーリャ・ラ・マンチャ州の産地ラ・マンチャ：世界最大のワイン生産地",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-ES-010"
+      ],
+      "note": "カスティーリャ・ラ・マンチャ州とラ・マンチャの対応を出題。",
+      "held_details": "「世界最大のワイン生産地」は地理的範囲・指標・対象年が不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ES-S008",
+      "country": "スペイン",
+      "source_line": 122,
+      "source_text": "フィノ：軽く、色は薄くすっきりとしたドライなタイプ",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-ES-011"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ES-S009",
+      "country": "スペイン",
+      "source_line": 123,
+      "source_text": "オロロソ：琥珀色からマホガニー色で酸化させて豊かな香りとデリケートなコクと深みのある辛口タイプ",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-ES-012"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-PT-S001",
+      "country": "ポルトガル",
+      "source_line": 126,
+      "source_text": "・コルクは、ポルトガルの主要な輸出品の1つ",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-PT-001"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-PT-S002",
+      "country": "ポルトガル",
+      "source_line": 127,
+      "source_text": "・1756年ポートワインの原産地管理法が世界最初の原産地管理法",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-PT-002"
+      ],
+      "note": "1756年の原産地保護制度の整備とポートの歴史を関連付けて出題。法制度整備と生産地域の境界設定の時差を混同しない表現にする。",
+      "held_details": "「世界最初の原産地管理法」は制度の定義と他地域との比較が必要なため保留。",
+      "reference_ids": [
+        "REF-IVDP-1756"
+      ]
+    },
+    {
+      "id": "PRETEXT-PT-S003",
+      "country": "ポルトガル",
+      "source_line": 128,
+      "source_text": "・ワイン法　DOC　EU統合でDOPへ",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-PT-003"
+      ],
+      "note": "DOCとEUのDOPの対応関係を採用。DOC表記の廃止とは解釈しない。",
+      "reference_ids": [
+        "REF-IVDP-DOP-DOC"
+      ]
+    },
+    {
+      "id": "PRETEXT-PT-S004",
+      "country": "ポルトガル",
+      "source_line": 130,
+      "source_text": "◆北部のミーニョ：品種（アルバリーニョ種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-PT-004",
+        "Q-PRETEXT-PT-005"
+      ],
+      "note": "ミーニョの北部という位置と品種を採用。品種名はポルトガルの呼称「アルヴァリーニョ」に修正し、スペインのアルバリーニョとの同一性を解説。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-PT-S005",
+      "country": "ポルトガル",
+      "source_line": 131,
+      "source_text": "DOP：ヴィーニョ・ヴェルデ　グリーンのワイン",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-PT-006"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-PT-S006",
+      "country": "ポルトガル",
+      "source_line": 132,
+      "source_text": "◆デュリエンセ：DOP：ポート（酒精強化ワイン）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-PT-007"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-PT-S007",
+      "country": "ポルトガル",
+      "source_line": 133,
+      "source_text": "DOP：ドウロ（スティルワイン）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-PT-008"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-PT-S008",
+      "country": "ポルトガル",
+      "source_line": 134,
+      "source_text": "◆アレンテージャーノ：世界有数のコルク産地",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-PT-009"
+      ],
+      "note": "コルク産地との対応を設問化。世界有数という評価的表現は順位問題にしない。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-PT-S009",
+      "country": "ポルトガル",
+      "source_line": 135,
+      "source_text": "◆テラス・マデイレンス：DOP：マディラ（酒精強化ワイン）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-PT-010"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-PT-S010",
+      "country": "ポルトガル",
+      "source_line": 137,
+      "source_text": "〇ルビータイプ：若いタイプのポートワイン",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-PT-011"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-PT-S011",
+      "country": "ポルトガル",
+      "source_line": 138,
+      "source_text": "〇トウニータイプ：小さい樽で長期に熟成させるなどして酸化をさせて黄褐色になったワイン",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-PT-012"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-PT-S012",
+      "country": "ポルトガル",
+      "source_line": 140,
+      "source_text": "リスボンから南西に1000kmの大西洋上に浮かぶ マディラ島で造られる酒精強化ワイン",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-PT-013"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-PT-S013",
+      "country": "ポルトガル",
+      "source_line": 142,
+      "source_text": "〇カンテイロ：太陽熱を利用した天然の加熱方法",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-PT-014"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-PT-S014",
+      "country": "ポルトガル",
+      "source_line": 143,
+      "source_text": "〇エストゥファ：人工的な加熱装置",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-PT-015"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AT-S001",
+      "country": "オーストリア",
+      "source_line": 146,
+      "source_text": "・オーストリアのブドウ栽培総面積のうち白ブドウが約7割である",
+      "status": "held",
+      "question_ids": [],
+      "note": "白ブドウが約7割という栽培面積割合は対象年・集計条件が不明のため出題しない。",
+      "held_details": "白ブドウ栽培面積の約7割という割合。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AT-S002",
+      "country": "オーストリア",
+      "source_line": 147,
+      "source_text": "・生産地域は、東部に集中し、ニーダーエスタライヒ州とブルゲンラント州が2大産地",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AT-001",
+        "Q-PRETEXT-AT-002"
+      ],
+      "note": "東部への集中と主要2州を出題。「ニーダーエスターライヒ」に表記を統一。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AT-S003",
+      "country": "オーストリア",
+      "source_line": 148,
+      "source_text": "・オーストリアの新酒をホイリゲという",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AT-003"
+      ],
+      "note": "新酒を表す語を出題し、同語が酒場も指す点を解説で補足。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AT-S004",
+      "country": "オーストリア",
+      "source_line": 149,
+      "source_text": "・ワイン法　DAC",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AT-004"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AT-S005",
+      "country": "オーストリア",
+      "source_line": 151,
+      "source_text": "◆ニーダ　エストライヒ州：オーストリア北東部にあり、全生産地域面積の約60％を占める。",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-AT-005"
+      ],
+      "note": "北東部という位置を出題し、州名を「ニーダーエスターライヒ」に表記統一。",
+      "held_details": "全生産地域面積の約60％という割合は対象年・集計条件不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AT-S006",
+      "country": "オーストリア",
+      "source_line": 152,
+      "source_text": "品種：グリューナー・ヴェルトリーナー種",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AT-006"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AT-S007",
+      "country": "オーストリア",
+      "source_line": 153,
+      "source_text": "DAC：ヴァインフィアテル（最大の生産地域であり、最初のDAC）",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-AT-007"
+      ],
+      "note": "最初のDACとしてヴァインフィアテルを出題。",
+      "held_details": "最大の生産地域という主張は面積等の指標・対象年が不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AT-S008",
+      "country": "オーストリア",
+      "source_line": 154,
+      "source_text": "◆ブルゲンラント州：ノイジードラーゼーに面し、東部のハンガリー国境に広がる産地",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AT-008"
+      ],
+      "note": "ハンガリー国境・東部・湖との位置関係を設問化。湖への言及はノイジードラー湖と表記。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AT-S009",
+      "country": "オーストリア",
+      "source_line": 155,
+      "source_text": "品種：ツヴァイゲルト種、ブラウフレンキッシュ種",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AT-009"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AT-S010",
+      "country": "オーストリア",
+      "source_line": 156,
+      "source_text": "DAC：ノイジードラーゼー",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AT-010"
+      ],
+      "note": "入力の知識を新規設問・解説に採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S001",
+      "country": "アメリカ",
+      "source_line": 160,
+      "source_text": "・ワイン生産量は、世界第4位",
+      "status": "held",
+      "question_ids": [],
+      "note": "正答を一意に確定できる基準年・条件の確認待ち。",
+      "held_details": "ワイン生産量の世界第4位は対象年・集計資料が不明。現在の順位として出題しない。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S002",
+      "country": "アメリカ",
+      "source_line": 161,
+      "source_text": "・国内のワイン消費量は、世界最大である",
+      "status": "held",
+      "question_ids": [],
+      "note": "正答を一意に確定できる基準年・条件の確認待ち。",
+      "held_details": "消費量世界最大は対象年・数量の集計条件が不明。現在の順位として出題しない。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S003",
+      "country": "アメリカ",
+      "source_line": 162,
+      "source_text": "・他の国とは異なり、国内ワインの生産量より消費量の方が多い",
+      "status": "held",
+      "question_ids": [],
+      "note": "正答を一意に確定できる基準年・条件の確認待ち。",
+      "held_details": "生産量と消費量の比較は対象年不明で、「他の国とは異なる」という排他的な説明も成立するとは限らないため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S004",
+      "country": "アメリカ",
+      "source_line": 163,
+      "source_text": "・生産量は、カリフォルニア州が全体の80％である",
+      "status": "held",
+      "question_ids": [],
+      "note": "正答を一意に確定できる基準年・条件の確認待ち。",
+      "held_details": "カリフォルニアの生産比率80％は対象年・集計対象が不明。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S005",
+      "country": "アメリカ",
+      "source_line": 164,
+      "source_text": "・19世紀後半からのゴールドラッシュにより人口の急増でワイン需要も拡大した",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-US-001"
+      ],
+      "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+      "held_details": "原文の「19世紀後半から」は開始時期の単純化があるため保留。ゴールドラッシュと人口・需要増の関係のみ採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S006",
+      "country": "アメリカ",
+      "source_line": 165,
+      "source_text": "・カリフォルニア大学デヴィズ校にブドウ栽培およびワイン醸造科が設けられ、当大学を中心に技術研究の成果を土台に大きな発展を遂げてきた",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-US-002",
+        "Q-PRETEXT-US-014",
+        "Q-PRETEXT-US-016"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S007",
+      "country": "アメリカ",
+      "source_line": 166,
+      "source_text": "・17世紀中頃、オランダ人によってマンハッタン島にブドウが植えられた。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-US-003",
+        "Q-PRETEXT-US-016"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S008",
+      "country": "アメリカ",
+      "source_line": 167,
+      "source_text": "・1976年、パリで開催された比較ブラインドテイスティング対決でフランスの著名なワイナリーを抑えて1位となり、カリフォルニアワインの国際的な認知度を高めた。後に「パリスの審判」と呼ばれた",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-US-004",
+        "Q-PRETEXT-US-005",
+        "Q-PRETEXT-US-014",
+        "Q-PRETEXT-US-016"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S009",
+      "country": "アメリカ",
+      "source_line": 168,
+      "source_text": "・気候は、太平洋沿岸では冷たいカリフォルニア海流で海に近い地域ほど冷涼で内陸に入るほど暑くなる",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-US-006",
+        "Q-PRETEXT-US-014"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S010",
+      "country": "アメリカ",
+      "source_line": 169,
+      "source_text": "・ワイン法　AVA",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-US-007"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S011",
+      "country": "アメリカ",
+      "source_line": 172,
+      "source_text": "◆ノース・コースト：AVA：ナパ、ソノマを含むカリフォルニアの最も重要な産地である。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-US-008",
+        "Q-PRETEXT-US-015"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S012",
+      "country": "アメリカ",
+      "source_line": 173,
+      "source_text": "◆セントラル・コースト：広域AVA。サンフランシスコ・カウンティ南部から太平洋岸に沿って、ロスアンゼルスに近いサンタバーバラまでの南北約400km東西約40kmに広がる産地",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-US-009"
+      ],
+      "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+      "held_details": "原文の概略距離（南北約400km、東西約40km）は範囲定義の照合が必要なため保留。太平洋岸に広がる産地として採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S013",
+      "country": "アメリカ",
+      "source_line": 175,
+      "source_text": "ブドウ栽培面積は全米第2位。",
+      "status": "held",
+      "question_ids": [],
+      "note": "正答を一意に確定できる基準年・条件の確認待ち。",
+      "held_details": "ワシントン州の栽培面積全米第2位は対象年・ワイン用ブドウと全ブドウの区分が不明。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S014",
+      "country": "アメリカ",
+      "source_line": 176,
+      "source_text": "AVA：ヤキマ・ヴァレー、ワラワラ・ヴァレー",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-US-010",
+        "Q-PRETEXT-US-015"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S015",
+      "country": "アメリカ",
+      "source_line": 178,
+      "source_text": "高品質のピノ・ノワール種の産地として世界的に注目",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-US-011",
+        "Q-PRETEXT-US-015"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S016",
+      "country": "アメリカ",
+      "source_line": 179,
+      "source_text": "AVA：ウィラメット・ヴァレー",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-US-012"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-US-S017",
+      "country": "アメリカ",
+      "source_line": 181,
+      "source_text": "AVA：フィンガー・レイクス、ロング・アイランド",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-US-013",
+        "Q-PRETEXT-US-015"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-CL-S001",
+      "country": "チリ",
+      "source_line": 184,
+      "source_text": "・日本のワイン市場において国別輸入量で第1位",
+      "status": "held",
+      "question_ids": [],
+      "note": "正答を一意に確定できる基準年・条件の確認待ち。",
+      "held_details": "日本の国別輸入量第1位は対象年・容器区分等の集計条件が不明。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-CL-S002",
+      "country": "チリ",
+      "source_line": 185,
+      "source_text": "・東はアンデス山脈、西は太平洋に海岸山脈が走り、その中間部が広い平地",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-CL-001",
+        "Q-PRETEXT-CL-003"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-CL-S003",
+      "country": "チリ",
+      "source_line": 186,
+      "source_text": "北はアタカマ砂漠、南は南氷洋、閉ざされた環境の産地",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-CL-002",
+        "Q-PRETEXT-CL-003"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-CL-S004",
+      "country": "チリ",
+      "source_line": 187,
+      "source_text": "・フィロキセラの病害が未だ出てない稀有なワイン産地",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-CL-004"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": [
+        "REF-SAG-PHYLLOXERA"
+      ]
+    },
+    {
+      "id": "PRETEXT-CL-S005",
+      "country": "チリ",
+      "source_line": 188,
+      "source_text": "・赤ワインの生産量が多く、全体の75％以上（4分の3）を占めている",
+      "status": "held",
+      "question_ids": [],
+      "note": "正答を一意に確定できる基準年・条件の確認待ち。",
+      "held_details": "赤ワイン比率75％以上は対象年と集計対象が不明。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-CL-S006",
+      "country": "チリ",
+      "source_line": 189,
+      "source_text": "・ワイン法　DO",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-CL-005"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-CL-S007",
+      "country": "チリ",
+      "source_line": 191,
+      "source_text": "◆アコンカグア：アンデス山脈から海に向かうアコンカグア川沿いのヴァレー",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-CL-006"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-CL-S008",
+      "country": "チリ",
+      "source_line": 192,
+      "source_text": "DO：アコンカグア",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-CL-007"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-CL-S009",
+      "country": "チリ",
+      "source_line": 193,
+      "source_text": "◆セントラル・ヴァレー：北のアコンカグア～南のマウレ川までの南北350kmの中央盆地の産地。",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-CL-008"
+      ],
+      "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+      "held_details": "北端・南端および南北350kmは呼称の地理的範囲との照合が必要なため保留。中央盆地という特徴を採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-CL-S010",
+      "country": "チリ",
+      "source_line": 194,
+      "source_text": "DO：マイポ・ヴァレー（カベルネ・ソーヴィニヨン種が中心で全体の栽培面積の50％以上）",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-CL-009"
+      ],
+      "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+      "held_details": "栽培面積50％以上は対象年不明のため保留。マイポとカベルネ・ソーヴィニヨンの対応を採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-CL-S011",
+      "country": "チリ",
+      "source_line": 196,
+      "source_text": "〇カベルネ・ソーヴィニヨン種：チリの気候と土壌にマッチし全体の30％を占める品種。",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-CL-010"
+      ],
+      "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+      "held_details": "栽培面積30％は対象年不明のため保留。主要品種としての位置付けを採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-CL-S012",
+      "country": "チリ",
+      "source_line": 197,
+      "source_text": "〇カルメネール種：長い間メルロ種と混同されていたが1994年違う品種であると判明。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-CL-011",
+        "Q-PRETEXT-CL-012"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AR-S001",
+      "country": "アルゼンチン",
+      "source_line": 200,
+      "source_text": "・アンデス山脈がチリとの国境にそびえ、太平洋からの湿った風はブロックされ、乾燥した大陸性気候",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AR-001",
+        "Q-PRETEXT-AR-002"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AR-S002",
+      "country": "アルゼンチン",
+      "source_line": 201,
+      "source_text": "・太平洋からの湿った風は、チリを超えると「ソンダ風」と呼ばれる乾燥した暖かい風",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AR-003"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AR-S003",
+      "country": "アルゼンチン",
+      "source_line": 202,
+      "source_text": "・ワイン法　DOC",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AR-004"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AR-S004",
+      "country": "アルゼンチン",
+      "source_line": 204,
+      "source_text": "◆北部地方のサルタ州：冷涼な気候を活かして、トロンテス・リオハーノ種",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-AR-005"
+      ],
+      "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+      "held_details": "サルタ州全体を冷涼とする説明は、標高と地域による違いを確認する必要があるため保留。品種の対応のみ採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AR-S005",
+      "country": "アルゼンチン",
+      "source_line": 205,
+      "source_text": "◆クージョ地方のメンドーサ州：総生産の80％を占める。",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-AR-006"
+      ],
+      "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+      "held_details": "総生産80％は対象年と集計対象が不明。クージョ地方とメンドーサ州の対応を採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AR-S006",
+      "country": "アルゼンチン",
+      "source_line": 206,
+      "source_text": "ラ・リオハ州：白用ブドウが主体で、トロンテス・リオハーノ種が35％を占める。",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-AR-007"
+      ],
+      "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+      "held_details": "白ブドウ主体およびトロンテス35％は対象年・集計条件不明。品種の対応のみ採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AR-S007",
+      "country": "アルゼンチン",
+      "source_line": 208,
+      "source_text": "マルベック種　栽培面積は世界一",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-AR-008"
+      ],
+      "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+      "held_details": "栽培面積世界一は対象年不明。国と品種の対応のみ採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AU-S001",
+      "country": "オーストラリア",
+      "source_line": 211,
+      "source_text": "・ブドウの栽培地域は、国の南半分にあたる南緯31～43度の間に帯状に分布する",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-AU-001"
+      ],
+      "note": "国の南部に産地が主に分布することを出題。",
+      "held_details": "南緯31～43度を全栽培地域の絶対的範囲とする記述は保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AU-S002",
+      "country": "オーストラリア",
+      "source_line": 212,
+      "source_text": "・1788年ニュー・サウス・ウェールズ州の初代総督だった英国海軍アーサー・フィリップ大佐が最初にワイン用ブドウ樹を持ち込んだ",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AU-002"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AU-S003",
+      "country": "オーストラリア",
+      "source_line": 213,
+      "source_text": "・ワイン法　GI",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AU-003"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AU-S004",
+      "country": "オーストラリア",
+      "source_line": 215,
+      "source_text": "◆西オーストラリア州：GI：マーガレット・リヴァー",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AU-004"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AU-S005",
+      "country": "オーストラリア",
+      "source_line": 216,
+      "source_text": "◆南オーストラリア州：GI：バロッサ・ヴァレー（シラーズ種（シラーズの首都）。黒ブドウ品種が85％）、GI：クナワラ（カベルネ・ソーヴィニヨン種。テラロッサと呼ばれる赤い粘土質と石灰岩質が混ざった土壌",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-AU-005",
+        "Q-PRETEXT-AU-006",
+        "Q-PRETEXT-AU-007",
+        "Q-PRETEXT-AU-008"
+      ],
+      "note": "州・産地・代表品種・テラロッサを出題。土壌は石灰岩上の赤い粘土質表土という関係へ修正。",
+      "held_details": "黒ブドウ品種85％は対象年・集計条件が不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AU-S006",
+      "country": "オーストラリア",
+      "source_line": 217,
+      "source_text": "◆ヴィトリア州：GI：ヤラ・ヴァレー（ピノ・ノワール種、シャルドネ種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AU-009",
+        "Q-PRETEXT-AU-010"
+      ],
+      "note": "ヴィトリア州をビクトリア州へ修正。州と品種の組み合わせを設問化。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AU-S007",
+      "country": "オーストラリア",
+      "source_line": 218,
+      "source_text": "◆ニュー・サウス・ウエールズ州：オーストラリアワイン産業の起源。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AU-011"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AU-S008",
+      "country": "オーストラリア",
+      "source_line": 219,
+      "source_text": "GI：ハンター（シラーズ種、セミヨン種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-AU-011",
+        "Q-PRETEXT-AU-012"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-AU-S009",
+      "country": "オーストラリア",
+      "source_line": 220,
+      "source_text": "◆タスマニア州：ピノ・ノワール種とシャルドネ種の極めて重要な生産拠点になりつつあり、冷涼の産地",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-AU-013",
+        "Q-PRETEXT-AU-014"
+      ],
+      "note": "冷涼さと重要品種を出題。",
+      "held_details": "「重要な生産拠点になりつつある」という進行状況は比較時点が不明のため採用しない。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-NZ-S001",
+      "country": "ニュージーランド",
+      "source_line": 223,
+      "source_text": "・ニュージーランドを代表する白ブドウは、ソーヴィニヨン・ブラン種",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-NZ-001"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-NZ-S002",
+      "country": "ニュージーランド",
+      "source_line": 224,
+      "source_text": "・全輸出量の70％以上を占めている。",
+      "status": "held",
+      "question_ids": [],
+      "note": "年度不明の割合のため設問化を保留。",
+      "held_details": "全輸出量の70％以上という割合は、対象年・輸出量の単位や品種別集計の根拠が不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-NZ-S003",
+      "country": "ニュージーランド",
+      "source_line": 225,
+      "source_text": "・ニュージーランド ワインの99％以上にスクリューキャップが採用されている",
+      "status": "held",
+      "question_ids": [],
+      "note": "年度不明の割合のため設問化を保留。",
+      "held_details": "スクリューキャップ採用率99％以上という割合は対象年・調査範囲が不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-NZ-S004",
+      "country": "ニュージーランド",
+      "source_line": 226,
+      "source_text": "・1819年ニュージーランド北島、ケリケリにオーストラリアからブドウの苗を植えたのが始まり。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-NZ-003"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-NZ-S005",
+      "country": "ニュージーランド",
+      "source_line": 227,
+      "source_text": "・2007年のヴィンテージよりは、85％ルールが適用する。（品種名、収穫年、産地名）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-NZ-004",
+        "Q-PRETEXT-NZ-005",
+        "Q-PRETEXT-NZ-013"
+      ],
+      "note": "85％の表示基準と、2011年版の公式コードが示す2007年以降という適用範囲を設問化。複数表示時の組み合わせ基準も解説に記載。",
+      "reference_ids": [
+        "REF-MFAT-NZ-85",
+        "REF-NZW-85-2007"
+      ]
+    },
+    {
+      "id": "PRETEXT-NZ-S006",
+      "country": "ニュージーランド",
+      "source_line": 228,
+      "source_text": "・ワイン法　GI",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-NZ-006"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-NZ-S007",
+      "country": "ニュージーランド",
+      "source_line": 231,
+      "source_text": "GI：ギズボーン（世界最東端のワイン産地）",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-NZ-007"
+      ],
+      "note": "北島のGIという所属関係を出題。",
+      "held_details": "世界最東端という断定は比較範囲・根拠が不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-NZ-S008",
+      "country": "ニュージーランド",
+      "source_line": 232,
+      "source_text": "GI：ホークス・ベイ（ボルドー品種とシラー種の産地で、ニュージーランドで第2位のワイン産地）",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-NZ-008"
+      ],
+      "note": "北島の産地とボルドー系品種・シラーを出題。",
+      "held_details": "第2位のワイン産地という順位は尺度・時点が不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-NZ-S009",
+      "country": "ニュージーランド",
+      "source_line": 233,
+      "source_text": "GI：マーティンボロ（ピノ・ノワール種の銘醸地）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-NZ-009"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-NZ-S010",
+      "country": "ニュージーランド",
+      "source_line": 235,
+      "source_text": "GI：マールボロ（ニュージーランド最大の産地でソーヴィニヨン・ブラン種）",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-NZ-010"
+      ],
+      "note": "南島の産地とソーヴィニヨン・ブランの対応を出題。",
+      "held_details": "最大の産地という順位は尺度・時点が不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-NZ-S011",
+      "country": "ニュージーランド",
+      "source_line": 236,
+      "source_text": "GI：ネルソン",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-NZ-011"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-NZ-S012",
+      "country": "ニュージーランド",
+      "source_line": 237,
+      "source_text": "GI：セントラル・オタゴ（最も標高が高く、世界で最南端にある産地である）",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-NZ-012"
+      ],
+      "note": "南島のGIという所属関係を出題。",
+      "held_details": "最高標高・世界最南端の断定は比較範囲・根拠が不明のため保留。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-NZ-S013",
+      "country": "ニュージーランド",
+      "source_line": 239,
+      "source_text": "白ブドウは、ソーヴィニヨン・ブラン種、黒ブドウは、ピノ・ノワール種",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-NZ-001",
+        "Q-PRETEXT-NZ-002"
+      ],
+      "note": "原文の確かな知識を三択設問と解説に再構成。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ZA-S001",
+      "country": "南アフリカ",
+      "source_line": 242,
+      "source_text": "・東インド会社のオランダ人ヤン・ファン・リーベックが1659年2月2日にケープのブドウから初めてワインを造った。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-ZA-001",
+        "Q-PRETEXT-ZA-002"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ZA-S002",
+      "country": "南アフリカ",
+      "source_line": 243,
+      "source_text": "・気候は、地中海性気候。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-ZA-003"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ZA-S003",
+      "country": "南アフリカ",
+      "source_line": 244,
+      "source_text": "・南極からの冷たいベンゲラ海流の影響で緯度のわりに冷涼",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-ZA-004"
+      ],
+      "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+      "held_details": "「南極から」という海流の起源の単純化は保留。寒流であることと冷涼化の影響を採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ZA-S004",
+      "country": "南アフリカ",
+      "source_line": 245,
+      "source_text": "・春から夏にかけて「ケープドクター」と呼ばれる強い乾燥した風が南東から吹く",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-ZA-005",
+        "Q-PRETEXT-ZA-006"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ZA-S005",
+      "country": "南アフリカ",
+      "source_line": 246,
+      "source_text": "・瓶内二次発酵によるスパークリングワインを「キャップ・クラシック」と呼ぶ。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-ZA-007",
+        "Q-PRETEXT-ZA-008"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ZA-S006",
+      "country": "南アフリカ",
+      "source_line": 247,
+      "source_text": "・ワイン法　WO　(Wine of Origin)　1973年に制定。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-ZA-009",
+        "Q-PRETEXT-ZA-010"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ZA-S007",
+      "country": "南アフリカ",
+      "source_line": 249,
+      "source_text": "◆西ケープ州：9割が西ケープ州に集中している",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-ZA-011"
+      ],
+      "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+      "held_details": "西ケープ州9割は対象年・集計条件不明。主要産地が集中する州名のみ採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ZA-S008",
+      "country": "南アフリカ",
+      "source_line": 250,
+      "source_text": "WO：ステレンボッシュ（ワイン産業の中心地、南アフリカ最大のブドウ栽培面積、カベルネ・ソーヴィニヨン種、ピノ・タージュ種）",
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-ZA-012"
+      ],
+      "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+      "held_details": "ブドウ栽培面積最大は対象年と地域区分不明。重要な産地であることと品種対応を採用。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ZA-S009",
+      "country": "南アフリカ",
+      "source_line": 252,
+      "source_text": "ピノ・タージュ種：南アフリカの交配品種（ピノ・ノワール種　X　サンソー種）。",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-ZA-013"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    },
+    {
+      "id": "PRETEXT-ZA-S010",
+      "country": "南アフリカ",
+      "source_line": 253,
+      "source_text": "シュナン・ブラン種（別名：スティーン種）",
+      "status": "question",
+      "question_ids": [
+        "Q-PRETEXT-ZA-014"
+      ],
+      "note": "原文項目の安定した知識を新規設問と解説に対応。",
+      "reference_ids": []
+    }
+  ],
+  "references": [
+    {
+      "id": "REF-NTA-JAPAN-WINE",
+      "url": "https://www.nta.go.jp/about/introduction/torikumi/70th_html/02_1.htm",
+      "title": "国税庁70年史：果実酒等の製法品質表示基準・ワインの表示ルール",
+      "checked_date": "2026-11-14",
+      "scope": "日本ワインの定義。本文の国際交渉・ワインの表示ルール抜粋を確認。",
+      "source_item_ids": [
+        "PRETEXT-JP-S001"
+      ],
+      "finding": "国産ぶどうのみを原料とし、日本国内で製造された果実酒である。原文では不足する国内製造・原料の限定を補う。"
+    },
+    {
+      "id": "REF-NTA-GI-DATES",
+      "url": "https://www.nta.go.jp/english/taxes/liquor_administration/geographical/02.htm",
+      "title": "National Tax Agency: Information on GIs protected in Japan",
+      "checked_date": "2026-11-14",
+      "scope": "ワインGI山梨・北海道の指定日。指定一覧の該当行を確認。",
+      "source_item_ids": [
+        "PRETEXT-JP-S002"
+      ],
+      "finding": "山梨（ぶどう酒）は2013年7月16日、北海道（ぶどう酒）は2018年6月28日。他のワインGIも掲載されており、この2産地を全指定産地と扱わない。"
+    },
+    {
+      "id": "REF-CIVB-1855",
+      "url": "https://www.bordeaux.com/en/classifications/classifications-1855/",
+      "title": "CIVB Bordeaux.com: The 1855 Wines Classifications",
+      "checked_date": "2026-11-14",
+      "scope": "1855年格付けの契機、赤の段階数、現在の対象産地・銘柄数。ページの説明部分を確認。",
+      "source_item_ids": [
+        "PRETEXT-FR-S038"
+      ],
+      "finding": "1855年パリ万博でナポレオン3世が分類を求めたこと、赤が5段階であることを確認。現在の赤の対象はメドック60とグラーヴ1。原文の「1855年にメドック60」という当初対象・数の断定までは支持しない。"
+    },
+    {
+      "id": "REF-DGCCRF-AOC-AOP",
+      "url": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-vins-savoir-lire-les-etiquettes",
+      "title": "DGCCRF: Étiquetage des vins : savoir lire les étiquettes",
+      "checked_date": "2026-11-14",
+      "scope": "フランスのAOPと伝統表示AOCの関係。必須表示の説明を確認。",
+      "source_item_ids": [
+        "PRETEXT-FR-S002"
+      ],
+      "finding": "AOP等の表示を伝統表示appellation d’origine contrôlée等で置き換えられる。AOCが使用不可になったという意味の一律廃止・全面移行とは扱わない。"
+    },
+    {
+      "id": "REF-IVDP-DOP-DOC",
+      "url": "https://www.ivdp.pt/pt/comunicacao/guias-tematicos/embalagem-apresentacao-e-designacao/guia-para-embalagem-apresentacao-e-designacao/capitulo-4-validacoes/",
+      "title": "IVDP: Guia para embalagem, apresentação e designação — Capítulo 4, Validações",
+      "checked_date": "2026-11-14",
+      "scope": "ポルトガルのDOP／DOC表記。2022年12月22日付ガイドのDOP Douroの必須表示を確認。",
+      "source_item_ids": [
+        "PRETEXT-PT-S003"
+      ],
+      "finding": "DOP DouroでDenominação de Origem Protegida/DOP、Denominação de Origem/DO、Denominação de Origem Controlada/DOCの表示が列挙されている。DOCが使用できなくなったと断定しない。"
+    },
+    {
+      "id": "REF-IVDP-1756",
+      "url": "https://ivdp.pt/en",
+      "title": "Instituto dos Vinhos do Douro e Porto: Master of Port案内",
+      "checked_date": "2026-11-14",
+      "scope": "1756年とドウロの歴史上の位置付け。Master of Port Benelux案内（2024年7月30日）の説明を確認。",
+      "source_item_ids": [
+        "PRETEXT-PT-S002"
+      ],
+      "finding": "IVDPはドウロを1756年に由来する世界最古の区画・規制された産地と説明する。対象を区画・規制された産地に限定して根拠とし、あらゆる世界最初の原産地管理法という広い法制度史の主張には使わない。"
+    },
+    {
+      "id": "REF-MFAT-NZ-85",
+      "url": "https://www.mfat.govt.nz/assets/Trade-agreements/EU-NZ-FTA/Annexes/Annex-9-E-Wine-and-Spirits.pdf",
+      "title": "New Zealand MFAT: EU–NZ FTA, Annex 9-E, Wine and Spirits",
+      "checked_date": "2026-11-14",
+      "scope": "第11条の単一品種・ヴィンテージ表示について85%以上の条件（PDFの10〜11ページ）を確認。",
+      "source_item_ids": [
+        "PRETEXT-NZ-S005"
+      ],
+      "finding": "EU–NZの輸出入では単一品種・ヴィンテージ表示はそれぞれ85%以上が条件。この出典は国内全般の地域表示規則や2007ヴィンテージからの適用開始年を直接確定する根拠としては用いない。MPI・法令本文は取得拒否で未確認。"
+    },
+    {
+      "id": "REF-NZW-85-2007",
+      "url": "https://www.nzwine.com/media/6741/nzw_wsmp_cop_v2.pdf",
+      "title": "New Zealand Winegrowers: Wine Standards Management Plan Code of Practice, Version 2 (October 2011), Appendix 2",
+      "checked_date": "2026-11-14",
+      "scope": "業界団体公式PDFの冊子23ページ（PDF22番目のページ）の品種・ヴィンテージ・地域表示、2007年以降の適用説明を確認。",
+      "source_item_ids": [
+        "PRETEXT-NZ-S005"
+      ],
+      "finding": "2007年以降のワインで単一品種・ヴィンテージ・地域を表示する場合、その表示内容に85%以上由来する条件を確認。品種・年・地域を組み合わせて表示する場合は、その組み合わせで85%以上とする説明もある。2007年の適用開始に関する当時の業界公式資料として使える。現在の全規則を確認した意味ではない。"
+    },
+    {
+      "id": "REF-SAG-PHYLLOXERA",
+      "url": "https://www.sag.gob.cl/sites/default/files/Resoluci%C3%B3n%207787_2025.pdf",
+      "title": "Chile SAG: Resolución Exenta 7787/2025 (2025-09-29)",
+      "checked_date": "2026-11-14",
+      "scope": "第20条の国内未発生の検疫有害動植物リスト（PDF2ページの前文および22ページの該当種）を確認。SAGの未発生害虫ページが最新改正としてこの文書を案内している。",
+      "source_item_ids": [
+        "PRETEXT-CL-S004"
+      ],
+      "finding": "チリ本土・島嶼部に未発生とするリストに、Viteus (=Daktulosphaira) vitifoliae（ブドウネアブラムシ、フィロキセラ）がVitis spp.の害虫として掲載されている。チリが未発生の産地という採用箇所を支持する。過去から将来まで永久に未発生という意味ではない。"
+    }
+  ]
+}
