@@ -727,6 +727,35 @@ for (const mode of ['server', 'pages']) {
     assert.deepEqual(app.requests, [PRACTICE_PACK_PATH, PRETEXT_PACK_PATH, PRACTICE_PACK_PATH]);
   });
 
+  test(`${mode}: a saved pre-expansion question bookmark survives a pretext bank update`, async () => {
+    const stableId = 'Q-PRETEXT-JP-001';
+    const row = registeredPretext.questions.find(item => item.question_id === stableId);
+    assert.ok(row, 'the existing pretext question ID must remain available');
+    const storage = storageWithBookmarks({ 'bundled:pretext': [stableId] });
+    const app = await startApp(mode, { storage });
+    await chooseBundledPack(app, 'pretext');
+    assert.match(app.$('#pages-import-status').textContent, new RegExp(`事前テキスト.*${registeredPretext.questions.length}`));
+    await chooseCountry(app, row.country);
+    await chooseBookmarkFilter(app, 'bookmarked');
+    assert.equal(app.$('#count-all-label').textContent, '全問（1 問）');
+    await app.$('#start-practice').click();
+    assert.equal(app.$('.quiz-card').dataset.questionId, stableId);
+    assert.equal(app.$('#question-prompt').textContent, row.question);
+    const correct = app.document.querySelectorAll('.choice').find(node => node.querySelector('.choice-text').textContent === row.correct_answer);
+    await correct.click();
+    assert.equal(app.$('.bookmark-toggle').getAttribute('aria-pressed'), 'true');
+    assert.equal(app.$('.explanation-body').textContent, row.explanation);
+    await app.$('#back-to-setup').click();
+    await chooseBundledPack(app, 'textbook');
+    await chooseBookmarkFilter(app, 'bookmarked');
+    assert.equal(app.$('#start-practice').disabled, true);
+    const reloaded = await startApp(mode, { storage });
+    await chooseBundledPack(reloaded, 'pretext');
+    await chooseBookmarkFilter(reloaded, 'bookmarked');
+    await reloaded.$('#start-practice').click();
+    assert.equal(reloaded.$('.quiz-card').dataset.questionId, stableId);
+  });
+
   test(`${mode}: matching blocks incomplete or repeated choices, grades once and resets on restart`, async () => {
     const row = registeredPractice.questions.find(row => row.question_type === 'matching');
     const app = await startApp(mode, { practicePack: JSON.stringify({ metadata: {}, questions: [row] }) });

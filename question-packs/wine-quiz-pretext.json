@@ -3,20 +3,20 @@
     "title": "事前テキスト",
     "created_date": "2026-11-14",
     "language": "ja",
-    "question_count": 235,
+    "question_count": 247,
     "country_counts": {
-      "日本": 14,
-      "フランス": 63,
-      "イタリア": 37,
+      "日本": 17,
+      "フランス": 66,
+      "イタリア": 38,
       "ドイツ": 7,
       "スペイン": 12,
-      "ポルトガル": 15,
+      "ポルトガル": 17,
       "オーストリア": 10,
-      "アメリカ": 16,
+      "アメリカ": 17,
       "チリ": 12,
       "アルゼンチン": 8,
-      "オーストラリア": 14,
-      "ニュージーランド": 13,
+      "オーストラリア": 15,
+      "ニュージーランド": 14,
       "南アフリカ": 14
     },
     "format": "single_choice",
@@ -29,14 +29,22 @@
     "source_sha256": "23a7a829077222a06ab1d9b48704084d56644b9a6021ed288bd7a34e7f79cb0a",
     "source_item_count": 196,
     "coverage_status_counts": {
-      "question": 139,
+      "question": 142,
       "explanation": 0,
-      "partial": 43,
-      "held": 14
+      "partial": 42,
+      "held": 12
     },
     "temporal_policy": "年度不明の統計・順位は正答条件にしない。疑義のある部分は対応表に保留理由を記録する。",
     "qa_status": "auto_checked：構造・正答キー・入力項目との対応を確認。全問の外部事実確認と人による最終承認は未完了。",
-    "implementation_issue": "https://github.com/boqxxxpod/wine-quiz-master/issues/28"
+    "implementation_issue": "https://github.com/boqxxxpod/wine-quiz-master/issues/28",
+    "updated_date": "2026-11-15",
+    "latest_review_issue": "https://github.com/boqxxxpod/wine-quiz-master/issues/30",
+    "expansion": {
+      "base_question_count": 235,
+      "added_question_count": 12,
+      "corrected_question_count": 3,
+      "rechecked_item_count": 57
+    }
   },
   "questions": [
     {
@@ -176,7 +184,7 @@
         "日本"
       ],
       "topic": "歴史",
-      "question": "1874年に山田宥教と詫間憲久が本格的なワイン造りを始めた場所を1つ選んでください。",
+      "question": "明治初期、山田宥教と詫間憲久がワイン醸造に取り組んだ山梨県の都市を1つ選んでください。",
       "options": [
         "甲府",
         "新潟",
@@ -184,7 +192,7 @@
       ],
       "correct_index": 0,
       "correct_answer": "甲府",
-      "explanation": "山田宥教と詫間憲久は、1874年に甲府で本格的なワイン造りを始めました。時代は明治初期です。新潟は川上善兵衛のワイン造りや品種育成と結び付く土地であり、人物と地域を組み合わせて覚えましょう。",
+      "explanation": "山田宥教と詫間憲久は、明治初期の甲府でワイン醸造に取り組みました。1874年は二人の醸造に関する生産数量の記録が残る年です。試醸はそれ以前に始まっているため、ワイン造り全般の開始年としては扱いません。",
       "source_page": "事前テキスト／日本／PRETEXT-JP-S003",
       "source_item_ids": [
         "PRETEXT-JP-S003"
@@ -219,7 +227,7 @@
         "日本"
       ],
       "topic": "歴史",
-      "question": "山田宥教と詫間憲久が甲府で本格的なワイン造りを始めた年を1つ選んでください。",
+      "question": "山田宥教と詫間憲久の醸造について、山梨県の初期のワイン生産数量が府県別物産表に記録された年を1つ選んでください。",
       "options": [
         "1927年",
         "2013年",
@@ -227,7 +235,7 @@
       ],
       "correct_index": 2,
       "correct_answer": "1874年",
-      "explanation": "甲府で山田宥教と詫間憲久が本格的なワイン造りを始めたのは1874年で、明治初期に当たります。1927年は川上善兵衛による品種改良の歩みと関連する年であり、異なる出来事として整理してください。",
+      "explanation": "山梨県の白ワイン約900L・赤ワイン約1,800Lの生産数量が記録されたのは1874年です。二人の試醸はそれ以前に始まっており、醸造開始年とは区別します。1927年は川上善兵衛によるマスカット・ベーリーAの交配年です。",
       "source_page": "事前テキスト／日本／PRETEXT-JP-S003",
       "source_item_ids": [
         "PRETEXT-JP-S003"
@@ -9430,8 +9438,8 @@
       ],
       "correct_index": 0,
       "correct_answer": "ソーヴィニヨン・ブラン",
-      "explanation": "マールボロはニュージーランド南島のワイン産地で、ソーヴィニヨン・ブランとの結び付きが特に重要です。フィアーノはイタリアのカンパーニャ、グレーラはプロセッコと対応します。国・島・産地・品種を順に整理しましょう。",
-      "source_page": "事前テキスト／ニュージーランド／PRETEXT-NZ-S010",
+      "explanation": "マールボロはニュージーランド南島の産地で、ソーヴィニヨン・ブランとの結び付きが重要です。2017年の栽培面積は25,135haで、国内最大の産地でした。フィアーノはイタリアのカンパーニャ、グレーラはプロセッコと対応します。",
+      "source_page": "事前テキスト／ニュージーランド／PRETEXT-NZ-S010・教科書116頁（2017年の栽培面積）",
       "source_item_ids": [
         "PRETEXT-NZ-S010"
       ],
@@ -10184,6 +10192,712 @@
           "country": "南アフリカ",
           "source_item_ids": [
             "PRETEXT-ZA-S010"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "Q-PRETEXT-JP-015",
+      "knowledge_id": "PRETEXT-JP-015",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "歴史・育種",
+      "question": "川上善兵衛がマスカット・ベーリーAを生む交配を行った年を1つ選んでください。",
+      "options": [
+        "1874年",
+        "1927年",
+        "2013年"
+      ],
+      "correct_index": 1,
+      "correct_answer": "1927年",
+      "explanation": "マスカット・ベーリーAを生む交配は1927年に行われました。川上善兵衛が日本の風土に合うワイン用ブドウを求めた育種の一環です。ブラック・クイーンも同年の交配による品種ですが、交配年と後の選抜・命名・登録の時期は区別しましょう。",
+      "source_page": "事前テキスト／日本／PRETEXT-JP-S004；教科書p.5（対向4から推定）・7",
+      "source_item_ids": [
+        "PRETEXT-JP-S004"
+      ],
+      "textbook_knowledge_ids": [
+        "K0795",
+        "K0796",
+        "K0797"
+      ],
+      "evidence_ids": [
+        "E30-JP-P04P05",
+        "E30-JP-P06P07",
+        "E30-EJ-REVIEW",
+        "E30-JP-CROSS1927"
+      ],
+      "status": "auto_checked",
+      "version": 1,
+      "question_type": "single_choice",
+      "source_verbatim": false,
+      "validation": {
+        "structure_checked": true,
+        "source_text_compared": true,
+        "textbook_page_compared": true,
+        "human_approved": false,
+        "external_fact_check_completed": false,
+        "editorial_note": "教科書の開発・登録という表現は既存訂正記録と岩の原公式で再確認し、交配年に限定。人物を問う練習JP014、品種を問う既存事前JP006/008とは異なる年と出来事の関係を確認する。"
+      },
+      "sources": [
+        {
+          "title": "事前テキストと教科書の再確認（Issue #30）",
+          "url": "https://github.com/boqxxxpod/wine-quiz-master/issues/30",
+          "source_item_ids": [
+            "PRETEXT-JP-S004"
+          ],
+          "textbook_knowledge_ids": [
+            "K0795",
+            "K0796",
+            "K0797"
+          ],
+          "evidence_ids": [
+            "E30-JP-P04P05",
+            "E30-JP-P06P07",
+            "E30-EJ-REVIEW",
+            "E30-JP-CROSS1927"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "Q-PRETEXT-JP-016",
+      "knowledge_id": "PRETEXT-JP-016",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "産地・資料統計",
+      "question": "国税庁の平成29年度（2017年4月〜2018年3月）調査で、日本ワインの都道府県別製成数量が第1位の県を1つ選んでください。",
+      "options": [
+        "長野県",
+        "北海道",
+        "山梨県"
+      ],
+      "correct_index": 2,
+      "correct_answer": "山梨県",
+      "explanation": "平成29年度調査の日本ワイン製成数量では、山梨県が第1位です。同じ表では長野県が第2位、北海道が第3位となります。比べているのは日本ワインの製成数量であり、輸入原料を含む国内製造ワイン全体やワイナリー数の順位とは区別してください。",
+      "source_page": "事前テキスト／日本／PRETEXT-JP-S010；教科書p.4・10",
+      "source_item_ids": [
+        "PRETEXT-JP-S010"
+      ],
+      "textbook_knowledge_ids": [
+        "K0783",
+        "K0784"
+      ],
+      "evidence_ids": [
+        "E30-JP-P04P05",
+        "E30-JP-P10",
+        "E30-EJ-REVIEW",
+        "E30-JP-NTA-H29"
+      ],
+      "status": "auto_checked",
+      "version": 1,
+      "question_type": "single_choice",
+      "source_verbatim": false,
+      "validation": {
+        "structure_checked": true,
+        "source_text_compared": true,
+        "textbook_page_compared": true,
+        "human_approved": false,
+        "external_fact_check_completed": false,
+        "editorial_note": "元の年度不明順位を現在値にせず、独立した公的過去統計の年度・日本ワイン・都道府県別製成数量に限定。原文の統計年を特定した意味ではない。練習JP002のワイナリー数とは異指標。"
+      },
+      "sources": [
+        {
+          "title": "事前テキストと教科書の再確認（Issue #30）",
+          "url": "https://github.com/boqxxxpod/wine-quiz-master/issues/30",
+          "source_item_ids": [
+            "PRETEXT-JP-S010"
+          ],
+          "textbook_knowledge_ids": [
+            "K0783",
+            "K0784"
+          ],
+          "evidence_ids": [
+            "E30-JP-P04P05",
+            "E30-JP-P10",
+            "E30-EJ-REVIEW",
+            "E30-JP-NTA-H29"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "Q-PRETEXT-JP-017",
+      "knowledge_id": "PRETEXT-JP-017",
+      "country": "日本",
+      "countries": [
+        "日本"
+      ],
+      "topic": "人物・歴史",
+      "question": "「日本ワインの父」と呼ばれる人物を1つ選んでください。",
+      "options": [
+        "川上善兵衛",
+        "山田宥教",
+        "詫間憲久"
+      ],
+      "correct_index": 0,
+      "correct_answer": "川上善兵衛",
+      "explanation": "「日本ワインの父」と呼ばれる人物は川上善兵衛です。新潟の岩の原葡萄園で、日本の風土に合うブドウの育種に力を注ぎました。甲府で明治初期のワイン醸造に取り組んだ山田宥教・詫間憲久とは、活動の拠点や役割を分けて覚えましょう。",
+      "source_page": "事前テキスト／日本／PRETEXT-JP-S004；教科書p.8",
+      "source_item_ids": [
+        "PRETEXT-JP-S004"
+      ],
+      "textbook_knowledge_ids": [
+        "K0851",
+        "K0852",
+        "K0853"
+      ],
+      "evidence_ids": [
+        "E30-JP-P08P09"
+      ],
+      "status": "auto_checked",
+      "version": 1,
+      "question_type": "single_choice",
+      "source_verbatim": false,
+      "validation": {
+        "structure_checked": true,
+        "source_text_compared": true,
+        "textbook_page_compared": true,
+        "human_approved": false,
+        "external_fact_check_completed": false,
+        "editorial_note": "教科書原画像p.8の称号を確認。既存問の人物と育成品種の対応に加え、本文の呼称と人物の関係を新たに確認する。"
+      },
+      "sources": [
+        {
+          "title": "事前テキストと教科書の再確認（Issue #30）",
+          "url": "https://github.com/boqxxxpod/wine-quiz-master/issues/30",
+          "source_item_ids": [
+            "PRETEXT-JP-S004"
+          ],
+          "textbook_knowledge_ids": [
+            "K0851",
+            "K0852",
+            "K0853"
+          ],
+          "evidence_ids": [
+            "E30-JP-P08P09"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "Q-PRETEXT-FR-064",
+      "knowledge_id": "PRETEXT-FR-064",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "産地・資料統計",
+      "question": "2017年実績の地方別AOCワイン生産量で、ローヌ渓谷地方はフランス第何位か1つ選んでください。",
+      "options": [
+        "第1位",
+        "第2位",
+        "第4位"
+      ],
+      "correct_index": 1,
+      "correct_answer": "第2位",
+      "explanation": "2017年実績では、ローヌ渓谷地方のAOCワイン生産量はボルドーに次ぐ第2位です。対象は地方別のAOCワインで、フランス全ワインや現時点の順位を表すものではありません。ローヌ全体では赤とロゼが中心です。",
+      "source_page": "事前テキスト／フランス／PRETEXT-FR-S025・教科書23頁",
+      "source_item_ids": [
+        "PRETEXT-FR-S025"
+      ],
+      "textbook_knowledge_ids": [
+        "K0111",
+        "K0112"
+      ],
+      "evidence_ids": [
+        "EV-FR-P022-023",
+        "EV-FR-REVIEW-K0111"
+      ],
+      "status": "auto_checked",
+      "version": 1,
+      "question_type": "single_choice",
+      "source_verbatim": false,
+      "validation": {
+        "structure_checked": true,
+        "source_text_compared": true,
+        "textbook_page_compared": true,
+        "human_approved": false,
+        "external_fact_check_completed": false,
+        "editorial_note": "原画像で2017年実績と地方別AOC生産量の対応を確認。隣接する赤80％・ロゼ13％の年とは認定しない。",
+        "temporal_note": "2017年のAOCワイン生産量に限定。現在の順位や年不明の色別比率へ転用しない。"
+      },
+      "sources": [
+        {
+          "title": "事前テキストと教科書の再確認（Issue #30）",
+          "url": "https://github.com/boqxxxpod/wine-quiz-master/issues/30",
+          "source_item_ids": [
+            "PRETEXT-FR-S025"
+          ],
+          "textbook_knowledge_ids": [
+            "K0111",
+            "K0112"
+          ],
+          "evidence_ids": [
+            "EV-FR-P022-023",
+            "EV-FR-REVIEW-K0111"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "Q-PRETEXT-FR-065",
+      "knowledge_id": "PRETEXT-FR-065",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "AOPとタイプ",
+      "question": "北部ローヌのエルミタージュで、赤・白に加えて造られるワインのタイプを1つ選んでください。",
+      "options": [
+        "ヴァン・ジョーヌ（黄ワイン）",
+        "クレマン・ダルザス",
+        "ヴァン・ド・パイユ（藁ワイン）"
+      ],
+      "correct_index": 2,
+      "correct_answer": "ヴァン・ド・パイユ（藁ワイン）",
+      "explanation": "エルミタージュでは、赤・白に加えてヴァン・ド・パイユも造られます。ヴァン・ド・パイユは乾燥させたブドウを用いる甘口ワインです。ジュラのヴァン・ジョーヌは黄色を帯びた辛口で、異なるタイプです。",
+      "source_page": "事前テキスト／フランス／PRETEXT-FR-S028・教科書24,22頁",
+      "source_item_ids": [
+        "PRETEXT-FR-S028"
+      ],
+      "textbook_knowledge_ids": [
+        "K0130",
+        "K0109"
+      ],
+      "evidence_ids": [
+        "EV-FR-P024-025",
+        "EV-FR-P022-023"
+      ],
+      "status": "auto_checked",
+      "version": 1,
+      "question_type": "single_choice",
+      "source_verbatim": false,
+      "validation": {
+        "structure_checked": true,
+        "source_text_compared": true,
+        "textbook_page_compared": true,
+        "human_approved": false,
+        "external_fact_check_completed": false,
+        "editorial_note": "原文のVdPを、教科書の北部ローヌAOC一覧にあるヴァン・ド・パイユの表記と照合。Vin de Paysとは解釈しない。"
+      },
+      "sources": [
+        {
+          "title": "事前テキストと教科書の再確認（Issue #30）",
+          "url": "https://github.com/boqxxxpod/wine-quiz-master/issues/30",
+          "source_item_ids": [
+            "PRETEXT-FR-S028"
+          ],
+          "textbook_knowledge_ids": [
+            "K0130",
+            "K0109"
+          ],
+          "evidence_ids": [
+            "EV-FR-P024-025",
+            "EV-FR-P022-023"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "Q-PRETEXT-FR-066",
+      "knowledge_id": "PRETEXT-FR-066",
+      "country": "フランス",
+      "countries": [
+        "フランス"
+      ],
+      "topic": "地理",
+      "question": "フランスのロワール川の全長として、最も近いものを1つ選んでください。",
+      "options": [
+        "約1,000km",
+        "約100km",
+        "約10km"
+      ],
+      "correct_index": 0,
+      "correct_answer": "約1,000km",
+      "explanation": "ロワール川の全長は約1,000kmで、中央高地から北上した後、西へ向きを変えて大西洋に注ぎます。長い川の渓谷に沿って産地が広がるため、ロワール地方では地域によって異なるタイプのワインが造られます。",
+      "source_page": "事前テキスト／フランス／PRETEXT-FR-S047・教科書32頁",
+      "source_item_ids": [
+        "PRETEXT-FR-S047"
+      ],
+      "textbook_knowledge_ids": [
+        "K0223",
+        "K0224"
+      ],
+      "evidence_ids": [
+        "EV-FR-P032-033"
+      ],
+      "status": "auto_checked",
+      "version": 1,
+      "question_type": "single_choice",
+      "source_verbatim": false,
+      "validation": {
+        "structure_checked": true,
+        "source_text_compared": true,
+        "textbook_page_compared": true,
+        "human_approved": false,
+        "external_fact_check_completed": false,
+        "editorial_note": "原文の1012mは教科書原画像の1,012kmにより単位誤記と確認。全長の概数を問う設問に構成。"
+      },
+      "sources": [
+        {
+          "title": "事前テキストと教科書の再確認（Issue #30）",
+          "url": "https://github.com/boqxxxpod/wine-quiz-master/issues/30",
+          "source_item_ids": [
+            "PRETEXT-FR-S047"
+          ],
+          "textbook_knowledge_ids": [
+            "K0223",
+            "K0224"
+          ],
+          "evidence_ids": [
+            "EV-FR-P032-033"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "Q-PRETEXT-IT-038",
+      "knowledge_id": "PRETEXT-IT-038",
+      "country": "イタリア",
+      "countries": [
+        "イタリア"
+      ],
+      "topic": "歴史・ワインの革新",
+      "question": "イタリアワイン・ルネッサンスと呼ばれる革新で、トスカーナの牽引役を務めたのは、どの呼称の生産者ですか。",
+      "options": [
+        "バローロ",
+        "キアンティ・クラッシコ",
+        "アスティ"
+      ],
+      "correct_index": 1,
+      "correct_answer": "キアンティ・クラッシコ",
+      "explanation": "革新の牽引役を務めたのはキアンティ・クラッシコの生産者です。自由な発想による近代的なスタイルはスーパータスカンとして注目されました。バローロとアスティはピエモンテの呼称で、トスカーナのこの動きとは地域が異なります。",
+      "source_page": "事前テキスト／イタリア／PRETEXT-IT-S013・教科書43頁",
+      "source_item_ids": [
+        "PRETEXT-IT-S013"
+      ],
+      "textbook_knowledge_ids": [
+        "K0342",
+        "K0343"
+      ],
+      "textbook_pages": [
+        43
+      ],
+      "evidence_ids": [
+        "E30-IT-P42-43"
+      ],
+      "status": "auto_checked",
+      "version": 1,
+      "question_type": "single_choice",
+      "source_verbatim": false,
+      "validation": {
+        "structure_checked": true,
+        "source_text_compared": true,
+        "human_approved": false,
+        "external_fact_check_completed": false,
+        "editorial_note": "既存の運動名称・スタイル名称の設問と異なり、原文で未対応だった生産者の役割を教科書43頁の原画像で確認して追加。"
+      },
+      "sources": [
+        {
+          "title": "事前テキストと教科書の再確認（Issue #30）",
+          "url": "https://github.com/boqxxxpod/wine-quiz-master/issues/30",
+          "source_item_ids": [
+            "PRETEXT-IT-S013"
+          ],
+          "textbook_knowledge_ids": [
+            "K0342",
+            "K0343"
+          ],
+          "evidence_ids": [
+            "E30-IT-P42-43"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "Q-PRETEXT-PT-016",
+      "knowledge_id": "PRETEXT-PT-016",
+      "country": "ポルトガル",
+      "countries": [
+        "ポルトガル"
+      ],
+      "topic": "産地・原産地呼称",
+      "question": "酒精強化ワインのポートと、スティルワインのドウロが結び付くポルトガルの地域名を1つ選んでください。",
+      "options": [
+        "ミーニョ",
+        "デュリエンセ",
+        "テラス・マデイレンセス"
+      ],
+      "correct_index": 1,
+      "correct_answer": "デュリエンセ",
+      "explanation": "ポートとドウロは、デュリエンセの地域に結び付く呼称です。ポートは酒精強化ワイン、ドウロはスティルワインなので、地域名と個別の呼称、ワインのタイプを分けて整理しましょう。ミーニョはヴィーニョ・ヴェルデと関連します。",
+      "source_page": "事前テキスト／ポルトガル／PRETEXT-PT-S006・PRETEXT-PT-S007；教科書p.73",
+      "source_item_ids": [
+        "PRETEXT-PT-S006",
+        "PRETEXT-PT-S007"
+      ],
+      "textbook_knowledge_ids": [
+        "K0497",
+        "K0516"
+      ],
+      "evidence_ids": [
+        "E30-PT-P72P73"
+      ],
+      "status": "auto_checked",
+      "version": 1,
+      "question_type": "single_choice",
+      "source_verbatim": false,
+      "validation": {
+        "structure_checked": true,
+        "source_text_compared": true,
+        "textbook_page_compared": true,
+        "human_approved": false,
+        "external_fact_check_completed": false,
+        "editorial_note": "p.73の地域見出しと呼称を原画像で対応付けた。既存練習PT004/005・事前PT007/008はタイプを問うため、未登場だった地域名との関係を補完。"
+      },
+      "sources": [
+        {
+          "title": "事前テキストと教科書の再確認（Issue #30）",
+          "url": "https://github.com/boqxxxpod/wine-quiz-master/issues/30",
+          "source_item_ids": [
+            "PRETEXT-PT-S006",
+            "PRETEXT-PT-S007"
+          ],
+          "textbook_knowledge_ids": [
+            "K0497",
+            "K0516"
+          ],
+          "evidence_ids": [
+            "E30-PT-P72P73"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "Q-PRETEXT-PT-017",
+      "knowledge_id": "PRETEXT-PT-017",
+      "country": "ポルトガル",
+      "countries": [
+        "ポルトガル"
+      ],
+      "topic": "産地・地理",
+      "question": "マディラ島を中心とする島々から成るポルトガルの地域名を1つ選んでください。",
+      "options": [
+        "デュリエンセ",
+        "ミーニョ",
+        "テラス・マデイレンセス"
+      ],
+      "correct_index": 2,
+      "correct_answer": "テラス・マデイレンセス",
+      "explanation": "テラス・マデイレンセスは、マディラ島を中心とする島々の地域です。この島で造る酒精強化ワインがマディラです。大西洋上の地域名とワインの呼称を対応させ、ポルトガル本土でポートやドウロと結び付くデュリエンセと区別しましょう。",
+      "source_page": "事前テキスト／ポルトガル／PRETEXT-PT-S009；教科書p.75（対向74から推定）・76",
+      "source_item_ids": [
+        "PRETEXT-PT-S009"
+      ],
+      "textbook_knowledge_ids": [
+        "K0520",
+        "K0525"
+      ],
+      "evidence_ids": [
+        "E30-PT-P75",
+        "E30-PT-P76"
+      ],
+      "status": "auto_checked",
+      "version": 1,
+      "question_type": "single_choice",
+      "source_verbatim": false,
+      "validation": {
+        "structure_checked": true,
+        "source_text_compared": true,
+        "textbook_page_compared": true,
+        "human_approved": false,
+        "external_fact_check_completed": false,
+        "editorial_note": "原文のテラス・マデイレンスを教科書の表記テラス・マデイレンセスへ整えた。既存問の島の位置・酒精強化というタイプと異なり、未登場の上位地域名との対応を確認する。"
+      },
+      "sources": [
+        {
+          "title": "事前テキストと教科書の再確認（Issue #30）",
+          "url": "https://github.com/boqxxxpod/wine-quiz-master/issues/30",
+          "source_item_ids": [
+            "PRETEXT-PT-S009"
+          ],
+          "textbook_knowledge_ids": [
+            "K0520",
+            "K0525"
+          ],
+          "evidence_ids": [
+            "E30-PT-P75",
+            "E30-PT-P76"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "Q-PRETEXT-US-017",
+      "knowledge_id": "PRETEXT-US-017",
+      "country": "アメリカ",
+      "countries": [
+        "アメリカ"
+      ],
+      "topic": "産地・地理",
+      "question": "教科書の地理説明に示された概略の広がりで、セントラル・コーストの東西の幅はおよそどれですか。",
+      "options": [
+        "約40km",
+        "約400km",
+        "約4,000km"
+      ],
+      "correct_index": 0,
+      "correct_answer": "約40km",
+      "explanation": "セントラル・コーストの概略の広がりは、東西約40km、南北約400kmと説明されます。東西の幅と南北の長さを取り違えないようにしましょう。この数値は教科書の地理説明であり、現在の法的なAVA境界の幅がどこでも一定という意味ではありません。",
+      "source_page": "事前テキスト／アメリカ／PRETEXT-US-S012；教科書p.88（概略の範囲）",
+      "source_item_ids": [
+        "PRETEXT-US-S012"
+      ],
+      "textbook_knowledge_ids": [
+        "K0606"
+      ],
+      "evidence_ids": [
+        "E30-US-P088-089"
+      ],
+      "status": "auto_checked",
+      "version": 1,
+      "question_type": "single_choice",
+      "source_verbatim": false,
+      "validation": {
+        "structure_checked": true,
+        "source_text_compared": true,
+        "human_approved": false,
+        "external_fact_check_completed": false,
+        "editorial_note": "分冊JSONのK0606・周辺文脈US14と教科書p88原画像の「東西約40km」を照合。既存練習US-010に記載される南北約400kmとは測定方向の異なる未収録知識を追加。現行AVA境界を外部照合した意味ではない。"
+      },
+      "sources": [
+        {
+          "title": "事前テキストと教科書の再確認（Issue #30）",
+          "url": "https://github.com/boqxxxpod/wine-quiz-master/issues/30",
+          "source_item_ids": [
+            "PRETEXT-US-S012"
+          ],
+          "textbook_knowledge_ids": [
+            "K0606"
+          ],
+          "evidence_ids": [
+            "E30-US-P088-089"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "Q-PRETEXT-AU-015",
+      "knowledge_id": "PRETEXT-AU-015",
+      "country": "オーストラリア",
+      "countries": [
+        "オーストラリア"
+      ],
+      "topic": "産地・地理",
+      "question": "オーストラリア南部の主なワイン産地が帯状に分布する緯度の目安を1つ選んでください。",
+      "options": [
+        "南緯5～15度",
+        "南緯31～43度",
+        "北緯31～43度"
+      ],
+      "correct_index": 1,
+      "correct_answer": "南緯31～43度",
+      "explanation": "オーストラリア南部の主なワイン産地は、おおよそ南緯31～43度の帯に分布します。東側のニュー・サウス・ウェールズ州から西オーストラリア州まで産地が点在します。この範囲は主産地の目安で、全栽培地の厳密な境界を意味しません。",
+      "source_page": "事前テキスト／オーストラリア／PRETEXT-AU-S001・教科書104頁",
+      "source_item_ids": [
+        "PRETEXT-AU-S001"
+      ],
+      "textbook_knowledge_ids": [
+        "K0672",
+        "K0673"
+      ],
+      "textbook_pages": [
+        104
+      ],
+      "evidence_ids": [
+        "E30-AU-P104-105"
+      ],
+      "status": "auto_checked",
+      "version": 1,
+      "question_type": "single_choice",
+      "source_verbatim": false,
+      "validation": {
+        "structure_checked": true,
+        "source_text_compared": true,
+        "human_approved": false,
+        "external_fact_check_completed": false,
+        "editorial_note": "原画像104頁の南部・帯状分布を確認。全国の全栽培地の絶対的範囲とせず、南部主産地のおおよその緯度帯に限定して出題。"
+      },
+      "sources": [
+        {
+          "title": "事前テキストと教科書の再確認（Issue #30）",
+          "url": "https://github.com/boqxxxpod/wine-quiz-master/issues/30",
+          "source_item_ids": [
+            "PRETEXT-AU-S001"
+          ],
+          "textbook_knowledge_ids": [
+            "K0672",
+            "K0673"
+          ],
+          "evidence_ids": [
+            "E30-AU-P104-105"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "Q-PRETEXT-NZ-014",
+      "knowledge_id": "PRETEXT-NZ-014",
+      "country": "ニュージーランド",
+      "countries": [
+        "ニュージーランド"
+      ],
+      "topic": "輸出・時点付き統計",
+      "question": "2017年のニュージーランドのワイン輸出量に占めるソーヴィニヨン・ブランの割合を1つ選んでください。",
+      "options": [
+        "30％",
+        "50％",
+        "86％"
+      ],
+      "correct_index": 2,
+      "correct_answer": "86％",
+      "explanation": "2017年実績ではニュージーランドのワイン生産の80％が輸出され、その輸出の86％をソーヴィニヨン・ブランが占めました。生産量に占める割合と輸出量に占める割合は分母が異なるため、対象年と指標を合わせて確認しましょう。",
+      "source_page": "事前テキスト／ニュージーランド／PRETEXT-NZ-S002・教科書113頁",
+      "source_item_ids": [
+        "PRETEXT-NZ-S002"
+      ],
+      "textbook_knowledge_ids": [],
+      "textbook_pages": [
+        113
+      ],
+      "evidence_ids": [
+        "E30-NZ-P113-EXPORT"
+      ],
+      "status": "auto_checked",
+      "version": 1,
+      "question_type": "single_choice",
+      "source_verbatim": false,
+      "validation": {
+        "structure_checked": true,
+        "source_text_compared": true,
+        "human_approved": false,
+        "external_fact_check_completed": false,
+        "editorial_note": "教科書JSON未転記の113頁輸出段落を原画像で追加確認。112頁の生産量70％以上と区別し、元の輸出70％の年を2017年と同定せず独立した時点付きの輸出86％を出題。"
+      },
+      "sources": [
+        {
+          "title": "事前テキストと教科書の再確認（Issue #30）",
+          "url": "https://github.com/boqxxxpod/wine-quiz-master/issues/30",
+          "source_item_ids": [
+            "PRETEXT-NZ-S002"
+          ],
+          "textbook_knowledge_ids": [],
+          "evidence_ids": [
+            "E30-NZ-P113-EXPORT"
           ]
         }
       ]

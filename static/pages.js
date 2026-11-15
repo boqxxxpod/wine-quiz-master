@@ -1,4 +1,4 @@
-import { isNativeQuestion, isPilotQuestion, normalizeQuestion, validQuestion } from './quiz.js?v=pretext-20261114';
+import { isNativeQuestion, isPilotQuestion, normalizeQuestion, validQuestion } from './quiz.js?v=pretext-expanded-20261115';
 
 export const MAX_PACK_BYTES = 2_000_000;
 export const MAX_PACK_QUESTIONS = 2000;

@@ -40,6 +40,7 @@ class PublicBuildTests(unittest.TestCase):
                          "question-packs/batches/wine-quiz-01.json", "question-packs/wine-quiz-500.json",
                          "question-packs/coverage.json", "question-packs/highlighted-batches/wine-quiz-01.json", "app/store.py",
                          "question-packs/pretext-source.txt", "question-packs/pretext-coverage.json", "question-packs/pretext-validation-report.md",
+                         "question-packs/pretext-expansion-review.json",
                          "question-packs/practice-assets/it-023.jpg", "question-packs/practice-assets/it-024.jpg",
                          "question-packs/practice-assets/it-025.jpg", "question-packs/practice-assets/it-026.jpg"):
             path = self.root / relative
