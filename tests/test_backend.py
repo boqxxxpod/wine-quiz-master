@@ -102,7 +102,7 @@ class HttpTests(unittest.TestCase):
             self.assertEqual(response.content, (APP_DIR / "question-packs/wine-quiz-pretext.json").read_bytes())
             self.assertEqual(response.json()["metadata"]["title"], "事前テキスト")
             self.assertEqual(len(response.json()["questions"]), response.json()["metadata"]["question_count"])
-            for route in ("/question-packs/", "/question-packs/README.md", "/question-packs/batches/pilot-01.json", "/question-packs/private.json", "/question-packs/wine-quiz-500.json", "/question-packs/coverage.json", "/question-packs/highlighted-batches/wine-quiz-01.json", "/question-packs/pilot-150.json", "/question-packs/batches/wine-quiz-01.json", "/question-packs/pretext-source.txt", "/question-packs/pretext-coverage.json", "/question-packs/pretext-validation-report.md"):
+            for route in ("/question-packs/", "/question-packs/README.md", "/question-packs/batches/pilot-01.json", "/question-packs/private.json", "/question-packs/wine-quiz-500.json", "/question-packs/coverage.json", "/question-packs/highlighted-batches/wine-quiz-01.json", "/question-packs/pilot-150.json", "/question-packs/batches/wine-quiz-01.json", "/question-packs/pretext-source.txt", "/question-packs/pretext-coverage.json", "/question-packs/pretext-validation-report.md", "/question-packs/pretext-expansion-review.json"):
                 with self.subTest(route=route):
                     self.assertEqual(self.client.get(route).status_code, 404)
 

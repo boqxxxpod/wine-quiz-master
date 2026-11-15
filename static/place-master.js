@@ -1,5 +1,5 @@
-import { loadPlaceData, placeLessons, safePlaceUrl } from './places.js?v=pretext-20261114';
-import { PlaceReviewStore, localDay, dueToday } from './place-review.js?v=pretext-20261114';
+import { loadPlaceData, placeLessons, safePlaceUrl } from './places.js?v=pretext-expanded-20261115';
+import { PlaceReviewStore, localDay, dueToday } from './place-review.js?v=pretext-expanded-20261115';
 
 const NOTEBOOK_PREFIX = 'wineQuizMaster.placeNotebook.v1:';
 const kindLabels = { country: '国', region: '地方', district: '地区', village: '村', vineyard: '特級畑' };

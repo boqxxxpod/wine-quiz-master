@@ -5,23 +5,26 @@
     "source_file": "pretext-source.txt",
     "source_sha256": "23a7a829077222a06ab1d9b48704084d56644b9a6021ed288bd7a34e7f79cb0a",
     "source_item_count": 196,
-    "question_count": 235,
+    "question_count": 247,
     "status_counts": {
-      "question": 139,
+      "question": 142,
       "explanation": 0,
-      "partial": 43,
-      "held": 14
+      "partial": 42,
+      "held": 12
     },
     "item_unit": "国ごとに見出しを除いた原文の行単位。1項目に複数の知識を含む。",
     "status_legend": {
       "question": "本文の知識を設問・解説で扱う",
       "explanation": "解説で補足",
-      "partial": "一部の知識を採用しheld_detailsの部分を保留",
-      "held": "項目全体を保留"
+      "partial": "事前へ一部採用。held_detailsには前回未採用内容を含み、今回の確認結果はlast_reviewで区別する。",
+      "held": "事前への採用を保留。事実未確認と、練習既出で追加しない場合はlast_reviewで区別する。"
     },
     "external_fact_check_completed": false,
     "human_approved": false,
-    "reference_scope": "referencesは各scopeの限定的な公式資料確認。全問・全選択肢の外部確認ではない。"
+    "reference_scope": "referencesは各scopeの限定的な公式資料確認。全問・全選択肢の外部確認ではない。",
+    "updated_date": "2026-11-15",
+    "latest_review": "pretext-expansion-review.json",
+    "review_scope": "coverageは事前テキストへの採用範囲。fact_resolutionは今回の教科書確認結果で別軸。練習既出で追加しない場合も旧保留理由は履歴として保持する。"
   },
   "items": [
     {
@@ -65,22 +68,76 @@
       ],
       "note": "年・場所・人物の漢字表記を設問と解説で採用。",
       "held_details": "山田宥教・詫間憲久の原文の読み仮名は未確認のため採用しない。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "山田宥教・詫間憲久の原文の読み仮名は未確認のため採用しない。",
+          "note": "年・場所・人物の漢字表記を設問と解説で採用。",
+          "question_ids": [
+            "Q-PRETEXT-JP-004",
+            "Q-PRETEXT-JP-005"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "hold",
+        "remaining_held_details": "詫間憲久の原文読み仮名いさのりは確認できず採用しない。",
+        "evidence_ids": [
+          "E30-JP-P04P05",
+          "E30-JP-HISTORY",
+          "E30-EJ-REVIEW"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-JP-S004",
       "country": "日本",
       "source_line": 5,
       "source_text": "・新潟県にワイナリーを創立した川上善兵衛は、日本の風土に適した葡萄を研究し1927年にマスカット・ベーリーAやブラッククイーンなど日本独自の改良品種を開発し「日本ワインの父」と呼ばれている",
-      "status": "partial",
+      "status": "question",
       "question_ids": [
         "Q-PRETEXT-JP-006",
         "Q-PRETEXT-JP-007",
-        "Q-PRETEXT-JP-008"
+        "Q-PRETEXT-JP-008",
+        "Q-PRETEXT-JP-015",
+        "Q-PRETEXT-JP-017"
       ],
-      "note": "新潟の川上善兵衛と育成品種を出題。ブラック・クイーンの表記を統一。",
-      "held_details": "1927年を品種の完成・命名年とするか、交配年とするかの確認、および「日本ワインの父」という称号の範囲は保留。",
-      "reference_ids": []
+      "note": "新潟の川上善兵衛と育成品種を出題。ブラック・クイーンの表記を統一。 Issue #30で教科書を再確認し、未出題の知識を追加。",
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "1927年を品種の完成・命名年とするか、交配年とするかの確認、および「日本ワインの父」という称号の範囲は保留。",
+          "note": "新潟の川上善兵衛と育成品種を出題。ブラック・クイーンの表記を統一。",
+          "question_ids": [
+            "Q-PRETEXT-JP-006",
+            "Q-PRETEXT-JP-007",
+            "Q-PRETEXT-JP-008"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "confirmed",
+        "decision": "add",
+        "remaining_held_details": "",
+        "evidence_ids": [
+          "E30-JP-P04P05",
+          "E30-JP-P06P07",
+          "E30-JP-P08P09",
+          "E30-JP-CROSS1927",
+          "E30-EJ-REVIEW"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-JP-S005",
@@ -91,7 +148,28 @@
       "question_ids": [],
       "note": "品種別の仕込量順位は統計年と集計条件が不明のため出題しない。",
       "held_details": "甲州が最多、次がマスカット・ベーリーAという順位。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "held",
+          "held_details": "甲州が最多、次がマスカット・ベーリーAという順位。",
+          "note": "品種別の仕込量順位は統計年と集計条件が不明のため出題しない。",
+          "question_ids": []
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "甲州最多・MBA次位の統計年と集計条件。原料受入量では代替しない。",
+        "evidence_ids": [
+          "E30-JP-P06P07",
+          "E30-EJ-REVIEW"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-JP-S006",
@@ -129,7 +207,30 @@
       ],
       "note": "山形県とデラウェアの対応を出題。",
       "held_details": "日本1位という生産順位は対象年・統計条件不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "日本1位という生産順位は対象年・統計条件不明のため保留。",
+          "note": "山形県とデラウェアの対応を出題。",
+          "question_ids": [
+            "Q-PRETEXT-JP-012"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "デラウェア順位の対象年、生食用を含む全収穫量かワイン原料用だけか。",
+        "evidence_ids": [
+          "E30-JP-P08P09",
+          "E30-EJ-REVIEW"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-JP-S009",
@@ -142,7 +243,30 @@
       ],
       "note": "長野県の代表的な品種としてメルロ、シャルドネ、ソーヴィニヨン・ブランの対応を出題。",
       "held_details": "3品種とも生産数量が全国トップという順位は対象年・統計条件不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "3品種とも生産数量が全国トップという順位は対象年・統計条件不明のため保留。",
+          "note": "長野県の代表的な品種としてメルロ、シャルドネ、ソーヴィニヨン・ブランの対応を出題。",
+          "question_ids": [
+            "Q-PRETEXT-JP-013"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "3品種ごとの対象年、生産数量が収穫量かワイナリー受入量か、用途範囲。",
+        "evidence_ids": [
+          "E30-JP-P08P09",
+          "E30-EJ-REVIEW"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-JP-S010",
@@ -151,11 +275,37 @@
       "source_text": "山梨県：甲州種とマスカット・ベーリーＡ種（日本ワインの生産量が最大）",
       "status": "partial",
       "question_ids": [
-        "Q-PRETEXT-JP-014"
+        "Q-PRETEXT-JP-014",
+        "Q-PRETEXT-JP-016"
       ],
-      "note": "山梨県と甲州、マスカット・ベーリーAの対応を出題。",
-      "held_details": "日本ワイン生産量が最大という順位は対象年・集計条件不明のため保留。",
-      "reference_ids": []
+      "note": "山梨県と甲州、マスカット・ベーリーAの対応を出題。 Issue #30で教科書を再確認し、未出題の知識を追加。",
+      "held_details": "原文の年度不明の生産量順位が何年を指すかは特定できない。",
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "日本ワイン生産量が最大という順位は対象年・集計条件不明のため保留。",
+          "note": "山梨県と甲州、マスカット・ベーリーAの対応を出題。",
+          "question_ids": [
+            "Q-PRETEXT-JP-014"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "add",
+        "remaining_held_details": "原文の年度不明の生産量順位が何年を指すかは特定できない。",
+        "evidence_ids": [
+          "E30-JP-P04P05",
+          "E30-JP-P10",
+          "E30-EJ-REVIEW",
+          "E30-JP-NTA-H29"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-FR-S001",
@@ -237,7 +387,30 @@
       ],
       "note": "山脈名を出題し、アルザスの西側と整理。山脈を国境と同一視しない。",
       "held_details": "原文の「ドイツとの国境」が山脈に掛かるように読める部分は正答に採用しない。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "原文の「ドイツとの国境」が山脈に掛かるように読める部分は正答に採用しない。",
+          "note": "山脈名を出題し、アルザスの西側と整理。山脈を国境と同一視しない。",
+          "question_ids": [
+            "Q-PRETEXT-FR-013"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "confirmed",
+        "decision": "already_in_pretext",
+        "remaining_held_details": "",
+        "evidence_ids": [
+          "EV-FR-P016",
+          "EV-FR-TEXT-S006"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-FR-S007",
@@ -250,7 +423,31 @@
       ],
       "note": "クレマン・ダルザスとアルザスのAOP発泡ワインの関係を出題。消費順位は採用しない。",
       "held_details": "家庭で消費されるAOP発泡ワイン中1位という順位は、対象年・集計条件不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "家庭で消費されるAOP発泡ワイン中1位という順位は、対象年・集計条件不明のため保留。",
+          "note": "クレマン・ダルザスとアルザスのAOP発泡ワインの関係を出題。消費順位は採用しない。",
+          "question_ids": [
+            "Q-PRETEXT-FR-063"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "hold",
+        "remaining_held_details": "家庭消費1位の対象年・指標は未確定。K0058のpendingを維持し、順位の新問は作らない。",
+        "evidence_ids": [
+          "EV-FR-P016",
+          "EV-FR-REVIEW-K0058",
+          "EV-FR-TEXT-S007"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-FR-S008",
@@ -410,7 +607,31 @@
       ],
       "note": "ジュラとブルゴーニュの位置関係を出題。",
       "held_details": "ジュラとサヴォワを一括してジュラ山脈のすそ野とする地形説明は保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "ジュラとサヴォワを一括してジュラ山脈のすそ野とする地形説明は保留。",
+          "note": "ジュラとブルゴーニュの位置関係を出題。",
+          "question_ids": [
+            "Q-PRETEXT-FR-025"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "hold",
+        "remaining_held_details": "ジュラとサヴォワ全体をジュラ山脈裾野とする一括表現は、教科書に裏付けがないため出題しない。",
+        "evidence_ids": [
+          "EV-FR-P020-021",
+          "EV-FR-P022-023",
+          "EV-FR-TEXT-S020"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-FR-S021",
@@ -467,11 +688,36 @@
       "country": "フランス",
       "source_line": 42,
       "source_text": "◆ローヌ：AOPワイン産地としてボルドーに次ぎ2位の規模、生産量の80％が赤、ロゼが13％で大半を占める。",
-      "status": "held",
-      "question_ids": [],
-      "note": "規模の順位と生産割合は対象年・指標が不明。",
-      "held_details": "ボルドーに次ぐ2位、赤80％、ロゼ13％の数値は保留。",
-      "reference_ids": []
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-FR-064"
+      ],
+      "note": "規模の順位と生産割合は対象年・指標が不明。 Issue #30で教科書を再確認し、未出題の知識を追加。",
+      "held_details": "赤80％・ロゼ13％の対象年は不明で、K0110のpendingを維持。",
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "held",
+          "held_details": "ボルドーに次ぐ2位、赤80％、ロゼ13％の数値は保留。",
+          "note": "規模の順位と生産割合は対象年・指標が不明。",
+          "question_ids": []
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "partially_resolved",
+        "remaining_held_details": "赤80％・ロゼ13％の対象年は不明で、K0110のpendingを維持。",
+        "evidence_ids": [
+          "EV-FR-P022-023",
+          "EV-FR-REVIEW-K0110",
+          "EV-FR-REVIEW-K0111",
+          "EV-FR-TEXT-S025"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-FR-S026",
@@ -503,15 +749,41 @@
       "country": "フランス",
       "source_line": 45,
       "source_text": "AOP：コート・ロティ（赤）」、「コンドリュー（白）」、「エルミタージュ（赤、白、VdP）",
-      "status": "partial",
+      "status": "question",
       "question_ids": [
         "Q-PRETEXT-FR-031",
         "Q-PRETEXT-FR-032",
-        "Q-PRETEXT-FR-033"
+        "Q-PRETEXT-FR-033",
+        "Q-PRETEXT-FR-065"
       ],
-      "note": "コート・ロティ、コンドリュー、エルミタージュの色の対応を出題。",
-      "held_details": "エルミタージュの「VdP」は略称の意味と呼称の扱いが特定できないため保留。",
-      "reference_ids": []
+      "note": "コート・ロティ、コンドリュー、エルミタージュの色の対応を出題。 Issue #30で教科書を再確認し、未出題の知識を追加。",
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "エルミタージュの「VdP」は略称の意味と呼称の扱いが特定できないため保留。",
+          "note": "コート・ロティ、コンドリュー、エルミタージュの色の対応を出題。",
+          "question_ids": [
+            "Q-PRETEXT-FR-031",
+            "Q-PRETEXT-FR-032",
+            "Q-PRETEXT-FR-033"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "confirmed",
+        "decision": "add",
+        "remaining_held_details": "",
+        "evidence_ids": [
+          "EV-FR-P024-025",
+          "EV-FR-P022-023",
+          "EV-FR-TEXT-S028"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-FR-S029",
@@ -548,7 +820,30 @@
       ],
       "note": "南部ローヌの黒ブドウとしてグルナッシュとシラーを出題。",
       "held_details": "ヴィオニエのみを南部ローヌの代表白品種とする読み方は避け、白品種の地域全体への一般化を保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "ヴィオニエのみを南部ローヌの代表白品種とする読み方は避け、白品種の地域全体への一般化を保留。",
+          "note": "南部ローヌの黒ブドウとしてグルナッシュとシラーを出題。",
+          "question_ids": [
+            "Q-PRETEXT-FR-036"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "hold",
+        "remaining_held_details": "南部ローヌ全体をヴィオニエのみで代表させる一般化は裏付けられず、出題しない。",
+        "evidence_ids": [
+          "EV-FR-P024-025",
+          "EV-FR-TEXT-S031"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-FR-S032",
@@ -562,7 +857,31 @@
       ],
       "note": "シャトーヌフ・デュ・パプの赤・白と、ジゴンダスの所属地域を出題。",
       "held_details": "ジゴンダスを赤・ロゼのみに限定する記述は制度の適用時点を確認できないため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "ジゴンダスを赤・ロゼのみに限定する記述は制度の適用時点を確認できないため保留。",
+          "note": "シャトーヌフ・デュ・パプの赤・白と、ジゴンダスの所属地域を出題。",
+          "question_ids": [
+            "Q-PRETEXT-FR-037",
+            "Q-PRETEXT-FR-038"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "hold",
+        "remaining_held_details": "ジゴンダスの現行の色の範囲は、白の認可時点と教科書の版の関係を確認できないため保留継続。",
+        "evidence_ids": [
+          "EV-FR-P024-025",
+          "EV-FR-TEXT-S032"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-FR-S033",
@@ -575,7 +894,30 @@
       ],
       "note": "プロヴァンスとロゼの関係を出題。",
       "held_details": "AOCロゼの生産割合42％は対象年・集計条件不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "AOCロゼの生産割合42％は対象年・集計条件不明のため保留。",
+          "note": "プロヴァンスとロゼの関係を出題。",
+          "question_ids": [
+            "Q-PRETEXT-FR-039"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "confirmed",
+        "decision": "already_in_practice",
+        "remaining_held_details": "",
+        "evidence_ids": [
+          "EV-FR-P024-025",
+          "EV-FR-TEXT-S033"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-FR-S034",
@@ -598,7 +940,29 @@
       "question_ids": [],
       "note": "IGPの割合は対象年・集計条件が不明。",
       "held_details": "フランスの全IGPワインの80％という割合は保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "held",
+          "held_details": "フランスの全IGPワインの80％という割合は保留。",
+          "note": "IGPの割合は対象年・集計条件が不明。",
+          "question_ids": []
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "hold",
+        "remaining_held_details": "IGP80％の対象年と地域境界を確認できず保留継続。",
+        "evidence_ids": [
+          "EV-FR-P026-027",
+          "EV-FR-REVIEW-K0139",
+          "EV-FR-TEXT-S035"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-FR-S036",
@@ -611,7 +975,30 @@
       ],
       "note": "VDNとVDLの略称・甘口ワインとの関連を設問と解説で扱う。",
       "held_details": "ルーションがフランス最大のVDN生産地という順位は時点・集計条件不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "ルーションがフランス最大のVDN生産地という順位は時点・集計条件不明のため保留。",
+          "note": "VDNとVDLの略称・甘口ワインとの関連を設問と解説で扱う。",
+          "question_ids": [
+            "Q-PRETEXT-FR-041"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "hold",
+        "remaining_held_details": "フランス最大のVDN生産地という順位は、年・比較指標・根拠が不足し保留継続。",
+        "evidence_ids": [
+          "EV-FR-P026-027",
+          "EV-FR-TEXT-S036"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-FR-S037",
@@ -639,7 +1026,31 @@
       "held_details": "「メドック地区の60銘柄」という地域と銘柄数は時点・対象の確認が必要なため保留。",
       "reference_ids": [
         "REF-CIVB-1855"
-      ]
+      ],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "「メドック地区の60銘柄」という地域と銘柄数は時点・対象の確認が必要なため保留。",
+          "note": "1855年・パリ万博・ナポレオン3世・1〜5級を設問と解説で扱う。",
+          "question_ids": [
+            "Q-PRETEXT-FR-044"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "hold",
+        "remaining_held_details": "1855当初と後年の格付け銘柄数・メドックの範囲を区別する根拠が不足。数の問題は保留継続。",
+        "evidence_ids": [
+          "EV-FR-P030-031",
+          "EV-FR-P032-033",
+          "EV-FR-TEXT-S038"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-FR-S039",
@@ -664,7 +1075,30 @@
       ],
       "note": "広域ボルドーAOPの赤・辛口白・ロゼを出題。",
       "held_details": "フランスのAOP中最大面積という順位は対象年・集計単位不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "フランスのAOP中最大面積という順位は対象年・集計単位不明のため保留。",
+          "note": "広域ボルドーAOPの赤・辛口白・ロゼを出題。",
+          "question_ids": [
+            "Q-PRETEXT-FR-046"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "hold",
+        "remaining_held_details": "最大面積という順位の対象年と、地方全体か個別AOPかという集計範囲が不明で保留継続。",
+        "evidence_ids": [
+          "EV-FR-P030-031",
+          "EV-FR-TEXT-S040"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-FR-S041",
@@ -744,13 +1178,36 @@
       "country": "フランス",
       "source_line": 66,
       "source_text": "◆ロワール：フランス最大の大河ロワール川（1012ｍ）によって形成された、渓谷沿いに広がるワイン産地",
-      "status": "partial",
+      "status": "question",
       "question_ids": [
-        "Q-PRETEXT-FR-053"
+        "Q-PRETEXT-FR-053",
+        "Q-PRETEXT-FR-066"
       ],
-      "note": "ロワール川沿いの産地という地理を出題。「1012ｍ」は距離の単位に誤記がある。",
-      "held_details": "原文の厳密な河川長は単位誤記と測定条件の確認が必要なため、数値問題にはしない。",
-      "reference_ids": []
+      "note": "ロワール川沿いの産地という地理を出題。「1012ｍ」は距離の単位に誤記がある。 Issue #30で教科書を再確認し、未出題の知識を追加。",
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "原文の厳密な河川長は単位誤記と測定条件の確認が必要なため、数値問題にはしない。",
+          "note": "ロワール川沿いの産地という地理を出題。「1012ｍ」は距離の単位に誤記がある。",
+          "question_ids": [
+            "Q-PRETEXT-FR-053"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "confirmed",
+        "decision": "add",
+        "remaining_held_details": "",
+        "evidence_ids": [
+          "EV-FR-P032-033",
+          "EV-FR-TEXT-S047"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-FR-S048",
@@ -915,7 +1372,32 @@
       ],
       "note": "赤のバローロ・バルバレスコと、アスティの代表的な甘口発泡白を出題。",
       "held_details": "アスティの呼称全体を甘口発泡白だけに限定する記述は採用しない。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "アスティの呼称全体を甘口発泡白だけに限定する記述は採用しない。",
+          "note": "赤のバローロ・バルバレスコと、アスティの代表的な甘口発泡白を出題。",
+          "question_ids": [
+            "Q-PRETEXT-IT-007",
+            "Q-PRETEXT-IT-008",
+            "Q-PRETEXT-IT-009",
+            "Q-PRETEXT-IT-010"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "maintain_hold",
+        "remaining_held_details": "アスティ呼称の全許可タイプを甘口発泡白だけとする排他的限定は採用しない。",
+        "evidence_ids": [
+          "E30-IT-P38-39"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-IT-S006",
@@ -940,7 +1422,29 @@
       ],
       "note": "ロンバルディアの位置とミラノの所属を出題。",
       "held_details": "「イタリアで最も豊かな州」は指標・時点が不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "「イタリアで最も豊かな州」は指標・時点が不明のため保留。",
+          "note": "ロンバルディアの位置とミラノの所属を出題。",
+          "question_ids": [
+            "Q-PRETEXT-IT-012"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "maintain_hold",
+        "remaining_held_details": "最も豊かな州という順位の尺度・年が不明。",
+        "evidence_ids": [
+          "E30-IT-P38-39"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-IT-S008",
@@ -1015,7 +1519,8 @@
       "question_ids": [
         "Q-PRETEXT-IT-021",
         "Q-PRETEXT-IT-022",
-        "Q-PRETEXT-IT-023"
+        "Q-PRETEXT-IT-023",
+        "Q-PRETEXT-IT-038"
       ],
       "note": "ボリゲリをボルゲリに修正。スーパータスカン、サッシカイア、ボルドー系品種の関係を設問化。",
       "reference_ids": []
@@ -1192,7 +1697,29 @@
       ],
       "note": "白ワイン用品種が主体という特徴を出題。",
       "held_details": "栽培面積の90％という割合は対象年・集計条件不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "栽培面積の90％という割合は対象年・集計条件不明のため保留。",
+          "note": "白ワイン用品種が主体という特徴を出題。",
+          "question_ids": [
+            "Q-PRETEXT-DE-005"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "source_missing",
+        "decision": "hold",
+        "remaining_held_details": "白ワイン用品種90％の対象年・統計範囲と原画像。",
+        "evidence_ids": [
+          "E30-DE-MISSING"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-DE-S006",
@@ -1205,7 +1732,29 @@
       ],
       "note": "モーゼル川、ザール川、ルーヴァー川と渓谷・急斜面の特徴を出題・解説に採用。",
       "held_details": "40％が30度以上の急斜面という数値は対象年・定義不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "40％が30度以上の急斜面という数値は対象年・定義不明のため保留。",
+          "note": "モーゼル川、ザール川、ルーヴァー川と渓谷・急斜面の特徴を出題・解説に採用。",
+          "question_ids": [
+            "Q-PRETEXT-DE-006"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "source_missing",
+        "decision": "hold",
+        "remaining_held_details": "40％が30度以上の急斜面という数値の対象年・面積定義と原画像。",
+        "evidence_ids": [
+          "E30-DE-MISSING"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-DE-S007",
@@ -1216,7 +1765,27 @@
       "question_ids": [],
       "note": "ラインガウを複数の区分・貴腐ワイン・格付け畑すべての発祥地とする一括断定は出題しない。",
       "held_details": "カビネット、シュペートレーゼ、貴腐ワイン、格付け畑の各発祥地という主張の個別確認が必要。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "held",
+          "held_details": "カビネット、シュペートレーゼ、貴腐ワイン、格付け畑の各発祥地という主張の個別確認が必要。",
+          "note": "ラインガウを複数の区分・貴腐ワイン・格付け畑すべての発祥地とする一括断定は出題しない。",
+          "question_ids": []
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "source_missing",
+        "decision": "hold",
+        "remaining_held_details": "カビネット・シュペートレーゼ・貴腐ワイン・格付け畑それぞれの発祥の定義と個別根拠。",
+        "evidence_ids": [
+          "E30-DE-MISSING"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-DE-S008",
@@ -1316,7 +1885,29 @@
       ],
       "note": "カスティーリャ・ラ・マンチャ州とラ・マンチャの対応を出題。",
       "held_details": "「世界最大のワイン生産地」は地理的範囲・指標・対象年が不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "「世界最大のワイン生産地」は地理的範囲・指標・対象年が不明のため保留。",
+          "note": "カスティーリャ・ラ・マンチャ州とラ・マンチャの対応を出題。",
+          "question_ids": [
+            "Q-PRETEXT-ES-010"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "hold",
+        "remaining_held_details": "世界最大の比較対象年。",
+        "evidence_ids": [
+          "E30-ES-P67"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-ES-S008",
@@ -1367,7 +1958,30 @@
       "held_details": "「世界最初の原産地管理法」は制度の定義と他地域との比較が必要なため保留。",
       "reference_ids": [
         "REF-IVDP-1756"
-      ]
+      ],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "「世界最初の原産地管理法」は制度の定義と他地域との比較が必要なため保留。",
+          "note": "1756年の原産地保護制度の整備とポートの歴史を関連付けて出題。法制度整備と生産地域の境界設定の時差を混同しない表現にする。",
+          "question_ids": [
+            "Q-PRETEXT-PT-002"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "世界最初が産地画定・品質管理・現代の原産地呼称法のどれを比較するか。",
+        "evidence_ids": [
+          "E30-PT-P72P73",
+          "E30-EJ-REVIEW"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-PT-S003",
@@ -1415,7 +2029,8 @@
       "source_text": "◆デュリエンセ：DOP：ポート（酒精強化ワイン）",
       "status": "question",
       "question_ids": [
-        "Q-PRETEXT-PT-007"
+        "Q-PRETEXT-PT-007",
+        "Q-PRETEXT-PT-016"
       ],
       "note": "入力の知識を新規設問・解説に採用。",
       "reference_ids": []
@@ -1427,7 +2042,8 @@
       "source_text": "DOP：ドウロ（スティルワイン）",
       "status": "question",
       "question_ids": [
-        "Q-PRETEXT-PT-008"
+        "Q-PRETEXT-PT-008",
+        "Q-PRETEXT-PT-016"
       ],
       "note": "入力の知識を新規設問・解説に採用。",
       "reference_ids": []
@@ -1451,7 +2067,8 @@
       "source_text": "◆テラス・マデイレンス：DOP：マディラ（酒精強化ワイン）",
       "status": "question",
       "question_ids": [
-        "Q-PRETEXT-PT-010"
+        "Q-PRETEXT-PT-010",
+        "Q-PRETEXT-PT-017"
       ],
       "note": "入力の知識を新規設問・解説に採用。",
       "reference_ids": []
@@ -1525,7 +2142,27 @@
       "question_ids": [],
       "note": "白ブドウが約7割という栽培面積割合は対象年・集計条件が不明のため出題しない。",
       "held_details": "白ブドウ栽培面積の約7割という割合。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "held",
+          "held_details": "白ブドウ栽培面積の約7割という割合。",
+          "note": "白ブドウが約7割という栽培面積割合は対象年・集計条件が不明のため出題しない。",
+          "question_ids": []
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "hold",
+        "remaining_held_details": "原文約7割と練習7割以上の厳密な差、比率の独立した統計出典は未確認。",
+        "evidence_ids": [
+          "E30-AT-P78"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-AT-S002",
@@ -1575,7 +2212,29 @@
       ],
       "note": "北東部という位置を出題し、州名を「ニーダーエスターライヒ」に表記統一。",
       "held_details": "全生産地域面積の約60％という割合は対象年・集計条件不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "全生産地域面積の約60％という割合は対象年・集計条件不明のため保留。",
+          "note": "北東部という位置を出題し、州名を「ニーダーエスターライヒ」に表記統一。",
+          "question_ids": [
+            "Q-PRETEXT-AT-005"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "全生産地域面積の約60％の対象年。隣接するp78の別統計年は流用しない。",
+        "evidence_ids": [
+          "E30-AT-P80P81"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-AT-S006",
@@ -1600,7 +2259,30 @@
       ],
       "note": "最初のDACとしてヴァインフィアテルを出題。",
       "held_details": "最大の生産地域という主張は面積等の指標・対象年が不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "最大の生産地域という主張は面積等の指標・対象年が不明のため保留。",
+          "note": "最初のDACとしてヴァインフィアテルを出題。",
+          "question_ids": [
+            "Q-PRETEXT-AT-007"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "最大の対象年、栽培面積・生産量・地理的面積の別、比較地域の単位。",
+        "evidence_ids": [
+          "E30-AT-P80P81",
+          "E30-EJ-REVIEW"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-AT-S008",
@@ -1647,7 +2329,27 @@
       "question_ids": [],
       "note": "正答を一意に確定できる基準年・条件の確認待ち。",
       "held_details": "ワイン生産量の世界第4位は対象年・集計資料が不明。現在の順位として出題しない。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "held",
+          "held_details": "ワイン生産量の世界第4位は対象年・集計資料が不明。現在の順位として出題しない。",
+          "note": "正答を一意に確定できる基準年・条件の確認待ち。",
+          "question_ids": []
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "元教材の生産量順位の対象年・集計資料。",
+        "evidence_ids": [
+          "E30-US-P085"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-US-S002",
@@ -1658,7 +2360,28 @@
       "question_ids": [],
       "note": "正答を一意に確定できる基準年・条件の確認待ち。",
       "held_details": "消費量世界最大は対象年・数量の集計条件が不明。現在の順位として出題しない。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "held",
+          "held_details": "消費量世界最大は対象年・数量の集計条件が不明。現在の順位として出題しない。",
+          "note": "正答を一意に確定できる基準年・条件の確認待ち。",
+          "question_ids": []
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "partial_existing",
+        "remaining_held_details": "元教材p85が用いた統計年は未特定。",
+        "evidence_ids": [
+          "E30-US-P085",
+          "E30-US-OIV2017-REVIEW"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-US-S003",
@@ -1669,7 +2392,28 @@
       "question_ids": [],
       "note": "正答を一意に確定できる基準年・条件の確認待ち。",
       "held_details": "生産量と消費量の比較は対象年不明で、「他の国とは異なる」という排他的な説明も成立するとは限らないため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "held",
+          "held_details": "生産量と消費量の比較は対象年不明で、「他の国とは異なる」という排他的な説明も成立するとは限らないため保留。",
+          "note": "正答を一意に確定できる基準年・条件の確認待ち。",
+          "question_ids": []
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "partial_existing",
+        "remaining_held_details": "原文の「他の国とは異なる」という排他性と元教材の年。",
+        "evidence_ids": [
+          "E30-US-P085",
+          "E30-US-OIV2017-REVIEW"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-US-S004",
@@ -1680,7 +2424,27 @@
       "question_ids": [],
       "note": "正答を一意に確定できる基準年・条件の確認待ち。",
       "held_details": "カリフォルニアの生産比率80％は対象年・集計対象が不明。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "held",
+          "held_details": "カリフォルニアの生産比率80％は対象年・集計対象が不明。",
+          "note": "正答を一意に確定できる基準年・条件の確認待ち。",
+          "question_ids": []
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "約80％の統計年・集計対象。",
+        "evidence_ids": [
+          "E30-US-P085"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-US-S005",
@@ -1693,7 +2457,29 @@
       ],
       "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
       "held_details": "原文の「19世紀後半から」は開始時期の単純化があるため保留。ゴールドラッシュと人口・需要増の関係のみ採用。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "原文の「19世紀後半から」は開始時期の単純化があるため保留。ゴールドラッシュと人口・需要増の関係のみ採用。",
+          "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+          "question_ids": [
+            "Q-PRETEXT-US-001"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "ゴールドラッシュの開始時期を19世紀後半とする単純化。",
+        "evidence_ids": [
+          "E30-US-P085"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-US-S006",
@@ -1782,11 +2568,34 @@
       "source_text": "◆セントラル・コースト：広域AVA。サンフランシスコ・カウンティ南部から太平洋岸に沿って、ロスアンゼルスに近いサンタバーバラまでの南北約400km東西約40kmに広がる産地",
       "status": "partial",
       "question_ids": [
-        "Q-PRETEXT-US-009"
+        "Q-PRETEXT-US-009",
+        "Q-PRETEXT-US-017"
       ],
-      "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
-      "held_details": "原文の概略距離（南北約400km、東西約40km）は範囲定義の照合が必要なため保留。太平洋岸に広がる産地として採用。",
-      "reference_ids": []
+      "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。 Issue #30で教科書を再確認し、未出題の知識を追加。",
+      "held_details": "現在の法的AVA境界の実測・一律の幅を示す数値としての採用は行わない。",
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "原文の概略距離（南北約400km、東西約40km）は範囲定義の照合が必要なため保留。太平洋岸に広がる産地として採用。",
+          "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+          "question_ids": [
+            "Q-PRETEXT-US-009"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "partial_add",
+        "remaining_held_details": "現在の法的AVA境界の実測・一律の幅を示す数値としての採用は行わない。",
+        "evidence_ids": [
+          "E30-US-P088-089"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-US-S013",
@@ -1797,7 +2606,27 @@
       "question_ids": [],
       "note": "正答を一意に確定できる基準年・条件の確認待ち。",
       "held_details": "ワシントン州の栽培面積全米第2位は対象年・ワイン用ブドウと全ブドウの区分が不明。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "held",
+          "held_details": "ワシントン州の栽培面積全米第2位は対象年・ワイン用ブドウと全ブドウの区分が不明。",
+          "note": "正答を一意に確定できる基準年・条件の確認待ち。",
+          "question_ids": []
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "栽培面積順位の対象年と用途区分。",
+        "evidence_ids": [
+          "E30-US-P088-089"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-US-S014",
@@ -1859,7 +2688,27 @@
       "question_ids": [],
       "note": "正答を一意に確定できる基準年・条件の確認待ち。",
       "held_details": "日本の国別輸入量第1位は対象年・容器区分等の集計条件が不明。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "held",
+          "held_details": "日本の国別輸入量第1位は対象年・容器区分等の集計条件が不明。",
+          "note": "正答を一意に確定できる基準年・条件の確認待ち。",
+          "question_ids": []
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "partial_existing",
+        "remaining_held_details": "容器区分や集計対象等の統計条件は本文だけでは不明。",
+        "evidence_ids": [
+          "E30-CL-P094-095"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-CL-S002",
@@ -1910,7 +2759,28 @@
       "question_ids": [],
       "note": "正答を一意に確定できる基準年・条件の確認待ち。",
       "held_details": "赤ワイン比率75％以上は対象年と集計対象が不明。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "held",
+          "held_details": "赤ワイン比率75％以上は対象年と集計対象が不明。",
+          "note": "正答を一意に確定できる基準年・条件の確認待ち。",
+          "question_ids": []
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "赤ワイン75％以上の対象年・分母・出典。",
+        "evidence_ids": [
+          "E30-CL-P094-095",
+          "E30-CL-P096-097"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-CL-S006",
@@ -1959,7 +2829,29 @@
       ],
       "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
       "held_details": "北端・南端および南北350kmは呼称の地理的範囲との照合が必要なため保留。中央盆地という特徴を採用。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "北端・南端および南北350kmは呼称の地理的範囲との照合が必要なため保留。中央盆地という特徴を採用。",
+          "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+          "question_ids": [
+            "Q-PRETEXT-CL-008"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "partial_existing",
+        "remaining_held_details": "現在のDO区分の正確な境界として採用するための制度上の確認。",
+        "evidence_ids": [
+          "E30-CL-P096-097"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-CL-S010",
@@ -1972,7 +2864,30 @@
       ],
       "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
       "held_details": "栽培面積50％以上は対象年不明のため保留。マイポとカベルネ・ソーヴィニヨンの対応を採用。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "栽培面積50％以上は対象年不明のため保留。マイポとカベルネ・ソーヴィニヨンの対応を採用。",
+          "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+          "question_ids": [
+            "Q-PRETEXT-CL-009"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "50％以上の対象年・分母・地域境界。",
+        "evidence_ids": [
+          "E30-CL-P096-097",
+          "E30-AMERICAS-REVIEW"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-CL-S011",
@@ -1985,7 +2900,30 @@
       ],
       "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
       "held_details": "栽培面積30％は対象年不明のため保留。主要品種としての位置付けを採用。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "栽培面積30％は対象年不明のため保留。主要品種としての位置付けを採用。",
+          "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+          "question_ids": [
+            "Q-PRETEXT-CL-010"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "30％の対象年と栽培面積・生産量の指標区別。",
+        "evidence_ids": [
+          "E30-CL-P096-097",
+          "E30-AMERICAS-REVIEW"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-CL-S012",
@@ -2048,7 +2986,29 @@
       ],
       "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
       "held_details": "サルタ州全体を冷涼とする説明は、標高と地域による違いを確認する必要があるため保留。品種の対応のみ採用。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "サルタ州全体を冷涼とする説明は、標高と地域による違いを確認する必要があるため保留。品種の対応のみ採用。",
+          "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+          "question_ids": [
+            "Q-PRETEXT-AR-005"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "サルタ州全体を一律に冷涼とする説明。",
+        "evidence_ids": [
+          "E30-AR-P100-101"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-AR-S005",
@@ -2061,7 +3021,30 @@
       ],
       "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
       "held_details": "総生産80％は対象年と集計対象が不明。クージョ地方とメンドーサ州の対応を採用。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "総生産80％は対象年と集計対象が不明。クージョ地方とメンドーサ州の対応を採用。",
+          "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+          "question_ids": [
+            "Q-PRETEXT-AR-006"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "メンドーサ80％の対象年と集計対象。",
+        "evidence_ids": [
+          "E30-AR-P102-103",
+          "E30-AMERICAS-REVIEW"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-AR-S006",
@@ -2074,7 +3057,29 @@
       ],
       "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
       "held_details": "白ブドウ主体およびトロンテス35％は対象年・集計条件不明。品種の対応のみ採用。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "白ブドウ主体およびトロンテス35％は対象年・集計条件不明。品種の対応のみ採用。",
+          "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+          "question_ids": [
+            "Q-PRETEXT-AR-007"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "partial_hold",
+        "remaining_held_details": "白用品種主体という構成の時点と35％の対象年・分母。",
+        "evidence_ids": [
+          "E30-AR-P102-103"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-AR-S007",
@@ -2087,7 +3092,29 @@
       ],
       "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
       "held_details": "栽培面積世界一は対象年不明。国と品種の対応のみ採用。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "栽培面積世界一は対象年不明。国と品種の対応のみ採用。",
+          "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+          "question_ids": [
+            "Q-PRETEXT-AR-008"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "世界一という栽培面積順位の対象年・比較条件。",
+        "evidence_ids": [
+          "E30-AR-P100-101"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-AU-S001",
@@ -2096,11 +3123,34 @@
       "source_text": "・ブドウの栽培地域は、国の南半分にあたる南緯31～43度の間に帯状に分布する",
       "status": "partial",
       "question_ids": [
-        "Q-PRETEXT-AU-001"
+        "Q-PRETEXT-AU-001",
+        "Q-PRETEXT-AU-015"
       ],
-      "note": "国の南部に産地が主に分布することを出題。",
-      "held_details": "南緯31～43度を全栽培地域の絶対的範囲とする記述は保留。",
-      "reference_ids": []
+      "note": "国の南部に産地が主に分布することを出題。 Issue #30で教科書を再確認し、未出題の知識を追加。",
+      "held_details": "全ての栽培地の絶対的な緯度境界とは断定しない。",
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "南緯31～43度を全栽培地域の絶対的範囲とする記述は保留。",
+          "note": "国の南部に産地が主に分布することを出題。",
+          "question_ids": [
+            "Q-PRETEXT-AU-001"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "partially_resolved",
+        "remaining_held_details": "全ての栽培地の絶対的な緯度境界とは断定しない。",
+        "evidence_ids": [
+          "E30-AU-P104-105"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-AU-S002",
@@ -2152,7 +3202,33 @@
       ],
       "note": "州・産地・代表品種・テラロッサを出題。土壌は石灰岩上の赤い粘土質表土という関係へ修正。",
       "held_details": "黒ブドウ品種85％は対象年・集計条件が不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "黒ブドウ品種85％は対象年・集計条件が不明のため保留。",
+          "note": "州・産地・代表品種・テラロッサを出題。土壌は石灰岩上の赤い粘土質表土という関係へ修正。",
+          "question_ids": [
+            "Q-PRETEXT-AU-005",
+            "Q-PRETEXT-AU-006",
+            "Q-PRETEXT-AU-007",
+            "Q-PRETEXT-AU-008"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "maintain_hold",
+        "remaining_held_details": "黒品種85％の対象年と分母・集計地域の明確な注記は未確定。",
+        "evidence_ids": [
+          "E30-AU-P106-107",
+          "E30-AU-NZ-REMAINING"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-AU-S006",
@@ -2204,7 +3280,30 @@
       ],
       "note": "冷涼さと重要品種を出題。",
       "held_details": "「重要な生産拠点になりつつある」という進行状況は比較時点が不明のため採用しない。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "「重要な生産拠点になりつつある」という進行状況は比較時点が不明のため採用しない。",
+          "note": "冷涼さと重要品種を出題。",
+          "question_ids": [
+            "Q-PRETEXT-AU-013",
+            "Q-PRETEXT-AU-014"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "maintain_hold",
+        "remaining_held_details": "進行状況を現在の特徴とするための比較時点・指標は不明。",
+        "evidence_ids": [
+          "E30-AU-P110"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-NZ-S001",
@@ -2223,11 +3322,34 @@
       "country": "ニュージーランド",
       "source_line": 224,
       "source_text": "・全輸出量の70％以上を占めている。",
-      "status": "held",
-      "question_ids": [],
-      "note": "年度不明の割合のため設問化を保留。",
-      "held_details": "全輸出量の70％以上という割合は、対象年・輸出量の単位や品種別集計の根拠が不明のため保留。",
-      "reference_ids": []
+      "status": "partial",
+      "question_ids": [
+        "Q-PRETEXT-NZ-014"
+      ],
+      "note": "年度不明の割合のため設問化を保留。 Issue #30で教科書を再確認し、未出題の知識を追加。",
+      "held_details": "元の事前テキストの輸出70％以上がどの年・集計範囲に由来するかは未同定。",
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "held",
+          "held_details": "全輸出量の70％以上という割合は、対象年・輸出量の単位や品種別集計の根拠が不明のため保留。",
+          "note": "年度不明の割合のため設問化を保留。",
+          "question_ids": []
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "partially_resolved",
+        "remaining_held_details": "元の事前テキストの輸出70％以上がどの年・集計範囲に由来するかは未同定。",
+        "evidence_ids": [
+          "E30-NZ-P112-113",
+          "E30-NZ-P113-EXPORT"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-NZ-S003",
@@ -2238,7 +3360,28 @@
       "question_ids": [],
       "note": "年度不明の割合のため設問化を保留。",
       "held_details": "スクリューキャップ採用率99％以上という割合は対象年・調査範囲が不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "held",
+          "held_details": "スクリューキャップ採用率99％以上という割合は対象年・調査範囲が不明のため保留。",
+          "note": "年度不明の割合のため設問化を保留。",
+          "question_ids": []
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "maintain_hold",
+        "remaining_held_details": "99％以上の対象年・調査範囲（輸出を含むか等）が不明。",
+        "evidence_ids": [
+          "E30-NZ-P112-113",
+          "E30-AU-NZ-REMAINING"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-NZ-S004",
@@ -2292,7 +3435,30 @@
       ],
       "note": "北島のGIという所属関係を出題。",
       "held_details": "世界最東端という断定は比較範囲・根拠が不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "世界最東端という断定は比較範囲・根拠が不明のため保留。",
+          "note": "北島のGIという所属関係を出題。",
+          "question_ids": [
+            "Q-PRETEXT-NZ-007"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "maintain_hold",
+        "remaining_held_details": "最東端の比較条件と対象年が不明。",
+        "evidence_ids": [
+          "E30-NZ-P114-115",
+          "E30-AU-NZ-REMAINING"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-NZ-S008",
@@ -2305,7 +3471,29 @@
       ],
       "note": "北島の産地とボルドー系品種・シラーを出題。",
       "held_details": "第2位のワイン産地という順位は尺度・時点が不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "第2位のワイン産地という順位は尺度・時点が不明のため保留。",
+          "note": "北島の産地とボルドー系品種・シラーを出題。",
+          "question_ids": [
+            "Q-PRETEXT-NZ-008"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "maintain_hold",
+        "remaining_held_details": "第2位の順位に対応する対象年と集計条件が未確定。",
+        "evidence_ids": [
+          "E30-NZ-P114-115"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-NZ-S009",
@@ -2330,7 +3518,29 @@
       ],
       "note": "南島の産地とソーヴィニヨン・ブランの対応を出題。",
       "held_details": "最大の産地という順位は尺度・時点が不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "最大の産地という順位は尺度・時点が不明のため保留。",
+          "note": "南島の産地とソーヴィニヨン・ブランの対応を出題。",
+          "question_ids": [
+            "Q-PRETEXT-NZ-010"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "resolved_with_scope",
+        "remaining_held_details": "現在の最大産地や、他の年・生産量順位に一般化しない。",
+        "evidence_ids": [
+          "E30-NZ-P116"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-NZ-S011",
@@ -2355,7 +3565,30 @@
       ],
       "note": "南島のGIという所属関係を出題。",
       "held_details": "最高標高・世界最南端の断定は比較範囲・根拠が不明のため保留。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "最高標高・世界最南端の断定は比較範囲・根拠が不明のため保留。",
+          "note": "南島のGIという所属関係を出題。",
+          "question_ids": [
+            "Q-PRETEXT-NZ-012"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "partly_confirmed",
+        "decision": "maintain_hold",
+        "remaining_held_details": "最高地点・平均標高などの指標、最南端に含める産地単位・商業性・対象年が不明。",
+        "evidence_ids": [
+          "E30-NZ-P116",
+          "E30-AU-NZ-REMAINING"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-NZ-S013",
@@ -2406,7 +3639,29 @@
       ],
       "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
       "held_details": "「南極から」という海流の起源の単純化は保留。寒流であることと冷涼化の影響を採用。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "「南極から」という海流の起源の単純化は保留。寒流であることと冷涼化の影響を採用。",
+          "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+          "question_ids": [
+            "Q-PRETEXT-ZA-004"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "海流の起源を「南極から」の一語で説明することの正確さ。",
+        "evidence_ids": [
+          "E30-ZA-P118-119"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-ZA-S004",
@@ -2458,7 +3713,30 @@
       ],
       "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
       "held_details": "西ケープ州9割は対象年・集計条件不明。主要産地が集中する州名のみ採用。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "西ケープ州9割は対象年・集計条件不明。主要産地が集中する州名のみ採用。",
+          "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+          "question_ids": [
+            "Q-PRETEXT-ZA-011"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "9割の対象年・指標・分母。",
+        "evidence_ids": [
+          "E30-ZA-P120-121",
+          "E30-AMERICAS-REVIEW"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-ZA-S008",
@@ -2471,7 +3749,30 @@
       ],
       "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
       "held_details": "ブドウ栽培面積最大は対象年と地域区分不明。重要な産地であることと品種対応を採用。",
-      "reference_ids": []
+      "reference_ids": [],
+      "review_history": [
+        {
+          "issue": 28,
+          "status": "partial",
+          "held_details": "ブドウ栽培面積最大は対象年と地域区分不明。重要な産地であることと品種対応を採用。",
+          "note": "確かな部分を新規設問または解説で扱い、残る内容を保留。",
+          "question_ids": [
+            "Q-PRETEXT-ZA-012"
+          ]
+        }
+      ],
+      "last_review": {
+        "issue": 30,
+        "reviewed_date": "2026-11-15",
+        "fact_resolution": "unresolved",
+        "decision": "hold",
+        "remaining_held_details": "最大面積の対象年と地区・地域・州の比較単位。",
+        "evidence_ids": [
+          "E30-ZA-P120-121",
+          "E30-AMERICAS-REVIEW"
+        ],
+        "record": "pretext-expansion-review.json"
+      }
     },
     {
       "id": "PRETEXT-ZA-S009",
